@@ -1,0 +1,52 @@
+#include "libft.h"
+
+static int	get_len(long long n);
+static char	*convert(long long n, int len);
+
+char	*ft_itoa(int n)
+{
+	return (convert((long long)n, get_len((long long)n)));
+}
+
+static int	get_len(long long n)
+{
+	int	len;
+
+	if (n == 0)
+		return (1);
+	len = 0;
+	if (n < 0)
+	{
+		len++;
+		n *= -1;
+	}
+	while (n > 0)
+	{
+		len++;
+		n /= 10;
+	}
+	return (len);
+}
+
+static char	*convert(long long n, int len)
+{
+	char	*n_str;
+
+	n_str = malloc(len + 1);
+	if (n_str == 0)
+		return (0);
+	n_str[len--] = 0;
+	if (n == 0)
+		n_str[0] = '0';
+	if (n < 0)
+	{
+		n_str[0] = '-';
+		n *= -1;
+	}
+	while (n > 0)
+	{
+		n_str[len--] = (n % 10) + '0';
+		n /= 10;
+	}
+	return (n_str);
+}

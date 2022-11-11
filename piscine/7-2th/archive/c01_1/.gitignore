@@ -1,0 +1,5 @@
+*.out*
+main.*
+.DS_Store
+*.swp
+*.swo
