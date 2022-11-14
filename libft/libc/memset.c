@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 16:18:39 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/11/11 16:18:41 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/11/15 00:19:48 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 
 void	*ft_memset(void *b, int c, size_t len)
 {
-	char			*b_casted;
-	unsigned char	c_casted;
+	char			*b_c;
+	unsigned char	c_c;
 	
-	b_casted = (char)b;
-	c_casted = (unsigned char)c;
-	while (len-- > 0 && *b_casted)
-		*b_casted = c_casted;
+	b_c = (char *)b;
+	c_c = (unsigned char)c;
+	while (len-- > 0 && *b_c)
+		*b_c = c_c;
 	return (b);
 }

@@ -2,37 +2,24 @@
 
 int main(void)
 {
-	// isalpha
-	printf("\n[isalpha]\n");
+	char s1[100] = "learningisfun";
+	char s2[100] = "learningisfun";
+	char *st1, *st2;
 
-	char letter;
-	
-	letter = 'a';
-	printf("input\t\t[%c]\n", letter);
-	printf("origin\t\t[%d]\n", isalpha(letter));
-	printf("ft\t\t[%d]\n\n", ft_isalpha(letter));
+	st1 = s1;
+	st2 = s2; 
 
-	letter = 'Z';
-	printf("input\t\t[%c]\n", letter);
-	printf("origin\t\t[%d]\n", isalpha(letter));
-	printf("ft\t\t[%d]\n\n", ft_isalpha(letter));
+	printf ("origin string1\t[%s]\n", st1);
+	printf ("origin string2\t[%s]\n\n", st2);
 
-	letter = '5';
-	printf("input\t\t[%c]\n", letter);
-	printf("origin\t\t[%d]\n", isalpha(letter));
-	printf("ft\t\t[%d]\n\n", ft_isalpha(letter));
+	memcpy(st1 + 8, st1, 10);
+	ft_memcpy(st2 + 8, st2, 10);
 
-	letter = 0;
-	printf("input\t\t[%c]\n", letter);
-	printf("origin\t\t[%d]\n", isalpha(letter));
-	printf("ft\t\t[%d]\n\n", ft_isalpha(letter));
+	printf ("after string1\t[%s]\n", st1);
+	printf ("after string2\t[%s]\n", st2);
 
-	// toupper
-	printf("\n[toupper]\n");
 
-	letter = 'a';
-	printf("input\t\t[%c]\n", letter);
-	printf("origin\t\t[%d]\n", isalpha(letter));
-	printf("ft\t\t[%d]\n\n", ft_isalpha(letter));
 
+
+	return (0);	
 }

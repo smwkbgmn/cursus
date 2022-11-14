@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include "libft.h"
 
 char	**scissor(char const *s, char c, int cnt);

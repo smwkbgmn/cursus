@@ -1,3 +1,4 @@
+#include <unistd.h>
 #include "libft.h"
 
 static int	ft_strlen(char *str);

@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include "libft.h"
 
 static int	get_len(long long n);
