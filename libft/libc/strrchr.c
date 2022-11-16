@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memcpy.c                                           :+:      :+:    :+:   */
+/*   strrchr.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/11 15:41:10 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/11/15 15:52:15 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/11/16 22:25:20 by donghyu2          #+#    #+#             */
+/*   Updated: 2022/11/16 23:13:23 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 #include "libft.h"
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+const char	*ft_strrchr(const char *s, int c)
 {
-	
-	char		*dst_c;
-	const char	*src_c;
+	size_t	idx;
+	char	c_cast;
 
-	if (n == 0 || dst == src)
-		return (dst);
 
-	dst_c = (char *)dst;
-	src_c = (const char *)src;
-	while (n-- > 0)
-		*dst_c++ = *src_c++;
-	return (dst);
+	idx = 0;
+	while (s[idx])
+		idx++;
+	c_cast = (char)c;
+	while (idx > 0 && s[idx] != c_cast)
+		idx--;
+	if (s[idx] == c_cast)
+		return (s + idx);
+	else
+		return (0);
 }

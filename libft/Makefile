@@ -8,7 +8,7 @@ OBJS	= $(SRCS:.c=.o)
 
 all		: $(NAME) clean
 $(NAME)	: $(OBJS)
-		$(CC) $(FLAG) $(OBJS) -o $(NAME)
+		$(CC) $(FLAG) $(OBJS) -o $(NAME) -fsanitize=undefined
 .c.o	: $(SRCS) $(HDR)
 		$(CC) $(FLAG) -I includes -c $< -o $(<:.c=.o)
 clean	:

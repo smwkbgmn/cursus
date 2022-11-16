@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memcpy.c                                           :+:      :+:    :+:   */
+/*   strncmp.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/11 15:41:10 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/11/15 15:52:15 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/11/16 23:43:38 by donghyu2          #+#    #+#             */
+/*   Updated: 2022/11/17 01:39:05 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
 #include "libft.h"
+#include <stddef.h>
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	
-	char		*dst_c;
-	const char	*src_c;
+	const unsigned char	*s1_cast;
+	const unsigned char	*s2_cast;
 
-	if (n == 0 || dst == src)
-		return (dst);
-
-	dst_c = (char *)dst;
-	src_c = (const char *)src;
-	while (n-- > 0)
-		*dst_c++ = *src_c++;
-	return (dst);
-}
+	if (n == 0)
+		return (0);
+	s1_cast = (const unsigned char *)s1;
+	s2_cast = (const unsigned char *)s2;
+	while (n-- > 0 && *s1_cast == *s2_cast)
+	{
+		if (*s1_cast == 0)
+			return (0);
+		s1_cast++;
+		s2_cast++;
+	}
+	return (*s1_cast - *s2_cast);
+} 

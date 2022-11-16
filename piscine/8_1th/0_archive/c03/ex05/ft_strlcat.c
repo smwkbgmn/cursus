@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: donghyu2 <donghyu2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 16:05:13 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/08/31 17:41:48 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/11/16 21:13:40 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,8 @@ unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
 	while (*dest)
 		dest++;
 	size -= size_d;
-	while (*src && size > 1)
-	{
+	while (*src && size-- > 1)
 		*dest++ = *src++;
-		size--;
-	}
 	*dest = 0;
 	return (size_d + size_s);
 }

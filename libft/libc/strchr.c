@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memcpy.c                                           :+:      :+:    :+:   */
+/*   strchr.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/11 15:41:10 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/11/15 15:52:15 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/11/16 21:14:46 by donghyu2          #+#    #+#             */
+/*   Updated: 2022/11/16 22:47:54 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
 #include "libft.h"
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+const char	*ft_strchr(const char *s, int c)
 {
-	
-	char		*dst_c;
-	const char	*src_c;
+	char	c_cast;
 
-	if (n == 0 || dst == src)
-		return (dst);
-
-	dst_c = (char *)dst;
-	src_c = (const char *)src;
-	while (n-- > 0)
-		*dst_c++ = *src_c++;
-	return (dst);
+	c_cast = (char)c;
+	while (*s && *s != c_cast)
+		s++;
+	if (*s == c_cast)
+		return (s);
+	else
+		return (0);
 }

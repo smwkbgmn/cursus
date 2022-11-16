@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memcpy.c                                           :+:      :+:    :+:   */
+/*   memcmp.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/11 15:41:10 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/11/15 15:52:15 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/11/15 15:53:50 by donghyu2          #+#    #+#             */
+/*   Updated: 2022/11/15 18:16:41 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include <stdlib.h>
 #include "libft.h"
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	
-	char		*dst_c;
-	const char	*src_c;
+	const unsigned char	*s1_c;
+	const unsigned char	*s2_c;
 
-	if (n == 0 || dst == src)
-		return (dst);
-
-	dst_c = (char *)dst;
-	src_c = (const char *)src;
-	while (n-- > 0)
-		*dst_c++ = *src_c++;
-	return (dst);
+	s1_c = (const unsigned char *)s1;
+	s2_c = (const unsigned char *)s2;
+	if (n == 0)
+		return (0);
+	while (n-- > 0 && *s1_c++ == *s2_c++);
+	return (*(s1_c - 1) - *(s2_c - 1));
 }
