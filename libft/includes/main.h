@@ -3,7 +3,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdlib.h>
-
+#include <malloc/malloc.h>
 #include <ctype.h>
 
 // libc
@@ -15,7 +15,9 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strrchr(const char *s, int c);
-int	ft_atoi(const char *str);
+int		ft_atoi(const char *str);
+void	*ft_calloc(size_t count, size_t size);
+char	*ft_strdup(const char *s1);
 
 // additional
 char	*ft_substr(char const *s, unsigned int start, size_t len);
