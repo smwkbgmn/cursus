@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strnstr.c                                          :+:      :+:    :+:   */
+/*   strncmp.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/16 23:43:42 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/11/18 13:52:24 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/11/16 23:43:38 by donghyu2          #+#    #+#             */
+/*   Updated: 2022/11/21 02:25:43 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
 #include "libft.h"
+#include <stddef.h>
 
-const char	*ft_strnstr(const char *haystack, const char *needle, size_t n)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	size_t	idx;
+	const unsigned char	*s1_cast;
+	const unsigned char	*s2_cast;
 
-	if (*needle == 0)
-		return (haystack);
-	while (n-- > 0 && *haystack)
+	if (n == 0)
+		return (0);
+	s1_cast = (const unsigned char *)s1;
+	s2_cast = (const unsigned char *)s2;
+	while (n-- > 0 && *s1_cast == *s2_cast)
 	{
-		idx = 0;
-		while (haystack[idx] == needle[idx] && needle[idx])
-			idx++;
-		if (needle[idx] == 0)
-			return (haystack);
-		haystack++;
+		if (*s1_cast == 0 || n == 0)
+			return (0);
+		s1_cast++;
+		s2_cast++;
 	}
-	return (0);
-}
+	return (*s1_cast - *s2_cast);
+} 
