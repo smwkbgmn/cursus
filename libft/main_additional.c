@@ -160,4 +160,4 @@ void	shift_odd_letter_case_iterri(unsigned int idx, char *letter)
 		else if ('a' <= *letter && *letter <= 'Z')
 			*letter += 32;
 	}
-}		
+}	

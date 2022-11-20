@@ -20,41 +20,202 @@
 
 int main(void)
 {
-	// bzero
-	printf("\n[bzero]\n\n");
 
-	int zero_int_origin[5] = {0, 1, 2, 3, 4};
-	int zero_int_ft[5] = {0, 1, 2, 3, 4};
-	char zero_char_origin[6] = "01234";
-	char zero_char_ft[6] = "01234";
+	// isalpha
+	printf("\n[isalpha]\n\n");
+
+	char letter;
+	char letter_ft;
+
+	letter = '\0';
+	printf("letter (\\0)\t[%d][%d]\n", isalpha(letter), ft_isalpha(letter));
+	letter = '\40';
+	printf("letter (%c)\t[%d][%d]\n", letter, isalpha(letter), ft_isalpha(letter));
+	letter = '5';
+	printf("letter (%c)\t[%d][%d]\n", letter, isalpha(letter), ft_isalpha(letter));
+	letter = 'g';
+	printf("letter (%c)\t[%d][%d]\n", letter, isalpha(letter), ft_isalpha(letter));
+	letter = 'K';
+	printf("letter (%c)\t[%d][%d]\n", letter, isalpha(letter), ft_isalpha(letter));
+	letter = '\176';
+	printf("letter (\\176)\t[%d][%d]\n", isalpha(letter), ft_isalpha(letter));
+	letter = '\177';
+	printf("letter (\\177)\t[%d][%d]\n", isalpha(letter), ft_isalpha(letter));
+	letter = '\377';
+	printf("letter (\\377)\t[%d][%d]\n", isalpha(letter), ft_isalpha(letter));
 	
-	size_t len;
+	printf("\n------------------------------------------------\n");
 
-	len = 7;
+	// isdigit
+	printf("\n[isdigit]\n\n");
 
-	printf("input array_int\t\t");
-	PRINTF(0, origin);
-	printf("input array_char\t");
-	PRINTF(1, origin);
-	printf("input len\t\t[%zu]\n", len);
+	letter = '\0';
+	printf("letter (\\0)\t[%d][%d]\n", isdigit(letter), ft_isdigit(letter));
+	letter = '\40';
+	printf("letter (%c)\t[%d][%d]\n", letter, isdigit(letter), ft_isdigit(letter));
+	letter = '0';
+	printf("letter (%c)\t[%d][%d]\n", letter, isdigit(letter), ft_isdigit(letter));
+	letter = '5';
+	printf("letter (%c)\t[%d][%d]\n", letter, isdigit(letter), ft_isdigit(letter));
+	letter = '9';
+	printf("letter (%c)\t[%d][%d]\n", letter, isdigit(letter), ft_isdigit(letter));
+	letter = 'g';
+	printf("letter (%c)\t[%d][%d]\n", letter, isdigit(letter), ft_isdigit(letter));
+	letter = 'K';
+	printf("letter (%c)\t[%d][%d]\n", letter, isdigit(letter), ft_isdigit(letter));
+	letter = '\176';
+	printf("letter (\\176)\t[%d][%d]\n", isdigit(letter), ft_isdigit(letter));
+	letter = '\177';
+	printf("letter (\\177)\t[%d][%d]\n", isdigit(letter), ft_isdigit(letter));
+	letter = '\377';
+	printf("letter (\\377)\t[%d][%d]\n", isdigit(letter), ft_isdigit(letter));
 
-	bzero(zero_int_origin, len);
-	ft_bzero(zero_int_ft, len);
+	printf("\n------------------------------------------------\n");
 
-	printf("\noutput ary_int\n");
-	printf("origin\t");
-	PRINTF(0, origin);
-	printf("ft\t");
-	PRINTF(0, ft);
+	// isalnum
+	printf("\n[isalnum]\n\n");
 
-	bzero(zero_char_origin, len);
-	ft_bzero(zero_char_ft, len);
+	letter = '\0';
+	printf("letter (\\0)\t[%d][%d]\n", isalnum(letter), ft_isalnum(letter));
+	letter = '\40';
+	printf("letter (%c)\t[%d][%d]\n", letter, isalnum(letter), ft_isalnum(letter));
+	letter = '5';
+	printf("letter (%c)\t[%d][%d]\n", letter, isalnum(letter), ft_isalnum(letter));
+	letter = 'g';
+	printf("letter (%c)\t[%d][%d]\n", letter, isalnum(letter), ft_isalnum(letter));
+	letter = 'K';
+	printf("letter (%c)\t[%d][%d]\n", letter, isalnum(letter), ft_isalnum(letter));
+	letter = '\176';
+	printf("letter (\\176)\t[%d][%d]\n", isalnum(letter), ft_isalnum(letter));
+	letter = '\177';
+	printf("letter (\\177)\t[%d][%d]\n", isalnum(letter), ft_isalnum(letter));
+	letter = '\377';
+	printf("letter (\\377)\t[%d][%d]\n", isalnum(letter), ft_isalnum(letter));
+	
+	printf("\n------------------------------------------------\n");
 
-	printf("\noutput ary_char\n");
-	printf("origin\t");
-	PRINTF(1, origin);
-	printf("ft\t");
-	PRINTF(1, ft);
+	// isascii
+	printf("\n[isascii]\n\n");
+
+	letter = '\0';
+	printf("letter (\\0)\t[%d][%d]\n", isascii(letter), ft_isascii(letter));
+	letter = '\40';
+	printf("letter (%c)\t[%d][%d]\n", letter, isascii(letter), ft_isascii(letter));
+	letter = '5';
+	printf("letter (%c)\t[%d][%d]\n", letter, isascii(letter), ft_isascii(letter));
+	letter = 'g';
+	printf("letter (%c)\t[%d][%d]\n", letter, isascii(letter), ft_isascii(letter));
+	letter = 'K';
+	printf("letter (%c)\t[%d][%d]\n", letter, isascii(letter), ft_isascii(letter));
+	letter = '\176';
+	printf("letter (\\176)\t[%d][%d]\n", isascii(letter), ft_isascii(letter));
+	letter = '\177';
+	printf("letter (\\177)\t[%d][%d]\n", isascii(letter), ft_isascii(letter));
+	letter = '\377';
+	printf("letter (\\377)\t[%d][%d]\n", isascii(letter), ft_isascii(letter));
+	
+	printf("\n------------------------------------------------\n");
+
+	// isprint
+	printf("\n[isprint]\n\n");
+
+	letter = '\0';
+	printf("letter (\\0)\t[%d][%d]\n", isprint(letter), ft_isprint(letter));
+	letter = '\40';
+	printf("letter (%c)\t[%d][%d]\n", letter, isprint(letter), ft_isprint(letter));
+	letter = '5';
+	printf("letter (%c)\t[%d][%d]\n", letter, isprint(letter), ft_isprint(letter));
+	letter = 'g';
+	printf("letter (%c)\t[%d][%d]\n", letter, isprint(letter), ft_isprint(letter));
+	letter = 'K';
+	printf("letter (%c)\t[%d][%d]\n", letter, isprint(letter), ft_isprint(letter));
+	letter = '\176';
+	printf("letter (\\176)\t[%d][%d]\n", isprint(letter), ft_isprint(letter));
+	letter = '\177';
+	printf("letter (\\177)\t[%d][%d]\n", isprint(letter), ft_isprint(letter));
+	letter = '\377';
+	printf("letter (\\377)\t[%d][%d]\n", isprint(letter), ft_isprint(letter));
+	
+	printf("\n------------------------------------------------\n");
+
+	// toupper
+	printf("\n[toupper]\n\n");
+
+	letter = letter_ft = '\0';
+	printf("letter (\\0)\t[%c][%c]\n", toupper(letter), ft_toupper(letter_ft));
+	letter = letter_ft = '\40';
+	printf("letter (%c)\t[%c][%c]\n", letter, toupper(letter), ft_toupper(letter_ft));
+	letter = letter_ft = '5';
+	printf("letter (%c)\t[%c][%c]\n", letter, toupper(letter), ft_toupper(letter_ft));
+	letter = letter_ft = 'g';
+	printf("letter (%c)\t[%c][%c]\n", letter, toupper(letter), ft_toupper(letter_ft));
+	letter = letter_ft = 'K';
+	printf("letter (\\176)\t[%c][%c]\n", toupper(letter), ft_toupper(letter_ft));
+	letter = letter_ft = '\177';
+	printf("letter (\\177)\t[%c][%c]\n", toupper(letter), ft_toupper(letter_ft));
+	letter = letter_ft = '\377';
+	printf("letter (\\377)\t[%c][%c]\n", toupper(letter), ft_toupper(letter_ft));
+
+
+
+	printf("\n------------------------------------------------\n");
+
+	// tolower
+	printf("\n[tolower]\n\n");
+
+	letter = letter_ft = '\0';
+	printf("letter (\\0)\t[%c][%c]\n", tolower(letter), ft_tolower(letter_ft));
+	letter = letter_ft = '\40';
+	printf("letter (%c)\t[%c][%c]\n", letter, tolower(letter), ft_tolower(letter_ft));
+	letter = letter_ft = '5';
+	printf("letter (%c)\t[%c][%c]\n", letter, tolower(letter), ft_tolower(letter_ft));
+	letter = letter_ft = 'g';
+	printf("letter (%c)\t[%c][%c]\n", letter, tolower(letter), ft_tolower(letter_ft));
+	letter = letter_ft = 'K';
+	printf("letter (\\176)\t[%c][%c]\n", tolower(letter), ft_tolower(letter_ft));
+	letter = letter_ft = '\177';
+	printf("letter (\\177)\t[%c][%c]\n", tolower(letter), ft_tolower(letter_ft));
+	letter = letter_ft = '\377';
+	printf("letter (\\377)\t[%c][%c]\n", tolower(letter), ft_tolower(letter_ft));
+
+
+	// printf("\n------------------------------------------------\n");
+
+	// // bzero
+	// printf("\n[bzero]\n\n");
+
+	// int zero_int_origin[5] = {0, 1, 2, 3, 4};
+	// int zero_int_ft[5] = {0, 1, 2, 3, 4};
+	// char zero_char_origin[6] = "01234";
+	// char zero_char_ft[6] = "01234";
+	
+	// size_t len;
+
+	// len = 7;
+
+	// printf("input array_int\t\t");
+	// PRINTF(0, origin);
+	// printf("input array_char\t");
+	// PRINTF(1, origin);
+	// printf("input len\t\t[%zu]\n", len);
+
+	// bzero(zero_int_origin, len);
+	// ft_bzero(zero_int_ft, len);
+
+	// printf("\noutput ary_int\n");
+	// printf("origin\t");
+	// PRINTF(0, origin);
+	// printf("ft\t");
+	// PRINTF(0, ft);
+
+	// bzero(zero_char_origin, len);
+	// ft_bzero(zero_char_ft, len);
+
+	// printf("\noutput ary_char\n");
+	// printf("origin\t");
+	// PRINTF(1, origin);
+	// printf("ft\t");
+	// PRINTF(1, ft);
 
 	// printf("\n------------------------------------------------\n");
 

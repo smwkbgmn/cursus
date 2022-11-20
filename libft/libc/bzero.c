@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 16:13:16 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/11/19 03:20:52 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/11/20 16:36:37 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ void	ft_bzero(void *s, size_t n)
 
 static void	*ft_memset(void *b, int c, size_t len)
 {
-	char	*b_c;
+	unsigned char	*b_c;
 	unsigned char	c_c;
 	
-	b_c = (char *)b;
+	b_c = (unsigned char *)b;
 	c_c = (unsigned char)c;
-	while (len > 0 && *b_c)
+	while (len > 0)
 	{
 		*b_c++ = c_c;
 		len--;
