@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 20:22:52 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/11/16 21:13:49 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/11/22 17:04:18 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	len_s = ft_strlen(src);
 	if (dstsize == 0 || dstsize < len_d)
 		return (len_s + dstsize);
-	dstsize -= len_d;
-	while (dstsize-- > 1 && *src)
+	// dstsize -= len_d;
+	while (dstsize-- > len_d + 1 && *src)
 		*(dst++ + len_d) = *src++;
 	*(dst + len_d) = 0;		
 	return (len_d + len_s);
