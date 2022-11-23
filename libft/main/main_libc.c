@@ -1,4 +1,5 @@
 #include "main.h"
+// #include "libft.h"
 
 #define FILLN(which, n) \
 { \
@@ -8,7 +9,7 @@
 		int_##which[idx] = idx; \
 		idx++; \
 	} \
-} 
+}
 
 #define PRINTF(type, which, n) \
 { \
@@ -47,6 +48,7 @@ int main(void)
 	printf("letter (\\177)\t[%d][%d]\n", isalpha(letter), ft_isalpha(letter));
 	letter = '\377';
 	printf("letter (\\377)\t[%d][%d]\n", isalpha(letter), ft_isalpha(letter));
+	printf("letter (-1)\t[%d][%d]\n", isalpha(-1), ft_isalpha(-1));
 	
 	printf("\n------------------------------------------------\n");
 
@@ -402,10 +404,83 @@ int main(void)
 
 	printf("\n------------------------------------------------\n");
 
+	// memchr
+	printf("\n[memchr]\n\n");
+
+	size_t nn;
+	
+	strcpy(s1, "aabcde");
+	strcpy(s2, "abccde");
+	strcpy(s3, "abcdee");
+	strcpy(s4, "\0");
+
+	nn = 0;
+	printf("n = %zu\n", nn);
+	printf("\"%s\" (%c)\t\t[%s]\t[%s]\n", s1, 'a', (char *)memchr(s1, 'a', nn), (char *)ft_memchr(s1, 'a', nn));
+	printf("\"%s\" (%c)\t\t[%s]\t[%s]\n", s2, 'c', (char *)memchr(s2, 'c', nn), (char *)ft_memchr(s2, 'c', nn));
+	printf("\"%s\" (%c)\t\t[%s]\t[%s]\n", s3, 'e', (char *)memchr(s3, 'e', nn), (char *)ft_memchr(s3, 'e', nn));
+	printf("\"%s\" (%c)\t\t[%s]\t[%s]\n", s3, 'z', (char *)memchr(s3, 'z', nn), (char *)ft_memchr(s3, 'z', nn));
+	printf("\"%s\" (null)\t\t[%s]\t[%s]\n", s3, (char *)memchr(s3, '\0', nn), (char *)ft_memchr(s3, '\0', nn));
+	printf("empty string (%c)\t[%s]\t[%s]\n", 'a', (char *)memchr(s4, 'a', nn), (char *)ft_memchr(s4, 'a', nn));
+	printf("empty string (null)\t[%s]\t[%s]\n", (char *)memchr(s4, '\0', nn), (char *)ft_memchr(s4, '\0', nn));
+	printf("\n");
+
+	nn = 3;
+	printf("n = %zu\n", nn);
+	printf("\"%s\" (%c)\t\t[%s]\t[%s]\n", s1, 'a', (char *)memchr(s1, 'a', nn), (char *)ft_memchr(s1, 'a', nn));
+	printf("\"%s\" (%c)\t\t[%s]\t\t[%s]\n", s2, 'c', (char *)memchr(s2, 'c', nn), (char *)ft_memchr(s2, 'c', nn));
+	printf("\"%s\" (%c)\t\t[%s]\t[%s]\n", s3, 'e', (char *)memchr(s3, 'e', nn), (char *)ft_memchr(s3, 'e', nn));
+	printf("\"%s\" (%c)\t\t[%s]\t[%s]\n", s3, 'z', (char *)memchr(s3, 'z', nn), (char *)ft_memchr(s3, 'z', nn));
+	printf("\"%s\" (null)\t\t[%s]\t[%s]\n", s3, (char *)memchr(s3, '\0', nn), (char *)ft_memchr(s3, '\0', nn));
+	printf("empty string (%c)\t[%s]\t[%s]\n", 'a', (char *)memchr(s4, 'a', nn), (char *)ft_memchr(s4, 'a', nn));
+	printf("empty string (null)\t[%s]\t\t[%s]\n", (char *)memchr(s4, '\0', nn), (char *)ft_memchr(s4, '\0', nn));
+	printf("\n");
+
+	nn = 5;
+	printf("n = %zu\n", nn);
+	printf("\"%s\" (%c)\t\t[%s]\t[%s]\n", s1, 'a', (char *)memchr(s1, 'a', nn), (char *)ft_memchr(s1, 'a', nn));
+	printf("\"%s\" (%c)\t\t[%s]\t\t[%s]\n", s2, 'c', (char *)memchr(s2, 'c', nn), (char *)ft_memchr(s2, 'c', nn));
+	printf("\"%s\" (%c)\t\t[%s]\t\t[%s]\n", s3, 'e', (char *)memchr(s3, 'e', nn), (char *)ft_memchr(s3, 'e', nn));
+	printf("\"%s\" (%c)\t\t[%s]\t[%s]\n", s3, 'z', (char *)memchr(s3, 'z', nn), (char *)ft_memchr(s3, 'z', nn));
+	printf("\"%s\" (null)\t\t[%s]\t[%s]\n", s3, (char *)memchr(s3, '\0', nn), (char *)ft_memchr(s3, '\0', nn));
+	printf("empty string (%c)\t[%s]\t[%s]\n", 'a', (char *)memchr(s4, 'a', nn), (char *)ft_memchr(s4, 'a', nn));
+	printf("empty string (null)\t[%s]\t\t[%s]\n", (char *)memchr(s4, '\0', nn), (char *)ft_memchr(s4, '\0', nn));
+	printf("\n");
+
+	nn = 6;
+	printf("n = %zu\n", nn);
+	printf("\"%s\" (%c)\t\t[%s]\t[%s]\n", s1, 'a', (char *)memchr(s1, 'a', nn), (char *)ft_memchr(s1, 'a', nn));
+	printf("\"%s\" (%c)\t\t[%s]\t\t[%s]\n", s2, 'c', (char *)memchr(s2, 'c', nn), (char *)ft_memchr(s2, 'c', nn));
+	printf("\"%s\" (%c)\t\t[%s]\t\t[%s]\n", s3, 'e', (char *)memchr(s3, 'e', nn), (char *)ft_memchr(s3, 'e', nn));
+	printf("\"%s\" (%c)\t\t[%s]\t[%s]\n", s3, 'z', (char *)memchr(s3, 'z', nn), (char *)ft_memchr(s3, 'z', nn));
+	printf("\"%s\" (null)\t\t[%s]\t[%s]\n", s3, (char *)memchr(s3, '\0', nn), (char *)ft_memchr(s3, '\0', nn));
+	printf("empty string (%c)\t[%s]\t[%s]\n", 'a', (char *)memchr(s4, 'a', nn), (char *)ft_memchr(s4, 'a', nn));
+	printf("empty string (null)\t[%s]\t\t[%s]\n", (char *)memchr(s4, '\0', nn), (char *)ft_memchr(s4, '\0', nn));
+	printf("\n");
+
+	nn = 7;
+	printf("n = %zu\n", nn);
+	printf("\"%s\" (%c)\t\t[%s]\t[%s]\n", s1, 'a', (char *)memchr(s1, 'a', nn), (char *)ft_memchr(s1, 'a', nn));
+	printf("\"%s\" (%c)\t\t[%s]\t\t[%s]\n", s2, 'c', (char *)memchr(s2, 'c', nn), (char *)ft_memchr(s2, 'c', nn));
+	printf("\"%s\" (%c)\t\t[%s]\t\t[%s]\n", s3, 'e', (char *)memchr(s3, 'e', nn), (char *)ft_memchr(s3, 'e', nn));
+	printf("\"%s\" (%c)\t\t[%s]\t[%s]\n", s3, 'z', (char *)memchr(s3, 'z', nn), (char *)ft_memchr(s3, 'z', nn));
+	printf("\"%s\" (null)\t\t[%s]\t\t[%s]\n", s3, (char *)memchr(s3, '\0', nn), (char *)ft_memchr(s3, '\0', nn));
+	printf("empty string (%c)\t[%s]\t[%s]\n", 'a', (char *)memchr(s4, 'a', nn), (char *)ft_memchr(s4, 'a', nn));
+	printf("empty string (null)\t[%s]\t\t[%s]\n", (char *)memchr(s4, '\0', nn), (char *)ft_memchr(s4, '\0', nn));
+
+	strcpy(s1, "\0\1\2\3\4\5");
+
+	printf("\n");
+	printf("\"%s\" (%c)\t\t[%s]\t\t[%s]\n", s1, '\2', (char *)memchr(s2, 2, 3), (char *)ft_memchr(s2, 2, 3));
+	printf("\"%s\" (%c)\t\t[%s]\t\t[%s]\n", s1, '\2', (char *)memchr(s2, 2 + 256, 3), (char *)ft_memchr(s2, 2 + 256, 3));
+
+
+	printf("\n------------------------------------------------\n");
+
 	// strlcpy
 	printf("\n[strlcpy]\n\n");
 
-	char src[100] = "source";
+	char src[10] = "source";
 	char src_null[10] = "";
 
 	char dst1[10];
@@ -413,6 +488,7 @@ int main(void)
 	char dst3[10];
 	char dst4[10];
 	char dst9[10];
+	// char dst11[10] = "AAAAAAAAAA";
 
 	printf("src string\t[%s]\n\n", src);
 	
@@ -421,6 +497,7 @@ int main(void)
 	printf("origin (%d)\t[%lu][%s]\n", 7, strlcpy(dst3, src, 7), dst3);
 	printf("origin (%d)\t[%lu][%s]\n", 8, strlcpy(dst4, src, 8), dst4);
 	printf("origin (%d)\t[%lu][%s]\n", 3, strlcpy(dst9, src_null, 3), dst9);
+	// printf("origin (%d)\t[%lu][%s]\n", 42, strlcpy(dst11, src_null, 42), dst11);
 
 	printf("\n");
 
@@ -429,12 +506,14 @@ int main(void)
 	char dst7[10];
 	char dst8[10];
 	char dst10[10];
+	// char dst12[10] = "AAAAAAAAAA";
 
 	printf("ft (%d)\t\t[%lu][%s]\n", 0, ft_strlcpy(dst5, src, 0), dst5);
 	printf("ft (%d)\t\t[%lu][%s]\n", 6, ft_strlcpy(dst6, src, 6), dst6);
 	printf("ft (%d)\t\t[%lu][%s]\n", 7, ft_strlcpy(dst7, src, 7), dst7);
 	printf("ft (%d)\t\t[%lu][%s]\n", 8, ft_strlcpy(dst8, src, 8), dst8);
 	printf("ft (%d)\t\t[%lu][%s]\n", 3, ft_strlcpy(dst10, src_null, 3), dst10);
+	// printf("ft (%d)\t\t[%lu][%s]\n", 42, ft_strlcpy(dst12, "", 42), dst12);
 
 	printf("\n------------------------------------------------\n");
 
@@ -1002,25 +1081,25 @@ int main(void)
 	// calloc
 	printf("\n[calloc]\n\n");
 
-	int *allocated_int_origin;
-	int *allocated_int_ft;
+	char *allocated_int_origin;
+	char *allocated_int_ft;
 
 	size_t count;
 	size_t size;
 	size_t idx;
 	size_t over;
 
-	count = 12;
-	size = 4;
+	count = 30;
+	size = 1;
 	over = 0;
 
 	printf("input count\t[%zu]\n", count);
 	printf("input size\t[%zu]\n", size);
 	printf("over\t\t[%zu]\n", over);
 
-	allocated_int_origin = (int *)ft_calloc(count, size);
+	allocated_int_origin = (char *)ft_calloc(count, size);
 	// allocated_int_origin = malloc(48);
-	allocated_int_ft = (int *)calloc(count, size);
+	allocated_int_ft = (char *)calloc(count, size);
 
 	printf("\n");
 
@@ -1028,7 +1107,7 @@ int main(void)
 	printf("each elem of mem allocated by origin\n");
 	idx = 0;
 	while (idx < ((count * size) / sizeof(*allocated_int_origin)) + over)
-		printf("[%d]", allocated_int_origin[idx++]);
+		printf("[%c]", allocated_int_origin[idx++]);
 	printf("\n");
 
 	printf("\n");
@@ -1037,7 +1116,7 @@ int main(void)
 	printf("each elem of mem allocated by ft\n");
 	idx = 0;
 	while (idx < ((count * size) / sizeof(*allocated_int_ft)) + over)
-		printf("[%d]", allocated_int_ft[idx++]);
+		printf("[%c]", allocated_int_ft[idx++]);
 	printf("\n");
 
 	printf("\n");
@@ -1046,6 +1125,11 @@ int main(void)
 	test = 4000000000400000000;
 	printf("size_t overflow test\nexpecting result is (null)\n");
 	printf("result %s\n", (char *)ft_calloc(test, 100)); 
+
+	printf("\n");
+	
+	// printf("result of SIZE_MAX --- [%s]\n", (char *)calloc(SIZE_MAX, SIZE_MAX));
+	// printf("result of SIZE_MAX --- [%s]\n", (char *)ft_calloc(SIZE_MAX, SIZE_MAX));
 
 	printf("\n------------------------------------------------\n");
 

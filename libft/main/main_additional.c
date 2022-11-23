@@ -8,12 +8,37 @@ int	main(void)
 	// ft_substr
 	printf("\n[ft_substr]\n");
 	
-	char origin[50] = "abcde 12345\0";
+	char origin[500] = "abcde 12345\0";
+	char *rst;
 	int idx_start, len;
 
 	printf("origin string\t[%s]\n", origin);
 	printf("start\t\t[%d]\nlen\t\t[%d]\n", idx_start = 3, len = 5);
-	printf("result\t\t[%s]\n", ft_substr(origin, idx_start, len));
+	rst = ft_substr(origin, idx_start, len);
+	printf("result\t\t[%s]\n", rst);
+	free(rst);
+
+	strcpy(origin, "tropouille");
+	printf("\norigin string\t[%s]\n", origin);
+	printf("start\t\t[%d]\nlen\t\t[%d]\n", idx_start = 0, len = 42000);
+	rst = ft_substr(origin, idx_start, len);
+	printf("result\t\t[%s]\n", rst);
+	free(rst);
+
+	strcpy(origin, "tropouille");
+	printf("\norigin string\t[%s]\n", origin);
+	printf("start\t\t[%d]\nlen\t\t[%d]\n", idx_start = 100, len = 1);
+	rst = ft_substr(origin, idx_start, len);
+	printf("result\t\t[%s]\n", rst);
+	free(rst);
+
+	strcpy(origin, "1");
+	printf("\norigin string\t[%s]\n", origin);
+	printf("start\t\t[%d]\nlen\t\t[%d]\n", idx_start = 42, len = 42000000);
+	rst = ft_substr(origin, idx_start, len);
+	printf("result\t\t[%s]\n", rst);
+	free(rst);
+
 
 
 	// ft_strjoin
@@ -24,7 +49,9 @@ int	main(void)
 
 	printf("s1\t\t[%s]\n", s1);
 	printf("s2\t\t[%s]\n", s2);
-	printf("result\t\t[%s]\n", ft_strjoin(s1, s2));
+	rst = ft_strjoin(s1, s2);
+	printf("result\t\t[%s]\n", rst);
+	free(rst);
 
 
 	// ft_strtrim
@@ -35,7 +62,9 @@ int	main(void)
 	strcpy(origin, " Hello World ? ");
 	printf("origin string\t[%s]\n", origin);
 	printf("set\t\t[%s]\n", set);
-	printf("result\t\t[%s]\n", ft_strtrim(origin, set));
+	rst = ft_strtrim(origin, set);
+	printf("result\t\t[%s]\n", rst);
+	free(rst);
 
 
 	// ft_split
@@ -53,15 +82,49 @@ int	main(void)
 		printf("[%s]", *result++);
 	printf("\n");
 
+	strcpy(origin, "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse");
+	printf("origin string\t[%s]\n", origin);
+	printf("delimiter\t[%c]\n", ' ');
+
+	result = ft_split(origin, ' ');
+	printf("result\t\t");
+	while (*result)
+		printf("[%s]", *result++);
+	printf("\n");
+
+	
+	strcpy(origin, "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultricies diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi.");
+	printf("origin string\t[%s]\n", origin);
+	printf("delimiter\t[%c]\n", 'i');
+
+	result = ft_split(origin, 'i');
+	printf("result\t\t");
+	while (*result)
+		printf("[%s]", *result++);
+	printf("\n");
 
 	// ft_itoa
 	printf("\n[ft_itoa]\n");
 
-	printf("-2147483648\t[%s]\n", ft_itoa(-2147483648));
-	printf("-345\t\t[%s]\n", ft_itoa(-345));
-	printf("0\t\t[%s]\n", ft_itoa(0));
-	printf("345\t\t[%s]\n", ft_itoa(345));
-	printf("2147483647\t[%s]\n", ft_itoa(2147483647));
+	rst = ft_itoa(2147483647);
+	printf("-2147483648\t[%s]\n", rst);
+	free(rst);
+
+	rst = ft_itoa(345);
+	printf("-345\t\t[%s]\n", rst);
+	free(rst);
+
+	rst = ft_itoa(0);
+	printf("0\t\t[%s]\n", rst);
+	free(rst);
+
+	rst = ft_itoa(-345);
+	printf("345\t\t[%s]\n", rst);
+	free(rst);
+
+	rst = ft_itoa(-2147483648);
+	printf("2147483647\t[%s]\n", rst);
+	free(rst);
 
 
 	// ft_strmapi
@@ -137,6 +200,8 @@ int	main(void)
 	close(fd);
 
 	system("rm test.txt");
+
+	// system("leaks test");
 }
 
 char	shift_odd_letter_case(unsigned int idx, char letter)

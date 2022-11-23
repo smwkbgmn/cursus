@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 16:22:35 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/11/21 18:46:08 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/11/23 23:52:57 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,14 @@
 
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	if (!lst || !new)
+	if (new == 0)
 		return ;
-	while ((*lst)->next)
-		lst = &(*lst)->next;
-	(*lst)->next = new;
+	if (*lst == 0)
+		*lst = new;
+	else
+	{
+		while ((*lst)->next)
+			lst = &(*lst)->next;
+		(*lst)->next = new;
+	}
 }

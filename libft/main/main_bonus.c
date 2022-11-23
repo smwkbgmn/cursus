@@ -90,7 +90,7 @@ int main(void)
 
 	t_list *test2_last = ft_lstlast(test2_head);
 
-	printf("after ft_lstdelone to last node of the test list 1\n");
+	printf("after ft_lstdelone to last node of the test list 2\n");
 	ft_lstdelone(test2_last, &del);
 	n = 4;
 	while (n-- > 0)
@@ -129,7 +129,7 @@ int main(void)
 	printf("\n");
 
 	// delete whole test list 3 and try to print 
-	printf("try to print test list 3\n");
+	printf("after ft_lstclear try to print test list 3\n");
 	ft_lstclear(&test3_head, &del);
 	print_lst(test3_head);
 	printf("\n");

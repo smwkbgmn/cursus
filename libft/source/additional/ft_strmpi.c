@@ -1,7 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strmpi.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/23 15:13:00 by donghyu2          #+#    #+#             */
+/*   Updated: 2022/11/23 23:17:33 by donghyu2         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include "libft.h"
-
-static int	ft_strlen(char const *str);
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
@@ -18,15 +28,6 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 		idx++;
 		s++;
 	}
+	result[idx] = 0;
 	return (result);
-}
-
-static int	ft_strlen(char const *str)
-{
-	int	len;
-
-	len = 0;
-	while (str[len])
-		len++;
-	return (len);
 }
