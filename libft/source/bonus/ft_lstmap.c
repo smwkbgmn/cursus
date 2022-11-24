@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 15:41:33 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/11/23 18:07:14 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/11/24 19:09:45 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
 	t_list	*new_head;
 
+	if (!lst)
+		return (0);
 	new_head = ft_lstnew(f(lst->content));
 	if (!new_head)
 		return (0);
