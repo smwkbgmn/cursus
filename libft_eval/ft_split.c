@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:12:25 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/11/23 15:12:27 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/11/24 15:28:43 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #include "libft.h"
 
 char	**scissor(char const *s, char c, int cnt);
-int		get_cnt_word(char const *s, char c);
-int		get_len(char const *s, char c);
+size_t	get_cnt_word(char const *s, char c);
+size_t	get_len(char const *s, char c);
 void	*free_malloc_failure(char **result, int r);
 
 char	**ft_split(char const *s, char c)
@@ -50,9 +50,9 @@ char	**scissor(char const *s, char c, int cnt)
 	return (result);
 }
 
-int	get_cnt_word(char const *s, char c)
+size_t	get_cnt_word(char const *s, char c)
 {
-	int	cnt;
+	size_t	cnt;
 
 	cnt = 0;
 	while (*s)
@@ -67,12 +67,12 @@ int	get_cnt_word(char const *s, char c)
 	return (cnt);
 }
 
-int	get_len(char const *s, char c)
+size_t	get_len(char const *s, char c)
 {
-	int	len;
+	size_t	len;
 
 	len = 0;
-	while (*s++ != c && *s)
+	while (s[len] != c && s[len])
 		len++;
 	return (len);
 }

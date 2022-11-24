@@ -6,17 +6,17 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:13:04 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/11/24 01:25:32 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/11/24 15:26:43 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 
-static char		*find_start_end(const char *s1, const char *set, int flag);
+static char		*find_end(const char *s1, const char *set, char *start);
 static int		is_set(const char c, char const *set);
-static char		*fill_rst(char *result, char *start, char *end);
 static size_t	get_len(char *start, char *end);
+static char		*fill_result(char *result, char *start, char *end);
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
@@ -27,30 +27,17 @@ char	*ft_strtrim(char const *s1, char const *set)
 	while (is_set(*s1, set) == 1)
 		s1++;
 	if (*s1 == 0)
-	{
-		result = malloc(1);
-		if (!result)
-			return (0);
-		*result = 0;
-		return (result);
-	}
-	start = find_start_end(s1, set, 0);
-	end = find_start_end(s1, set, 1);
+		return ((char *)ft_calloc(1, 1));
+	start = (char *)s1;
+	end = find_end(s1, set, start);
 	result = malloc(get_len(start, end) + 1);
 	if (!result)
 		return (0);
-	return (fill_rst(result, start, end));
+	return (fill_result(result, start, end));
 }		
 
-static char	*find_start_end(const char *s1, const char *set, int flag)
+static char	*find_end(const char *s1, const char *set, char *start)
 {
-	char	*start;
-
-	while (is_set(*s1, set) == 1 && *(s1 + 1))
-		s1++;
-	if (flag == 0)
-		return ((char *)s1);
-	start = (char *)s1;
 	while (*(s1 + 1))
 		s1++;
 	while (is_set(*s1, set) == 1 && s1 != start)
@@ -68,17 +55,6 @@ static int	is_set(const char c, char const *set)
 		return (0);
 }
 
-static char	*fill_rst(char *result, char *start, char *end)
-{
-	size_t	idx;
-
-	idx = 0;
-	while (start <= end)
-		result[idx++] = *(char *)start++;
-	result[idx] = 0;
-	return (result);
-}
-
 static size_t	get_len(char *start, char *end)
 {
 	size_t	len;
@@ -87,4 +63,15 @@ static size_t	get_len(char *start, char *end)
 	while (start++ <= end)
 		len++;
 	return (len);
+}
+
+static char	*fill_result(char *result, char *start, char *end)
+{
+	size_t	idx;
+
+	idx = 0;
+	while (start <= end)
+		result[idx++] = *(char *)start++;
+	result[idx] = 0;
+	return (result);
 }

@@ -6,14 +6,13 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:13:07 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/11/24 01:25:41 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/11/24 15:28:09 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 
-// static char	*exception(char *result);
 static char	*fill_rst(const char *s, char *result, long start, size_t size_r);
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
@@ -24,13 +23,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 	size_s = ft_strlen(s);
 	if (start >= size_s || len == 0)
-	{
-		result = malloc(1);
-		if (!result)
-			return (0);
-		*result = 0;
-		return (result);
-	}
+		return (ft_calloc(1, 1));
 	if (size_s - start < len)
 		size_r = size_s - start;
 	else
