@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   isalpha.c                                          :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 16:13:41 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/11/23 15:16:38 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/11/24 17:56:52 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,9 @@
 
 int	ft_isalpha(int c)
 {
-	unsigned char	c_casted;
-
-	c_casted = (unsigned char)c;
-	if ('a' <= c_casted && c_casted <= 'z')
+	if ('a' <= c && c <= 'z')
 		return (1);
-	else if ('A' <= c_casted && c_casted <= 'Z')
+	else if ('A' <= c && c <= 'Z')
 		return (1);
 	else
 		return (0);
