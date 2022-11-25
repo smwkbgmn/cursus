@@ -6,43 +6,43 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 15:41:33 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/11/24 19:09:45 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/11/26 01:23:01 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 
-static int		ft_lstadd_back_int(t_list **lst, t_list *new);
+static void	*malloc_fail(t_list *head, void *content, void (*del)(void *));
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	*new_head;
+	t_list	*head;
+	t_list	*node;
+	void	*content;
 
 	if (!lst)
 		return (0);
-	new_head = ft_lstnew(f(lst->content));
-	if (!new_head)
-		return (0);
+	content = f(lst->content);
+	head = ft_lstnew(content);
+	if (!head)
+		return (malloc_fail(head, content, del));
 	lst = lst->next;
 	while (lst)
 	{
-		if (!ft_lstadd_back_int(&new_head, ft_lstnew(f(lst->content))))
-		{
-			ft_lstclear(&new_head, del);
-			return (0);
-		}
+		content = f(lst->content);
+		node = ft_lstnew(content);
+		if (!node)
+			return (malloc_fail(head, content, del));
+		ft_lstadd_back(&head, node);
 		lst = lst->next;
 	}
-	return (new_head);
+	return (head);
 }
 
-static int	ft_lstadd_back_int(t_list **lst, t_list *new)
+static void	*malloc_fail(t_list *head, void *content, void (*del)(void *))
 {
-	if (!lst || !new)
-		return (0);
-	while ((*lst)->next)
-		lst = &(*lst)->next;
-	(*lst)->next = new;
-	return (1);
+	del(content);
+	ft_lstclear(&head, del);
+	return (0);
 }

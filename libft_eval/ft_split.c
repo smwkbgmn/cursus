@@ -6,28 +6,28 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:12:25 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/11/24 15:28:43 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/11/26 02:12:53 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 
-char	**scissor(char const *s, char c, int cnt);
+char	**scissor(char const *s, char c, size_t cnt);
 size_t	get_cnt_word(char const *s, char c);
 size_t	get_len(char const *s, char c);
-void	*free_malloc_failure(char **result, int r);
+void	*free_malloc_failure(char **result, int p);
 
 char	**ft_split(char const *s, char c)
 {
 	return (scissor(s, c, get_cnt_word(s, c)));
 }
 
-char	**scissor(char const *s, char c, int cnt)
+char	**scissor(char const *s, char c, size_t cnt)
 {
 	char	**result;
-	int		p;
-	int		pp;
+	size_t	p;
+	size_t	pp;
 
 	result = malloc(sizeof(char *) * (cnt + 1));
 	if (result == 0)
@@ -77,10 +77,10 @@ size_t	get_len(char const *s, char c)
 	return (len);
 }
 
-void	*free_malloc_failure(char **result, int r)
+void	*free_malloc_failure(char **result, int p)
 {
-	while (r >= 0)
-		free(result[r--]);
+	while (p >= 0)
+		free(result[p--]);
 	free(result);
 	return (0);
 }

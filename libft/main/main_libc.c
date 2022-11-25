@@ -342,22 +342,22 @@ int main(void)
 
 	// printf("\n------------------------------------------------\n");
 
-	// memmove
-	printf("\n[memmove]\n\n");
+	// // memmove
+	// printf("\n[memmove]\n\n");
 	
-	int int_source[10] = {5998, 3326, 3958, 1259, 9999};
-	int int_dest1[10] = {0, 1, 2, 3, 4};
-	int int_dest2[10] = {0, 1, 2, 3, 4}; 
+	// int int_source[10] = {5998, 3326, 3958, 1259, 9999};
+	// int int_dest1[10] = {0, 1, 2, 3, 4};
+	// int int_dest2[10] = {0, 1, 2, 3, 4}; 
 
-	memmove(int_dest1, int_source, 20);
-	ft_memmove(int_dest2, int_source, 20);
+	// memmove(int_dest1, int_source, 20);
+	// ft_memmove(int_dest2, int_source, 20);
 
-	for (int p = 0; p < 5; p++)
-		printf("[%d]", int_dest1[p]);	
+	// for (int p = 0; p < 5; p++)
+	// 	printf("[%d]", int_dest1[p]);	
 
-	printf("\n");
-	for (int p = 0; p < 5; p++)
-		printf("[%d]", int_dest2[p]);	
+	// printf("\n");
+	// for (int p = 0; p < 5; p++)
+	// 	printf("[%d]", int_dest2[p]);	
 	
 	
 
@@ -1101,22 +1101,22 @@ int main(void)
 
 	// printf("\n------------------------------------------------\n");
 
-	// // calloc
-	// printf("\n[calloc]\n\n");
+	// calloc
+	printf("\n[calloc]\n\n");
 
-	// char *cptr;
+	char *cptr;
 
-	// cptr = calloc(0, 0);
-	// 	printf("calloc(0, 0) --- [%p][%c][%zu]\n", cptr, *cptr, malloc_size(cptr));
+	cptr = ft_calloc(0, 0);
+		printf("calloc(0, 0) --- [%p][%c][%zu]\n", cptr, *cptr, malloc_size(cptr));
 
-	// cptr = calloc(0, 4);
-	// printf("calloc(0, 4) --- [%p][%c][%zu]\n", cptr, *cptr, malloc_size(cptr));
+	cptr = ft_calloc(0, 4);
+	printf("calloc(0, 4) --- [%p][%c][%zu]\n", cptr, *cptr, malloc_size(cptr));
 
-	// cptr = ft_calloc(4, 0);
-	// printf("calloc(4, 0) --- [%p][%c][%zu]\n", cptr, *cptr, malloc_size(cptr));
+	cptr = ft_calloc(4, 0);
+	printf("calloc(4, 0) --- [%p][%c][%zu]\n", cptr, *cptr, malloc_size(cptr));
 
-	// cptr = ft_calloc(4, 20);
-	// 	printf("calloc(4, 20) --- [%p][%c][%zu]\n", cptr, *cptr, malloc_size(cptr));
+	cptr = ft_calloc(4, 20);
+		printf("calloc(4, 20) --- [%p][%c][%zu]\n", cptr, *cptr, malloc_size(cptr));
 
 
 	// char *allocated_int_origin;
