@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   idf_p.c                                            :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/25 00:54:11 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/11/29 02:02:33 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/11/11 16:18:39 by donghyu2          #+#    #+#             */
+/*   Updated: 2022/11/24 15:28:44 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include "libftprintf.h"
 #include "libft.h"
 
-void	idf_p(va_list ptr)
+void	*ft_memset(void *b, int c, size_t len)
 {
-	unsigned long	addr;
+	unsigned char	*b_c;
+	unsigned char	c_c;
 
-	addr = (unsigned long)va_arg(ptr, void *);
-	write(1, "0x", 2);
-	write_hex_lower(addr);
+	b_c = (unsigned char *)b;
+	c_c = (unsigned char)c;
+	while (len > 0)
+	{
+		*b_c++ = c_c;
+		len--;
+	}
+	return (b);
 }

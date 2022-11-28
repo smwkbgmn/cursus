@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_string.c                                     :+:      :+:    :+:   */
+/*   writing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 01:33:34 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/11/25 13:39:39 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/11/29 02:15:33 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 #include "libftprintf.h"
 #include "libft.h"
 
-static void	set_idf(void (*idf_functions[9])(va_list));
+static void	set_idf(void (*idf_functions[9])(va_list ptr));
 static int	get_idf(char idf);
 
 void	print_string(const char *str, va_list ptr)
 {
 	void	(*idf_functions[9])(va_list);
 
-	// va_start(ptr, str);
 	set_idf(idf_functions);
 
 	while (*str)
 	{
-		if (*str == '\\')
-			write (1, str++, 2);
-		else if (*str == '%' && get_idf(*(str + 1)) != -1)
+		// if (*str == '\\')
+		// 	write (1, str++, 2);
+		if (*str == '%' && get_idf(*(str + 1)) != -1)
 		{	
 			str++;
 			idf_functions[get_idf(*str)](ptr);
@@ -36,21 +36,18 @@ void	print_string(const char *str, va_list ptr)
 			write(1, str, 1);
 		str++;
 	}
-
-	// va_end(ptr);
 }
 
-static void	set_idf(void (*idf_functions[9])(va_list))
+static void	set_idf(void (*idf_functions[9])(va_list ptr))
 {
 	idf_functions[0] = &idf_c;
-	// idf_functions[1] = &idf_d;
-	// idf_functions[2] = &idf_i;
-	// idf_functions[3] = &idf_p;
-	// idf_functions[4] = &idf_s;
-	// idf_functions[5] = &idf_u;
-	// idf_functions[6] = &idf_x_lower;
-	// idf_functions[7] = &idf_x_upper;
-	// idf_functions[8] = &idf_percent;
+	idf_functions[1] = &idf_d;
+	idf_functions[2] = &idf_i;
+	idf_functions[3] = &idf_p;
+	idf_functions[4] = &idf_s;
+	idf_functions[5] = &idf_u;
+	idf_functions[6] = &idf_x_lower;
+	idf_functions[7] = &idf_x_upper;
 }
 
 static int	get_idf(char idf)
@@ -58,7 +55,7 @@ static int	get_idf(char idf)
 	char	idfs[10];
 	int		idx;
 
-	ft_strlcpy(idfs, "cdipsuxX%\0", 10);
+	ft_strlcpy(idfs, "cdipsuxX", 9);
 
 	idx = 0;
 	while (idfs[idx] != idf && idfs[idx])
@@ -68,8 +65,3 @@ static int	get_idf(char idf)
 	else
 		return (idx);
 }
-
-// void	print_idf(va_list ptr, char idf, void (*function)(va_list))
-// {
-	
-// }

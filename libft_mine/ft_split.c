@@ -6,28 +6,28 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:12:25 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/11/23 15:12:27 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/11/26 02:12:53 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 
-char	**scissor(char const *s, char c, int cnt);
-int		get_cnt_word(char const *s, char c);
-int		get_len(char const *s, char c);
-void	*free_malloc_failure(char **result, int r);
+char	**scissor(char const *s, char c, size_t cnt);
+size_t	get_cnt_word(char const *s, char c);
+size_t	get_len(char const *s, char c);
+void	*free_malloc_failure(char **result, int p);
 
 char	**ft_split(char const *s, char c)
 {
 	return (scissor(s, c, get_cnt_word(s, c)));
 }
 
-char	**scissor(char const *s, char c, int cnt)
+char	**scissor(char const *s, char c, size_t cnt)
 {
 	char	**result;
-	int		p;
-	int		pp;
+	size_t	p;
+	size_t	pp;
 
 	result = malloc(sizeof(char *) * (cnt + 1));
 	if (result == 0)
@@ -50,9 +50,9 @@ char	**scissor(char const *s, char c, int cnt)
 	return (result);
 }
 
-int	get_cnt_word(char const *s, char c)
+size_t	get_cnt_word(char const *s, char c)
 {
-	int	cnt;
+	size_t	cnt;
 
 	cnt = 0;
 	while (*s)
@@ -67,20 +67,20 @@ int	get_cnt_word(char const *s, char c)
 	return (cnt);
 }
 
-int	get_len(char const *s, char c)
+size_t	get_len(char const *s, char c)
 {
-	int	len;
+	size_t	len;
 
 	len = 0;
-	while (*s++ != c && *s)
+	while (s[len] != c && s[len])
 		len++;
 	return (len);
 }
 
-void	*free_malloc_failure(char **result, int r)
+void	*free_malloc_failure(char **result, int p)
 {
-	while (r >= 0)
-		free(result[r--]);
+	while (p >= 0)
+		free(result[p--]);
 	free(result);
 	return (0);
 }

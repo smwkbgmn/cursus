@@ -6,12 +6,30 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 00:54:26 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/11/25 13:30:41 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/11/29 02:02:49 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 #include "libftprintf.h"
 
-// void	idf_u(va_list ptr)
-// {
-// }
+static void	ft_putnbr_uint(unsigned int num);
+
+void	idf_u(va_list ptr)
+{
+	unsigned int	num;
+
+	num = va_arg(ptr, unsigned int);
+	ft_putnbr_uint(num);
+}
+
+static void	ft_putnbr_uint(unsigned int num)
+{
+	if (num < 10)
+		write(1, &"0123456789"[num], 1);
+	else
+	{
+		ft_putnbr_uint(num / 10);
+		write(1, &"0123456789"[num % 10], 1);
+	}	
+}

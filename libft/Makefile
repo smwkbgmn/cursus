@@ -1,11 +1,55 @@
 NAME	= libft.a
 
 CC		= cc
-FLAG	= -Wall -Wextra -Werror -I include
+FLAG	= -Wall -Wextra -Werror
 
-SRCS	= $(wildcard source/libc/*.c) \
-		$(wildcard source/additional/*.c) \
-		$(wildcard source/bonus/*.c)
+SRCS	= \
+ft_strnstr.c \
+ft_isdigit.c \
+ft_strlcpy.c \
+ft_strlen.c \
+ft_memcmp.c \
+ft_strchr.c \
+ft_bzero.c \
+ft_isascii.c \
+ft_memcpy.c \
+ft_isprint.c \
+ft_toupper.c \
+ft_strrchr.c \
+ft_isalpha.c \
+ft_memchr.c \
+ft_memset.c \
+ft_strncmp.c \
+ft_memmove.c \
+ft_strlcat.c \
+ft_calloc.c \
+ft_strdup.c \
+ft_atoi.c \
+ft_isalnum.c \
+ft_tolower.c \
+\
+ft_putstr_fd.c \
+ft_putnbr_fd.c \
+ft_striteri.c \
+ft_strjoin.c \
+ft_putendl_fd.c \
+ft_split.c \
+ft_putchar_fd.c \
+ft_substr.c \
+ft_strtrim.c \
+ft_strmpi.c \
+ft_itoa.c \
+\
+ft_lstadd_back.c \
+ft_lstnew.c \
+ft_lstlast.c \
+ft_lstclear.c \
+ft_lstiter.c \
+ft_lstmap.c \
+ft_lstsize.c \
+ft_lstadd_front.c \
+ft_lstdelone.c
+
 OBJS	= $(SRCS:.c=.o)
 
 all		: $(NAME)
@@ -17,18 +61,14 @@ $(NAME)	: $(OBJS)
 		$(CC) $(FLAG) -c $< -o $(<:.c=.o)
 
 clean	:
-		$(RM) $(OBJS) $(wildcard main*.o)
+		$(RM) $(OBJS)
 
 fclean	: clean
-		$(RM) $(NAME) test
+		$(RM) $(NAME)
 
 re		: fclean all
 
-lc		: $(NAME) main/main_libc.c
-		$(CC) $(FLAG) $(NAME) main/main_libc.c -o test
+bonus	: $(OBJS)
+		ar rc $(NAME) $(OBJS)
 
-add		: $(NAME) main/main_additional.c
-		$(CC) $(FLAG) $(NAME) main/main_additional.c -o test
-
-bns		: $(NAME) main/main_bonus.c
-		$(CC) $(FLAG) $(NAME) main/main_bonus.c -o test
+.PHONY	: all clan fcelan re

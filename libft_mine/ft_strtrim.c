@@ -6,16 +6,15 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:13:04 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/11/24 01:25:32 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/11/26 02:25:03 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 
-static char		*find_start_end(const char *s1, const char *set, int flag);
-static int		is_set(const char c, char const *set);
-static char		*fill_rst(char *result, char *start, char *end);
+static int		is_set(char c, const char *set);
+static char		*find_end(char *start, const char *set);
 static size_t	get_len(char *start, char *end);
 
 char	*ft_strtrim(char const *s1, char const *set)
@@ -27,40 +26,19 @@ char	*ft_strtrim(char const *s1, char const *set)
 	while (is_set(*s1, set) == 1)
 		s1++;
 	if (*s1 == 0)
-	{
-		result = malloc(1);
-		if (!result)
-			return (0);
-		*result = 0;
-		return (result);
-	}
-	start = find_start_end(s1, set, 0);
-	end = find_start_end(s1, set, 1);
+		return ((char *)ft_calloc(1, 1));
+	start = (char *)s1;
+	end = find_end(start, set);
 	result = malloc(get_len(start, end) + 1);
 	if (!result)
 		return (0);
-	return (fill_rst(result, start, end));
-}		
-
-static char	*find_start_end(const char *s1, const char *set, int flag)
-{
-	char	*start;
-
-	while (is_set(*s1, set) == 1 && *(s1 + 1))
-		s1++;
-	if (flag == 0)
-		return ((char *)s1);
-	start = (char *)s1;
-	while (*(s1 + 1))
-		s1++;
-	while (is_set(*s1, set) == 1 && s1 != start)
-		s1--;
-	return ((char *)s1);
+	ft_strlcpy(result, start, get_len(start, end) + 1);
+	return (result);
 }
 
-static int	is_set(const char c, char const *set)
+static int	is_set(char letter, char const *set)
 {
-	while (*set != c && *set)
+	while (*set != letter && *set)
 		set++;
 	if (*set != 0)
 		return (1);
@@ -68,15 +46,16 @@ static int	is_set(const char c, char const *set)
 		return (0);
 }
 
-static char	*fill_rst(char *result, char *start, char *end)
+static char	*find_end(char *start, const char *set)
 {
-	size_t	idx;
+	char	*ptr;
 
-	idx = 0;
-	while (start <= end)
-		result[idx++] = *(char *)start++;
-	result[idx] = 0;
-	return (result);
+	ptr = start;
+	while (*(ptr + 1))
+		ptr++;
+	while (is_set(*ptr, set) == 1 && ptr != start)
+		ptr--;
+	return ((char *)ptr);
 }
 
 static size_t	get_len(char *start, char *end)

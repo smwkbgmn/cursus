@@ -10,7 +10,7 @@ LIBFT	= libft.a
 all		: $(NAME)
 
 $(NAME)	: $(OBJS)
-		ar rc $(NAME) $(LIBFT) $(OBJS) 
+		ar rc $(NAME) $(OBJS)
 		
 .c.o	: $(SRCS)
 		$(CC) $(FLAG) -c $< -o $(<:.c=.o)
@@ -19,9 +19,13 @@ clean	:
 		$(RM) $(OBJS)
 
 fclean	: clean
-		$(RM) $(NAME)
+		$(RM) $(NAME) test
 
 re		: fclean all
 
-main	: $(NAME)
-		$(CC) $(FLAG) $(NAME) $(LIBFT) main_printf/main.c -o test
+
+
+
+
+main	: $(NAME) main/main.c
+		$(CC) $(FLAG) -I. -L. -lft $(NAME) main/main.c -o test

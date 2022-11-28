@@ -48,7 +48,10 @@ ft_lstiter.c \
 ft_lstmap.c \
 ft_lstsize.c \
 ft_lstadd_front.c \
-ft_lstdelone.c
+ft_lstdelone.c \
+\
+ft_puthex_lower.c \
+ft_puthex_upper.c
 
 OBJS	= $(SRCS:.c=.o)
 

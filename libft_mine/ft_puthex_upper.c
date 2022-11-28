@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_puthex_upper.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/11 16:18:39 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/11/23 17:55:24 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/11/29 01:29:57 by donghyu2          #+#    #+#             */
+/*   Updated: 2022/11/29 01:54:25 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 #include "libft.h"
 
-void	*ft_memset(void *b, int c, size_t len)
-{
-	unsigned char	*b_c;
-	unsigned char	c_c;
+static void	write_digit(short digit);
 
-	b_c = (unsigned char *)b;
-	c_c = (unsigned char)c;
-	while (len > 0)
+void	write_hex_upper(unsigned long num)
+{
+	if (num < 16)
+		write_digit(num & 0xf);
+	else
 	{
-		*b_c++ = c_c;
-		len--;
+		write_hex_upper(num >> 4);
+		write_digit(num & 0xf);
 	}
-	return (b);
+}
+
+static void	write_digit(short digit)
+{
+	write(1, &"0123456789ABCDEF"[digit], 1);
 }
