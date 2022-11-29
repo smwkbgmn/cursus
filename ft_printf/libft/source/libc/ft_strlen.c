@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/24 22:06:50 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/11/29 02:36:49 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/11/15 17:37:16 by donghyu2          #+#    #+#             */
+/*   Updated: 2022/11/23 17:56:59 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "libft.h"
 
-int	ft_printf(const char *str, ...)
+size_t	ft_strlen(const char *s)
 {
-	va_list	ptr;
+	size_t	len;
 
-	va_start(ptr, str);
-	print_string(str, ptr);
-	va_end(ptr);
-
-	return (0);
+	len = 0;
+	while (s[len])
+		len++;
+	return (len);
 }

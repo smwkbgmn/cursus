@@ -1,19 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   idf_i.c                                            :+:      :+:    :+:   */
+/*   spcf_u.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/25 00:54:03 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/11/29 02:01:47 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/11/25 00:54:26 by donghyu2          #+#    #+#             */
+/*   Updated: 2022/11/29 23:11:44 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 #include "libftprintf.h"
-#include "libft.h"
 
-void	idf_i(va_list ptr)
+static void	ft_putnbr_uint(unsigned int num);
+
+void	spcf_u(va_list *ptr)
 {
-	ft_putnbr_fd(va_arg(ptr, int), 1);
+	unsigned int	num;
+
+	num = va_arg(*ptr, unsigned int);
+	ft_putnbr_uint(num);
+}
+
+static void	ft_putnbr_uint(unsigned int num)
+{
+	if (num < 10)
+		write(1, &"0123456789"[num], 1);
+	else
+	{
+		ft_putnbr_uint(num / 10);
+		write(1, &"0123456789"[num % 10], 1);
+	}	
 }

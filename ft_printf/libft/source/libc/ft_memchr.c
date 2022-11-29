@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   idf_x_upper.c                                      :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/25 00:54:21 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/11/29 01:56:51 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/11/11 16:22:13 by donghyu2          #+#    #+#             */
+/*   Updated: 2022/11/24 19:14:41 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
 #include "libft.h"
 
-void	idf_x_upper(va_list ptr)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	unsigned long	num;
+	unsigned char	*s_c;
+	unsigned char	c_c;
 
-	num = va_arg(ptr, unsigned long);
-	write_hex_upper(num);
+	if (n == 0)
+		return (0);
+	s_c = (unsigned char *)s;
+	c_c = (unsigned char)c;
+	while (*s_c != c_c && n-- > 1)
+		s_c++;
+	if (*s_c == c_c)
+		return ((void *)s_c);
+	else
+		return (0);
 }

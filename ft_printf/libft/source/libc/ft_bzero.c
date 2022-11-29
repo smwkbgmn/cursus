@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   idf_d.c                                            :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/25 00:54:00 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/11/28 21:19:28 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/11/11 16:13:16 by donghyu2          #+#    #+#             */
+/*   Updated: 2022/11/23 18:01:03 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
 #include "libft.h"
 
-void	idf_d(va_list ptr)
+void	ft_bzero(void *s, size_t n)
 {
-	ft_putnbr_fd(va_arg(ptr, int), 1);
+	if (n == 0)
+		return ;
+	ft_memset(s, 0, n);
 }

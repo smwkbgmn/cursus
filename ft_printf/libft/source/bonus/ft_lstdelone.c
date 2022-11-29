@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   idf_s.c                                            :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/25 00:54:28 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/11/29 01:39:06 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/11/22 15:02:00 by donghyu2          #+#    #+#             */
+/*   Updated: 2022/11/23 15:13:35 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include <stdlib.h>
 #include "libft.h"
 
-void	idf_s(va_list ptr)
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	char	*str;
-
-	str = va_arg(ptr, char *);
-	ft_putstr_fd(str, 1);
+	del(lst->content);
+	free(lst);
 }

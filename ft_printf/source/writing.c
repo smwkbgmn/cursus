@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 01:33:34 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/11/29 02:15:33 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/11/29 23:12:05 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,20 @@
 #include "libftprintf.h"
 #include "libft.h"
 
-static void	set_idf(void (*idf_functions[9])(va_list ptr));
-static int	get_idf(char idf);
+static void		set_spcf(void (*spcf_function[9])(va_list *));
+static short	get_spcf(char spcf);
 
-void	print_string(const char *str, va_list ptr)
+void	writing(const char *str, va_list *ptr)
 {
-	void	(*idf_functions[9])(va_list);
+	void	(*spcf_function[9])(va_list *);
 
-	set_idf(idf_functions);
-
+	set_spcf(spcf_function);
 	while (*str)
 	{
-		// if (*str == '\\')
-		// 	write (1, str++, 2);
-		if (*str == '%' && get_idf(*(str + 1)) != -1)
-		{	
+		if (*str == '%' && get_spcf(*(str + 1)) != -1)
+		{
 			str++;
-			idf_functions[get_idf(*str)](ptr);
+			spcf_function[get_spcf(*str)](ptr);
 		}
 		else
 			write(1, str, 1);
@@ -38,29 +35,29 @@ void	print_string(const char *str, va_list ptr)
 	}
 }
 
-static void	set_idf(void (*idf_functions[9])(va_list ptr))
+static void	set_spcf(void (*spcf_function[9])(va_list *))
 {
-	idf_functions[0] = &idf_c;
-	idf_functions[1] = &idf_d;
-	idf_functions[2] = &idf_i;
-	idf_functions[3] = &idf_p;
-	idf_functions[4] = &idf_s;
-	idf_functions[5] = &idf_u;
-	idf_functions[6] = &idf_x_lower;
-	idf_functions[7] = &idf_x_upper;
+	spcf_function[0] = &spcf_c;
+	spcf_function[1] = &spcf_d;
+	spcf_function[2] = &spcf_i;
+	spcf_function[3] = &spcf_p;
+	spcf_function[4] = &spcf_s;
+	spcf_function[5] = &spcf_u;
+	spcf_function[6] = &spcf_x_lower;
+	spcf_function[7] = &spcf_x_upper;
 }
 
-static int	get_idf(char idf)
+static short	get_spcf(char spcf)
 {
-	char	idfs[10];
-	int		idx;
+	char	spcf_set[10];
+	short	idx;
 
-	ft_strlcpy(idfs, "cdipsuxX", 9);
+	ft_strlcpy(spcf_set, "cdipsuxX", 9);
 
 	idx = 0;
-	while (idfs[idx] != idf && idfs[idx])
+	while (spcf_set[idx] != spcf && spcf_set[idx])
 		idx++;
-	if (idfs[idx] == 0)
+	if (spcf_set[idx] == 0)
 		return (-1);
 	else
 		return (idx);
