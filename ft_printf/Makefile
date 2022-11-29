@@ -2,24 +2,28 @@ NAME		= libftprintf.a
 
 CC			= cc
 FLAG		= -Wall -Wextra -Werror -I $(DIR_HEADER)
-DIR_HEADER	= include
 
-SRCS		= $(wildcard $(DIR_SRCS)/*.c) $(wildcard $(DIR_SPECIF)/*.c)
-DIR_SRCS	= source
-DIR_SPECIF	= specifier
-
+SRCS		= $(wildcard $(DIR_UTL)/*.c) $(wildcard $(DIR_SPCF)/*.c)
 OBJS		= $(SRCS:.c=.o)
-
 LIBFT		= $(DIR_LIBFT)/libft.a
+
+DIR_HEADER	= include
+DIR_UTL		= source/utility
+DIR_SPCF	= source/specifier
 DIR_LIBFT	= libft
 
 all		: $(NAME)
 
-$(NAME)	: $(OBJS)
+$(NAME)	: $(LIBFT) $(OBJS)
+		cp $(LIBFT) $(NAME)
 		ar rc $(NAME) $(OBJS)
+		$(MAKE) -C $(DIR_LIBFT) fclean
+
+$(LIBFT):
+		$(MAKE) -C $(DIR_LIBFT) all
 		
 %.o		: %.c
-		$(CC) $(FLAG) -I include -c $< -o $@
+		$(CC) $(FLAG) -c $< -o $@
 
 clean	: 
 		$(RM) $(OBJS)
@@ -29,14 +33,9 @@ fclean	: clean
 
 re		: fclean all
 
+.PHONY	: all clean fclean re
 
 
-
-$(LIBFT):
-		$(MAKE) -C $(DIR_LIBFT) all
-		$(MAKE) -C $(DIR_LIBFT) clean
 
 main	: $(NAME) $(LIBFT) main/main.c
 		$(CC) $(FLAG) -L$(DIR_LIBFT) -lft $(NAME) main/main.c
-
-.PHONY	: all clean fclean re

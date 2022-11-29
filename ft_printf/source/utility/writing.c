@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 01:33:34 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/11/29 23:12:05 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/11/30 01:30:22 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,23 @@
 #include "libftprintf.h"
 #include "libft.h"
 
-static void		set_spcf(void (*spcf_function[9])(va_list *));
+static void		set_spcf(void (*write_specifier[9])(va_list *));
 static short	get_spcf(char spcf);
 
 void	writing(const char *str, va_list *ptr)
 {
-	void	(*spcf_function[9])(va_list *);
+	void	(*write_specifier[9])(va_list *);
 
-	set_spcf(spcf_function);
+	set_spcf(write_specifier);
 	while (*str)
 	{
-		if (*str == '%' && get_spcf(*(str + 1)) != -1)
+		if (*str == '%')
 		{
 			str++;
-			spcf_function[get_spcf(*str)](ptr);
+			if (get_spcf(*str) != -1)
+				write_specifier[get_spcf(*str)](ptr);
+			else
+				write(1, str, 1);
 		}
 		else
 			write(1, str, 1);
@@ -35,16 +38,16 @@ void	writing(const char *str, va_list *ptr)
 	}
 }
 
-static void	set_spcf(void (*spcf_function[9])(va_list *))
+static void	set_spcf(void (*write_specifier[9])(va_list *))
 {
-	spcf_function[0] = &spcf_c;
-	spcf_function[1] = &spcf_d;
-	spcf_function[2] = &spcf_i;
-	spcf_function[3] = &spcf_p;
-	spcf_function[4] = &spcf_s;
-	spcf_function[5] = &spcf_u;
-	spcf_function[6] = &spcf_x_lower;
-	spcf_function[7] = &spcf_x_upper;
+	write_specifier[0] = &spcf_c;
+	write_specifier[1] = &spcf_d;
+	write_specifier[2] = &spcf_i;
+	write_specifier[3] = &spcf_p;
+	write_specifier[4] = &spcf_s;
+	write_specifier[5] = &spcf_u;
+	write_specifier[6] = &spcf_x_lower;
+	write_specifier[7] = &spcf_x_upper;
 }
 
 static short	get_spcf(char spcf)
@@ -53,7 +56,6 @@ static short	get_spcf(char spcf)
 	short	idx;
 
 	ft_strlcpy(spcf_set, "cdipsuxX", 9);
-
 	idx = 0;
 	while (spcf_set[idx] != spcf && spcf_set[idx])
 		idx++;

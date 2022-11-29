@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   spcf_s.c                                           :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/25 00:54:28 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/11/29 23:11:35 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/11/24 22:06:50 by donghyu2          #+#    #+#             */
+/*   Updated: 2022/11/30 02:11:42 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include "libft.h"
 
-void	spcf_s(va_list *ptr)
+int	ft_printf(const char *str, ...)
 {
-	char	*str;
+	// size_t	printed_len;
+	va_list	ptr;
 
-	str = va_arg(*ptr, char *);
-	ft_putstr_fd(str, 1);
+	va_start(ptr, str);
+	// printed_len = writing(str, &ptr);
+	writing(str, &ptr);
+	va_end(ptr);
+	return (0);
 }
