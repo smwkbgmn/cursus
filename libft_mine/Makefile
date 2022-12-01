@@ -1,67 +1,79 @@
 NAME	= libft.a
 
 CC		= cc
-FLAG	= -Wall -Wextra -Werror
+FLAG	= -Wall -Wextra -Werror -I $(DIR_HEADER)
 
 SRCS	= \
-ft_strnstr.c \
-ft_isdigit.c \
-ft_strlcpy.c \
-ft_strlen.c \
-ft_memcmp.c \
-ft_strchr.c \
-ft_bzero.c \
-ft_isascii.c \
-ft_memcpy.c \
-ft_isprint.c \
-ft_toupper.c \
-ft_strrchr.c \
-ft_isalpha.c \
-ft_memchr.c \
-ft_memset.c \
-ft_strncmp.c \
-ft_memmove.c \
-ft_strlcat.c \
-ft_calloc.c \
-ft_strdup.c \
-ft_atoi.c \
-ft_isalnum.c \
-ft_tolower.c \
+$(DIR_LIBC)/ft_strnstr.c \
+$(DIR_LIBC)/ft_isdigit.c \
+$(DIR_LIBC)/ft_strlcpy.c \
+$(DIR_LIBC)/ft_strlen.c \
+$(DIR_LIBC)/ft_memcmp.c \
+$(DIR_LIBC)/ft_strchr.c \
+$(DIR_LIBC)/ft_bzero.c \
+$(DIR_LIBC)/ft_isascii.c \
+$(DIR_LIBC)/ft_memcpy.c \
+$(DIR_LIBC)/ft_isprint.c \
+$(DIR_LIBC)/ft_toupper.c \
+$(DIR_LIBC)/ft_strrchr.c \
+$(DIR_LIBC)/ft_isalpha.c \
+$(DIR_LIBC)/ft_memchr.c \
+$(DIR_LIBC)/ft_memset.c \
+$(DIR_LIBC)/ft_strncmp.c \
+$(DIR_LIBC)/ft_memmove.c \
+$(DIR_LIBC)/ft_strlcat.c \
+$(DIR_LIBC)/ft_calloc.c \
+$(DIR_LIBC)/ft_strdup.c \
+$(DIR_LIBC)/ft_atoi.c \
+$(DIR_LIBC)/ft_isalnum.c \
+$(DIR_LIBC)/ft_tolower.c \
 \
-ft_putstr_fd.c \
-ft_putnbr_fd.c \
-ft_striteri.c \
-ft_strjoin.c \
-ft_putendl_fd.c \
-ft_split.c \
-ft_putchar_fd.c \
-ft_substr.c \
-ft_strtrim.c \
-ft_strmpi.c \
-ft_itoa.c \
+$(DIR_ADD)/ft_putstr_fd.c \
+$(DIR_ADD)/ft_putnbr_fd.c \
+$(DIR_ADD)/ft_striteri.c \
+$(DIR_ADD)/ft_strjoin.c \
+$(DIR_ADD)/ft_putendl_fd.c \
+$(DIR_ADD)/ft_split.c \
+$(DIR_ADD)/ft_putchar_fd.c \
+$(DIR_ADD)/ft_substr.c \
+$(DIR_ADD)/ft_strtrim.c \
+$(DIR_ADD)/ft_strmpi.c \
+$(DIR_ADD)/ft_itoa.c \
 \
-ft_lstadd_back.c \
-ft_lstnew.c \
-ft_lstlast.c \
-ft_lstclear.c \
-ft_lstiter.c \
-ft_lstmap.c \
-ft_lstsize.c \
-ft_lstadd_front.c \
-ft_lstdelone.c \
+$(DIR_BONUS)/ft_lstadd_back.c \
+$(DIR_BONUS)/ft_lstnew.c \
+$(DIR_BONUS)/ft_lstlast.c \
+$(DIR_BONUS)/ft_lstclear.c \
+$(DIR_BONUS)/ft_lstiter.c \
+$(DIR_BONUS)/ft_lstmap.c \
+$(DIR_BONUS)/ft_lstsize.c \
+$(DIR_BONUS)/ft_lstadd_front.c \
+$(DIR_BONUS)/ft_lstdelone.c \
 \
-ft_puthex_lower.c \
-ft_puthex_upper.c
+$(DIR_CUSTOM)/write_hex_lower.c \
+$(DIR_CUSTOM)/write_hex_upper.c \
+$(DIR_CUSTOM)/write_hex_lower_len.c \
+$(DIR_CUSTOM)/write_hex_upper_len.c \
+$(DIR_CUSTOM)/write_address.c \
+$(DIR_CUSTOM)/ft_putchar_len.c \
+$(DIR_CUSTOM)/ft_putstr_len.c \
+$(DIR_CUSTOM)/ft_putnbr_len.c
 
 OBJS	= $(SRCS:.c=.o)
+
+DIR_HEADER	= include
+DIR_LIBC	= source/libc
+DIR_ADD		= source/additional
+DIR_BONUS	= source/bonus
+DIR_CUSTOM	= source/custom
 
 all		: $(NAME)
 
 $(NAME)	: $(OBJS)
 		ar rc $(NAME) $(OBJS)
 
-.c.o	: $(SRCS)
-		$(CC) $(FLAG) -c $< -o $(<:.c=.o)
+%.o		: %.c
+		$(CC) $(FLAG) -c $< -o $@
 
 clean	:
 		$(RM) $(OBJS)
@@ -70,8 +82,5 @@ fclean	: clean
 		$(RM) $(NAME)
 
 re		: fclean all
-
-bonus	: $(OBJS)
-		ar rc $(NAME) $(OBJS)
 
 .PHONY	: all clan fcelan re

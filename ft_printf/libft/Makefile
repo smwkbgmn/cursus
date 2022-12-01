@@ -51,7 +51,13 @@ $(DIR_BONUS)/ft_lstadd_front.c \
 $(DIR_BONUS)/ft_lstdelone.c \
 \
 $(DIR_CUSTOM)/write_hex_lower.c \
-$(DIR_CUSTOM)/write_hex_upper.c
+$(DIR_CUSTOM)/write_hex_upper.c \
+$(DIR_CUSTOM)/write_hex_lower_len.c \
+$(DIR_CUSTOM)/write_hex_upper_len.c \
+$(DIR_CUSTOM)/write_address.c \
+$(DIR_CUSTOM)/ft_putchar_len.c \
+$(DIR_CUSTOM)/ft_putstr_len.c \
+$(DIR_CUSTOM)/ft_putnbr_len.c
 
 OBJS	= $(SRCS:.c=.o)
 

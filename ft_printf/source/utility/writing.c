@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 01:33:34 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/11/30 01:30:22 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/12/02 01:40:57 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,34 @@
 #include "libftprintf.h"
 #include "libft.h"
 
-static void		set_spcf(void (*write_specifier[9])(va_list *));
+static void		set_spcf(size_t (*write_specifier[9])(va_list *));
 static short	get_spcf(char spcf);
 
-void	writing(const char *str, va_list *ptr)
+int	writing(const char *str, va_list *ptr)
 {
-	void	(*write_specifier[9])(va_list *);
+	int	len;
 
+	size_t (*write_specifier[9])(va_list *);
 	set_spcf(write_specifier);
+	len = 0;
 	while (*str)
 	{
 		if (*str == '%')
 		{
 			str++;
 			if (get_spcf(*str) != -1)
-				write_specifier[get_spcf(*str)](ptr);
+				len += write_specifier[get_spcf(*str)](ptr);
 			else
-				write(1, str, 1);
+				len += write(1, str, 1);
 		}
 		else
-			write(1, str, 1);
+			len += write(1, str, 1);
 		str++;
 	}
+	return (len);
 }
 
-static void	set_spcf(void (*write_specifier[9])(va_list *))
+static void	set_spcf(size_t (*write_specifier[9])(va_list *))
 {
 	write_specifier[0] = &spcf_c;
 	write_specifier[1] = &spcf_d;

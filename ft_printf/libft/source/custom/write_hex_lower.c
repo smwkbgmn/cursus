@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 01:29:57 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/11/29 15:36:27 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/12/02 01:44:24 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static void	write_digit(short digit);
 
-void	write_hex_lower(unsigned long num)
+void	write_hex_lower(unsigned int num)
 {
 	if (num < 16)
 		write_digit(num & 0xf);

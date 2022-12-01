@@ -17,7 +17,6 @@ all		: $(NAME)
 $(NAME)	: $(LIBFT) $(OBJS)
 		cp $(LIBFT) $(NAME)
 		ar rc $(NAME) $(OBJS)
-		$(MAKE) -C $(DIR_LIBFT) fclean
 
 $(LIBFT):
 		$(MAKE) -C $(DIR_LIBFT) all
@@ -26,9 +25,11 @@ $(LIBFT):
 		$(CC) $(FLAG) -c $< -o $@
 
 clean	: 
+		$(MAKE) -C $(DIR_LIBFT) clean
 		$(RM) $(OBJS)
 
 fclean	: clean
+		$(MAKE) -C $(DIR_LIBFT) fclean
 		$(RM) $(NAME) a.out
 
 re		: fclean all
@@ -38,4 +39,5 @@ re		: fclean all
 
 
 main	: $(NAME) $(LIBFT) main/main.c
+		$(MAKE) -C $(DIR_LIBFT) all
 		$(CC) $(FLAG) -L$(DIR_LIBFT) -lft $(NAME) main/main.c
