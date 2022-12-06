@@ -69,8 +69,7 @@ DIR_CUSTOM	= source/custom
 
 all		: $(NAME)
 
-$(NAME)	: $(OBJS)
-		ar rc $(NAME) $(OBJS)
+$(NAME)	: $(NAME)($(OBJS))
 
 %.o		: %.c
 		$(CC) $(FLAG) -c $< -o $@

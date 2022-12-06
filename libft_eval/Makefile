@@ -54,21 +54,12 @@ ft_lstdelone.c
 OBJ_MAN	= $(SRC_MAN:.c=.o)
 OBJ_BNS = $(SRC_BNS:.c=.o)
 
-OBJS	= $(OBJ_MAN)
-
-# BONUS	= 0
-
-# ifeq ($(BONUS), 1)
-# 	OBJS = $(OBJ_MAN) $(OBJ_BNS)
-# else
-# 	OBJS = $(OBJ_MAN)
-# endif
-
-
 all		: $(NAME)
 
-$(NAME)	: $(OBJS)
-		ar rc $(NAME) $(OBJS)
+$(NAME)	: $(NAME)($(OBJ_MAN))
+
+# $(NAME)(%) : %
+# 		ar rc $@ $%
 
 %.o		: %.c
 		$(CC) $(FLAG) -c $< -o $@
@@ -81,10 +72,7 @@ fclean	: clean
 
 re		: fclean all
 
-# bonus	: 
-# 		make BONUS=1
+bonus	: $(NAME)($(OBJ_MAN)) $(NAME)($(OBJ_BNS))
 
-bonus	: $(NAME) $(OBJ_BNS)
-		ar r $(NAME) $(OBJ_BNS)
-
-.PHONY	: all clan fcelan re
+# .SECONDARY : $(OBJ_MAN) $(OBJ_BNS)
+.PHONY	: all clan fcelan re bonus
