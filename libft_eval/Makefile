@@ -51,15 +51,15 @@ ft_lstsize.c \
 ft_lstadd_front.c \
 ft_lstdelone.c
 
-OBJ_MAN	= $(SRC_MAN:.c=.o)
-OBJ_BNS = $(SRC_BNS:.c=.o)
+OBJ_MAN	:= $(SRC_MAN:.c=.o)
+OBJ_BNS := $(SRC_BNS:.c=.o)
 
 all		: $(NAME)
 
 $(NAME)	: $(NAME)($(OBJ_MAN))
 
-# $(NAME)(%) : %
-# 		ar rc $@ $%
+# $(NAME)(%)	: %
+# 			ar rc $@ $<
 
 %.o		: %.c
 		$(CC) $(FLAG) -c $< -o $@
@@ -74,5 +74,5 @@ re		: fclean all
 
 bonus	: $(NAME)($(OBJ_MAN)) $(NAME)($(OBJ_BNS))
 
-# .SECONDARY : $(OBJ_MAN) $(OBJ_BNS)
+# .PRECIOUS : %.o
 .PHONY	: all clan fcelan re bonus
