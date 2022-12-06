@@ -71,6 +71,9 @@ all		: $(NAME)
 
 $(NAME)	: $(NAME)($(OBJS))
 
+$(NAME)(%)	: %
+			ar rc $@ $<
+
 %.o		: %.c
 		$(CC) $(FLAG) -c $< -o $@
 
@@ -82,4 +85,5 @@ fclean	: clean
 
 re		: fclean all
 
-.PHONY	: all clan fcelan re
+.PRECIOUS	: %.o
+.PHONY		: all clan fcelan re
