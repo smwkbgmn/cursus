@@ -3,7 +3,7 @@ NAME	= libft.a
 CC		= cc
 FLAG	= -Wall -Wextra -Werror
 
-SRCS	= \
+SRC_MAN	= \
 ft_strnstr.c \
 ft_isdigit.c \
 ft_strlcpy.c \
@@ -38,8 +38,9 @@ ft_putchar_fd.c \
 ft_substr.c \
 ft_strtrim.c \
 ft_strmpi.c \
-ft_itoa.c \
-\
+ft_itoa.c
+
+SRC_BNS	= \
 ft_lstadd_back.c \
 ft_lstnew.c \
 ft_lstlast.c \
@@ -50,25 +51,40 @@ ft_lstsize.c \
 ft_lstadd_front.c \
 ft_lstdelone.c
 
-OBJS	= $(SRCS:.c=.o)
+OBJ_MAN	= $(SRC_MAN:.c=.o)
+OBJ_BNS = $(SRC_BNS:.c=.o)
+
+OBJS	= $(OBJ_MAN)
+
+# BONUS	= 0
+
+# ifeq ($(BONUS), 1)
+# 	OBJS = $(OBJ_MAN) $(OBJ_BNS)
+# else
+# 	OBJS = $(OBJ_MAN)
+# endif
+
 
 all		: $(NAME)
 
 $(NAME)	: $(OBJS)
 		ar rc $(NAME) $(OBJS)
 
-.c.o	: $(SRCS)
-		$(CC) $(FLAG) -c $< -o $(<:.c=.o)
+%.o		: %.c
+		$(CC) $(FLAG) -c $< -o $@
 
 clean	:
-		$(RM) $(OBJS)
+		$(RM) $(OBJ_MAN) $(OBJ_BNS)
 
 fclean	: clean
 		$(RM) $(NAME)
 
 re		: fclean all
 
-bonus	: $(OBJS)
-		ar rc $(NAME) $(OBJS)
+# bonus	: 
+# 		make BONUS=1
+
+bonus	: $(NAME) $(OBJ_BNS)
+		ar r $(NAME) $(OBJ_BNS)
 
 .PHONY	: all clan fcelan re
