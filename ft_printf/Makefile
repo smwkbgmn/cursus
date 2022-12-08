@@ -41,3 +41,8 @@ re		: fclean all
 main	: $(NAME) $(LIBFT) main/main.c
 		$(MAKE) -C $(DIR_LIBFT) all
 		$(CC) $(FLAG) -L$(DIR_LIBFT) -lft $(NAME) main/main.c
+
+a.out		: 
+		@$(CC) $(FLAG) main/main.c
+		@./a.out
+		@$(RM) a.out

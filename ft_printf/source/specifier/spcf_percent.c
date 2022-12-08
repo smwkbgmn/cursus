@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   spcf_x_lower.c                                     :+:      :+:    :+:   */
+/*   spcf_percent.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/25 00:54:24 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/12/08 18:11:02 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/12/08 21:57:40 by donghyu2          #+#    #+#             */
+/*   Updated: 2022/12/08 22:01:18 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include "libft.h"
 
-int	spcf_x_lower(va_list *ptr)
+int	spcf_percent(va_list *ptr)
 {
-	unsigned int	num;
-
-	num = va_arg(*ptr, unsigned int);
-	return (write_hex_lower_len(num));
+	return (write(1, "%", 1));
 }

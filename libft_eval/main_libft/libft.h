@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:29:06 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/12/08 18:11:58 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/11/26 01:03:27 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,5 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
-
-void	write_hex_lower(unsigned int num);
-void	write_hex_upper(unsigned int num);
-int		write_hex_lower_len(unsigned int num);
-int		write_hex_upper_len(unsigned int num);
-int		write_address(unsigned long addr);
-int		ft_putchar_len(char c);
-int		ft_putstr_len(char *s);
-int		ft_putnbr_len(int n, int len);
 
 #endif

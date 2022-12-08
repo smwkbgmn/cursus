@@ -54,25 +54,25 @@ ft_lstdelone.c
 OBJ_MAN	:= $(SRC_MAN:.c=.o)
 OBJ_BNS := $(SRC_BNS:.c=.o)
 
-all		: $(NAME)
+all			: $(NAME)
 
-$(NAME)	: $(NAME)($(OBJ_MAN))
+$(NAME)		: $(NAME)($(OBJ_MAN))
 
-# $(NAME)(%)	: %
-# 			ar rc $@ $<
+$(NAME)(%)	: %
+			ar rc $@ $<
 
-%.o		: %.c
-		$(CC) $(FLAG) -c $< -o $@
+%.o			: %.c
+			$(CC) $(FLAG) -c $< -o $@
 
-clean	:
-		$(RM) $(OBJ_MAN) $(OBJ_BNS)
+clean		:
+			$(RM) $(OBJ_MAN) $(OBJ_BNS)
 
-fclean	: clean
-		$(RM) $(NAME)
+fclean		: clean
+			$(RM) $(NAME)
 
-re		: fclean all
+re			: fclean all
 
-bonus	: $(NAME)($(OBJ_MAN)) $(NAME)($(OBJ_BNS))
+bonus		: $(NAME)($(OBJ_MAN)) $(NAME)($(OBJ_BNS))
 
-# .PRECIOUS : %.o
-.PHONY	: all clan fcelan re bonus
+.PRECIOUS	: %.o
+.PHONY		: all clan fcelan re bonus

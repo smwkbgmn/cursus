@@ -6,35 +6,36 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 17:35:25 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/12/08 13:49:56 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/12/08 22:02:18 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 #include "libft.h"
 
-void	set_spcf(size_t (*write_convert[8])(va_list *))
+void	set_spcf(int (*conversion[9])(va_list *))
 {
-	write_convert[0] = &spcf_c;
-	write_convert[1] = &spcf_d;
-	write_convert[2] = &spcf_i;
-	write_convert[3] = &spcf_p;
-	write_convert[4] = &spcf_s;
-	write_convert[5] = &spcf_u;
-	write_convert[6] = &spcf_x_lower;
-	write_convert[7] = &spcf_x_upper;
+	conversion[0] = &spcf_c;
+	conversion[1] = &spcf_d;
+	conversion[2] = &spcf_i;
+	conversion[3] = &spcf_p;
+	conversion[4] = &spcf_s;
+	conversion[5] = &spcf_u;
+	conversion[6] = &spcf_x_lower;
+	conversion[7] = &spcf_x_upper;
+	conversion[8] = &spcf_percent;
 }
 
 short	get_spcf(char c)
 {
-	char	spcf_set[9];
+	char	spcf[10];
 	short	idx;
 
-	ft_strlcpy(spcf_set, "cdipsuxX", 9);
+	ft_strlcpy(spcf, "cdipsuxX%", 10);
 	idx = 0;
-	while (spcf_set[idx])
+	while (spcf[idx])
 	{
-		if (spcf_set[idx] == c)
+		if (spcf[idx] == c)
 			return (idx);
 		idx++;
 	}
