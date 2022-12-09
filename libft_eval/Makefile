@@ -56,6 +56,7 @@ OBJ_BNS := $(SRC_BNS:.c=.o)
 
 all			: $(NAME)
 
+# $(NAME)		: $(OBJ_MAN) $(NAME)($(OBJ_MAN))
 $(NAME)		: $(NAME)($(OBJ_MAN))
 
 $(NAME)(%)	: %
@@ -72,7 +73,8 @@ fclean		: clean
 
 re			: fclean all
 
-bonus		: $(NAME)($(OBJ_MAN)) $(NAME)($(OBJ_BNS))
+# bonus		: $(NAME) $(OBJ_BNS) $(NAME)($(OBJ_BNS))
+bonus		: $(NAME) $(NAME)($(OBJ_BNS))
 
 .PRECIOUS	: %.o
 .PHONY		: all clan fcelan re bonus
