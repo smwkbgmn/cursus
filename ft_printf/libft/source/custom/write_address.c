@@ -6,19 +6,19 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 01:29:57 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/12/02 02:20:21 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/12/11 18:40:52 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "libft.h"
 
-static size_t	write_digit(short digit);
+static int	write_digit(short digit);
 
-size_t	write_address(unsigned long addr)
+int	write_address(unsigned long addr)
 {
 	short	hex[20];
-	size_t	len;
+	int		len;
 	int		idx;
 
 	len = 0;

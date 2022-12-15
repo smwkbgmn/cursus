@@ -6,14 +6,14 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:11:53 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/12/02 01:48:39 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/12/11 18:41:20 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "libft.h"
 
-size_t	ft_putnbr_len(int n, size_t len)
+int	ft_putnbr_len(int n, int len)
 {
 	if (n == -2147483648)
 		len += write(1, "-2147483648", 11);

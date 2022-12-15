@@ -1,40 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   write_hex_lower_len.c                              :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/29 01:29:57 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/12/02 01:40:22 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/11/15 15:53:50 by donghyu2          #+#    #+#             */
+/*   Updated: 2022/11/23 17:55:13 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "libft.h"
 
-static size_t	write_digit(short digit);
-
-size_t	write_hex_lower_len(unsigned int num)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	short	hex[20];
-	size_t	len;
-	int		idx;
+	const unsigned char	*s1_c;
+	const unsigned char	*s2_c;
 
-	len = 0;
-	idx = 0;
-	while (num > 15)
-	{
-		hex[idx++] = num & 0xf;
-		num = num >> 4;
-	}
-	hex[idx] = num;
-	while (idx >= 0)
-		len += write_digit(hex[idx--]);
-	return (len);
-}
-
-static size_t	write_digit(short digit)
-{
-	return (write(1, &"0123456789abcdef"[digit], 1));
+	s1_c = (const unsigned char *)s1;
+	s2_c = (const unsigned char *)s2;
+	if (n == 0)
+		return (0);
+	while (n > 0 && *s1_c++ == *s2_c++)
+		n--;
+	return (*(s1_c - 1) - *(s2_c - 1));
 }

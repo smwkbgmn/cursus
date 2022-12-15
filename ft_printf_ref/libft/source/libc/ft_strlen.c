@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   write_hex_upper.c                                  :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/29 01:29:57 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/12/02 02:31:37 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/11/15 17:37:16 by donghyu2          #+#    #+#             */
+/*   Updated: 2022/11/23 17:56:59 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "libft.h"
 
-static void	write_digit(short digit);
-
-void	write_hex_upper(unsigned int num)
+size_t	ft_strlen(const char *s)
 {
-	if (num < 16)
-		write_digit(num & 0xf);
-	else
-	{
-		write_hex_upper(num >> 4);
-		write_digit(num & 0xf);
-	}
-}
+	size_t	len;
 
-static void	write_digit(short digit)
-{
-	write(1, &"0123456789ABCDEF"[digit], 1);
+	len = 0;
+	while (s[len])
+		len++;
+	return (len);
 }

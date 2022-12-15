@@ -56,7 +56,7 @@ OBJ_BNS := $(SRC_BNS:.c=.o)
 
 all			: $(NAME)
 
-# $(NAME)		: $(OBJ_MAN) $(NAME)($(OBJ_MAN))
+# $(NAME)	: $(OBJ_MAN) $(NAME)($(OBJ_MAN))
 $(NAME)		: $(NAME)($(OBJ_MAN))
 
 $(NAME)(%)	: %

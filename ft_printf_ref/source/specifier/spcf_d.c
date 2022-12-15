@@ -1,40 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   write_hex_upper_len.c                              :+:      :+:    :+:   */
+/*   spcf_d.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/29 01:29:57 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/12/02 01:40:36 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/11/25 00:54:00 by donghyu2          #+#    #+#             */
+/*   Updated: 2022/12/08 18:10:00 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "libftprintf.h"
 #include "libft.h"
 
-static size_t	write_digit(short digit);
-
-size_t	write_hex_upper_len(unsigned int num)
+int	spcf_d(va_list *ptr)
 {
-	short	hex[20];
-	size_t	len;
-	int		idx;
-
-	len = 0;
-	idx = 0;
-	while (num > 15)
-	{
-		hex[idx++] = num & 0xf;
-		num = num >> 4;
-	}
-	hex[idx] = num;
-	while (idx >= 0)
-		len += write_digit(hex[idx--]);
-	return (len);
-}
-
-static size_t	write_digit(short digit)
-{
-	return (write(1, &"0123456789ABCDEF"[digit], 1));
+	return (ft_putnbr_len(va_arg(*ptr, int), 0));
 }

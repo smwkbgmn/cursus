@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 00:54:21 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/12/08 18:10:17 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/12/15 13:23:51 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,5 @@ int	spcf_x_upper(va_list *ptr)
 	unsigned int	num;
 
 	num = va_arg(*ptr, unsigned int);
-	return (write_hex_upper_len(num));
+	return (write_hex_len(num, 1));
 }
