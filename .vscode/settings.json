@@ -1,0 +1,8 @@
+{
+	"editor.quickSuggestions": {
+		"other": "inline"
+	},
+	"files.associations": {
+		"sstream": "c"
+	}
+}

@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 21:57:40 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/12/08 22:01:18 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/12/15 17:39:11 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 
 int	spcf_percent(va_list *ptr)
 {
-	return (write(1, "%", 1));
+	
+	return ();
 }

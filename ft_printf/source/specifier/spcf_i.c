@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 00:54:03 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/12/08 18:11:18 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/12/15 14:37:22 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,5 @@
 
 int	spcf_i(va_list *ptr)
 {
-	return (ft_putnbr_len(va_arg(*ptr, int), 0));
+	return (ft_itoa(va_arg(*ptr, int)));
 }

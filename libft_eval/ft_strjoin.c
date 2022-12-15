@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:12:37 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/11/23 17:45:53 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/12/15 18:05:11 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	char	*result;
 	int		idx;
 
+	if (!s1 || !s2)
+		return (0);
 	result = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (result == 0)
 		return (0);

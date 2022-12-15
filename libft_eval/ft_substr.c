@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:13:07 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/11/26 02:25:20 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/12/15 18:09:05 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	size_t	size_s;
 	size_t	size_r;
 
+	if (!s)
+		return (0);
 	size_s = ft_strlen(s);
 	if (start >= size_s || len == 0)
 		return (ft_calloc(1, 1));

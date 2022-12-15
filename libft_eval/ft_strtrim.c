@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:13:04 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/12/06 15:06:57 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/12/15 18:08:40 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 	char	*start;
 	char	*end;
 
+	if (!s1 || !set)
+		return (0);
 	start = find_start(s1, set);
 	if (*start == 0)
 		return ((char *)ft_calloc(1, 1));
