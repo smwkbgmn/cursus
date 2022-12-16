@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 22:06:50 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/12/14 20:28:25 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/12/16 18:54:13 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	writing(const char *str, va_list *ptr, int *len)
 
 static char	*get_conversion(const char *str, va_list *ptr)
 {
-	int		(*conversion[9])(va_list *);
+	int		(*conversion[8])(va_list *);
 
 	set_spcf(conversion);
 	while (get_flag(*str) >= 0)
@@ -57,10 +57,8 @@ static char	*get_conversion(const char *str, va_list *ptr)
 
 static char	*apply_flag(const char *str, char *converted)
 {
-	
 	while (*str && *str != '%')
-	{
-		
+	{		
 	}	
 }
 

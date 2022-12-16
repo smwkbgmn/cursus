@@ -6,14 +6,14 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 17:35:25 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/12/08 22:02:18 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/12/16 18:53:37 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 #include "libft.h"
 
-void	set_spcf(int (*conversion[9])(va_list *))
+void	set_spcf(int (*conversion[8])(va_list *))
 {
 	conversion[0] = &spcf_c;
 	conversion[1] = &spcf_d;
@@ -23,15 +23,14 @@ void	set_spcf(int (*conversion[9])(va_list *))
 	conversion[5] = &spcf_u;
 	conversion[6] = &spcf_x_lower;
 	conversion[7] = &spcf_x_upper;
-	conversion[8] = &spcf_percent;
 }
 
 short	get_spcf(char c)
 {
-	char	spcf[10];
+	char	spcf[9];
 	short	idx;
 
-	ft_strlcpy(spcf, "cdipsuxX%", 10);
+	ft_strlcpy(spcf, "cdipsuxX", 9);
 	idx = 0;
 	while (spcf[idx])
 	{
