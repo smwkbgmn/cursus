@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:13:04 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/12/06 15:06:57 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/12/18 02:21:10 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,20 @@ char	*ft_strtrim(char const *s1, char const *set)
 	char	*result;
 	char	*start;
 	char	*end;
+	size_t	len;
 
 	start = find_start(s1, set);
-	if (*start == 0)
+	if (*start)
+	{
+		end = find_end(start, set);
+		len = get_len(start, end);
+		result = malloc(len + 1);
+		if (result)
+			ft_strlcpy(result, start, len + 1);
+		return (result);
+	}
+	else
 		return ((char *)ft_calloc(1, 1));
-	end = find_end(start, set);
-	result = malloc(get_len(start, end) + 1);
-	if (!result)
-		return (0);
-	ft_strlcpy(result, start, get_len(start, end) + 1);
-	return (result);
 }
 
 static char	*find_start(const char *s1, const char *set)

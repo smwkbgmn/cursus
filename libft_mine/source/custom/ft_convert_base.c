@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 18:23:53 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/12/11 22:07:50 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/12/18 04:23:38 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,22 @@ static int	base_valid(char *base, int *radix)
 	*radix = 0;
 	while (base[*radix])
 		*radix += 1;
-	if (*radix < 2)
-		return (0);
-	while (*base)
+	if (*radix > 1)
 	{
-		if (*base == '+' || *base == '-')
-			return (0);
-		if ((9 <= *base && *base <= 13) || *base == ' ')
-			return (0);
-		if (is_there_same(base) == 1)
-			return (0);
-		base++;
+		while (*base)
+		{
+			if (*base == '+' || *base == '-')
+				return (0);
+			if ((9 <= *base && *base <= 13) || *base == ' ')
+				return (0);
+			if (is_there_same(base) == 1)
+				return (0);
+			base++;
+		}
+		return (1);
 	}
-	return (1);
+	else
+		return (0);
 }
 
 static int	is_there_same(char *str)

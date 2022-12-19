@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 23:43:42 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/11/23 17:57:07 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/12/20 00:01:55 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,29 @@
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t n)
 {
-	size_t	idx;
+	size_t	idx_h;
+	size_t	idx_n;
 
-	if (*needle == 0)
+	if (!(*needle))
 		return ((char *)haystack);
-	while (n > 0 && *haystack)
+	idx_h = 0;
+	idx_n = 0;
+	while (haystack[idx_h] && needle[idx_n] && idx_h < n)
 	{
-		idx = 0;
-		while (haystack[idx] == needle[idx] && needle[idx] && idx < n)
-			idx++;
-		if (needle[idx] == 0)
-			return ((char *)haystack);
-		n--;
-		haystack++;
+		if (haystack[idx_h] == needle[idx_n])
+			idx_n++;
+		else
+		{
+			if (idx_n > 0)
+			{
+				idx_h -= idx_n;
+				idx_n = 0;
+			}
+		}
+		idx_h++;
 	}
-	return (0);
+	if (needle[idx_n] == 0)
+		return ((char *)&haystack[idx_h - idx_n]);
+	else
+		return (0);
 }

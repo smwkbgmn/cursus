@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 15:34:04 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/12/06 15:07:27 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/12/18 04:11:05 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,16 @@
 
 void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	t_list	*prev;
+	t_list	*node_del;
 
-	if (!del)
-		return ;
-	while (*lst)
+	if (del)
 	{
-		prev = *lst;
-		*lst = (*lst)->next;
-		del(prev->content);
-		free(prev);
+		while (*lst)
+		{
+			node_del = *lst;
+			*lst = (*lst)->next;
+			del(node_del->content);
+			free(node_del);
+		}
 	}
 }

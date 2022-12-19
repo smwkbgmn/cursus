@@ -6,14 +6,14 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 00:54:03 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/12/16 19:36:47 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/12/17 22:21:09 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 #include "libft.h"
 
-int	spcf_i(va_list *ptr)
+char	*spcf_i(va_list *ptr)
 {
 	return (ft_itoa(va_arg(*ptr, int)));
 }

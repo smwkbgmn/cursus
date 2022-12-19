@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:29:06 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/12/12 20:23:38 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/12/20 01:32:14 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ char	**ft_split(char const *s, char c);
 char	*ft_itoa(int n);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
+
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
@@ -75,9 +76,10 @@ int		write_hex_len(unsigned int num, short flag);
 int		write_address(unsigned long addr);
 int		ft_putchar_len(char c);
 int		ft_putstr_len(char *s);
-int		ft_putnbr_len(int n, size_t len);
+int		ft_putnbr_len(int n, int len);
 
 size_t	ft_strcpy_len(char *dest, char *src);
+size_t	ft_strlcpy_len(char *dst, const char *src, size_t dstsize);
 char	*ft_convert_base(char *nbr, char *base_from, char *base_to);
 
 #endif

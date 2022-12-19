@@ -6,7 +6,7 @@
 #include <malloc/malloc.h>
 #include <ctype.h>
 
-#include "libft.h"
+#include "../include/libft.h"
 
 // libc
 int		ft_isalpha(int c);

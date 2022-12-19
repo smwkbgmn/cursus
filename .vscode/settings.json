@@ -1,8 +1,6 @@
 {
-	"editor.quickSuggestions": {
-		"other": "inline"
-	},
 	"files.associations": {
-		"sstream": "c"
+		"ios": "c",
+		"libft.h": "c"
 	}
 }

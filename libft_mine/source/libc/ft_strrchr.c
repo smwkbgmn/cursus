@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 22:25:20 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/11/24 19:51:31 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/12/20 01:16:27 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,11 @@
 char	*ft_strrchr(const char *s, int c)
 {
 	size_t	idx;
-	char	c_cast;
 
-	idx = 0;
-	while (s[idx])
-		idx++;
-	c_cast = (char)c;
-	while (idx > 0 && s[idx] != c_cast)
+	idx = ft_strlen(s);
+	while (s[idx] != (char)c && idx > 0)
 		idx--;
-	if (s[idx] == c_cast)
+	if (s[idx] == (char)c)
 		return ((char *)(s + idx));
 	else
 		return (0);

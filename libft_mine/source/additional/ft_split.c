@@ -6,81 +6,90 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:12:25 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/11/26 02:12:53 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/12/20 02:09:52 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 
-char	**scissor(char const *s, char c, size_t cnt);
-size_t	get_cnt_word(char const *s, char c);
-size_t	get_len(char const *s, char c);
+size_t	get_cnt(char const *s, char c);
+size_t	get_len(char const *s, char c, short flag);
+char	*assign_word(char const **s, char c);
 void	*free_malloc_failure(char **result, int p);
 
 char	**ft_split(char const *s, char c)
 {
-	return (scissor(s, c, get_cnt_word(s, c)));
-}
-
-char	**scissor(char const *s, char c, size_t cnt)
-{
 	char	**result;
-	size_t	p;
-	size_t	pp;
+	size_t	cnt_word;
+	size_t	ptr;
 
-	result = malloc(sizeof(char *) * (cnt + 1));
-	if (result == 0)
-		return (0);
-	p = 0;
-	while (p < cnt)
+	cnt_word = get_cnt(s, c);
+	result = malloc(sizeof(char *) * (cnt_word + 1));
+	if (result)
 	{
-		while (*s == c && *s)
-			s++;
-		result[p] = malloc(get_len(s, c) + 1);
-		if (result[p] == 0)
-			return (free_malloc_failure(result, p));
-		pp = 0;
-		while (*s != c && *s)
-			result[p][pp++] = *s++;
-		result[p][pp] = 0;
-		p++;
+		ptr = 0;
+		while (ptr < cnt_word)
+		{
+			result[ptr] = assign_word(&s, c);
+			if (result[ptr])
+				ptr++;
+			else
+				return (free_malloc_failure(result, ptr));
+		}
+		result[ptr] = 0;
 	}
-	result[p] = 0;
 	return (result);
 }
 
-size_t	get_cnt_word(char const *s, char c)
+char	*assign_word(char const **s, char c)
 {
-	size_t	cnt;
-
-	cnt = 0;
-	while (*s)
-	{
-		while (*s == c && *s)
-			s++;
-		if (*s)
-			cnt++;
-		while (*s != c && *s)
-			s++;
-	}
-	return (cnt);
-}
-
-size_t	get_len(char const *s, char c)
-{
+	char	*word;
 	size_t	len;
 
-	len = 0;
-	while (s[len] != c && s[len])
-		len++;
-	return (len);
+	*s += get_len(*s, c, 0);
+	len = get_len(*s, c, 1);
+	word = malloc(len + 1);
+	if (word)
+	{
+		ft_strlcpy(word, *s, len + 1);
+		*s += len;
+	}
+	return (word);
 }
 
-void	*free_malloc_failure(char **result, int p)
+size_t	get_cnt(char const *s, char c)
 {
-	while (p >= 0)
-		free(result[p--]);
+	size_t	cnt_word;
+
+	cnt_word = 0;
+	while (*s)
+	{
+		s += get_len(s, c, 0);
+		if (*s)
+			cnt_word++;
+		s += get_len(s, c, 1);
+	}
+	return (cnt_word);
+}
+
+size_t	get_len(char const *s, char c, short flag)
+{
+	size_t	idx;
+
+	idx = 0;
+	while ((s[idx] != c) == flag && s[idx])
+		idx++;
+	return (idx);
+}
+
+void	*free_malloc_failure(char **result, int ptr)
+{
+	while (ptr >= 0)
+	{
+		free(result[ptr]);
+		ptr--;
+	}
 	free(result);
 	return (0);
 }

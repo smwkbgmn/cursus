@@ -1,41 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   write_address.c                                    :+:      :+:    :+:   */
+/*   ft_strlcpy_len.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/29 01:29:57 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/12/18 04:26:46 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/11/15 20:03:57 by donghyu2          #+#    #+#             */
+/*   Updated: 2022/12/20 00:10:59 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "libft.h"
 
-static int	write_digit(short digit);
-
-int	write_address(unsigned long addr)
+size_t	ft_strlcpy_len(char *dst, const char *src, size_t dstsize)
 {
-	short	hex[20];
-	int		len;
-	int		idx;
+	size_t	idx;
 
-	len = 0;
 	idx = 0;
-	while (addr > 15)
+	while (dstsize-- > 1 && src[idx])
 	{
-		hex[idx++] = addr & 0xf;
-		addr = addr >> 4;
+		dst[idx] = src[idx];
+		idx++;
 	}
-	hex[idx] = addr;
-	len += write(1, "0x", 2);
-	while (idx >= 0)
-		len += write_digit(hex[idx--]);
-	return (len);
-}
-
-static int	write_digit(short digit)
-{
-	return (write(1, &"0123456789abcdef"[digit], 1));
+	dst[idx] = 0;
+	return (idx);
 }

@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 16:13:34 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/11/24 17:59:14 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/12/18 04:34:05 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,5 @@
 
 int	ft_isalnum(int c)
 {
-	return (ft_isalpha(c) == 1
-		|| ft_isdigit(c) == 1);
+	return (ft_isalpha(c) == 1 || ft_isdigit(c) == 1);
 }

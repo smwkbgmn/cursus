@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 17:37:16 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/11/23 17:56:59 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/12/18 19:06:47 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 size_t	ft_strlen(const char *s)
 {
-	size_t	len;
+	size_t	idx;
 
-	len = 0;
-	while (s[len])
-		len++;
-	return (len);
+	idx = 0;
+	while (s[idx])
+		idx++;
+	return (idx);
 }

@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 15:41:33 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/12/06 15:08:44 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/12/18 04:17:01 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,21 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	t_list	*node;
 	void	*content;
 
-	if (!lst || !f || !del)
-		return (0);
 	head = 0;
-	while (lst)
+	if (lst && f && del)
 	{
-		content = f(lst->content);
-		node = ft_lstnew(content);
-		if (!node)
-			return (malloc_fail(head, content, del));
-		ft_lstadd_back(&head, node);
-		lst = lst->next;
+		while (lst)
+		{
+			content = f(lst->content);
+			node = ft_lstnew(content);
+			if (node)
+			{
+				ft_lstadd_back(&head, node);
+				lst = lst->next;
+			}
+			else
+				return (malloc_fail(head, content, del));
+		}
 	}
 	return (head);
 }

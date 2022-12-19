@@ -6,14 +6,14 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 00:54:24 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/12/16 19:54:10 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/12/17 22:22:15 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 #include "libft.h"
 
-int	spcf_x_lower(va_list *ptr)
+char	*spcf_x_lower(va_list *ptr)
 {
 	char	*dec;
 	char	*hex;

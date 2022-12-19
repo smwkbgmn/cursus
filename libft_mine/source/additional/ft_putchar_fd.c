@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:11:44 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/11/23 18:01:48 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/12/18 01:30:02 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 void	ft_putchar_fd(char c, int fd)
 {
-	if (fd < 0)
-		return ;
-	write(fd, &c, 1);
+	if (fd >= 0)
+		write(fd, &c, 1);
 }
