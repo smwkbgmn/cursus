@@ -1,7 +1,9 @@
 #include "main.h"
 
-int main (void)
-{
+#include <unistd.h>
+
+// int main (void)
+// {
 	// int		int_max = 2147483647;
 	// int		int_min = -2147483648;
 	// int		n = -10;
@@ -101,12 +103,29 @@ int main (void)
 
 	// printf("\n");
 
-	// int result;
+
+	// return (0);
+// }
+
+int main(void)
+{
+		// int result;
 
 	printf("123456789A123456789A\n");
-	printf("%.0d\n", 0);
+	// printf("%-.3d%d\n", 1, 1);
+	// printf("%- 10.3d%d\n", 1, 1);
+	// printf("%.10d\n", 1);
+	// printf("%.0010d%d\n", 0, 1);
+
+
+	printf("%0.1d%.10d\n", 0, 123);
+	// ft_printf("%.0d%.10d\n", 0, 123);
+	// ft_printf("%.0d\n", 0);
+
 	// result = printf("%.0d\n", 0);
 	// printf("result --- [%d]\n", result);
 
+
+	// system("leaks a.out");
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:29:06 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/12/20 01:32:14 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/12/24 04:55:21 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,7 @@ int		ft_putnbr_len(int n, int len);
 size_t	ft_strcpy_len(char *dest, char *src);
 size_t	ft_strlcpy_len(char *dst, const char *src, size_t dstsize);
 char	*ft_convert_base(char *nbr, char *base_from, char *base_to);
+
+char	*ft_itoa_long(long n);
 
 #endif

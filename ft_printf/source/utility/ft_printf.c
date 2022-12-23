@@ -6,12 +6,23 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 22:06:50 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/12/16 18:54:13 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/12/24 05:44:03 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include <unistd.h>
+#include <stddef.h>
 #include "libftprintf.h"
+#include "libft.h"
+
+#include <stdio.h>
+
+static void		writing(const char *str, va_list *ptr, int *len);
+static char		*get_value(const char *str, va_list *ptr, size_t len_flag);
+static char		*apply_flag(const char *str, char *value, size_t len_flag);
+static size_t	get_len_flag(const char *str);
+static short	is_formatter(char c);
 
 int	ft_printf(const char *str, ...)
 {
@@ -25,41 +36,87 @@ int	ft_printf(const char *str, ...)
 	return (len);
 }
 
-void	writing(const char *str, va_list *ptr, int *len)
+static void	writing(const char *str, va_list *ptr, int *len)
 {
-	char	*converted;
+	size_t	len_flag;
+	char	*value;
 
-	while (*str)
+	while (*str && value)
 	{
 		if (*str == '%')
 		{
+			// printf("in writing if %%\n");
 			str++;
-			converted = apply_flag(str, get_conversion(str, ptr));
-			write(1, converted, ft_strlen(converted));
-			free(converted);
-			while (is_formatter == 1)
-				str++;
+			len_flag = get_len_flag(str);
+			// printf("after len_flag\n");
+			value = get_value(str, ptr, len_flag);
+			// printf("after get_value\n");
+			if (value)
+			{
+				value = apply_flag(str, value, len_flag);
+				// printf("after apply_flag\n");
+				if (value)
+				{
+					*len = write(1, value, ft_strlen(value));
+					free(value);
+					while (is_formatter(*str))
+						str++;
+				}
+			}
 		}
 		else
 			write(1, str++, 1);
 	}
 }
 
-static char	*get_conversion(const char *str, va_list *ptr)
+static char	*get_value(const char *str, va_list *ptr, size_t len_flag)
 {
-	int		(*conversion[8])(va_list *);
+	char		*(*specifiers[8])(va_list *);
 
-	set_spcf(conversion);
-	while (get_flag(*str) >= 0)
-		str++;
-	return (conversion[get_spcf(*str)](ptr));
+	set_spcf(specifiers);
+	return (specifiers[get_spcf(*(str + len_flag))](ptr));
 }
 
-static char	*apply_flag(const char *str, char *converted)
+static char	*apply_flag(const char *str, char *value, size_t len_flag)
 {
-	while (*str && *str != '%')
-	{		
-	}	
+	char	*(*flags[7])(const char *, char *);
+	short	idx_flag;
+	size_t	idx;
+
+	set_flag(flags);
+	idx_flag = 0;
+	while (idx_flag < 1)
+	{
+		// printf("int apply_flag while 1\n");
+		idx = 0;
+		while (idx < len_flag)
+		{
+			// printf("int apply_flag while 2\n");
+			if (get_flag(str[idx]) == idx_flag)
+			{
+				// printf("after compare\n");
+				value = flags[idx_flag](str + idx, value);
+				// printf("after getting new value\n");
+				if (!value)
+					return (0);
+				break ;
+			}
+			else
+				idx++;
+		}
+		idx_flag++;
+	}
+	return (value);
+}
+
+static size_t	get_len_flag(const char *str)
+{
+	size_t	idx;
+
+	idx = 0;
+	while (get_flag(*str++) != -1)
+		idx++;
+	return (idx);
 }
 
 static short	is_formatter(char c)
@@ -80,4 +137,12 @@ static short	is_formatter(char c)
 // add preceeding '0x' or '0X' character
 
 // [.] [1 ~ 9] precision 
-// with specifier d, i it fills the space with zero
+// with specifiers d, i it fills the space with zero
+
+
+// I need to handle the validation of a formatter string
+
+
+// '-' and '0' couldn't be used together 
+// '.' and '0' couldn't be used together
+// '+' and ' ' couldn't be used together 

@@ -1,22 +1,25 @@
 NAME		= libftprintf.a
 
 CC			= cc
-FLAG		= -Wall -Wextra -Werror -I $(DIR_HEADER)
+FLAG		= -Wall -Wextra -Werror -I include -I $(DIR_LIBFT)/include
 
-SRCS		= $(wildcard $(DIR_UTL)/*.c) $(wildcard $(DIR_SPCF)/*.c)
+SRCS		= $(wildcard $(DIR_UTIL)/*.c) $(wildcard $(DIR_SPCF)/*.c) $(wildcard $(DIR_FLAG)/*.c)
 OBJS		= $(SRCS:.c=.o)
 LIBFT		= $(DIR_LIBFT)/libft.a
 
-DIR_HEADER	= include
-DIR_UTL		= source/utility
+DIR_UTIL	= source/utility
 DIR_SPCF	= source/specifier
-DIR_LIBFT	= libft
+DIR_FLAG	= source/flag
+DIR_LIBFT	= ../libft_mine
 
 all		: $(NAME)
 
 $(NAME)	: $(LIBFT) $(OBJS)
 		cp $(LIBFT) $(NAME)
 		ar rc $(NAME) $(OBJS)
+
+# $(NAME)	: $(LIBFT) $(LIBFT)($(OBJS))
+# 		cp $(LIBFT) $(NAME)
 
 $(LIBFT):
 		$(MAKE) -C $(DIR_LIBFT) all
@@ -30,19 +33,20 @@ clean	:
 
 fclean	: clean
 		$(MAKE) -C $(DIR_LIBFT) fclean
-		$(RM) $(NAME) a.out
+		$(RM) $(NAME)
 
 re		: fclean all
 
 .PHONY	: all clean fclean re
 
+################### Test Main ########################
 
-
-main	: $(NAME) $(LIBFT) main/main.c
-		$(MAKE) -C $(DIR_LIBFT) all
-		$(CC) $(FLAG) -L$(DIR_LIBFT) -lft $(NAME) main/main.c
+main	: $(NAME) ../Testmain/main_printf/main.c
+		$(CC) $(FLAG) $(NAME) ../Testmain/main_printf/main.c
+		@./a.out
+		@$(RM) a.out
 
 a		: 
-		@$(CC) $(FLAG) main/main.c
+		@$(CC) $(FLAG) ../Testmain/main_printf/main.c
 		@./a.out
 		@$(RM) a.out

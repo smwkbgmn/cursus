@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_itoa_long.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:11:37 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/12/24 04:52:28 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/12/24 04:52:26 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 static char		*convert(long n, size_t len);
 static size_t	get_len(long n);
 
-char	*ft_itoa(int n)
+char	*ft_itoa_long(long n)
 {
-	return (convert((long)n, get_len((long)n)));
+	return (convert(n, get_len(n)));
 }
 
 static char	*convert(long n, size_t len)

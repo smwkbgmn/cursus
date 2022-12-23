@@ -1,6 +1,8 @@
 {
 	"files.associations": {
 		"ios": "c",
-		"libft.h": "c"
+		"libft.h": "c",
+		"libftprintf.h": "c",
+		"stdlib.h": "c"
 	}
 }
