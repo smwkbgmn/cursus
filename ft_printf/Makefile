@@ -18,9 +18,6 @@ $(NAME)	: $(LIBFT) $(OBJS)
 		cp $(LIBFT) $(NAME)
 		ar rc $(NAME) $(OBJS)
 
-# $(NAME)	: $(LIBFT) $(LIBFT)($(OBJS))
-# 		cp $(LIBFT) $(NAME)
-
 $(LIBFT):
 		$(MAKE) -C $(DIR_LIBFT) all
 		
@@ -38,6 +35,8 @@ fclean	: clean
 re		: fclean all
 
 .PHONY	: all clean fclean re
+
+
 
 ################### Test Main ########################
 

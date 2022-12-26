@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 00:55:30 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/12/24 05:34:32 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/12/27 02:28:29 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ char	*spcf_x_lower(va_list *ptr);
 char	*spcf_x_upper(va_list *ptr);
 
 char	*flag_precision(const char *str, char *value);
-// char	*flag_zero(const char *str, char *value);
-// char	*flag_plus(const char *str, char *value);
-// char	*flag_space(const char *str, char *value);
-// char	*flag_hash(const char *str, char *value);
-// char	*flag_dash(const char *str, char *value);
-// char	*flag_width(const char *str, char *value);
+char	*flag_zero(const char *str, char *value);
+char	*flag_plus(const char *str, char *value);
+char	*flag_space(const char *str, char *value);
+char	*flag_hash(const char *str, char *value);
+char	*flag_dash(const char *str, char *value);
+char	*flag_width(const char *str, char *value);
 
 #endif

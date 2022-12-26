@@ -6,15 +6,42 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 22:06:50 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/12/24 05:44:03 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/12/27 03:32:32 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+// [1 ~ 9] just number or number with [0], [-]
+// pad N space (just number) / N space with left align (-) / N zero (0) 
+
+// [+] plus sign
+// add preceeding '+' charater to positive number
+
+// [ ] space
+// pad 1 space for align to positive number
+
+// [#] hash with [x] or [X]
+// add preceeding '0x' or '0X' character
+
+// [.] [1 ~ 9] precision 
+// with specifiers d, i it fills the space with zero
+
+// ### To do ###
+// Check validation of a format string
+
+// These flags may not use together 
+// '-' and '0'
+// '.' and '0'
+// '+' and ' '
+// '#' and '+', '-', ' ' 
+
+// Handle INT_MAX overflow at the width flags
+
+#include "libftprintf.h"
+#include "libft.h"
 
 #include <stdlib.h>
 #include <unistd.h>
 #include <stddef.h>
-#include "libftprintf.h"
-#include "libft.h"
 
 #include <stdio.h>
 
@@ -85,18 +112,18 @@ static char	*apply_flag(const char *str, char *value, size_t len_flag)
 
 	set_flag(flags);
 	idx_flag = 0;
-	while (idx_flag < 1)
+	while (idx_flag < 5)
 	{
-		// printf("int apply_flag while 1\n");
+		// printf("in apply_flag while 1\n");
 		idx = 0;
 		while (idx < len_flag)
 		{
-			// printf("int apply_flag while 2\n");
+			// printf("in apply_flag while 2\n");
 			if (get_flag(str[idx]) == idx_flag)
 			{
 				// printf("after compare\n");
 				value = flags[idx_flag](str + idx, value);
-				// printf("after getting new value\n");
+				// printf("after getting a new value\n");
 				if (!value)
 					return (0);
 				break ;
@@ -123,26 +150,3 @@ static short	is_formatter(char c)
 {
 	return (get_spcf(c) >= 0 || get_flag(c) >= 0);
 }
-
-// [1 ~ 9] just number or number with [0], [-]
-// pad N space (just number) / N space with left align (-) / N zero (0) 
-
-// [+] plus sign
-// add preceeding '+' charater to positive number
-
-// [ ] space
-// pad 1 space for align to positive number
-
-// [#] hash with [x] or [X]
-// add preceeding '0x' or '0X' character
-
-// [.] [1 ~ 9] precision 
-// with specifiers d, i it fills the space with zero
-
-
-// I need to handle the validation of a formatter string
-
-
-// '-' and '0' couldn't be used together 
-// '.' and '0' couldn't be used together
-// '+' and ' ' couldn't be used together 

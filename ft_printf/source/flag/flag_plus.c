@@ -1,36 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   spcf_p.c                                           :+:      :+:    :+:   */
+/*   flag_plus.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/25 00:54:11 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/12/26 05:51:46 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/12/07 16:23:41 by donghyu2          #+#    #+#             */
+/*   Updated: 2022/12/27 03:02:00 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libftprintf.h"
 #include "libft.h"
 
-char	*spcf_p(va_list *ptr)
-{
-	char	*dec;
-	char	*hex;
-	char	*address;
+#include <stdlib.h>
 
-	address = 0;
-	dec = ft_itoa_long(va_arg(*ptr, unsigned long));
-	if (dec)
+static short	check_overide(char *value);
+
+char	*flag_plus(const char *str, char *value)
+{
+	char	*result;
+
+	str++;
+	result = value;
+	if (!check_overide(value))
 	{
-		hex = ft_convert_base(dec, "0123456789", "0123456789abcdef");
-		if (hex)
-		{
-			address = ft_strjoin("0x", hex);
-			free(hex);
-		}
-		free(dec);
+		result = ft_strjoin("+", value);
+		free(value);
 	}
-	return (address);
+	return (result);
+}
+
+static short	check_overide(char *value)
+{
+	return (*value == '-' || *value == '+');
 }

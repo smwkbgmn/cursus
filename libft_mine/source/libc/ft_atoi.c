@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 23:43:44 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/12/18 04:28:31 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/12/26 06:45:35 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,11 @@ static int	get_int(const char **str, int sign)
 {
 	long	num;
 
-	if (ft_isdigit(**str))
-	{
-		num = (*(*str)++ - '0') * sign;
-		while (ft_isdigit(**str))
-			num = (num * 10) + ((*(*str)++ - '0') * sign);
-		if (num * sign < 0)
-			return ((sign > 0) * -1);
-	}
+	num = 0;
+	while (ft_isdigit(**str))
+		num = (num * 10) + ((*(*str)++ - '0') * sign);
+	if (num * sign < 0)
+		return ((sign > 0) * -1);
 	else
-		num = 0;
-	return (num);
+		return (num);
 }
