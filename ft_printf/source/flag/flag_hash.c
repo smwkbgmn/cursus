@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 16:23:29 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/12/27 03:20:05 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/12/27 08:16:42 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ char	*flag_hash(const char *str, char *value)
 	result = value;
 	if (!check_override(value))
 	{
-		if (check_case(str) == 0)
-			result = ft_strjoin("0x", value);
-		else
+		if (check_case(str))
 			result = ft_strjoin("0X", value);
+		else
+			result = ft_strjoin("0x", value);
 		free(value);
 	}
 	return (result);

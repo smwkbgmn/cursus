@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 00:54:24 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/12/24 04:56:42 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/12/29 02:19:39 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ char	*spcf_x_lower(va_list *ptr)
 	char	*hex;
 
 	hex = 0;
-	dec = ft_itoa(va_arg(*ptr, unsigned int));
+	dec = ft_itoa_long(va_arg(*ptr, unsigned int));
 	if (dec)
 	{
-		hex = ft_convert_base(dec, "0123456789", "0123456789abcdef");
+		hex = ft_convert_base_ul(dec, "0123456789", "0123456789abcdef");
 		free(dec);
 	}
 	return (hex);

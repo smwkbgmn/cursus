@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 00:55:30 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/12/27 02:28:29 by donghyu2         ###   ########.fr       */
+/*   Updated: 2022/12/29 02:33:35 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	set_spcf(char *(*specifiers[8])(va_list *));
 short	get_flag(char c);
 short	get_spcf(char c);
 
-char	*spcf_c(va_list *ptr);
 char	*spcf_d(va_list *ptr);
 char	*spcf_i(va_list *ptr);
 char	*spcf_p(va_list *ptr);
