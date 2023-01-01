@@ -6,108 +6,49 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 16:23:48 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/12/28 13:04:16 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/01 22:38:06 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include "libft.h"
 
-#include <stdlib.h>
+static size_t	get_len_full_str(t_list *head);
 
-static short	check_override(const char *str);
-static char		*get_sign(char *value);
-static size_t	pass_flags(const char *str);
-static char		*pad_zero(char *value, char *sign, char *digit, int width);
-
-char	*flag_zero(const char *str, char *value)
+void	flag_zero(const char *str, t_list **head)
 {
-	char	*result;
-	char	*sign;
-	char	*digit;
+	t_list	*node_new;
+	char	*zeros;
 	int		width;
 
-	if (check_override(str))
-		return (value);
-	result = 0;
-	sign = get_sign(value);
-	if (sign)
+	str += find_flag(str, '0');
+	str += pass_flag(str);
+	width = ft_atoi(str) - get_len_full_str(*head);
+	if (width > 0)
 	{
-		digit = ft_strdup(value + ft_strlen(sign));
-		if (digit)
+		zeros = get_str_fill_char(width, '0');
+		if (zeros)
 		{
-			str += pass_flags(str);
-			width = ft_atoi(str) - ft_strlen(digit) - ft_strlen(sign);
-			if (width > 0)
-				result = pad_zero(value, sign, digit, width);
-			else
-				result = value;
-			free(digit);
+			node_new = ft_lstnew(zeros);
+			if (node_new)
+			{
+				if (ft_lstsize(*head) == 1)
+					ft_lstadd_front(head, node_new);
+				else
+					ft_lstadd_idx(*head, node_new, 0);
+			}
 		}
-		free(sign);
 	}
-	return (result);
 }
 
-static short	check_override(const char *str)
+static size_t	get_len_full_str(t_list *head)
 {
-	while (*str != '%')
-		str--;
-	while (get_spcf(*str) == -1)
+	size_t	len;
+
+	len = 0;
+	while (head)
 	{
-		if (get_flag(*str) == 3)
-			return (1);
-		str++;
+		len += ft_strlen(head->content);
+		head = head->next;
 	}
-	return (0);
-}
-
-static char	*get_sign(char *value)
-{
-	char	*sign;
-
-	if (*value == '+')
-		sign = ft_strdup("+");
-	else if (*value == '-')
-		sign = ft_strdup("-");
-	else if (*value == ' ')
-		sign = ft_strdup(" ");
-	else if (*(value + 1) == 'x')
-		sign = ft_strdup("0x");
-	else
-		sign = ft_strdup("\0");
-	return (sign);
-}
-
-static size_t	pass_flags(const char *str)
-{
-	size_t	idx;
-
-	idx = 1;
-	while (!ft_isdigit(str[idx]) && get_spcf(str[idx]) == -1)
-		idx++;
-	return (idx);
-}
-
-static char	*pad_zero(char *value, char *sign, char *digit, int width)
-{
-	char	*result;
-	char	*zeros;
-	char	*sign_zeros;
-
-	result = 0;
-	zeros = malloc(width + 1);
-	if (zeros)
-	{
-		ft_memset(zeros, '0', width);
-		sign_zeros = ft_strjoin(sign, zeros);
-		if (sign_zeros)
-		{
-			result = ft_strjoin(sign_zeros, digit);
-			free(sign_zeros);
-		}
-		free(zeros);
-	}
-	free(value);
-	return (result);
+	return (len);
 }

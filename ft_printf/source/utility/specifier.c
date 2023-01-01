@@ -6,14 +6,13 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 17:35:25 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/12/29 02:34:15 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/01 07:37:32 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include "libft.h"
 
-void	set_spcf(char *(*specifiers[8])(va_list *))
+void	set_spcf(t_list *(*specifiers[7])(va_list *))
 {
 	specifiers[0] = &spcf_d;
 	specifiers[1] = &spcf_i;
@@ -26,10 +25,10 @@ void	set_spcf(char *(*specifiers[8])(va_list *))
 
 short	get_spcf(char c)
 {
-	char	spcf_set[9];
+	char	spcf_set[8];
 	short	idx;
 
-	ft_strlcpy(spcf_set, "dipsuxX", 9);
+	ft_strlcpy(spcf_set, "dipsuxX", 8);
 	idx = 0;
 	while (spcf_set[idx])
 	{

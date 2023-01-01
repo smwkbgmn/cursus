@@ -6,20 +6,21 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 00:54:28 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/12/20 21:12:16 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/01 07:52:55 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include "libft.h"
 
-char	*spcf_s(va_list *ptr)
+t_list	*spcf_s(va_list *ptr)
 {
-	char	*str;
+	t_list	*head;
+	char	*content;
 
-	str = va_arg(*ptr, char *);
-	if (str)
-		return (ft_strdup(str));
+	content = va_arg(*ptr, char *);
+	if (content)
+		head = ft_lstnew(content);
 	else
-		return (ft_strdup("(null)"));
+		head = ft_lstnew(ft_strdup("(null)"));
+	return (head);
 }

@@ -1,6 +1,8 @@
 #include "main.h"
 
 #include <unistd.h>
+#include <limits.h>
+#include <unistd.h>
 
 // int main (void)
 // {
@@ -107,11 +109,11 @@
 // 	return (0);
 // }
 
-// int main(void)
-// {
+int main(void)
+{
 		// int result;
 
-	// printf("123456789A123456789A\n");
+	printf("123456789A123456789A\n");
 	// printf("%-.3d%d\n", 1, 1);
 	// printf("%- 10.3d%d\n", 1, 1);
 	// printf("%.10d\n", 1);
@@ -147,30 +149,64 @@
 	// printf("result --- [%d]\n", result);
 
 
+	printf("%020d\n", 12345);
+	ft_printf("%020d\n", 12345);
+	printf("%020.10d\n", -12345);
+	ft_printf("%020.10d\n", -12345);
+
 	// system("leaks a.out");
-// 	return (0);
-// }
-
-int	main(void)
-{
-	printf("----------- ft ----------\n");
-
-	ft_printf(" %c \n", '0');
-	ft_printf("%c \n", '0' + 256);
-	ft_printf(" %c %c %c \n", '0', 0, '1');
-	ft_printf(" %c %c %c \n", ' ', ' ', ' ');
-	ft_printf(" %c %c %c \n", '1', '2', '3');
-	ft_printf(" %c %c %c \n", '2', '1', 0);
-	ft_printf(" %c %c %c \n", 0, '1', '2');
-
-	printf("----------- original ----------\n");
-
-	printf(" %c \n", '0');
-	printf("%c \n", '0' + 256);
-	printf(" %c %c %c \n", '0', 0, '1');
-	printf(" %c %c %c \n", ' ', ' ', ' ');
-	printf(" %c %c %c \n", '1', '2', '3');
-	printf(" %c %c %c \n", '2', '1', 0);
-	printf(" %c %c %c \n", 0, '1', '2');
 	return (0);
 }
+
+// int	main(void)
+// {
+	// printf("----------- ft ----------\n");
+
+	// ft_printf(" %c \n", '0');
+	// ft_printf("%c \n", '0' + 256);
+	// ft_printf(" %c %c %c \n", '0', 0, '1');
+	// ft_printf(" %c %c %c \n", ' ', ' ', ' ');
+	// ft_printf(" %c %c %c \n", '1', '2', '3');
+	// ft_printf(" %c %c %c \n", '2', '1', 0);
+	// ft_printf(" %c %c %c \n", 0, '1', '2');
+
+	// printf("----------- original ----------\n");
+
+	// printf(" %c \n", '0');
+	// printf("%c \n", '0' + 256);
+	// printf(" %c %c %c \n", '0', 0, '1');
+	// printf(" %c %c %c \n", ' ', ' ', ' ');
+	// printf(" %c %c %c \n", '1', '2', '3');
+	// printf(" %c %c %c \n", '2', '1', 0);
+	// printf(" %c %c %c \n", 0, '1', '2');
+
+	// long	LMN = LONG_MIN;
+	// long	LMX = LONG_MAX;
+	// unsigned long	UMN = ULONG_MAX * -1;
+	// unsigned long	UMX = ULONG_MAX;
+
+	// printf("LONG MIN --- [%p]\n", (void *)LMN);
+	// printf("LONG MAX --- [%p]\n", (void *)LMX);
+	// printf("ULONG MAX NEGATIVE --- [%p]\n", (void *)UMN);
+	// printf("ULONG MAX --- [%p]\n", (void *)UMX);
+
+	// printf("LONG MIN --- [%lu]\n", LMN);
+	// printf("LONG MAX --- [%lu]\n", LMX);
+	// printf("ULONG MAX NEGATIVE --- [%lu]\n", UMN);
+	// printf("ULONG MAX --- [%lu]\n", UMX);
+
+	// printf("\n");
+
+	// ft_printf("LONG MIN --- [%p]\n", LMN);
+	// ft_printf("LONG MAX --- [%p]\n", LMX);
+	// ft_printf("ULONG MAX NEGATIVE --- [%p]\n", UMN);
+	// ft_printf("ULONG MAX --- [%p]\n", UMX);
+
+	// int	rst;
+
+	// printf("the write result --- [");
+	// rst = write(1, "hi", -10);
+	// printf("%d]\n", rst);
+
+// 	return (0);
+// }

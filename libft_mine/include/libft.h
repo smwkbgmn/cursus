@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:29:06 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/12/29 02:10:01 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/01 20:10:02 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,18 +71,19 @@ void	ft_lstclear(t_list **lst, void (*del)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 
-void	write_hex(unsigned int num, short flag);
-int		write_hex_len(unsigned int num, short flag);
-int		write_address(unsigned long addr);
 int		ft_putchar_len(char c);
 int		ft_putstr_len(char *s);
 int		ft_putnbr_len(int n, int len);
+void	write_hex(unsigned int num, short flag);
+int		write_hex_len(unsigned int num, short flag);
 
-size_t	ft_strcpy_len(char *dest, char *src);
-size_t	ft_strlcpy_len(char *dst, const char *src, size_t dstsize);
 char	*ft_convert_base(char *nbr, char *base_from, char *base_to);
 char	*ft_convert_base_ul(char *nbr, char *base_from, char *base_to);
 
 char	*ft_itoa_long(unsigned long n);
+char	*ft_itoa_address(unsigned long addr);
+
+t_list	*ft_lstidx(t_list *head, int idx);
+void	ft_lstadd_idx(t_list *head, t_list *new, int idx);
 
 #endif

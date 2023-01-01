@@ -6,14 +6,15 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 17:35:12 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/12/28 23:31:41 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/01 22:21:37 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include "libft.h"
 
-void	set_flag(char *(*flags[7])(const char *, char *))
+#include <stdlib.h>
+
+void	set_flag(void (*flags[7])(const char *, t_list **head))
 {
 	flags[0] = &flag_plus;
 	flags[1] = &flag_space;
@@ -43,4 +44,34 @@ short	get_flag(char c)
 		}
 	}
 	return (-1);
+}
+
+size_t	pass_flag(const char *str)
+{
+	size_t	idx;
+
+	idx = 0;
+	while (!ft_isdigit(str[idx]))
+		idx++;
+	return (idx);
+}
+
+size_t	find_flag(const char *str, char flag)
+{
+	size_t	idx;
+
+	idx = 0;
+	while (str[idx] != flag)
+		idx++;
+	return (idx);
+}
+
+char	*get_str_fill_char(int width, char c)
+{
+	char	*str;
+
+	str = malloc(width + 1);
+	if (str)
+		ft_memset(str, c, width);
+	return (str);
 }

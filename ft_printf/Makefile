@@ -3,25 +3,25 @@ NAME		= libftprintf.a
 CC			= cc
 FLAG		= -Wall -Wextra -Werror -I include -I $(DIR_LIBFT)/include
 
-SRCS		= $(wildcard $(DIR_UTILL)/*.c) $(wildcard $(DIR_SPCF)/*.c) $(wildcard $(DIR_FLAG)/*.c)
+SRCS		= $(wildcard $(DIR_UTIL)/*.c) $(wildcard $(DIR_SPCF)/*.c) $(wildcard $(DIR_FLAG)/*.c)
 OBJS		= $(SRCS:.c=.o)
 LIBFT		= $(DIR_LIBFT)/libft.a
 
-DIR_UTILL	= source/utility
+DIR_UTIL	= source/utility
 DIR_SPCF	= source/specifier
 DIR_FLAG	= source/flag
-DIR_LIBFT	= libft_mine
+DIR_LIBFT	= ../libft_mine
 
 all		: $(NAME)
 
 $(NAME)	: $(LIBFT) $(OBJS)
-		cp $(LIBFT) $(NAME)
-		ar rc $(NAME) $(OBJS)
+		@cp $(LIBFT) $(NAME)
+		@ar rc $(NAME) $(OBJS)
 
 $(LIBFT):
 		$(MAKE) -C $(DIR_LIBFT) all
 
-# bonus	: $(NAME) $(NAME)($(OBJS))
+bonus	: $(NAME ) $(NAME)($(OBJS))
 		
 %.o		: %.c
 		$(CC) $(FLAG) -c $< -o $@
@@ -36,4 +36,18 @@ fclean	: clean
 
 re		: fclean all
 
-.PHONY	: all clean fclean re
+.PHONY	: all clean fclean re bonus
+
+
+
+################### Test Main ########################
+
+main	: $(NAME) ../Testmain/main_printf/main.c
+		@$(CC) $(FLAG) $(NAME) ../Testmain/main_printf/main.c
+		@./a.out
+		@$(RM) a.out
+
+a		: 
+		@$(CC) $(FLAG) ../Testmain/main_printf/main.c
+		@./a.out
+		@$(RM) a.out

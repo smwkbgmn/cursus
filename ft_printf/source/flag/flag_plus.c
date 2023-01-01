@@ -6,32 +6,28 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 16:23:41 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/12/27 03:02:00 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/01 09:49:26 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include "libft.h"
 
-#include <stdlib.h>
-
-static short	check_overide(char *value);
-
-char	*flag_plus(const char *str, char *value)
+void	flag_plus(const char *str, t_list **head)
 {
-	char	*result;
+	t_list	*node_new;
+	char	*value;
+	char	*sign;
 
 	str++;
-	result = value;
-	if (!check_overide(value))
+	value = (*head)->content;
+	if (*value != '-')
 	{
-		result = ft_strjoin("+", value);
-		free(value);
+		sign = ft_strdup("+");
+		if (sign)
+		{
+			node_new = ft_lstnew(sign);
+			if (node_new)
+				ft_lstadd_front(head, node_new);
+		}
 	}
-	return (result);
-}
-
-static short	check_overide(char *value)
-{
-	return (*value == '-' || *value == '+');
 }

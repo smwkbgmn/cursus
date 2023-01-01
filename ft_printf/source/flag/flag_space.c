@@ -6,39 +6,28 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 16:23:45 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/12/27 02:54:16 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/01 09:49:21 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include "libft.h"
 
-#include <stdlib.h>
-
-static short	check_overide(const char *str, char *value);
-
-char	*flag_space(const char *str, char *value)
+void	flag_space(const char *str, t_list **head)
 {
-	char	*result;
+	t_list	*node_new;
+	char	*value;
+	char	*sign;
 
-	result = value;
-	if (!check_overide(str, value))
+	str++;
+	value = (*head)->content;
+	if (*value != '-')
 	{
-		result = ft_strjoin(" ", value);
-		free(value);
+		sign = ft_strdup(" ");
+		if (sign)
+		{
+			node_new = ft_lstnew(sign);
+			if (node_new)
+				ft_lstadd_front(head, node_new);
+		}
 	}
-	return (result);
-}
-
-static short	check_overide(const char *str, char *value)
-{
-	while (*str != '%')
-		str--;
-	while (get_spcf(*str) == -1)
-	{
-		if (*str == '+')
-			return (1);
-		str++;
-	}
-	return (*value == '-');
 }

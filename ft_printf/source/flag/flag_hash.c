@@ -6,38 +6,26 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 16:23:29 by donghyu2          #+#    #+#             */
-/*   Updated: 2022/12/27 08:16:42 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/01 08:04:28 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include "libft.h"
 
-#include <stdlib.h>
-
-static short	check_override(char *value);
 static short	check_case(const char *str);
 
-char	*flag_hash(const char *str, char *value)
+void	flag_hash(const char *str, t_list **head)
 {
-	char	*result;
+	t_list	*node_new;
+	char	*sign;
 
-	result = value;
-	if (!check_override(value))
-	{
-		if (check_case(str))
-			result = ft_strjoin("0X", value);
-		else
-			result = ft_strjoin("0x", value);
-		free(value);
-	}
-	return (result);
-}
-
-static short	check_override(char *value)
-{
-	return (ft_strncmp(value, "0x", 2) == 0
-		|| ft_strncmp(value, "0X", 2) == 0);
+	if (check_case(str))
+		sign = ft_strdup("0X");
+	else
+		sign = ft_strdup("0x");
+	node_new = ft_lstnew(sign);
+	if (node_new)
+		ft_lstadd_front(head, node_new);
 }
 
 static short	check_case(const char *str)
