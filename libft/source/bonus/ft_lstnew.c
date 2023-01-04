@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flag_space.c                                       :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/07 16:23:45 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/04 12:34:18 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/11/21 13:31:14 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/01/04 12:38:29 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "libft.h"
+#include <stdlib.h>
 
-void	flag_space(const char *str, t_list **head)
+t_list	*ft_lstnew(void *content)
 {
-	t_list	*node_new;
-	char	*value;
-	char	*sign;
+	t_list	*new;
 
-	str++;
-	value = (*head)->content;
-	if (*value != '-')
+	new = malloc(sizeof(t_list));
+	if (new)
 	{
-		sign = ft_strdup(" ");
-		if (sign)
-		{
-			node_new = ft_lstnew(sign);
-			if (node_new)
-				ft_lstadd_front(head, node_new);
-		}
+		new->content = content;
+		new->next = 0;
 	}
+	return (new);
 }

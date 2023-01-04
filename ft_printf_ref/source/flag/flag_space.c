@@ -1,48 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flag_width.c                                       :+:      :+:    :+:   */
+/*   flag_space.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/07 16:23:55 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/04 12:33:47 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/12/07 16:23:45 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/01/01 09:49:21 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-static size_t	get_len_full_str(t_list *head);
-
-void	flag_width(const char *str, t_list **head)
+void	flag_space(const char *str, t_list **head)
 {
 	t_list	*node_new;
-	char	*spaces;
-	int		width;
+	char	*value;
+	char	*sign;
 
-	str += pass_flag(str);
-	width = ft_atoi(str) - get_len_full_str(*head);
-	if (width > 0)
+	str++;
+	value = (*head)->content;
+	if (*value != '-')
 	{
-		spaces = get_str_fill_char(width, ' ');
-		if (spaces)
+		sign = ft_strdup(" ");
+		if (sign)
 		{
-			node_new = ft_lstnew(spaces);
+			node_new = ft_lstnew(sign);
 			if (node_new)
 				ft_lstadd_front(head, node_new);
 		}
 	}
-}
-
-static size_t	get_len_full_str(t_list *head)
-{
-	size_t	len;
-
-	len = 0;
-	while (head)
-	{
-		len += ft_strlen(head->content);
-		head = head->next;
-	}
-	return (len);
 }

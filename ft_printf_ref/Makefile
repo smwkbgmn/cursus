@@ -3,12 +3,12 @@ NAME		= libftprintf.a
 CC			= cc
 FLAG		= -Wall -Wextra -Werror -I include -I $(DIR_LIBFT)/include
 
-SRCS		= $(wildcard $(DIR_UTIL)/*.c) $(wildcard $(DIR_TYPE)/*.c) $(wildcard $(DIR_FLAG)/*.c)
+SRCS		= $(wildcard $(DIR_UTIL)/*.c) $(wildcard $(DIR_SPCF)/*.c) $(wildcard $(DIR_FLAG)/*.c)
 OBJS		= $(SRCS:.c=.o)
 LIBFT		= $(DIR_LIBFT)/libft.a
 
 DIR_UTIL	= source/utility
-DIR_TYPE	= source/type
+DIR_SPCF	= source/specifier
 DIR_FLAG	= source/flag
 DIR_LIBFT	= ../libft
 

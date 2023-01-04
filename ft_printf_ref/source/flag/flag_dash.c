@@ -6,11 +6,12 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 16:23:07 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/04 12:41:58 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/03 18:19:13 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
+
 #include <stdlib.h>
 
 static size_t	get_len_full_str(t_list *head, short i_spcf);

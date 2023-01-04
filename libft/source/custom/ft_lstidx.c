@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flag_space.c                                       :+:      :+:    :+:   */
+/*   ft_lstidx.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/07 16:23:45 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/04 12:34:18 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/12/31 18:14:41 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/01/03 21:05:39 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "libft.h"
 
-void	flag_space(const char *str, t_list **head)
+t_list	*ft_lstidx(t_list *head, int idx)
 {
-	t_list	*node_new;
-	char	*value;
-	char	*sign;
+	short	size;
 
-	str++;
-	value = (*head)->content;
-	if (*value != '-')
+	size = ft_lstsize(head);
+	if (idx != 0 && -1 * size < idx && idx < size)
 	{
-		sign = ft_strdup(" ");
-		if (sign)
-		{
-			node_new = ft_lstnew(sign);
-			if (node_new)
-				ft_lstadd_front(head, node_new);
-		}
+		idx += size * (idx < 0);
+		while (idx-- > 0)
+			head = head->next;
 	}
+	return (head);
 }

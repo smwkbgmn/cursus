@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flag_space.c                                       :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/07 16:23:45 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/04 12:34:18 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/11/15 20:22:52 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/01/03 20:34:54 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "libft.h"
 
-void	flag_space(const char *str, t_list **head)
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-	t_list	*node_new;
-	char	*value;
-	char	*sign;
+	size_t	l_dst;
+	size_t	l_src;
 
-	str++;
-	value = (*head)->content;
-	if (*value != '-')
-	{
-		sign = ft_strdup(" ");
-		if (sign)
-		{
-			node_new = ft_lstnew(sign);
-			if (node_new)
-				ft_lstadd_front(head, node_new);
-		}
-	}
+	l_dst = ft_strlen(dst);
+	l_src = ft_strlen(src);
+	if (dstsize == 0 || dstsize < l_dst)
+		return (l_src + dstsize);
+	while (dstsize-- > l_dst + 1 && *src)
+		*(dst++ + l_dst) = *src++;
+	*(dst + l_dst) = 0;
+	return (l_dst + l_src);
 }

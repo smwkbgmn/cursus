@@ -1,33 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flag_space.c                                       :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/07 16:23:45 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/04 12:34:18 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/11/23 15:12:17 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/01/04 12:39:40 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "libft.h"
+#include <unistd.h>
 
-void	flag_space(const char *str, t_list **head)
+void	ft_putstr_fd(char *s, int fd)
 {
-	t_list	*node_new;
-	char	*value;
-	char	*sign;
-
-	str++;
-	value = (*head)->content;
-	if (*value != '-')
+	if (fd >= 0)
 	{
-		sign = ft_strdup(" ");
-		if (sign)
-		{
-			node_new = ft_lstnew(sign);
-			if (node_new)
-				ft_lstadd_front(head, node_new);
-		}
+		while (*s)
+			write(fd, s++, 1);
 	}
 }

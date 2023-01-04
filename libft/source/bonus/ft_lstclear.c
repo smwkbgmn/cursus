@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flag_space.c                                       :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/07 16:23:45 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/04 12:34:18 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/11/22 15:34:04 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/01/04 12:38:49 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "libft.h"
+#include <stdlib.h>
 
-void	flag_space(const char *str, t_list **head)
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	t_list	*node_new;
-	char	*value;
-	char	*sign;
+	t_list	*node_del;
 
-	str++;
-	value = (*head)->content;
-	if (*value != '-')
+	if (del)
 	{
-		sign = ft_strdup(" ");
-		if (sign)
+		while (*lst)
 		{
-			node_new = ft_lstnew(sign);
-			if (node_new)
-				ft_lstadd_front(head, node_new);
+			node_del = *lst;
+			*lst = (*lst)->next;
+			del(node_del->content);
+			free(node_del);
 		}
 	}
 }

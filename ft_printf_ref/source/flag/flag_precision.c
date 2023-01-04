@@ -6,13 +6,13 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 16:23:52 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/04 12:35:07 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/03 16:36:15 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-static short	check_type(const char *str);
+static short	check_spcf(const char *str);
 
 void	flag_precision(const char *str, t_list **head)
 {
@@ -22,12 +22,12 @@ void	flag_precision(const char *str, t_list **head)
 	int		l_str;
 	char 	*casted;
 
-	if (!check_type(str))
+	if (!check_spcf(str))
 		return ;
 	l_str = ft_strlen(ft_lstlast(*head)->content);
 	str += find_flag(str, '.');
 	str += pass_flag(str);
-	if (find_type(str) == 4)
+	if (find_spcf(str) == 4)
 	{
 		width = ft_atoi(str);
 		if (width < l_str)
@@ -57,10 +57,10 @@ void	flag_precision(const char *str, t_list **head)
 	}
 }
 
-static short	check_type(const char *str)
+static short	check_spcf(const char *str)
 {
-	short	idx_t;
+	short	i_spcf;
 
-	idx_t = find_type(str);
-	return (idx_t != 0 && idx_t != 3 && idx_t != 8);
+	i_spcf = find_spcf(str);
+	return (i_spcf != 0 && i_spcf != 3 && i_spcf != 8);
 }

@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flag_space.c                                       :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/07 16:23:45 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/04 12:34:18 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/11/23 15:12:37 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/01/04 12:39:33 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "libft.h"
+#include <stdlib.h>
 
-void	flag_space(const char *str, t_list **head)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	t_list	*node_new;
-	char	*value;
-	char	*sign;
+	char	*result;
+	size_t	len_s1;
+	size_t	len_s2;
 
-	str++;
-	value = (*head)->content;
-	if (*value != '-')
+	len_s1 = ft_strlen(s1);
+	len_s2 = ft_strlen(s2);
+	result = malloc(len_s1 + len_s2 + 1);
+	if (result)
 	{
-		sign = ft_strdup(" ");
-		if (sign)
-		{
-			node_new = ft_lstnew(sign);
-			if (node_new)
-				ft_lstadd_front(head, node_new);
-		}
+		ft_memmove(result, s1, len_s1);
+		ft_memmove(result + len_s1, s2, len_s2);
+		result[len_s1 + len_s2] = 0;
 	}
+	return (result);
 }

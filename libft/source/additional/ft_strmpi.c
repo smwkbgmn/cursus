@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flag_space.c                                       :+:      :+:    :+:   */
+/*   ft_strmpi.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/07 16:23:45 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/04 12:34:18 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/11/23 15:13:00 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/01/04 12:39:29 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "libft.h"
+#include <stdlib.h>
 
-void	flag_space(const char *str, t_list **head)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	t_list	*node_new;
-	char	*value;
-	char	*sign;
+	char				*result;
+	unsigned int		idx;
 
-	str++;
-	value = (*head)->content;
-	if (*value != '-')
+	result = malloc(ft_strlen(s) + 1);
+	if (result)
 	{
-		sign = ft_strdup(" ");
-		if (sign)
+		idx = 0;
+		while (*s)
 		{
-			node_new = ft_lstnew(sign);
-			if (node_new)
-				ft_lstadd_front(head, node_new);
+			result[idx] = f(idx, *s);
+			idx++;
+			s++;
 		}
+		result[idx] = 0;
 	}
+	return (result);
 }
