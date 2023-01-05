@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 13:07:57 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/05 13:14:46 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/05 17:33:44 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static short	check_format(char *format, short idx_f);
 short	get_conversion(char *format, t_list *head, va_list *ptr)
 {
 	convert_value(ptr, head, get_type_str(format));
-	convert_flag(format, head);
+	if (ft_strlen(format) > 1)
+		convert_flag(format, head);
 	return (0);
 }
 
