@@ -6,33 +6,37 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 16:23:29 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/04 12:35:40 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/05 12:31:46 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-static short	check_case(const char *str);
+static short	check_case(const char *format);
 
-void	flag_hash(const char *str, t_list **head)
+short	flag_hash(char *format, t_list *head)
 {
-	t_list	*node_new;
-	char	*sign;
+	char	*content;
 
-	if (ft_memcmp(ft_lstlast(*head)->content, "0", 1) == 0)
-		return ;
-	if (check_case(str))
-		sign = ft_strdup("0X");
+	if (ft_memcmp(ft_lstidx(head, 3)->content, "0", 1) == 0)
+		content = 0;
 	else
-		sign = ft_strdup("0x");
-	node_new = ft_lstnew(sign);
-	if (node_new)
-		ft_lstadd_front(head, node_new);
+	{
+		if (check_case(format))
+			content = ft_strdup("0X");
+		else
+			content = ft_strdup("0x");
+		if (content)
+			ft_lstidx(head, 1)->content = content;
+		else
+			return (ERROR);
+	}
+	return (SUCCESS);
 }
 
-static short	check_case(const char *str)
+static short	check_case(const char *format)
 {
-	while (get_type(*str) == -1)
-		str++;
-	return (*str == 'X');
+	while (get_type_char(*format) == -1)
+		format++;
+	return (*format == 'X');
 }

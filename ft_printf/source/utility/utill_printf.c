@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 22:06:50 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/04 12:42:42 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/05 13:09:39 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 #include <unistd.h>
 
 static int		writing(const char *str, va_list *ptr);
-static size_t	get_len_flag(const char *str);
-static int		write_list(t_list *strings, short idx_t);
-static void		free_content(void *content);
+static size_t	get_len_format(const char *str);
 
 int	ft_printf(const char *str, ...)
 {
@@ -32,21 +30,24 @@ int	ft_printf(const char *str, ...)
 
 static int	writing(const char *str, va_list *ptr)
 {
-	t_list	*strings;
+	t_list	*list_format;
+	char	*str_format;
 	size_t	len_f;
 	int		len_w;
 
+	init_list(&list_format);
 	len_w = 0;
 	while (*str)
 	{
 		if (*str == '%')
 		{
-			str++;
-			len_f = get_len_flag(str);
-			strings = get_list(str, ptr, len_f);
-			len_w += write_list(strings, find_type(str));
+			len_f = get_len_format(str);
+			str_format = ft_substr(str, 1, len_f);
+			get_conversion(str_format, list_format, ptr);
+			len_w += write_list(list_format, get_type_str(str_format));
 			str += len_f;
-			ft_lstclear(&strings, &free_content);
+			free(str_format);
+			ft_lstclear(&list_format, &free_content);
 		}
 		else
 			len_w += write(1, str, 1);
@@ -55,36 +56,12 @@ static int	writing(const char *str, va_list *ptr)
 	return (len_w);
 }
 
-static size_t	get_len_flag(const char *str)
+static size_t	get_len_format(const char *str)
 {
 	size_t	idx;
 
-	idx = 0;
-	while (get_flag(*str++) != -1)
+	idx = 1;
+	while (get_type_char(str[idx]) == -1)
 		idx++;
 	return (idx);
-}
-
-static int	write_list(t_list *strings, short idx_t)
-{
-	size_t	len_s;
-	int		len_w;
-
-	len_w = 0;
-	while (strings)
-	{
-		if (idx_t == 0 && ft_memcmp(strings->content, "\0", 1) == 0)
-			len_s = 1;
-		else
-			len_s = ft_strlen(strings->content);
-		len_w += write(1, strings->content, len_s);
-		strings = strings->next;
-	}
-	return (len_w);
-}
-
-static void	free_content(void *content)
-{
-	if (content)
-		free(content);
 }

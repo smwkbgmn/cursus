@@ -6,48 +6,45 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 16:23:48 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/03 12:02:38 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/05 12:57:26 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-static size_t	get_len_full_str(t_list *head);
+static size_t	get_len_full_str(t_list *head, short idx_t);
 
-void	flag_zero(const char *str, t_list **head)
+short	flag_zero(char *format, t_list *head)
 {
-	t_list	*node_new;
 	char	*zeros;
 	int		width;
 
-	str += find_flag(str, '0');
-	str += pass_flag(str);
-	width = ft_atoi(str) - get_len_full_str(*head);
+	format += find_flag(format, '0');
+	format += pass_flag(format);
+	width = ft_atoi(format) - get_len_full_str(head, get_type_str(format));
 	if (width > 0)
 	{
 		zeros = get_str_fill_char(width, '0');
 		if (zeros)
-		{
-			node_new = ft_lstnew(zeros);
-			if (node_new)
-			{
-				if (ft_lstsize(*head) == 1)
-					ft_lstadd_front(head, node_new);
-				else
-					ft_lstadd_idx(*head, node_new, 0);
-			}
-		}
+			ft_lstidx(head, 2)->content = zeros;
 	}
+	return (SUCCESS);
 }
 
-static size_t	get_len_full_str(t_list *head)
+static size_t	get_len_full_str(t_list *head, short idx_t)
 {
 	size_t	len;
 
 	len = 0;
 	while (head)
 	{
-		len += ft_strlen(head->content);
+		if (head->content)
+		{
+			if (idx_t == 0 && ft_memcmp(head->content, "\0", 1) == 0)
+				len += 1;
+			else
+				len += ft_strlen(head->content);
+		}
 		head = head->next;
 	}
 	return (len);

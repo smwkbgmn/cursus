@@ -6,43 +6,41 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 16:23:07 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/04 12:41:58 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/05 12:31:23 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 #include <stdlib.h>
 
-static size_t	get_len_full_str(t_list *head, short i_spcf);
+static size_t	get_len_full_str(t_list *head, short idx_t);
 
-void	flag_dash(const char *str, t_list **head)
+short	flag_dash(char *format, t_list *head)
 {
-	t_list	*node_new;
 	char	*spaces;
 	int		width;
 
-	str += pass_flag(str);
-	width = ft_atoi(str) - get_len_full_str(*head, find_spcf(str));
+	format += pass_flag(format);
+	width = ft_atoi(format) - get_len_full_str(head, get_type_str(format));
 	if (width > 0)
 	{
 		spaces = get_str_fill_char(width, ' ');
 		if (spaces)
-		{
-			node_new = ft_lstnew(spaces);
-			if (node_new)
-				ft_lstadd_back(head, node_new);
-		}
+			ft_lstidx(head, 4)->content = spaces;
+		else
+			return (ERROR);
 	}
+	return (SUCCESS);
 }
 
-static size_t	get_len_full_str(t_list *head, short i_spcf)
+static size_t	get_len_full_str(t_list *head, short idx_t)
 {
 	size_t	len;
 
 	len = 0;
 	while (head)
 	{
-		if (i_spcf == 0 && ft_memcmp(head->content, "\0", 1) == 0)
+		if (idx_t == 0 && ft_memcmp(head->content, "\0", 1) == 0)
 			len += 1;
 		else
 			len += ft_strlen(head->content);

@@ -6,14 +6,14 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 17:35:12 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/04 12:43:21 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/04 21:08:41 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 #include <stdlib.h>
 
-void	set_flag(void (*flags[7])(const char *, t_list **head))
+void	set_flag(short (*flags[7])(char *, t_list *))
 {
 	flags[0] = &flag_plus;
 	flags[1] = &flag_space;
@@ -45,32 +45,32 @@ short	get_flag(char c)
 	return (-1);
 }
 
-size_t	pass_flag(const char *str)
+size_t	pass_flag(char *format)
 {
 	size_t	idx;
 
 	idx = 0;
-	while (!ft_isdigit(str[idx]) && get_spcf(str[idx]) == -1)
+	while (!ft_isdigit(format[idx]) && format[idx])
 		idx++;
 	return (idx);
 }
 
-size_t	find_flag(const char *str, char flag)
+size_t	find_flag(char *format, char flag)
 {
 	size_t	idx;
 
 	idx = 0;
-	while (str[idx] != flag)
+	while (format[idx] != flag)
 		idx++;
 	return (idx);
 }
 
 char	*get_str_fill_char(int width, char c)
 {
-	char	*str;
+	char	*format;
 
-	str = malloc(width + 1);
-	if (str)
-		ft_memset(str, c, width);
-	return (str);
+	format = malloc(width + 1);
+	if (format)
+		ft_memset(format, c, width);
+	return (format);
 }

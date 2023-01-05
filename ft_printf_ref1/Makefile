@@ -10,7 +10,7 @@ LIBFT		= $(DIR_LIBFT)/libft.a
 DIR_UTIL	= source/utility
 DIR_SPCF	= source/specifier
 DIR_FLAG	= source/flag
-DIR_LIBFT	= ../libft
+DIR_LIBFT	= libft
 
 all			: $(NAME)
 
