@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:29:06 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/06 12:13:51 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/06 16:02:48 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,11 @@ void	write_hex(unsigned int num, short flag);
 int		write_hex_len(unsigned int num, short flag);
 char	*ft_convert_base(char *nbr, char *base_from, char *base_to);
 char	*ft_convert_base_ul(char *nbr, char *base_from, char *base_to);
-char	*ft_itoa_ul(unsigned long n);
-char	*ft_itoa_address(unsigned long addr);
 t_list	*ft_lstidx(t_list *head, int idx);
 void	ft_lstadd_idx(t_list **head, t_list *new, int idx);
+char	*ft_itoa_uint(unsigned int n);
+char	*ft_itoa_ulong(unsigned long n);
+char	*ft_itoa_uint_base(unsigned int dec, char *base);
+char	*ft_itoa_ulong_base(unsigned long dec, char *base);
 
 #endif

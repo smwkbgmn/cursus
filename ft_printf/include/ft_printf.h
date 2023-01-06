@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 00:55:30 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/05 12:39:39 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/06 14:53:15 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 
 # include "libft.h"
 # include <stdarg.h>
+
+# include <stdio.h>
 
 int		ft_printf(const char *str, ...);
 

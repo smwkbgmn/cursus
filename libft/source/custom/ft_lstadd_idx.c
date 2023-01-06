@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 17:46:18 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/06 12:35:06 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/06 14:41:02 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_lstadd_idx(t_list **head, t_list *new, int idx)
 		ft_lstadd_back(head, new);
 	else
 	{
-		note_prev = ft_lstidx(*head, idx - 1);
+		node_prev = ft_lstidx(*head, idx - 1);
 		if (node_prev)
 		{
 			new->next = node_prev->next;

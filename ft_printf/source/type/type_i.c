@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 00:54:03 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/04 17:25:33 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/06 16:45:53 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,59 @@
 
 short	type_i(va_list *ptr, t_list *head)
 {
+	char	*value;
+	char	*sign;
 	char	*content;
 
-	content = ft_itoa(va_arg(*ptr, int));
-	if (content)
+	value = ft_itoa(va_arg(*ptr, int));
+	if (value)
 	{
-		if (*content == '-')
+		if (*value == '-')
 		{
-			ft_lstidx(head, 1)->content = ft_strdup("-");
-			ft_lstidx(head, 3)->content = ft_strdup(content + 1);
-			free(content);
+			sign = ft_strdup("-");
+			content = ft_strdup(value + 1);
+			free(value);
 		}
 		else
+		{
+			sign = ft_strdup("\0");
+			content = value;
+		}
+		if (sign && content)
+		{
+			ft_lstidx(head, 1)->content = sign;
 			ft_lstidx(head, 3)->content = content;
-		return (SUCCESS);
+			return (SUCCESS);
+		}
 	}
-	else
-		return (ERROR);
+	return (ERROR);
 }
+
+// short	type_i(va_list *ptr, t_list *head)
+// {
+// 	char	*value;
+// 	char	*sign;
+// 	char	*content;
+
+// 	value = ft_itoa(va_arg(*ptr, int));
+// 	if (value)
+// 	{
+// 		if (*value == '-')
+// 		{
+// 			sign = ft_strdup("-");
+// 			content = ft_strdup(value + 1);
+// 			free(value);
+// 			if (sign && content)
+// 			{
+// 				ft_lstidx(head, 1)->content = sign;
+// 				ft_lstidx(head, 3)->content = content;
+// 			}
+// 			else
+// 				return (ERROR);
+// 		}
+// 		else
+// 			ft_lstidx(head, 3)->content = value;
+// 		return (SUCCESS);
+// 	}
+// 	return (ERROR);
+// }

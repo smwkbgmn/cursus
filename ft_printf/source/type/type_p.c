@@ -6,22 +6,31 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 00:54:11 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/04 17:28:51 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/06 16:12:16 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdlib.h>
 
 #include "libftprintf.h"
 
 short	type_p(va_list *ptr, t_list *head)
 {
-	char	*content;
+	unsigned long	addr;
+	char			*str_addr;
+	char			*content;
 
-	content = ft_itoa_address((unsigned long)va_arg(*ptr, void *));
-	if (content)
+	addr = (unsigned long)va_arg(*ptr, void *);
+	str_addr = ft_itoa_ulong_base(addr, "0123456789abcdef");
+	if (str_addr)
 	{
-		ft_lstidx(head, 3)->content = content;
-		return (SUCCESS);
+		content = ft_strjoin("0x", str_addr);
+		free(str_addr);
+		if (content)
+		{
+			ft_lstidx(head, 3)->content = content;
+			return (SUCCESS);
+		}
 	}
-	else
-		return (ERROR);
+	return (ERROR);
 }

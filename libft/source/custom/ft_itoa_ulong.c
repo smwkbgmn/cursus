@@ -1,54 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_itoa_ulong.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:11:37 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/04 12:39:57 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/06 15:52:59 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
-static char		*convert(long n, size_t len);
-static size_t	get_len(long n);
+static char		*get_str(unsigned long n, size_t len);
+static size_t	get_len(unsigned long n);
 
-char	*ft_itoa(int n)
+char	*ft_itoa_ulong(unsigned long n)
 {
-	return (convert((long)n, get_len((long)n)));
+	return (get_str(n, get_len(n)));
 }
 
-static char	*convert(long n, size_t len)
+static char	*get_str(unsigned long n, size_t len)
 {
-	char	*n_str;
+	char	*result;
 
-	n_str = malloc(len + 1);
-	if (n_str)
+	if (n == 0)
+		result = ft_strdup("0");
+	else
 	{
-		if (n == 0)
-			ft_strlcpy(n_str, "0", 2);
-		else
+		result = ft_calloc(len + 1, 1);
+		if (result)
 		{
-			if (n < 0)
+			while (len > 0)
 			{
-				n_str[0] = '-';
-				n *= -1;
-			}
-			n_str[len--] = 0;
-			while (n > 0)
-			{
-				n_str[len--] = n % 10 + '0';
+				result[len - 1] = "0123456789"[n % 10];
 				n /= 10;
+				len--;
 			}
 		}
 	}
-	return (n_str);
+	return (result);
 }
 
-static size_t	get_len(long n)
+static size_t	get_len(unsigned long n)
 {
 	size_t	len;
 
@@ -56,13 +50,7 @@ static size_t	get_len(long n)
 		len = 1;
 	else
 	{
-		if (n < 0)
-		{
-			len = 1;
-			n *= -1;
-		}
-		else
-			len = 0;
+		len = 0;
 		while (n > 0)
 		{
 			n /= 10;
