@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:29:06 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/03 20:50:54 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/06 12:13:51 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,6 @@ char	*ft_convert_base_ul(char *nbr, char *base_from, char *base_to);
 char	*ft_itoa_ul(unsigned long n);
 char	*ft_itoa_address(unsigned long addr);
 t_list	*ft_lstidx(t_list *head, int idx);
-void	ft_lstadd_idx(t_list *head, t_list *new, int idx);
+void	ft_lstadd_idx(t_list **head, t_list *new, int idx);
 
 #endif

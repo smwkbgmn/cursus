@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 22:06:50 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/05 19:04:24 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/06 12:46:56 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-static int		writing(const char *str, va_list *ptr);
+static void		apply_len(int len_in, int *len_out);
+static int		write_format(const char **str, va_list *ptr);
 static size_t	get_len_format(const char *str);
 
 int	ft_printf(const char *str, ...)
@@ -27,9 +28,9 @@ int	ft_printf(const char *str, ...)
 	while (*str && len != ERROR)
 	{
 		if (*str == '%')
-			len += parse_format(&str, ptr);
+			apply_len(write_format(&str, &ptr), &len);
 		else
-			len += write(1, str, 1);
+			apply_len(write(1, str, 1), &len);
 		str++;
 	}
 	va_end(ptr);
@@ -44,29 +45,27 @@ static void	apply_len(int len_in, int *len_out)
 		*len_out = ERROR;
 }
 
-static int	parse_format(const char **str, va_list *ptr)
+static int	write_format(const char **str, va_list *ptr)
 {
-	t_list	*list_format;
-	char	*str_format;
+	t_list	*list_f;
+	char	*str_f;
 	size_t	len_f;	
 	int		len_w;
 
 	len_w = ERROR;
-	if (init_list(&list_format))
+	if (init_list(&list_f) != ERROR)
 	{
 		len_f = get_len_format(*str);
-		str_format = ft_substr(*str, 1, len_f);
-		if (str_format)
+		str_f = ft_substr(*str, 1, len_f);
+		if (str_f)
 		{
-			if (get_conversion(str_format, list_format, ptr))
-			{
-				len_w = write_list(list_format, get_type_str(str_format));
-				ft_lstclear(&list_format, &free_content);
-			}
-			free(str_format);
+			if (get_conversion(str_f, list_f, ptr) != ERROR)
+				len_w = write_list(list_f, get_type_str(str_f));
+			free(str_f);
 		}
+		ft_lstclear(&list_f, &free_content);
+		*str += len_f;
 	}
-	*str += len_f;
 	return (len_w);
 }
 

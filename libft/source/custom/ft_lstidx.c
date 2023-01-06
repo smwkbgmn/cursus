@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 18:14:41 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/03 21:05:39 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/06 12:31:37 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,7 @@ t_list	*ft_lstidx(t_list *head, int idx)
 		while (idx-- > 0)
 			head = head->next;
 	}
+	else
+		head = 0;
 	return (head);
 }
