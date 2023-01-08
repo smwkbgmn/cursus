@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 17:35:25 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/08 13:48:13 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/08 18:23:25 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,9 @@ short	get_type_str(char *format)
 	while (get_type_char(*format) == -1)
 		format++;
 	return (get_type_char(*format));
+}
+
+short	type_c_with_null(short type, void *content)
+{
+	return (type == 0 && ft_memcmp(content, "\0", 1) == 0);
 }

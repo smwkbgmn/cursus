@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 13:07:57 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/08 16:35:39 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/08 22:47:36 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,25 +37,25 @@ short	init_list(t_list **head)
 	return (TRUE);
 }
 
-int	write_list(t_list *head, short idx_t)
+int	write_list(t_list *head, short type)
 {
-	size_t	len_s;
-	int		len_w;
+	size_t	len_content;
+	int		len;
 
-	len_w = 0;
-	while (head && len_w != ERROR)
+	len = 0;
+	while (head && len != ERROR)
 	{
 		if (head->content)
 		{
-			if (idx_t == 0 && ft_memcmp(head->content, "\0", 1) == 0)
-				len_s = 1;
+			if (type_c_with_null(type, head->content))
+				len_content = 1;
 			else
-				len_s = ft_strlen(head->content);
-			apply_len(write(1, head->content, len_s), &len_w);
+				len_content = ft_strlen(head->content);
+			apply_len(write(1, head->content, len_content), &len);
 		}
 		head = head->next;
 	}
-	return (len_w);
+	return (len);
 }
 
 void	free_content(void *content)

@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 17:35:12 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/08 13:48:33 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/08 22:55:46 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,10 @@ size_t	find_flag(char *format, char flag)
 
 char	*get_str_fill_char(int width, char c)
 {
-	char	*format;
+	char	*str;
 
-	format = malloc(width + 1);
-	if (format)
-		ft_memset(format, c, width);
-	return (format);
+	str = ft_calloc(width + 1, 1);
+	if (str)
+		ft_memset(str, c, width);
+	return (str);
 }

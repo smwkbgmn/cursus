@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 16:23:07 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/08 15:56:57 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/08 20:11:06 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 #include "libftprintf.h"
 
-static size_t	get_len_full_str(t_list *head, short idx_t);
+static int		get_width(char *format, t_list *head);
+static size_t	get_len_full_str(t_list *head, short type);
 
 short	flag_dash(char *format, t_list *head)
 {
 	char	*spaces;
 	int		width;
 
-	format += pass_flag(format);
-	width = ft_atoi(format) - get_len_full_str(head, get_type_str(format));
+	width = get_width(format, head);
 	if (width > 0)
 	{
 		spaces = get_str_fill_char(width, ' ');
@@ -34,7 +34,13 @@ short	flag_dash(char *format, t_list *head)
 	return (TRUE);
 }
 
-static size_t	get_len_full_str(t_list *head, short idx_t)
+static int	get_width(char *format, t_list *head)
+{
+	format += pass_flag(format);
+	return (ft_atoi(format) - get_len_full_str(head, get_type_str(format)));
+}
+
+static size_t	get_len_full_str(t_list *head, short type)
 {
 	size_t	len;
 
@@ -43,7 +49,7 @@ static size_t	get_len_full_str(t_list *head, short idx_t)
 	{
 		if (head->content)
 		{
-			if (idx_t == 0 && ft_memcmp(head->content, "\0", 1) == 0)
+			if (type_c_with_null(type, head->content))
 				len += 1;
 			else
 				len += ft_strlen(head->content);

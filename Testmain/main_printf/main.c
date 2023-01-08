@@ -5,13 +5,13 @@
 
 int	main(void)
 {
-	int	a, b;
+	// printf("123456789A123456789A\n");
+	// printf("[%d]\n", printf("% s\n", "hi"));
+	printf("[%d]\n", ft_printf("% s\n", "hi"));
 
-	a = printf("%.s", "hi");
-	b = ft_printf("%.s", "hi");
-	printf("[%d][%d]\n", a, b);
+	printf("\n");
 
-	// system("leaks a.out");
+	system("leaks a.out");
 
 	return (0);
 }
@@ -30,9 +30,6 @@ int	main(void)
 // 	int	rst_ft;
 
 // 	printf("123456789A123456789A\n");
-// 	// printf("%010.10%\n");
-// 	// ft_printf("%010.10%\n");
-// 	// ft_printf("%010.10%");
 
 // 	ft_printf("'a' (%%c)\t\t");
 // 	rst_ft = ft_printf("[%c]", c);
@@ -121,24 +118,9 @@ int	main(void)
 
 // 	printf("\n");
 
-// 	system("leaks a.out");
-
-
-// 	// printf(" [%-1c] [%-2c] [%-3c] ", '0', 0, '1');
-// 	// printf(" [%-1c] [%-2c] [%-3c] ", '2', '1', 0);
-// 	// printf(" [%-1c] [%-2c] [%-3c] ", 0, '1', '2');
-
-// 	// printf("\n");
-
-// 	// ft_printf(" [%-1c] [%-2c] [%-3c] ", '0', 0, '1');
-// 	// ft_printf(" [%-1c] [%-2c] [%-3c] ", '2', '1', 0);
-// 	// ft_printf(" [%-1c] [%-2c] [%-3c] ", 0, '1', '2');
-
-
-
-// 	// printf("\n");
-
-
 // 	// ft_printf("%%d");
+
+
+// 	system("leaks a.out");
 // 	return (0);
 // }

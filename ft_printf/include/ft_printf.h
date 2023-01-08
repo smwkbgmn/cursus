@@ -6,26 +6,27 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 00:55:30 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/08 14:47:21 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/08 20:11:59 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# define SUCCESS 1
-# define ERROR -1
-
 # include "libft.h"
 # include <stdarg.h>
 
 # include <stdio.h>
 
+# define TRUE 1
+# define FALSE 0
+# define ERROR -1
+
 int		ft_printf(const char *str, ...);
 void	apply_len(int len_in, int *len_out);
 
 short	init_list(t_list **head);
-int		write_list(t_list *head, short idx_t);
+int		write_list(t_list *head, short type);
 void	free_content(void *content);
 
 short	get_conversion(char *format, t_list *head, va_list *ptr);
@@ -33,6 +34,7 @@ short	get_conversion(char *format, t_list *head, va_list *ptr);
 void	set_type(short (*types[8])(va_list *, t_list *));
 short	get_type_char(char c);
 short	get_type_str(char *format);
+short	type_c_with_null(short type, void *content);
 
 void	set_flag(short (*flags[7])(char *, t_list *));
 short	get_flag(char c);

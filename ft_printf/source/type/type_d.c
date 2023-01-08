@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 00:54:00 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/08 16:35:09 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/08 23:34:13 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,47 @@
 
 #include "libftprintf.h"
 
-short	type_d(va_list *ptr, t_list	*head)
+static short	apply_to_list(t_list *head, char *sign, char *content);
+
+short	type_d(va_list *ptr, t_list *head)
 {
+	char	*value;
+	char	*sign;
 	char	*content;
 
-	content = ft_itoa(va_arg(*ptr, int));
-	if (content)
+	value = ft_itoa(va_arg(*ptr, int));
+	if (value)
 	{
-		if (*content == '-')
+		if (*value == '-')
 		{
-			ft_lstidx(head, 1)->content = ft_strdup("-");
-			ft_lstidx(head, 3)->content = ft_strdup(content + 1);
-			free(content);
+			sign = ft_strdup("-");
+			content = ft_strdup(value + 1);
+			free(value);
+			return (apply_to_list(head, sign, content));
 		}
 		else
-			ft_lstidx(head, 3)->content = content;
+		{
+			ft_lstidx(head, 3)->content = value;
+			return (TRUE);
+		}
+	}
+	return (FALSE);
+}
+
+static short	apply_to_list(t_list *head, char *sign, char *content)
+{
+	if (sign && content)
+	{
+		ft_lstidx(head, 1)->content = sign;
+		ft_lstidx(head, 3)->content = content;
 		return (TRUE);
 	}
 	else
+	{
+		if (sign)
+			free(sign);
+		if (content)
+			free(content);
 		return (FALSE);
+	}
 }
