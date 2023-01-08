@@ -5,13 +5,11 @@
 
 int	main(void)
 {
-	printf("rst [%d]\n", printf("%p, %p, %p, %p, %p, %p", (void *)0, (void *)0xABCDE, (void *)ULONG_MAX, (void *)LONG_MIN, (void *)-1, (void *)-2352));
+	int	a, b;
 
-	printf("\n\n\n");
-
-	ft_printf("rst [%d]\n", ft_printf("%p, %p, %p, %p, %p, %p", (void *)0, (void *)0xABCDE, (void *)ULONG_MAX, (void *)LONG_MIN, (void *)-1, (void *)-2352));
-
-	printf("\n\n\n");
+	a = printf("%.s", "hi");
+	b = ft_printf("%.s", "hi");
+	printf("[%d][%d]\n", a, b);
 
 	// system("leaks a.out");
 

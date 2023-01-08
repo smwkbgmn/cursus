@@ -3,18 +3,26 @@
         {
             "name": "Mac",
             "includePath": [
-                "${default}",
-                "${workspaceFolder}/**",
-                "${workspaceFolder}"
+                "${workspaceFolder}/**"
             ],
-            "defines": [],
+            "defines": [
+                "SUCCESS=1",
+                "ERROR=-1",
+                "TRUE=1",
+                "FALSE=0"
+            ],
             "macFrameworkPath": [
                 "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks"
             ],
             "compilerPath": "/usr/bin/clang",
             "cStandard": "c17",
             "cppStandard": "c++17",
-            "intelliSenseMode": "macos-clang-arm64"
+            "intelliSenseMode": "macos-clang-arm64",
+            "mergeConfigurations": true,
+            "browse": {
+                "path": [],
+                "limitSymbolsToIncludedHeaders": true
+            }
         }
     ],
     "version": 4

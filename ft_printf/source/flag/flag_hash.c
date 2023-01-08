@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 16:23:29 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/05 12:31:46 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/08 15:56:52 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ short	flag_hash(char *format, t_list *head)
 		if (content)
 			ft_lstidx(head, 1)->content = content;
 		else
-			return (ERROR);
+			return (FALSE);
 	}
-	return (SUCCESS);
+	return (TRUE);
 }
 
 static short	check_case(const char *format)

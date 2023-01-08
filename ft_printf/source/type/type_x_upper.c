@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 00:54:21 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/06 16:15:01 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/08 15:57:06 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ short	type_x_upper(va_list *ptr, t_list *head)
 	if (hex)
 	{
 		ft_lstidx(head, 3)->content = hex;
-		return (SUCCESS);
+		return (TRUE);
 	}
 	else
-		return (ERROR);
+		return (FALSE);
 }

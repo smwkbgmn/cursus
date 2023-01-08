@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 16:23:52 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/06 12:47:09 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/08 15:56:38 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ short	flag_precision(char *format, t_list *head)
 			if (zeros)
 				ft_lstidx(head, 2)->content = zeros;
 			else
-				return (ERROR);
+				return (FALSE);
 		}
 	}
-	return (SUCCESS);
+	return (TRUE);
 }
 
 static short	check_type(char *format)

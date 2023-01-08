@@ -6,12 +6,13 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 15:34:04 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/04 12:38:49 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/08 14:43:19 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include <stdlib.h>
+
+#include "libft.h"
 
 void	ft_lstclear(t_list **lst, void (*del)(void *))
 {

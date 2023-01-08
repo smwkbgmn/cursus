@@ -6,15 +6,15 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 22:06:50 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/06 12:46:56 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/08 16:45:24 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
 #include <stdlib.h>
 #include <unistd.h>
 
-static void		apply_len(int len_in, int *len_out);
+#include "libftprintf.h"
+
 static int		write_format(const char **str, va_list *ptr);
 static size_t	get_len_format(const char *str);
 
@@ -37,12 +37,9 @@ int	ft_printf(const char *str, ...)
 	return (len);
 }
 
-static void	apply_len(int len_in, int *len_out)
+void	apply_len(int len_in, int *len_out)
 {
-	if (len_in != ERROR)
-		*len_out += len_in;
-	else
-		*len_out = ERROR;
+	*len_out = (*len_out + len_in) * (len_in != ERROR) - (len_in == ERROR);
 }
 
 static int	write_format(const char **str, va_list *ptr)
@@ -53,13 +50,13 @@ static int	write_format(const char **str, va_list *ptr)
 	int		len_w;
 
 	len_w = ERROR;
-	if (init_list(&list_f) != ERROR)
+	if (init_list(&list_f))
 	{
 		len_f = get_len_format(*str);
 		str_f = ft_substr(*str, 1, len_f);
 		if (str_f)
 		{
-			if (get_conversion(str_f, list_f, ptr) != ERROR)
+			if (get_conversion(str_f, list_f, ptr))
 				len_w = write_list(list_f, get_type_str(str_f));
 			free(str_f);
 		}

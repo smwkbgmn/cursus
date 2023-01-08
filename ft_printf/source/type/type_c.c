@@ -6,26 +6,25 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 17:09:29 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/04 17:32:44 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/08 16:35:14 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
-
 #include <stdlib.h>
+
+#include "libftprintf.h"
 
 short	type_c(va_list *ptr, t_list	*head)
 {
-	char	*str_c;
+	char	*content;
 
-	str_c = ft_calloc(2, 1);
-	if (str_c)
+	content = ft_calloc(2, 1);
+	if (content)
 	{
-		str_c[0] = va_arg(*ptr, int);
-		str_c[1] = 0;
-		ft_lstidx(head, 3)->content = str_c;
-		return (SUCCESS);
+		content[0] = va_arg(*ptr, int);
+		ft_lstidx(head, 3)->content = content;
+		return (TRUE);
 	}
 	else
-		return (ERROR);
+		return (FALSE);
 }

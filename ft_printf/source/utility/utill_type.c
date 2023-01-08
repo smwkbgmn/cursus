@@ -6,12 +6,13 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 17:35:25 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/05 12:33:38 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/08 13:48:13 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
 #include <stdlib.h>
+
+#include "libftprintf.h"
 
 void	set_type(short (*types[8])(va_list *, t_list *))
 {

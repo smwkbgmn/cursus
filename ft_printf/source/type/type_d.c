@@ -6,13 +6,13 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 00:54:00 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/05 13:01:44 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/08 16:35:09 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
-
 #include <stdlib.h>
+
+#include "libftprintf.h"
 
 short	type_d(va_list *ptr, t_list	*head)
 {
@@ -29,8 +29,8 @@ short	type_d(va_list *ptr, t_list	*head)
 		}
 		else
 			ft_lstidx(head, 3)->content = content;
-		return (SUCCESS);
+		return (TRUE);
 	}
 	else
-		return (ERROR);
+		return (FALSE);
 }

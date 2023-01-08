@@ -6,12 +6,13 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 17:35:12 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/04 21:08:41 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/08 13:48:33 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
 #include <stdlib.h>
+
+#include "libftprintf.h"
 
 void	set_flag(short (*flags[7])(char *, t_list *))
 {
@@ -50,7 +51,7 @@ size_t	pass_flag(char *format)
 	size_t	idx;
 
 	idx = 0;
-	while (!ft_isdigit(format[idx]) && format[idx])
+	while (!ft_isdigit(format[idx]) && format[idx + 1])
 		idx++;
 	return (idx);
 }

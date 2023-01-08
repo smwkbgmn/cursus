@@ -6,13 +6,14 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 13:07:57 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/05 17:23:37 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/08 16:35:39 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
 #include <stdlib.h>
 #include <unistd.h>
+
+#include "libftprintf.h"
 
 short	init_list(t_list **head)
 {
@@ -27,10 +28,13 @@ short	init_list(t_list **head)
 		if (node)
 			ft_lstadd_back(head, node);
 		else
-			return (ERROR);
+		{
+			ft_lstclear(head, &free_content);
+			return (FALSE);
+		}
 		cnt++;
 	}
-	return (SUCCESS);
+	return (TRUE);
 }
 
 int	write_list(t_list *head, short idx_t)
@@ -39,7 +43,7 @@ int	write_list(t_list *head, short idx_t)
 	int		len_w;
 
 	len_w = 0;
-	while (head)
+	while (head && len_w != ERROR)
 	{
 		if (head->content)
 		{
@@ -47,7 +51,7 @@ int	write_list(t_list *head, short idx_t)
 				len_s = 1;
 			else
 				len_s = ft_strlen(head->content);
-			len_w += write(1, head->content, len_s);
+			apply_len(write(1, head->content, len_s), &len_w);
 		}
 		head = head->next;
 	}

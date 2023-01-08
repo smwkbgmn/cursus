@@ -6,12 +6,13 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 16:23:07 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/05 17:41:35 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/08 15:56:57 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
 #include <stdlib.h>
+
+#include "libftprintf.h"
 
 static size_t	get_len_full_str(t_list *head, short idx_t);
 
@@ -28,9 +29,9 @@ short	flag_dash(char *format, t_list *head)
 		if (spaces)
 			ft_lstidx(head, 4)->content = spaces;
 		else
-			return (ERROR);
+			return (FALSE);
 	}
-	return (SUCCESS);
+	return (TRUE);
 }
 
 static size_t	get_len_full_str(t_list *head, short idx_t)

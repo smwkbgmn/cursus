@@ -6,22 +6,24 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 00:55:30 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/05 12:43:07 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/08 15:55:21 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFTPRINTF_H
 # define LIBFTPRINTF_H
 
-# define SUCCESS 1
-# define ERROR -1
-
 # include "libft.h"
 # include <stdarg.h>
 
 # include <stdio.h>
 
+# define TRUE 1
+# define FALSE 0
+# define ERROR -1
+
 int		ft_printf(const char *str, ...);
+void	apply_len(int len_in, int *len_out);
 
 short	init_list(t_list **head);
 int		write_list(t_list *head, short idx_t);
