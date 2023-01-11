@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 00:55:30 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/08 18:23:37 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/11 18:20:22 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ short	type_c_with_null(short type, void *content);
 
 void	set_flag(short (*flags[7])(char *, t_list *));
 short	get_flag(char c);
-size_t	pass_flag(char *format);
+size_t	pass_flag(char *format, short flag);
 size_t	find_flag(char *format, char flag);
 char	*get_str_fill_char(int width, char c);
 

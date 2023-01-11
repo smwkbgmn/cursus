@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 13:07:57 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/08 22:47:41 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/11 21:04:15 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,10 @@ static short	convert_flag(char *format, t_list *head)
 		while (flag < 7)
 		{
 			if (switchs[flag])
-				flags[flag](format, head);
+			{
+				if (!flags[flag](format, head))
+					return (FALSE);
+			}
 			flag++;
 		}
 		free(switchs);

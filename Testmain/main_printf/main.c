@@ -7,11 +7,26 @@ int	main(void)
 {
 	// printf("123456789A123456789A\n");
 	// printf("[%d]\n", printf("% s\n", "hi"));
-	printf("[%d]\n", ft_printf("% s\n", "hi"));
+	// printf("[%d]\n", ft_printf("% s\n", "hi"));
+
+	// printf("[%d]", printf("%4294967296d", 12345));
+
+	printf("[%d]", ft_printf("%21474836472309948209384902843d", 12345));
 
 	printf("\n");
+	// printf("[%d]", ft_printf("%2147483646d", 12345));
+	// printf("[%d]", ft_printf("%4294967296d", 12345));
 
-	system("leaks a.out");
+	// printf("\n");
+
+	// printf("[%d]", ft_printf("%2147483647d", 12345));
+
+	// printf("%lu\n", ft_atoi_ulong("2147483648"));
+	// printf("%lu\n", ft_atoi_ulong("4294967297"));
+
+	// printf("\n");s
+
+	// sys	tem("leaks a.out");
 
 	return (0);
 }

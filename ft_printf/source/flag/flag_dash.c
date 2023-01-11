@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 16:23:07 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/09 17:47:07 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/11 18:21:50 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ short	flag_dash(char *format, t_list *head)
 
 static int	get_width(char *format, t_list *head)
 {
-	format += pass_flag(format);
+	format += pass_flag(format, 5);
 	return (ft_atoi(format) - get_len_full_str(head, get_type_str(format)));
 }
 
