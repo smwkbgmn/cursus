@@ -37,7 +37,7 @@ long long	*solution(long long numbers[], size_t numbers_len)
 
 long long	find_next(long long n)
 {
-	long long	sbin;
+	long long	bin;
 
 	if ((n & 1) == 0)
 		return (n + 1);
