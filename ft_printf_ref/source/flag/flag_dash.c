@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flag_width.c                                       :+:      :+:    :+:   */
+/*   flag_dash.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/07 16:23:55 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/12 20:15:11 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/12/07 16:23:07 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/01/11 18:21:50 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdlib.h>
 
 #include "libftprintf.h"
 
 static int		get_width(char *format, t_list *head);
 static size_t	get_len_full_str(t_list *head, short type);
 
-short	flag_width(char *format, t_list *head)
+short	flag_dash(char *format, t_list *head)
 {
 	char	*spaces;
 	int		width;
@@ -25,7 +27,7 @@ short	flag_width(char *format, t_list *head)
 	{
 		spaces = get_str_fill_char(width, ' ');
 		if (spaces)
-			ft_lstidx(head, 0)->content = spaces;
+			ft_lstidx(head, 4)->content = spaces;
 		else
 			return (FALSE);
 	}
@@ -34,7 +36,7 @@ short	flag_width(char *format, t_list *head)
 
 static int	get_width(char *format, t_list *head)
 {
-	format += pass_flag(format, 6);
+	format += pass_flag(format, 5);
 	return (ft_atoi(format) - get_len_full_str(head, get_type_str(format)));
 }
 

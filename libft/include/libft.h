@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:29:06 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/11 20:55:36 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/12 20:15:09 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }	t_list;
-
-typedef unsigned long	t_ul;
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -76,7 +74,7 @@ void	write_hex(unsigned int num, short flag);
 int		write_hex_len(unsigned int num, short flag);
 t_list	*ft_lstidx(t_list *head, int idx);
 void	ft_lstadd_idx(t_list **head, t_list *new, int idx);
-t_ul	ft_atoi_ulong(const char *str);
+long	ft_atoi_long(const char *str);
 char	*ft_itoa_uint(unsigned int n);
 char	*ft_itoa_ulong(unsigned long n);
 char	*ft_itoa_uint_base(unsigned int dec, char *base);

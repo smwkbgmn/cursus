@@ -5,28 +5,39 @@
 
 int	main(void)
 {
-	// printf("123456789A123456789A\n");
-	// printf("[%d]\n", printf("% s\n", "hi"));
-	// printf("[%d]\n", ft_printf("% s\n", "hi"));
+// 	printf("123456789A123456789A\n");
+// 	printf("[%d]\n", printf("% s\n", "hi"));
+// 	printf("[%d]\n", ft_printf("% s\n", "hi"));
 
-	// printf("[%d]", printf("%4294967296d", 12345));
+// 	printf("[%d]", printf("%4294967296d", 12345));
 
-	printf("[%d]", ft_printf("%21474836472309948209384902843d", 12345));
-
-	printf("\n");
-	// printf("[%d]", ft_printf("%2147483646d", 12345));
-	// printf("[%d]", ft_printf("%4294967296d", 12345));
-
+	ft_printf("%0+100.1d, %0+100.1d, %0+100.1d, %0+100.1d, %0+100.1d, %0+100.1d, %0+100.1d, %0+100.1d", 0, 5, -1, -10, 100, -1862, INT_MIN, INT_MAX);
 	// printf("\n");
+	// ft_printf("hihi 2147483647 %5d   , %5d  %2147483647d hihi   ejfj", 1234, 1234, 1234);
+	// ft_printf("%5d, %2147483647d", 1234, 1234);
+// 	printf("[%d]\n", printf("%-1.100X, %-1.100X, %-1.100X, %-1.100X, %-1.100X, %-1.100X, 
+// %-1.100X, %-1.100X, %-1.100X, %-1.100X", 0, 5, -1, -10, 0x1234, -1862, 0xABCDE, INT_MIN, 
+// INT_MAX, UINT_MAX));
+// 	printf("\n");
 
-	// printf("[%d]", ft_printf("%2147483647d", 12345));
 
-	// printf("%lu\n", ft_atoi_ulong("2147483648"));
+// 	printf("[%d]\n", ft_printf("%-1.100X, %-1.100X, %-1.100X, %-1.100X, %-1.100X, %-1.100X, 
+// %-1.100X, %-1.100X, %-1.100X, %-1.100X", 0, 5, -1, -10, 0x1234, -1862, 0xABCDE, INT_MIN, 
+// INT_MAX, UINT_MAX));
+// 	printf("\n");
+// 	printf("[%d]", ft_printf("%2147483646d", 12345));
+// 	printf("[%d]", ft_printf("%4294967296d", 12345));
+
+// 	printf("\n");
+
+// 	printf("[%d]", ft_printf("%2147483647d", 12345));
+
+// 	printf("%lu\n", ft_atoi_ulong("2147483648"));
 	// printf("%lu\n", ft_atoi_ulong("4294967297"));
 
-	// printf("\n");s
+	printf("\n");
 
-	// sys	tem("leaks a.out");
+	system("leaks a.out");
 
 	return (0);
 }
