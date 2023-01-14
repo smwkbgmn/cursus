@@ -6,9 +6,13 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 22:06:50 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/12 20:53:44 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/14 15:24:01 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+// Split code
+// Find out the reason of TIMEOUT with the type d, i, x and X
+// Some adjustment for flag 'space' and 'plus'
 
 #include <stdlib.h>
 #include <unistd.h>
@@ -17,44 +21,36 @@
 
 static int		write_format(const char **str, va_list *ptr);
 static size_t	get_len_format(const char *str);
-static short	check_format_valid(const char *str);
+static short	valid_format(const char *str);
 
 int	ft_printf(const char *str, ...)
 {
 	va_list	ptr;
 	int		len;
-	short	valid;
 
-	len = 0;
-	valid = FALSE;
 	va_start(ptr, str);
+	apply_len(valid_format(str), &len, 1);
 	while (*str && len != ERROR)
 	{
-		if (!valid)
-		{
-			valid = check_format_valid(str);
-			if (!valid)
-			{
-				len = ERROR;
-				break ;
-			}
-		}
 		if (*str == '%')
 		{
-			apply_len(write_format(&str, &ptr), &len);
-			valid = FALSE;
+			apply_len(write_format(&str, &ptr), &len, 0);
+			apply_len(valid_format(str), &len, 1);
 		}
 		else
-			apply_len(write(1, str, 1), &len);
+			apply_len(write(1, str, 1), &len, 0);
 		str++;
 	}
 	va_end(ptr);
 	return (len);
 }
 
-void	apply_len(int len_in, int *len_out)
+void	apply_len(int len_in, int *len_out, short flag)
 {
-	*len_out = (*len_out + len_in) * (len_in != ERROR) - (len_in == ERROR);
+	if (flag == 0)
+		*len_out = (*len_out + len_in) * (len_in != ERROR) - (len_in == ERROR);
+	else
+		*len_out *= (len_in != FALSE) - (len_in == FALSE);
 }
 
 static int	write_format(const char **str, va_list *ptr)
@@ -89,43 +85,4 @@ static size_t	get_len_format(const char *str)
 	while (get_type_char(str[idx]) == -1)
 		idx++;
 	return (idx);
-}
-
-static short	check_format_valid(const char *str)
-{
-	char	*format;
-	char	*format_for_free;
-	long	width;
-	short	valid;
-
-	while (*str != '%' && *str)
-		str++;
-	if (*str == '\0')
-		valid = TRUE;
-	else
-	{
-		format = ft_substr(str, 1, get_len_format(str));
-		if (!format)
-			return (FALSE);
-		format_for_free = format;
-		while (*format)
-		{
-			while (!ft_isdigit(*format) && *format)
-				format++;
-			width = ft_atoi_long(format);
-			if (width < 0 || width > 2147483646)
-			{
-				free(format_for_free);
-				return (FALSE);
-			}
-			else
-			{
-				while (ft_isdigit(*format) && *format)
-					format++;
-			}
-		}
-		valid = TRUE;
-		free(format_for_free);
-	}
-	return (valid);
 }
