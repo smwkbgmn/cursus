@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 13:07:57 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/14 15:23:59 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/16 03:27:52 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,26 +50,22 @@ static short	convert_flag(char *format, t_list *head)
 	short	(*flags[7])(char *, t_list *);
 	short	*switchs;
 	short	flag;
+	short	valid;
 
 	set_flag(flags);
 	switchs = get_switchs(format);
 	if (switchs)
 	{
 		flag = 0;
-		while (flag < 7)
+		valid = TRUE;
+		while (flag < 7 && valid)
 		{
 			if (switchs[flag])
-			{
-				if (!flags[flag](format, head))
-				{
-					free(switchs);
-					return (FALSE);
-				}
-			}
+				valid = flags[flag](format, head);
 			flag++;
 		}
 		free(switchs);
-		return (TRUE);
+		return (valid);
 	}
 	else
 		return (FALSE);

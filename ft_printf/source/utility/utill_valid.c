@@ -6,18 +6,23 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 14:40:39 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/14 15:21:01 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/16 03:53:42 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
+#include <stdlib.h>
 
 #include "libftprintf.h"
+
+static size_t	find_format(const char *str);
+static short	valid_width(char *format);
+static char		*find_digit(char **format);
+static char		*pass_digit(char **format);
 
 short	valid_format(const char *str)
 {
 	char	*format;
-	long	width;
 	short	valid;
 
 	str += find_format(str);
@@ -64,22 +69,14 @@ static short	valid_width(char *format)
 
 static char	*find_digit(char **format)
 {
-	size_t	idx;
-
-	idx = 0;
 	while (!ft_isdigit(**format) && **format)
-		idx++;
-	*format += idx;
+		(*format)++;
 	return (*format);
 }
 
 static char	*pass_digit(char **format)
 {
-	size_t	idx;
-
-	idx = 0;
 	while (ft_isdigit(**format) && **format)
-		idx++;
-	*format += idx;
+		(*format)++;
 	return (*format);
 }

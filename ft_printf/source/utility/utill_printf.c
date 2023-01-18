@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 22:06:50 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/14 15:24:01 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/19 05:30:54 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,37 @@
 // Find out the reason of TIMEOUT with the type d, i, x and X
 // Some adjustment for flag 'space' and 'plus'
 
+#include <stddef.h>
 #include <stdlib.h>
 #include <unistd.h>
 
 #include "libftprintf.h"
 
+static size_t	get_len(const char *str);
 static int		write_format(const char **str, va_list *ptr);
-static size_t	get_len_format(const char *str);
-static short	valid_format(const char *str);
 
 int	ft_printf(const char *str, ...)
 {
 	va_list	ptr;
+	size_t	len_str;
 	int		len;
 
+	len = 0;
 	va_start(ptr, str);
-	apply_len(valid_format(str), &len, 1);
+	apply_len(valid_format(str), &len, 0);
 	while (*str && len != ERROR)
 	{
 		if (*str == '%')
 		{
-			apply_len(write_format(&str, &ptr), &len, 0);
-			apply_len(valid_format(str), &len, 1);
+			apply_len(write_format(&str, &ptr), &len, -1);
+			apply_len(valid_format(str), &len, 0);
 		}
 		else
-			apply_len(write(1, str, 1), &len, 0);
-		str++;
+		{
+			len_str = get_len(str);
+			apply_len(write(1, str, len_str), &len, -1);
+			str += len_str;
+		}
 	}
 	va_end(ptr);
 	return (len);
@@ -47,37 +52,17 @@ int	ft_printf(const char *str, ...)
 
 void	apply_len(int len_in, int *len_out, short flag)
 {
-	if (flag == 0)
-		*len_out = (*len_out + len_in) * (len_in != ERROR) - (len_in == ERROR);
-	else
-		*len_out *= (len_in != FALSE) - (len_in == FALSE);
+	*len_out = (*len_out + len_in * (flag == ERROR))
+		* (len_in != flag)
+		- (len_in == flag);
+	// printf("flag --- [%d]\n", flag);
+	// if (flag == -1)
+	// 	*len_out = (*len_out + len_in) * (len_in != ERROR) - (len_in == ERROR);
+	// else
+	// 	*len_out = *len_out * (len_in != FALSE) - (len_in == FALSE);
 }
 
-static int	write_format(const char **str, va_list *ptr)
-{
-	t_list	*list_f;
-	char	*str_f;
-	size_t	len_f;	
-	int		len;
-
-	len = ERROR;
-	if (init_list(&list_f))
-	{
-		len_f = get_len_format(*str);
-		str_f = ft_substr(*str, 1, len_f);
-		if (str_f)
-		{
-			if (get_conversion(str_f, list_f, ptr))
-				len = write_list(list_f, get_type_str(str_f));
-			free(str_f);
-		}
-		ft_lstclear(&list_f, &free_content);
-		*str += len_f;
-	}
-	return (len);
-}
-
-static size_t	get_len_format(const char *str)
+size_t	get_len_format(const char *str)
 {
 	size_t	idx;
 
@@ -85,4 +70,38 @@ static size_t	get_len_format(const char *str)
 	while (get_type_char(str[idx]) == -1)
 		idx++;
 	return (idx);
+}
+
+static size_t	get_len(const char *str)
+{
+	size_t	idx;
+
+	idx = 0;
+	while (str[idx] != '%' && str[idx])
+		idx++;
+	return (idx);
+}
+
+static int	write_format(const char **str, va_list *ptr)
+{
+	t_list	*list_fm;
+	char	*str_fm;
+	size_t	len_fm;	
+	int		len;
+
+	len = ERROR;
+	if (init_list(&list_fm))
+	{
+		len_fm = get_len_format(*str);
+		str_fm = ft_substr(*str, 1, len_fm);
+		if (str_fm)
+		{
+			if (get_conversion(str_fm, list_fm, ptr))
+				len = write_list(list_fm, get_type_str(str_fm));
+			free(str_fm);
+		}
+		ft_lstclear(&list_fm, &free_content);
+		*str += len_fm + 1;
+	}
+	return (len);
 }

@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 13:07:57 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/14 15:23:33 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/19 05:26:35 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	write_list(t_list *head, short type)
 				len_content = 1;
 			else
 				len_content = ft_strlen(head->content);
-			apply_len(write(1, head->content, len_content), &len, 0);
+			apply_len(write(1, head->content, len_content), &len, -1);
 		}
 		head = head->next;
 	}

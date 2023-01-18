@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 00:55:30 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/14 15:23:11 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/16 03:15:51 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 
 int		ft_printf(const char *str, ...);
 void	apply_len(int len_in, int *len_out, short flag);
+size_t	get_len_format(const char *str);
 
 short	valid_format(const char *str);
 
