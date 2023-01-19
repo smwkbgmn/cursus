@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 22:06:50 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/19 05:30:54 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/19 05:34:47 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,11 @@ int	ft_printf(const char *str, ...)
 	return (len);
 }
 
-void	apply_len(int len_in, int *len_out, short flag)
+void	apply_len(int in, int *out, short flag)
 {
-	*len_out = (*len_out + len_in * (flag == ERROR))
-		* (len_in != flag)
-		- (len_in == flag);
-	// printf("flag --- [%d]\n", flag);
-	// if (flag == -1)
-	// 	*len_out = (*len_out + len_in) * (len_in != ERROR) - (len_in == ERROR);
-	// else
-	// 	*len_out = *len_out * (len_in != FALSE) - (len_in == FALSE);
+	*out = (*out + in * (flag == ERROR))
+		* (in != flag)
+		- (in == flag);
 }
 
 size_t	get_len_format(const char *str)

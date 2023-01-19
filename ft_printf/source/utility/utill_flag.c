@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 17:35:12 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/12 18:57:27 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/19 16:48:33 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,20 +49,20 @@ short	get_flag(char c)
 size_t	pass_flag(char *format, short flag)
 {
 	size_t	idx;
-	char	c;
+	short	flag_c;
 
 	idx = 0;
 	while (format[idx + 1])
 	{
-		c = format[idx];
+		flag_c = get_flag(format[idx]);
 		if (flag == 4 || flag == 6)
 		{
-			if (get_flag(c) == 6)
+			if (flag_c == 6)
 				break ;
 		}
 		else
 		{
-			if (ft_isdigit(c) || (get_flag(c) != flag && get_flag(c) > 2))
+			if (ft_isdigit(format[idx]) || (flag_c != flag && flag_c > 2))
 				break ;
 		}
 		idx++;

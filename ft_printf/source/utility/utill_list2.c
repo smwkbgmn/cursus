@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 13:07:57 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/16 03:27:52 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/19 17:02:07 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,27 +98,47 @@ static short	*get_switchs(char *format)
 
 static short	check_format(char *format, short flag)
 {
-	while (*format)
+	if (flag == 4)
 	{
-		if (flag == 4)
-		{
-			if (!(get_flag(*format) < 3))
-				break ;
-		}
-		else if (flag == 6)
-		{
-			if (!(get_flag(*format) < 3 || *format == '0'))
-				break ;
-		}
-		else
-		{
-			if (get_flag(*format) == flag)
-				break ;
-		}
-		format++;
+		while (get_flag(*format) < 3 && *format)
+			format++;
 	}
-	if (get_flag(*format) == flag)
-		return (TRUE);
+	else if (flag == 6)
+	{
+		while ((get_flag(*format) < 3 || *format == '0') && *format)
+			format++;
+	}
 	else
-		return (FALSE);
+	{
+		while (get_flag(*format) != flag && *format)
+			format++;
+	}
+	return (get_flag(*format) == flag);
 }
+
+// static short	check_format(char *format, short flag)
+// {
+// 	while (*format)
+// 	{
+// 		if (flag == 4)
+// 		{
+// 			if (!(get_flag(*format) < 3))
+// 				break ;
+// 		}
+// 		else if (flag == 6)
+// 		{
+// 			if (!(get_flag(*format) < 3 || *format == '0'))
+// 				break ;
+// 		}
+// 		else
+// 		{
+// 			if (get_flag(*format) == flag)
+// 				break ;
+// 		}
+// 		format++;
+// 	}
+// 	if (get_flag(*format) == flag)
+// 		return (TRUE);
+// 	else
+// 		return (FALSE);
+// }
