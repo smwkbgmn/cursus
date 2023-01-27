@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   type_c.c                                           :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/02 17:09:29 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/27 13:39:37 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/11/15 20:03:57 by donghyu2          #+#    #+#             */
+/*   Updated: 2022/12/18 19:06:31 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "libft.h"
 
-short	type_c(va_list *ptr, t_list	*head)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	char	*content;
+	size_t	len_src;
 
-	content = ft_calloc(2, 1);
-	if (content)
-	{
-		content[0] = va_arg(*ptr, int);
-		ft_lstidx(head, 3)->content = content;
-		return (TRUE);
-	}
-	else
-		return (FALSE);
+	len_src = ft_strlen(src);
+	if (dstsize == 0)
+		return (len_src);
+	while (dstsize-- > 1 && *src)
+		*dst++ = *src++;
+	*dst = 0;
+	return (len_src);
 }

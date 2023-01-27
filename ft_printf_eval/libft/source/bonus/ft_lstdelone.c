@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   type_c.c                                           :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/02 17:09:29 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/27 13:39:37 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/11/22 15:02:00 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/01/04 12:38:46 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "libft.h"
+#include <stdlib.h>
 
-short	type_c(va_list *ptr, t_list	*head)
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	char	*content;
-
-	content = ft_calloc(2, 1);
-	if (content)
+	if (del)
 	{
-		content[0] = va_arg(*ptr, int);
-		ft_lstidx(head, 3)->content = content;
-		return (TRUE);
+		del(lst->content);
+		free(lst);
 	}
-	else
-		return (FALSE);
 }

@@ -1,28 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   type_c.c                                           :+:      :+:    :+:   */
+/*   type_p.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/02 17:09:29 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/27 13:39:37 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/11/25 00:54:11 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/01/08 16:34:56 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+
 #include "libftprintf.h"
 
-short	type_c(va_list *ptr, t_list	*head)
+short	type_p(va_list *ptr, t_list *head)
 {
-	char	*content;
+	unsigned long	addr;
+	char			*str_addr;
+	char			*content;
 
-	content = ft_calloc(2, 1);
-	if (content)
+	addr = (unsigned long)va_arg(*ptr, void *);
+	str_addr = ft_itoa_ulong_base(addr, "0123456789abcdef");
+	if (str_addr)
 	{
-		content[0] = va_arg(*ptr, int);
-		ft_lstidx(head, 3)->content = content;
-		return (TRUE);
+		content = ft_strjoin("0x", str_addr);
+		free(str_addr);
+		if (content)
+		{
+			ft_lstidx(head, 3)->content = content;
+			return (TRUE);
+		}
 	}
-	else
-		return (FALSE);
+	return (FALSE);
 }

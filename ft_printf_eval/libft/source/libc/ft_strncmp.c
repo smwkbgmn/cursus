@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   type_c.c                                           :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/02 17:09:29 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/27 13:39:37 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/11/16 23:43:38 by donghyu2          #+#    #+#             */
+/*   Updated: 2022/12/20 01:24:56 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "libft.h"
 
-short	type_c(va_list *ptr, t_list	*head)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	char	*content;
+	const unsigned char	*s1_cast;
+	const unsigned char	*s2_cast;
+	size_t				idx;
 
-	content = ft_calloc(2, 1);
-	if (content)
+	if (n > 0)
 	{
-		content[0] = va_arg(*ptr, int);
-		ft_lstidx(head, 3)->content = content;
-		return (TRUE);
+		s1_cast = (const unsigned char *)s1;
+		s2_cast = (const unsigned char *)s2;
+		idx = 0;
+		while (idx < n)
+		{
+			if (s1_cast[idx] != s2_cast[idx] || !(s1_cast[idx]))
+				return (s1_cast[idx] - s2_cast[idx]);
+			idx++;
+		}
 	}
-	else
-		return (FALSE);
+	return (0);
 }

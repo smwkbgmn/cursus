@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   libftprintf.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 00:55:30 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/19 05:32:12 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/27 15:17:26 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#ifndef LIBFTPRINTF_H
+# define LIBFTPRINTF_H
 
 # include "libft.h"
 # include <stdarg.h>
-
-# include <stdio.h>
 
 # define TRUE 1
 # define FALSE 0
@@ -25,8 +23,6 @@
 int		ft_printf(const char *str, ...);
 void	apply_len(int len_in, int *len_out, short flag);
 size_t	get_len_format(const char *str);
-
-short	valid_format(const char *str);
 
 short	init_list(t_list **head);
 int		write_list(t_list *head, short type);

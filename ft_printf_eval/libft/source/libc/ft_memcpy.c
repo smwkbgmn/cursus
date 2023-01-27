@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   type_c.c                                           :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/02 17:09:29 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/27 13:39:37 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/11/11 15:41:10 by donghyu2          #+#    #+#             */
+/*   Updated: 2022/12/19 23:02:02 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "libft.h"
 
-short	type_c(va_list *ptr, t_list	*head)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	char	*content;
+	char		*dst_c;
+	const char	*src_c;
 
-	content = ft_calloc(2, 1);
-	if (content)
+	if (n > 0 && dst != src)
 	{
-		content[0] = va_arg(*ptr, int);
-		ft_lstidx(head, 3)->content = content;
-		return (TRUE);
+		dst_c = (char *)dst;
+		src_c = (char *)src;
+		while (n > 0)
+		{
+			*dst_c++ = *src_c++;
+			n--;
+		}
 	}
-	else
-		return (FALSE);
+	return (dst);
 }

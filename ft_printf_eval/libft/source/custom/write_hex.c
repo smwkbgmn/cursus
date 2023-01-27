@@ -1,28 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   type_c.c                                           :+:      :+:    :+:   */
+/*   write_hex.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/02 17:09:29 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/27 13:39:37 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/11/29 01:29:57 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/01/04 12:40:19 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "libft.h"
+#include <unistd.h>
 
-short	type_c(va_list *ptr, t_list	*head)
+static void	write_digit(short digit, short flag);
+
+void	write_hex(unsigned int num, short flag)
 {
-	char	*content;
-
-	content = ft_calloc(2, 1);
-	if (content)
-	{
-		content[0] = va_arg(*ptr, int);
-		ft_lstidx(head, 3)->content = content;
-		return (TRUE);
-	}
+	if (num < 16)
+		write_digit(num & 0xf, flag);
 	else
-		return (FALSE);
+	{
+		write_hex(num >> 4, flag);
+		write_digit(num & 0xf, flag);
+	}
+}
+
+static void	write_digit(short digit, short flag)
+{
+	if (flag == 0)
+		write(1, &"0123456789abcdef"[digit], 1);
+	else
+		write(1, &"0123456789ABCDEF"[digit], 1);
 }

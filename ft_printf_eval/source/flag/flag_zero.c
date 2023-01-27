@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flag_dash.c                                        :+:      :+:    :+:   */
+/*   flag_zero.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/07 16:23:07 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/27 15:18:19 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/12/07 16:23:48 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/01/11 16:56:42 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 static int		get_width(char *format, t_list *head);
 static size_t	get_len_full_str(t_list *head, short type);
 
-short	flag_dash(char *format, t_list *head)
+short	flag_zero(char *format, t_list *head)
 {
-	char	*spaces;
+	char	*zeros;
 	int		width;
 
 	width = get_width(format, head);
 	if (width > 0)
 	{
-		spaces = get_str_fill_char(width, ' ');
-		if (spaces)
-			ft_lstidx(head, 4)->content = spaces;
+		zeros = get_str_fill_char(width, '0');
+		if (zeros)
+			ft_lstidx(head, 2)->content = zeros;
 		else
 			return (FALSE);
 	}
@@ -34,7 +34,8 @@ short	flag_dash(char *format, t_list *head)
 
 static int	get_width(char *format, t_list *head)
 {
-	format += pass_flag(format, 5);
+	format += find_flag(format, '0');
+	format += pass_flag(format, 4);
 	return (ft_atoi(format) - get_len_full_str(head, get_type_str(format)));
 }
 

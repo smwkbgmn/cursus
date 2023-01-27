@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   type_c.c                                           :+:      :+:    :+:   */
+/*   ft_lstidx.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/02 17:09:29 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/27 13:39:37 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/12/31 18:14:41 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/01/08 23:06:10 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "libft.h"
 
-short	type_c(va_list *ptr, t_list	*head)
+t_list	*ft_lstidx(t_list *head, int idx)
 {
-	char	*content;
+	short	size;
 
-	content = ft_calloc(2, 1);
-	if (content)
+	size = ft_lstsize(head);
+	if (-1 * size < idx && idx < size)
 	{
-		content[0] = va_arg(*ptr, int);
-		ft_lstidx(head, 3)->content = content;
-		return (TRUE);
+		idx += size * (idx < 0);
+		while (idx-- > 0)
+			head = head->next;
 	}
 	else
-		return (FALSE);
+		head = 0;
+	return (head);
 }

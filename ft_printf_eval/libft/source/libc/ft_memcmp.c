@@ -1,28 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   type_c.c                                           :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/02 17:09:29 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/27 13:39:37 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/11/15 15:53:50 by donghyu2          #+#    #+#             */
+/*   Updated: 2022/12/20 00:15:38 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "libft.h"
 
-short	type_c(va_list *ptr, t_list	*head)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	char	*content;
+	const unsigned char	*s1_c;
+	const unsigned char	*s2_c;
 
-	content = ft_calloc(2, 1);
-	if (content)
+	if (n > 0)
 	{
-		content[0] = va_arg(*ptr, int);
-		ft_lstidx(head, 3)->content = content;
-		return (TRUE);
+		s1_c = (const unsigned char *)s1;
+		s2_c = (const unsigned char *)s2;
+		while (n > 0)
+		{
+			if (*s1_c != *s2_c)
+				return (*s1_c - *s2_c);
+			else
+			{
+				s1_c++;
+				s2_c++;
+			}
+			n--;
+		}
 	}
-	else
-		return (FALSE);
+	return (0);
 }

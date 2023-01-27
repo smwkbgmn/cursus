@@ -1,28 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   type_c.c                                           :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/02 17:09:29 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/27 13:39:37 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/11/23 15:13:07 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/01/04 12:39:21 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "libft.h"
+#include <stdlib.h>
 
-short	type_c(va_list *ptr, t_list	*head)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*content;
+	char	*result;
+	size_t	len_s;
+	size_t	len_r;
 
-	content = ft_calloc(2, 1);
-	if (content)
+	len_s = ft_strlen(s);
+	if (start < len_s && len > 0)
 	{
-		content[0] = va_arg(*ptr, int);
-		ft_lstidx(head, 3)->content = content;
-		return (TRUE);
+		if (len_s - start < len)
+			len_r = len_s - start;
+		else
+			len_r = len;
+		result = malloc(len_r + 1);
+		if (result)
+			ft_strlcpy(result, s + start, len_r + 1);
 	}
 	else
-		return (FALSE);
+		result = ft_calloc(1, 1);
+	return (result);
 }

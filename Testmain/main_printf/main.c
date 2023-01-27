@@ -11,7 +11,10 @@ int	main(void)
 	// int a = printf("%.2147483660d", 0);
 	// printf("\n%d\n", a);
 
-	// printf("[%d] ", printf("%.2147483646d", 0));
+	// printf("[%d]\n", printf("hi %d, there %.2147483635d, hello", 0, 0));
+	// printf("[%d]\n", printf("%.2147483648d", 0));
+	printf("hi % s", "hithere");
+	// printf("[%d]\n", atoi("2147483647") + 18);
 	// printf("\n");
 	// printf("[%d] ", printf("%.2147483647d", 0));
 	// printf("\n");
@@ -24,57 +27,6 @@ int	main(void)
 
 	// ft_printf("[%d]", ft_printf("%.5d", 123));
 	// ft_printf("[%d]\n", 5);
-
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
-	ft_printf("%-+1.d, %-+1.d", INT_MIN, INT_MAX);
 
 	// printf("\n");
 

@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   type_c.c                                           :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/02 17:09:29 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/27 13:39:37 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/11/16 22:25:20 by donghyu2          #+#    #+#             */
+/*   Updated: 2022/12/20 01:16:27 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "libft.h"
 
-short	type_c(va_list *ptr, t_list	*head)
+char	*ft_strrchr(const char *s, int c)
 {
-	char	*content;
+	size_t	idx;
 
-	content = ft_calloc(2, 1);
-	if (content)
-	{
-		content[0] = va_arg(*ptr, int);
-		ft_lstidx(head, 3)->content = content;
-		return (TRUE);
-	}
+	idx = ft_strlen(s);
+	while (s[idx] != (char)c && idx > 0)
+		idx--;
+	if (s[idx] == (char)c)
+		return ((char *)(s + idx));
 	else
-		return (FALSE);
+		return (0);
 }

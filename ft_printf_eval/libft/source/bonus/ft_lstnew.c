@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   type_c.c                                           :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/02 17:09:29 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/27 13:39:37 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/11/21 13:31:14 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/01/04 12:38:29 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "libft.h"
+#include <stdlib.h>
 
-short	type_c(va_list *ptr, t_list	*head)
+t_list	*ft_lstnew(void *content)
 {
-	char	*content;
+	t_list	*new;
 
-	content = ft_calloc(2, 1);
-	if (content)
+	new = malloc(sizeof(t_list));
+	if (new)
 	{
-		content[0] = va_arg(*ptr, int);
-		ft_lstidx(head, 3)->content = content;
-		return (TRUE);
+		new->content = content;
+		new->next = 0;
 	}
-	else
-		return (FALSE);
+	return (new);
 }

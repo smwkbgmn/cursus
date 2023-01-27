@@ -1,28 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   type_c.c                                           :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/02 17:09:29 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/27 13:39:37 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/11/23 15:11:53 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/01/04 12:39:44 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "libft.h"
+#include <unistd.h>
 
-short	type_c(va_list *ptr, t_list	*head)
+void	ft_putnbr_fd(int n, int fd)
 {
-	char	*content;
-
-	content = ft_calloc(2, 1);
-	if (content)
+	if (fd >= 0)
 	{
-		content[0] = va_arg(*ptr, int);
-		ft_lstidx(head, 3)->content = content;
-		return (TRUE);
-	}
-	else
-		return (FALSE);
+		if (n == -2147483648)
+			write(fd, "-2147483648", 11);
+		else if (n < 0)
+		{
+			write(fd, "-", 1);
+			n *= -1;
+			ft_putnbr_fd(n, fd);
+		}
+		else if (n < 10)
+			write(fd, &"0123456789"[n], 1);
+		else
+		{
+			ft_putnbr_fd(n / 10, fd);
+			write(fd, &"0123456789"[n % 10], 1);
+		}
+	}	
 }

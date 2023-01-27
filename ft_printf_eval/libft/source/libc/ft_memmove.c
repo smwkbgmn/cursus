@@ -1,28 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   type_c.c                                           :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/02 17:09:29 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/27 13:39:37 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/11/15 15:51:56 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/01/25 02:32:07 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "libft.h"
 
-short	type_c(va_list *ptr, t_list	*head)
+void	*ft_memmove(void *dst, const void *src, size_t n)
 {
-	char	*content;
+	char	*dst_c;
+	char	*src_c;
 
-	content = ft_calloc(2, 1);
-	if (content)
+	if (n > 0 && dst != src)
 	{
-		content[0] = va_arg(*ptr, int);
-		ft_lstidx(head, 3)->content = content;
-		return (TRUE);
+		dst_c = (char *)dst;
+		src_c = (char *)src;
+		if (dst < src)
+			ft_memcpy(dst, src, n);
+		else
+		{
+			while (n > 0)
+			{
+				n--;
+				*(dst_c + n) = *(src_c + n);
+			}
+		}
 	}
-	else
-		return (FALSE);
+	return (dst);
 }
