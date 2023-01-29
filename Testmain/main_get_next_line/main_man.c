@@ -9,6 +9,7 @@ int	main(void)
 
 	fd = open("test.txt", O_RDONLY);
 	// printf("fd --- [%d]\n", fd);
+	printf("BUFFER_SIZE --- [%d]\n\n", BUFFER_SIZE);
 
 	while (1)
 	{
@@ -22,7 +23,7 @@ int	main(void)
 	
 	close(fd);
 
-	// system("leaks gnl_man.out");
+	system("leaks gnl_man.out");
 
 	return (0);
 }

@@ -45,7 +45,7 @@ re			:
 			make fclean
 			make all
 
-.PHONY		: all clean fclean re bonus
+.PHONY		: clean fclean re bonus
 
 ################ FOR TEST ###############
 
@@ -57,4 +57,4 @@ bns			: $(NAME_BNS)
 			@./gnl_man.out
 			@rm gnl_man.out
 
-.PHONY		: man bns
+.PHONY		: bns

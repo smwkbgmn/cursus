@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:01:02 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/29 22:09:46 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/30 03:08:34 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@ t_list	*init_list(int fd);
 size_t	get_len_line(char *ptr);
 size_t	ft_strlen(char *s);
 short	is_there_nl(char *str);
+size_t	ft_strlcpy(char *dst, char *src, size_t dstsize);
 
 #endif
