@@ -22,7 +22,7 @@ int	main(void)
 	
 	close(fd);
 
-	system("leaks gnl_man.out");
+	// system("leaks gnl_man.out");
 
 	return (0);
 }

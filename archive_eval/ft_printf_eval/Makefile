@@ -40,6 +40,8 @@ DIR_LIBFT	= libft
 
 all			: $(NAME)
 
+bonus		: $(NAME)
+
 $(NAME)		: $(LIBFT) $(NAME)($(OBJS))
 
 $(LIBFT)	:
@@ -49,7 +51,6 @@ $(LIBFT)	:
 $(NAME)(%)	: %
 			@ar rc $@ $<
 
-bonus		: $(NAME)
 		
 %.o			: %.c
 			@$(CC) $(FLAG) -c $< -o $@

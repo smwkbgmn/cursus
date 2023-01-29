@@ -3,44 +3,47 @@ NAME		= libftprintf.a
 CC			= cc
 FLAG		= -Wall -Wextra -Werror -I include -I $(DIR_LIBFT)/include
 
-SRCS		= $(wildcard $(DIR_UTIL)/*.c) $(wildcard $(DIR_TYPE)/*.c) $(wildcard $(DIR_FLAG)/*.c)
-OBJS		= $(SRCS:.c=.o)
-LIBFT		= $(DIR_LIBFT)/libft.a
-
 DIR_UTIL	= source/utility
 DIR_TYPE	= source/type
 DIR_FLAG	= source/flag
 DIR_LIBFT	= ../libft
+
+SRCS		= \
+$(wildcard $(DIR_UTIL)/*.c) \
+$(wildcard $(DIR_TYPE)/*.c) \
+$(wildcard $(DIR_FLAG)/*.c)
+
+OBJS		= $(SRCS:.c=.o)
+
+LIBFT		= $(DIR_LIBFT)/libft.a
 
 all			: $(NAME)
 
 $(NAME)		: $(LIBFT) $(NAME)($(OBJS))
 
 $(LIBFT)	:
-			$(MAKE) -C $(DIR_LIBFT) all
+			@$(MAKE) -C $(DIR_LIBFT) all
 			@cp $(LIBFT) $(NAME)
 
 $(NAME)(%)	: %
 			@ar rc $@ $<
-
-bonus		: $(NAME) $(NAME)($(OBJS))
 		
 %.o			: %.c
 			@$(CC) $(FLAG) -c $< -o $@
 
 clean		: 
-			$(RM) $(OBJS)
-			$(MAKE) -C $(DIR_LIBFT) clean
+			@$(RM) $(OBJS)
+			@$(MAKE) -C $(DIR_LIBFT) clean
 
 fclean		: 
-			make clean
-			$(RM) $(LIBFT) $(NAME)
+			@make clean
+			@$(RM) $(LIBFT) $(NAME)
 
 re			: 
-			make fclean
-			make all
+			@make fclean
+			@make all
 
-.PHONY		: all clean fclean re bonus
+.PHONY		: all clean fclean re
 
 
 
