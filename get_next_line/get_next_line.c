@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 16:15:11 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/29 21:53:37 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/29 22:05:01 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ char	*get_next_line(int fd)
 	static t_list	*node;
 	char			*line;
 
+	printf("BUFFER_SIZE --- [%d]\n", BUFFER_SIZE);
 	node = init_list(fd);
 	line = read_line(node, fd);
 	return (line);
@@ -57,11 +58,16 @@ char	*read_line(t_list *node, int fd)
 			}
 		}
 	}
-	len_line = get_len_line(node->ptr);
-	line = ft_substr(node->ptr, 0, len_line);
-	node->ptr += len_line + 1;
-	if (!(*node->ptr))
-		free(node->str);
+	if (node->ptr)
+	{
+		len_line = get_len_line(node->ptr);
+		line = ft_substr(node->ptr, 0, len_line);
+		node->ptr += len_line + 1;
+		if (!(*node->ptr))
+			free(node->str);
+	}
+	else
+		line = 0;
 	return (line);
 }
 
@@ -73,12 +79,19 @@ char	*get_str(int fd, size_t len_total)
 
 	buf = malloc(BUFFER_SIZE + 1);
 	len = read(fd, buf, BUFFER_SIZE);
-	if (len > 0 && !is_there_nl(buf))
-		str = get_str(fd, len_total + len);
-	else if (len == 0 && len_total == 0)
+	if (len == 0 && len_total == 0)
+	{
+		printf("case null [%zu]\n", len_total);
 		str = 0;
+	}
+	else if (len > 0 && !is_there_nl(buf))
+	{
+		printf("case len > 0 [%zu]\n", len_total);
+		str = get_str(fd, len_total + len);
+	}
 	else
 	{
+		printf("case len == 0 or meet '\\n' [%zu]\n", len_total);
 		str = malloc(len_total + len + 1);
 		str[len_total + len] = 0;
 	}

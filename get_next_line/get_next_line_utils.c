@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 19:07:17 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/29 21:42:50 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/29 22:03:19 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,8 @@ size_t	get_len_line(char *ptr)
 	size_t	idx;
 
 	idx = 0;
-	if (ptr)
-	{
-		while (ptr[idx] != '\n' && ptr[idx])
-			idx++;
-	}
+	while (ptr[idx] != '\n' && ptr[idx])
+		idx++;
 	return (idx);
 }
 

@@ -8,7 +8,7 @@ int	main(void)
 	char	*line;
 
 	fd = open("test.txt", O_RDONLY);
-	printf("fd --- [%d]\n", fd);
+	// printf("fd --- [%d]\n", fd);
 
 	while (1)
 	{
