@@ -6,53 +6,112 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 19:07:17 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/25 02:06:57 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/30 03:08:37 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
 #include "get_next_line.h"
 
-static t_list	*lstlast(t_list *head);
-
-t_list	*init_node(t_list **head, int fd)
+char	*ft_strjoin(char *s1, char *s2)
 {
-	t_list	*node;
+	char	*result;
+	size_t	len_s1;
+	size_t	len_s2;
 
-	node = find_node(*head, fd);
-	if (!node)
+	len_s1 = ft_strlen(s1);
+	len_s2 = ft_strlen(s2);
+	result = malloc(len_s1 + len_s2 + 1);
+	if (result)
 	{
-		node = malloc(sizeof(t_list));
-		if (node)
-		{
-			node->next = 0;
-			node->fd = fd;
-			node->str = 0;
-			node->ptr = 0;
-			if (*head)
-				lstlast(*head)->next = node;
-			else
-				*head = node;
-		}
+		ft_memcpy(result, s1, len_s1);
+		ft_memcpy(result + len_s1, s2, len_s2);
+		result[len_s1 + len_s2] = 0;
 	}
-	return (node);
+	return (result);
 }
 
-t_list	*find_node(t_list *head, int fd)
+char	*ft_substr(char *s, unsigned int start, size_t len)
 {
-	while (head)
+	char	*result;
+	size_t	len_s;
+	size_t	len_r;
+
+	len_s = ft_strlen(s);
+	if (start < len_s && len > 0)
 	{
-		if (head->fd == fd)
-			return (head);
-		head = head->next;
+		if (len_s - start < len)
+			len_r = len_s - start;
+		else
+			len_r = len;
+		result = malloc(len_r + 1);
+		if (result)
+			ft_strlcpy(result, s + start, len_r + 1);
 	}
-	return (FALSE);
+	else
+		result = 0;
+	return (result);
 }
 
-static t_list	*lstlast(t_list *head)
+void	ft_memcpy(char *dst, char *src, size_t n)
 {
-	while (head->next)
-		head = head->next;
-	return (head);
+	while (n > 0)
+	{
+		*dst++ = *src++;
+		n--;
+	}
+}
+
+size_t	ft_strlcpy(char *dst, char *src, size_t dstsize)
+{
+	size_t	len_src;
+
+	len_src = ft_strlen(src);
+	if (dstsize == 0)
+		return (len_src);
+	while (dstsize-- > 1 && *src)
+		*dst++ = *src++;
+	*dst = 0;
+	return (len_src);
+}
+
+t_list	*init_list(int fd)
+{
+	t_list	*new;
+
+	new = malloc(sizeof(t_list));
+	if (new)
+	{
+		new->next = 0;
+		new->fd = fd;
+		new->str = 0;
+		new->ptr = 0;
+	}
+	return (new);
+}
+
+size_t	get_len_line(char *ptr)
+{
+	size_t	idx;
+
+	idx = 0;
+	while (ptr[idx] != '\n' && ptr[idx])
+		idx++;
+	return (idx + (ptr[idx] == '\n'));
+}
+
+size_t	ft_strlen(char *s)
+{
+	size_t	idx;
+
+	idx = 0;
+	while (s[idx])
+		idx++;
+	return (idx);
+}
+
+short	is_there_nl(char *str)
+{
+	while (*str != '\n' && *str)
+		str++;
+	return (*str == '\n');
 }

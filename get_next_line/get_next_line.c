@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 16:15:11 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/30 03:19:14 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/31 04:43:22 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,45 +37,38 @@ char	*get_next_line(int fd)
 
 char	*read_line(t_list *node, int fd)
 {
-	char	*str;
+	char	*new;
 	char	*line;
-	size_t	len_line;
+	size_t	len_ptr;
+	size_t	len_new;
 
-	if (!node->str || !is_there_nl(node->ptr))
+	new = NULL;
+	if (!node->ptr || !is_there_nl(node->ptr))
+		new = get_str(fd, 0);
+	printf("new[%s]\n", new);
+	len_ptr = get_len(node->ptr);
+	len_new = get_len(new);
+	if (len_ptr > 0 || len_new > 0)
 	{
-		str = get_str(fd, 0);
-		// printf("[%s]\n", str);
-		if (str)
+		line = malloc(len_ptr + len_new + 1);
+		line[len_ptr + len_new] = 0;
+		if (line)
 		{
-			if (!node->str)
-			{
-				printf("getting fresh str\n");
-				node->str = str;
-				node->ptr = str;
-			}
-			else
-			{
-				node->ptr = ft_strjoin(node->ptr, str);
-				free(node->str);
-				free(str);
-				node->str = node->ptr;
-			}
-			printf("[%s]\n", node->str);
+			ft_strncpy(line, node->ptr, len_ptr);
+			ft_strncpy(line + len_ptr, new, len_new);
 		}
-	}
-	if (node->ptr)
-	{
-		len_line = get_len_line(node->ptr);
-		line = ft_substr(node->ptr, 0, len_line);
-		node->ptr += len_line;
+		if (!node->ptr || !is_there_nl(node->ptr))
+		{
+			set_new_str(node, new);
+			node->ptr += len_new;
+		}
+		else
+			node->ptr += len_ptr;
 		if (*node->ptr == 0)
-		{
-			free(node->str);
-			node->str = NULL;
-		}
+			set_new_str(node, NULL);
 	}
 	else
-		line = 0;
+		line = NULL;
 	return (line);
 }
 
@@ -88,23 +81,16 @@ char	*get_str(int fd, size_t len_total)
 	buf = malloc(BUFFER_SIZE + 1);
 	len = read(fd, buf, BUFFER_SIZE);
 	if (len == 0 && len_total == 0)
-	{
-		// printf("case null [%zu]\n", len_total + len);
-		str = 0;
-	}
+		str = NULL;
 	else if (len > 0 && !is_there_nl(buf))
-	{
-		// printf("case len > 0 [%zu]\n", len_total + len);
 		str = get_str(fd, len_total + len);
-	}
 	else
 	{
-		// printf("case len == 0 or meet '\\n' [%zu]\n", len_total + len);
 		str = malloc(len_total + len + 1);
 		str[len_total + len] = 0;
 	}
 	if (str)
-		ft_memcpy(str + len_total, buf, len);
+		ft_strncpy(str + len_total, buf, len);
 	free(buf);
 	return (str);
 }

@@ -7,7 +7,7 @@ ifdef BUF
 else
 	FLAG		= -Wall -Wextra -Werror
 endif
-
+ 
 SRC_MAN		= \
 get_next_line.c \
 get_next_line_utils.c
@@ -26,7 +26,7 @@ all			: $(NAME_MAN)
 bonus		: $(NAME_BNS)
 
 $(NAME_MAN)	: $(OBJ_MAN)
-			@$(CC) $(FLAG) $(DIR_MAIN)/main_man.c $(OBJ_MAN) -o $(NAME_MAN)
+			$(CC) $(FLAG) $(DIR_MAIN)/main_man.c $(OBJ_MAN) -o $(NAME_MAN)
 
 $(NAME_BNS)	: $(OBJ_BNS)
 			@$(CC) $(FLAG) $(DIR_MAIN)/main_bns.c $(OBJ_BNS) -o $(NAME_BNS)
@@ -45,7 +45,7 @@ re			:
 			make fclean
 			make all
 
-.PHONY		: all clean fclean re bonus
+.PHONY		: clean fclean re bonus
 
 ################ FOR TEST ###############
 
@@ -57,4 +57,4 @@ bns			: $(NAME_BNS)
 			@./gnl_man.out
 			@rm gnl_man.out
 
-.PHONY		: man bns
+.PHONY		: bns
