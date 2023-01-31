@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 16:15:11 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/31 04:43:22 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/01/31 23:39:53 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,55 +20,75 @@
 
 char	*read_line(t_list *node, int fd);
 char	*get_str(int fd, size_t len_total);
-short	is_there_nl(char *str);
+void	adjust(t_list *node, char *new, size_t len_p, size_t len_n);
+void	ft_lstdel(t_list **head, int fd);
 
 char	*get_next_line(int fd)
 {
-	static t_list	*node;
+	static t_list	*head;
+	t_list			*node;
 	char			*line;
 
-	if (!node)
-		node = init_list(fd);
-	line = read_line(node, fd);
-	if (!line)
-		free(node);
+	line = NULL;
+	if (fd >= 0 && BUFFER_SIZE > 0)
+	{
+		node = init_list(&head, fd);
+		if (node)
+		{
+			if (!node->ptr)
+				set_str(node, get_str(fd, 0));
+			line = read_line(node, fd);
+			if (!line)
+				ft_lstdel(&head, fd);
+		}
+	}
 	return (line);
+}
+
+void	ft_lstdel(t_list **head, int fd)
+{
+	t_list	*node;
+	t_list	*node_del;
+
+	node = *head;
+	if (!node->next)
+		free(node);
+	else if (node->fd == fd)
+	{
+		*head = node->next;
+		free(node);
+	}
+	else
+	{
+		while (node->next->fd != fd)
+			node = node->next;
+		node_del = node->next;
+		node->next = node_del->next;
+		free(node_del);
+	}
 }
 
 char	*read_line(t_list *node, int fd)
 {
-	char	*new;
 	char	*line;
-	size_t	len_ptr;
-	size_t	len_new;
+	char	*new;
+	size_t	len_p;
+	size_t	len_n;
 
-	new = NULL;
-	if (!node->ptr || !is_there_nl(node->ptr))
-		new = get_str(fd, 0);
-	printf("new[%s]\n", new);
-	len_ptr = get_len(node->ptr);
-	len_new = get_len(new);
-	if (len_ptr > 0 || len_new > 0)
+	line = NULL;
+	if (node->ptr)
 	{
-		line = malloc(len_ptr + len_new + 1);
-		line[len_ptr + len_new] = 0;
-		if (line)
-		{
-			ft_strncpy(line, node->ptr, len_ptr);
-			ft_strncpy(line + len_ptr, new, len_new);
-		}
-		if (!node->ptr || !is_there_nl(node->ptr))
-		{
-			set_new_str(node, new);
-			node->ptr += len_new;
-		}
+		len_p = get_len(node->ptr);
+		if (!ft_strchr(node->ptr, '\n'))
+			new = get_str(fd, 0);
 		else
-			node->ptr += len_ptr;
-		if (*node->ptr == 0)
-			set_new_str(node, NULL);
+			new = NULL;
+		len_n = get_len(new);
+		line = malloc(len_p + len_n + 1);
+		ft_strncpy(line, node->ptr, len_p);
+		ft_strncpy(line + len_p, new, len_n);
+		adjust(node, new, len_p, len_n);
 	}
-	else
-		line = NULL;
 	return (line);
 }
 
@@ -76,13 +96,13 @@ char	*get_str(int fd, size_t len_total)
 {
 	char	*buf;
 	char	*str;
-	size_t	len;
+	ssize_t	len;
 
 	buf = malloc(BUFFER_SIZE + 1);
 	len = read(fd, buf, BUFFER_SIZE);
-	if (len == 0 && len_total == 0)
+	if ((len == 0 && len_total == 0) || len == ERROR)
 		str = NULL;
-	else if (len > 0 && !is_there_nl(buf))
+	else if (len > 0 && !ft_strchr(buf, '\n'))
 		str = get_str(fd, len_total + len);
 	else
 	{
@@ -93,4 +113,19 @@ char	*get_str(int fd, size_t len_total)
 		ft_strncpy(str + len_total, buf, len);
 	free(buf);
 	return (str);
+}
+
+void	adjust(t_list *node, char *new, size_t len_p, size_t len_n)
+{
+	if (new)
+	{
+		set_str(node, new);
+		node->ptr += len_n;
+	}
+	else
+	{
+		node->ptr += len_p;
+		if (*node->ptr == 0)
+			set_str(node, NULL);
+	}	
 }
