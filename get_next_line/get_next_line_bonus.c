@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 16:15:11 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/31 23:39:49 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/02/02 05:16:33 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,29 +45,6 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-void	ft_lstdel(t_list **head, int fd)
-{
-	t_list	*node;
-	t_list	*node_del;
-
-	node = *head;
-	if (!node->next)
-		free(node);
-	else if (node->fd == fd)
-	{
-		*head = node->next;
-		free(node);
-	}
-	else
-	{
-		while (node->next->fd != fd)
-			node = node->next;
-		node_del = node->next;
-		node->next = node_del->next;
-		free(node_del);
-	}
-}
-
 char	*read_line(t_list *node, int fd)
 {
 	char	*line;
@@ -78,15 +55,19 @@ char	*read_line(t_list *node, int fd)
 	line = NULL;
 	if (node->ptr)
 	{
+		// printf("you may not enter here\n");
 		len_p = get_len(node->ptr);
 		if (!ft_strchr(node->ptr, '\n'))
 			new = get_str(fd, 0);
 		else
 			new = NULL;
 		len_n = get_len(new);
-		line = malloc(len_p + len_n + 1);
-		ft_strncpy(line, node->ptr, len_p);
-		ft_strncpy(line + len_p, new, len_n);
+		if (len_p > 0 || len_n > 0)
+		{
+			line = malloc(len_p + len_n + 1);
+			ft_strncpy(line, node->ptr, len_p);
+			ft_strncpy(line + len_p, new, len_n);
+		}
 		adjust(node, new, len_p, len_n);
 	}
 	return (line);
@@ -128,4 +109,25 @@ void	adjust(t_list *node, char *new, size_t len_p, size_t len_n)
 		if (*node->ptr == 0)
 			set_str(node, NULL);
 	}	
+}
+
+void	ft_lstdel(t_list **head, int fd)
+{
+	t_list	*node;
+	t_list	*node_del;
+
+	node = *head;
+	if (node->fd == fd)
+	{
+		*head = node->next;
+		free(node);
+	}
+	else
+	{
+		while (node->next->fd != fd)
+			node = node->next;
+		node_del = node->next;
+		node->next = node_del->next;
+		free(node_del);
+	}
 }

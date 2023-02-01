@@ -6,9 +6,9 @@ int	main(void)
 
 	/////////////////////////////////////////////////////
 
-	int fd = open("test1.txt", O_RDONLY);
+	// int fd = open("test1.txt", O_RDONLY);
 
-	char *line;
+	// char *line;
 
 	// while (1)
 	// {
@@ -21,25 +21,35 @@ int	main(void)
 	// 		break;
 	// }
 
-	while (1)
-	{
-		line = get_next_line(fd);
-		printf("%s", line);
-		if (line)
-			free(line);
-		else
-			break;
-	}
+	// while (1)
+	// {
+	// 	line = get_next_line(fd);
+	// 	printf("%s", line);
+	// 	if (line)
+	// 		free(line);
+	// 	else
+	// 		break;
+	// }
 
-	close(fd);
+	// close(fd);
+
+	// char buf[10];
+
+	// printf("return of read --- [%zd]\n", read(fd, buf, 10));
+	// printf("%s\n", buf);
+
+	// line = get_next_line(fd);
+	// printf("%s", line);
+	// if (line)
+	// 	free(line);
 
 	/////////////////////////////////////////////////////
 
-	// int fd1 = open("test1.txt", O_RDONLY);
-	// int fd2 = open("test2.txt", O_RDONLY);
-	// int fd3 = open("test3.txt", O_RDONLY);
+	int fd1 = open("test1.txt", O_RDONLY);
+	int fd2 = open("test2.txt", O_RDONLY);
+	int fd3 = open("test3.txt", O_RDONLY);
 
-	// char *line;
+	char *line;
 
 	// ver 1.0
 
@@ -66,35 +76,37 @@ int	main(void)
 
 	// ver 2.0
 
-	// int cnt = 0;
+	int cnt = 0;
 
-	// while (cnt < 10)
-	// {
-	// 	line = get_next_line(fd1);
-	// 	printf("%s", line);
-	// 	if (line)
-	// 		free(line);
+	while (cnt < 10)
+	{
+		printf("\ncycle [%d]\n", cnt + 1);
 
-	// 	line = get_next_line(fd2);
-	// 	printf("%s", line);
-	// 	if (line)
-	// 		free(line);
+		line = get_next_line(fd1);
+		printf("%s", line);
+		if (line)
+			free(line);
 
-	// 	line = get_next_line(fd3);
-	// 	printf("%s", line);
-	// 	if (line)
-	// 		free(line);
+		line = get_next_line(fd2);
+		printf("%s", line);
+		if (line)
+			free(line);
 
-	// 	cnt++;
-	// }
+		line = get_next_line(fd3);
+		printf("%s", line);
+		if (line)
+			free(line);
 
-	// close(fd1);
-	// close(fd2);
-	// close(fd3);
+		cnt++;
+	}
+
+	close(fd1);
+	close(fd2);
+	close(fd3);
 
 	/////////////////////////////////////////////////////
 
-	system("leaks gnl_man.out");
+	// system("leaks gnl_man.out");
 
 	return (0);
 }
