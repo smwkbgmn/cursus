@@ -6,71 +6,13 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 19:07:17 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/31 22:51:59 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/02/04 03:56:13 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+
 #include "get_next_line_bonus.h"
-
-t_list	*init_list(t_list **head, int fd)
-{
-	t_list	*node;
-	t_list	*new;
-
-	node = *head;
-	while (node && node->next && node->fd != fd)
-		node = node->next;
-	if (!node || node->fd != fd)
-	{
-		new = malloc(sizeof(t_list));
-		if (new)
-		{
-			new->fd = fd;
-			new->str = NULL;
-			new->ptr = NULL;
-			new->next = NULL;
-		}
-		if (!node)
-			*head = new;
-		else
-			node->next = new;
-		return (new);
-	}
-	else
-		return (node);
-}
-
-size_t	get_len(char *str)
-{
-	size_t	idx;
-
-	if (!str)
-		return (0);
-	else
-	{
-		idx = 0;
-		while (str[idx] != '\n' && str[idx])
-			idx++;
-		return (idx + (str[idx] == '\n'));
-	}
-}
-
-void	ft_strncpy(char *dst, char *src, size_t n)
-{
-	while (n > 0 && *src)
-	{
-		*dst++ = *src++;
-		n--;
-	}
-}
-
-void	set_str(t_list *node, char *new)
-{
-	if (node->str)
-		free(node->str);
-	node->str = new;
-	node->ptr = new;
-}
 
 char	*ft_strchr(char *s, int c)
 {
@@ -82,3 +24,63 @@ char	*ft_strchr(char *s, int c)
 		return (NULL);
 }
 
+void	ft_strncpy(char *dst, char *src, size_t n)
+{
+	while (n > 0 && *src)
+	{
+		*dst++ = *src++;
+		n--;
+	}
+}
+
+char	*ft_calloc(size_t count, size_t size)
+{
+	char	*ptr;
+	size_t	len;
+	size_t	idx;
+
+	len = size * count;
+	ptr = malloc(len);
+	if (ptr)
+	{
+		idx = 0;
+		while (idx < len)
+			ptr[idx++] = 0;
+	}
+	return (ptr);
+}
+
+size_t	get_len(char *str)
+{
+	size_t	idx;
+
+	if (!str || str == WRONG_FD)
+		return (0);
+	else
+	{
+		idx = 0;
+		while (str[idx] != '\n' && str[idx])
+			idx++;
+		return (idx + (str[idx] == '\n'));
+	}
+}
+
+void	adjust(t_list *node, char *new, size_t len_p, size_t len_n)
+{
+	if (new)
+	{
+		free(node->str);
+		node->str = new;
+		node->ptr = new + len_n;
+	}
+	else
+	{
+		node->ptr += len_p;
+		if (*node->ptr == 0)
+		{
+			free(node->str);
+			node->str = NULL;
+			node->ptr = NULL;
+		}
+	}	
+}

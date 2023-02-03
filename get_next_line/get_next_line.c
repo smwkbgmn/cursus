@@ -6,22 +6,14 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 16:15:11 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/02/02 05:16:35 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/02/04 03:54:13 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// Consider standard input (fd 1)
-// Read buf size will be modified during evaluation
-// compiler buf size flag : -D BUFFER_SIZE=n
-
-#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 #include "get_next_line.h"
-
-char	*read_line(t_list *node, int fd);
-char	*get_str(int fd, size_t len_total);
-void	adjust(t_list *node, char *new, size_t len_p, size_t len_n);
-void	ft_lstdel(t_list **head, int fd);
 
 char	*get_next_line(int fd)
 {
@@ -30,15 +22,18 @@ char	*get_next_line(int fd)
 	char			*line;
 
 	line = NULL;
-	if (fd >= 0 && BUFFER_SIZE > 0)
+	if (fd != ERROR && BUFFER_SIZE > 0)
 	{
 		node = init_list(&head, fd);
 		if (node)
 		{
-			if (!node->ptr)
-				set_str(node, get_str(fd, 0));
+			if (!node->str)
+			{
+				node->str = get_str(fd, 0);
+				node->ptr = node->str;
+			}
 			line = read_line(node, fd);
-			if (!line)
+			if (!line || !node->str)
 				ft_lstdel(&head, fd);
 		}
 	}
@@ -49,26 +44,27 @@ char	*read_line(t_list *node, int fd)
 {
 	char	*line;
 	char	*new;
-	size_t	len_p;
-	size_t	len_n;
+	size_t	len_ptr;
+	size_t	len_new;
 
 	line = NULL;
-	if (node->ptr)
+	if (node->ptr && node->ptr != WRONG_FD)
 	{
-		// printf("you may not enter here\n");
-		len_p = get_len(node->ptr);
+		new = NULL;
 		if (!ft_strchr(node->ptr, '\n'))
 			new = get_str(fd, 0);
-		else
-			new = NULL;
-		len_n = get_len(new);
-		if (len_p > 0 || len_n > 0)
+		len_ptr = get_len(node->ptr);
+		len_new = get_len(new);
+		if (len_ptr + len_new > 0 && new != WRONG_FD)
 		{
-			line = malloc(len_p + len_n + 1);
-			ft_strncpy(line, node->ptr, len_p);
-			ft_strncpy(line + len_p, new, len_n);
+			line = ft_calloc(len_ptr + len_new + 1, 1);
+			if (line)
+			{
+				ft_strncpy(line, node->ptr, len_ptr);
+				ft_strncpy(line + len_ptr, new, len_new);
+			}
 		}
-		adjust(node, new, len_p, len_n);
+		adjust(node, new, len_ptr, len_new);
 	}
 	return (line);
 }
@@ -76,39 +72,56 @@ char	*read_line(t_list *node, int fd)
 char	*get_str(int fd, size_t len_total)
 {
 	char	*buf;
-	char	*str;
+	char	*new;
 	ssize_t	len;
 
-	buf = malloc(BUFFER_SIZE + 1);
-	len = read(fd, buf, BUFFER_SIZE);
-	if ((len == 0 && len_total == 0) || len == ERROR)
-		str = NULL;
-	else if (len > 0 && !ft_strchr(buf, '\n'))
-		str = get_str(fd, len_total + len);
-	else
+	buf = ft_calloc(BUFFER_SIZE + 1, 1);
+	if (buf)
 	{
-		str = malloc(len_total + len + 1);
-		str[len_total + len] = 0;
+		len = read(fd, buf, BUFFER_SIZE);
+		if (len == ERROR)
+			new = WRONG_FD;
+		else if (len == 0 && len_total == 0)
+			new = NULL;
+		else if (len > 0 && !ft_strchr(buf, '\n'))
+			new = get_str(fd, len_total + len);
+		else
+			new = ft_calloc(len_total + len + 1, 1);
+		if (new && new != WRONG_FD)
+			ft_strncpy(new + len_total, buf, len);
+		free(buf);
+		return (new);
 	}
-	if (str)
-		ft_strncpy(str + len_total, buf, len);
-	free(buf);
-	return (str);
+	else
+		return (NULL);
 }
 
-void	adjust(t_list *node, char *new, size_t len_p, size_t len_n)
+t_list	*init_list(t_list **head, int fd)
 {
+	t_list	*node;
+	t_list	*new;
+
+	node = *head;
+	if (node)
+	{
+		while (node->fd != fd && node->next)
+			node = node->next;
+		if (node->fd == fd)
+			return (node);
+	}
+	new = malloc(sizeof(t_list));
 	if (new)
 	{
-		set_str(node, new);
-		node->ptr += len_n;
+		new->fd = fd;
+		new->str = NULL;
+		new->ptr = NULL;
+		new->next = NULL;
+		if (!node)
+			*head = new;
+		else
+			node->next = new;
 	}
-	else
-	{
-		node->ptr += len_p;
-		if (*node->ptr == 0)
-			set_str(node, NULL);
-	}	
+	return (new);
 }
 
 void	ft_lstdel(t_list **head, int fd)
@@ -119,8 +132,8 @@ void	ft_lstdel(t_list **head, int fd)
 	node = *head;
 	if (node->fd == fd)
 	{
+		node_del = node;
 		*head = node->next;
-		free(node);
 	}
 	else
 	{
@@ -128,6 +141,6 @@ void	ft_lstdel(t_list **head, int fd)
 			node = node->next;
 		node_del = node->next;
 		node->next = node_del->next;
-		free(node_del);
 	}
+	free(node_del);
 }

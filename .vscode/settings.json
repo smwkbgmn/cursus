@@ -27,6 +27,8 @@
 		"string": "c",
 		"string_view": "c",
 		"unordered_map": "c",
-		"stdarg.h": "c"
+		"stdarg.h": "c",
+		"get_next_line.h": "c",
+		"get_next_line_bonus.h": "c"
 	}
 }

@@ -26,7 +26,7 @@ all			: $(NAME_MAN)
 bonus		: $(NAME_BNS)
 
 $(NAME_MAN)	: $(OBJ_MAN)
-			$(CC) $(FLAG) $(DIR_MAIN)/main_man.c $(OBJ_MAN) -o $(NAME_MAN)
+			@$(CC) $(FLAG) $(DIR_MAIN)/main_man.c $(OBJ_MAN) -o $(NAME_MAN)
 
 $(NAME_BNS)	: $(OBJ_BNS)
 			@$(CC) $(FLAG) $(DIR_MAIN)/main_bns.c $(OBJ_BNS) -o $(NAME_BNS)
@@ -35,11 +35,11 @@ $(NAME_BNS)	: $(OBJ_BNS)
 			@$(CC) $(FLAG) -c $< -o $@
 
 clean		:
-			$(RM) $(OBJ_MAN) $(OBJ_BNS)
+			@$(RM) $(OBJ_MAN) $(OBJ_BNS)
 	
 fclean		: 
 			make clean
-			$(RM) $(NAME_MAN) $(NAME_BNS)
+			@$(RM) $(NAME_MAN) $(NAME_BNS)
 
 re			:
 			make fclean
