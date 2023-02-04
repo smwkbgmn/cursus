@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 16:15:11 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/02/04 03:54:13 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/02/05 06:50:43 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*get_next_line(int fd)
 	line = NULL;
 	if (fd != ERROR && BUFFER_SIZE > 0)
 	{
-		node = init_list(&head, fd);
+		node = init_node(&head, fd);
 		if (node)
 		{
 			if (!node->str)
@@ -34,7 +34,7 @@ char	*get_next_line(int fd)
 			}
 			line = read_line(node, fd);
 			if (!line || !node->str)
-				ft_lstdel(&head, fd);
+				del_node(&head, fd);
 		}
 	}
 	return (line);
@@ -44,27 +44,18 @@ char	*read_line(t_list *node, int fd)
 {
 	char	*line;
 	char	*new;
-	size_t	len_ptr;
-	size_t	len_new;
 
 	line = NULL;
-	if (node->ptr && node->ptr != WRONG_FD)
+	if (node->str && node->str != EOF)
 	{
-		new = NULL;
+		new = EOF;
 		if (!ft_strchr(node->ptr, '\n'))
 			new = get_str(fd, 0);
-		len_ptr = get_len(node->ptr);
-		len_new = get_len(new);
-		if (len_ptr + len_new > 0 && new != WRONG_FD)
+		if (new)
 		{
-			line = ft_calloc(len_ptr + len_new + 1, 1);
-			if (line)
-			{
-				ft_strncpy(line, node->ptr, len_ptr);
-				ft_strncpy(line + len_ptr, new, len_new);
-			}
+			line = ft_strjoin(node->ptr, new);
+			adjust(node, new);
 		}
-		adjust(node, new, len_ptr, len_new);
 	}
 	return (line);
 }
@@ -75,28 +66,29 @@ char	*get_str(int fd, size_t len_total)
 	char	*new;
 	ssize_t	len;
 
-	buf = ft_calloc(BUFFER_SIZE + 1, 1);
-	if (buf)
+	buf = malloc(BUFFER_SIZE + 1);
+	if (!buf)
+		return (NULL);
+	len = read(fd, buf, BUFFER_SIZE);
+	if (len == ERROR || (len == 0 && len_total == 0))
+		new = (void *)(42 * (unsigned long)(len != ERROR));
+	else
 	{
-		len = read(fd, buf, BUFFER_SIZE);
-		if (len == ERROR)
-			new = WRONG_FD;
-		else if (len == 0 && len_total == 0)
-			new = NULL;
-		else if (len > 0 && !ft_strchr(buf, '\n'))
+		buf[len] = 0;
+		if (len > 0 && !ft_strchr(buf, '\n'))
 			new = get_str(fd, len_total + len);
 		else
-			new = ft_calloc(len_total + len + 1, 1);
-		if (new && new != WRONG_FD)
-			ft_strncpy(new + len_total, buf, len);
-		free(buf);
-		return (new);
+		{
+			new = malloc(len_total + len + 1);
+			ft_memcpy(new + len_total + len, "\0", 1 * (new != NULL));
+		}
+		ft_memcpy(new + len_total, buf, len * (new != NULL));
 	}
-	else
-		return (NULL);
+	free(buf);
+	return (new);
 }
 
-t_list	*init_list(t_list **head, int fd)
+t_list	*init_node(t_list **head, int fd)
 {
 	t_list	*node;
 	t_list	*new;
@@ -114,7 +106,6 @@ t_list	*init_list(t_list **head, int fd)
 	{
 		new->fd = fd;
 		new->str = NULL;
-		new->ptr = NULL;
 		new->next = NULL;
 		if (!node)
 			*head = new;
@@ -124,7 +115,7 @@ t_list	*init_list(t_list **head, int fd)
 	return (new);
 }
 
-void	ft_lstdel(t_list **head, int fd)
+void	del_node(t_list **head, int fd)
 {
 	t_list	*node;
 	t_list	*node_del;
@@ -142,5 +133,7 @@ void	ft_lstdel(t_list **head, int fd)
 		node_del = node->next;
 		node->next = node_del->next;
 	}
+	if (node_del->str && node_del->str != EOF)
+		free(node_del->str);
 	free(node_del);
 }

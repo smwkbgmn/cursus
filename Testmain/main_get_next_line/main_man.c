@@ -6,7 +6,7 @@ int	main(void)
 
 	/////////////////////////////////////////////////////
 
-	int fd = open("test", O_RDONLY);
+	int fd = open("test1.txt", O_RDONLY);
 
 	char *line;
 

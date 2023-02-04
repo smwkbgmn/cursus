@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:01:02 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/02/04 03:56:02 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/02/05 06:51:56 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,29 +17,35 @@
 #  define BUFFER_SIZE 1
 # endif
 
+# define TRUE 1
+# define FALSE 0
 # define ERROR -1
-# define WRONG_FD (void *)42
+
+# ifdef EOF
+#  undef EOF
+# endif
+# define EOF (void *)42
 
 # include <stddef.h>
 
 typedef struct s_list
 {
-	struct s_list	*next;
 	int				fd;
 	char			*str;
 	char			*ptr;
+	struct s_list	*next;
 }	t_list;
 
 char	*get_next_line(int fd);
 char	*read_line(t_list *node, int fd);
 char	*get_str(int fd, size_t len_total);
-t_list	*init_list(t_list **head, int fd);
-void	ft_lstdel(t_list **head, int fd);
+t_list	*init_node(t_list **head, int fd);
+void	del_node(t_list **head, int fd);
 
+char	*ft_strjoin(char *s1, char *s2);
+void	ft_memcpy(char *dst, char *src, size_t n);
 char	*ft_strchr(char *s, int c);
-void	ft_strncpy(char *dst, char *src, size_t n);
-char	*ft_calloc(size_t count, size_t size);
 size_t	get_len(char *str);
-void	adjust(t_list *node, char *new, size_t len_p, size_t len_n);
+void	adjust(t_list *node, char *new);
 
 #endif
