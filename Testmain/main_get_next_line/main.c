@@ -6,9 +6,13 @@ int	main(void)
 
 	/////////////////////////////////////////////////////
 
-	int fd = open("test1.txt", O_RDONLY);
+	int fd = open("test1", O_RDONLY);
 
 	char *line;
+
+	clock_t begin;
+	clock_t end;
+	double result;
 
 	// while (1)
 	// {
@@ -20,6 +24,8 @@ int	main(void)
 	// 	else
 	// 		break;
 	// }
+	
+	begin = clock();
 
 	while (1)
 	{
@@ -30,6 +36,12 @@ int	main(void)
 		else
 			break;
 	}
+
+	end = clock();
+
+	// result = (double)end - (double)begin;
+	result = (double)(end - begin);
+	printf("\ntime measurment --- %.0f ms\n", result);
 
 	close(fd);
 
@@ -45,9 +57,9 @@ int	main(void)
 
 	/////////////////////////////////////////////////////
 
-	// int fd1 = open("test1.txt", O_RDONLY);
-	// int fd2 = open("test2.txt", O_RDONLY);
-	// int fd3 = open("test3.txt", O_RDONLY);
+	// int fd1 = open("test1", O_RDONLY);
+	// int fd2 = open("test2", O_RDONLY);
+	// int fd3 = open("test3", O_RDONLY);
 
 	// char *line;
 

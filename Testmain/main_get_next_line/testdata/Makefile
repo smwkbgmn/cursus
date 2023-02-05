@@ -26,10 +26,10 @@ all			: $(NAME_MAN)
 bonus		: $(NAME_BNS)
 
 $(NAME_MAN)	: $(OBJ_MAN)
-			@$(CC) $(FLAG) $(DIR_MAIN)/main_man.c $(OBJ_MAN) -o $(NAME_MAN)
+			@$(CC) $(FLAG) $(DIR_MAIN)/main.c $(OBJ_MAN) -o $(NAME_MAN)
 
 $(NAME_BNS)	: $(OBJ_BNS)
-			@$(CC) $(FLAG) $(DIR_MAIN)/main_bns.c $(OBJ_BNS) -o $(NAME_BNS)
+			@$(CC) $(FLAG) $(DIR_MAIN)/main.c $(OBJ_BNS) -o $(NAME_BNS)
 
 %.o			: %.c
 			@$(CC) $(FLAG) -c $< -o $@
@@ -54,7 +54,7 @@ man			: $(NAME_MAN)
 			@rm gnl_man.out
 
 bns			: $(NAME_BNS) 
-			@./gnl_man.out
-			@rm gnl_man.out
+			@./gnl_bns.out
+			@rm gnl_bns.out
 
 .PHONY		: bns

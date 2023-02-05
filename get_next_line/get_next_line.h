@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:01:02 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/02/05 06:51:10 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/02/05 19:46:40 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,7 @@
 #  define BUFFER_SIZE 1
 # endif
 
-# define TRUE 1
-# define FALSE 0
 # define ERROR -1
-
-# ifdef EOF
-#  undef EOF
-# endif
-# define EOF (void *)42
 
 # include <stddef.h>
 

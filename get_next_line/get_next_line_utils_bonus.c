@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 19:07:17 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/02/05 06:51:45 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/02/05 20:01:35 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ size_t	get_len(char *str)
 {
 	size_t	idx;
 
-	if (!str || str == EOF)
+	if (!str)
 		return (0);
 	else
 	{
@@ -69,18 +69,13 @@ size_t	get_len(char *str)
 
 void	adjust(t_list *node, char *new)
 {
-	size_t	len_ptr;
-	size_t	len_new;
-
-	len_ptr = get_len(node->ptr);
-	len_new = get_len(new);
-	if (len_new == 0)
-		node->ptr += len_ptr;
+	if (!new)
+		node->ptr += get_len(node->ptr);
 	else
 	{
 		free(node->str);
 		node->str = new;
-		node->ptr = new + len_new;
+		node->ptr = new + get_len(new);
 	}
 	if (*node->ptr == 0)
 	{

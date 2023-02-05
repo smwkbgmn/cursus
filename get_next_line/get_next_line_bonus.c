@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 16:15:11 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/02/05 06:52:18 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/02/05 20:01:54 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,16 @@ char	*read_line(t_list *node, int fd)
 {
 	char	*line;
 	char	*new;
+	char	*nl;
 
 	line = NULL;
-	if (node->str && node->str != EOF)
+	if (node->str && *node->str)
 	{
-		new = EOF;
-		if (!ft_strchr(node->ptr, '\n'))
+		new = NULL;
+		nl = ft_strchr(node->ptr, '\n');
+		if (!nl)
 			new = get_str(fd, 0);
-		if (new)
+		if (nl || new)
 		{
 			line = ft_strjoin(node->ptr, new);
 			adjust(node, new);
@@ -66,25 +68,25 @@ char	*get_str(int fd, size_t len_total)
 	char	*new;
 	ssize_t	len;
 
+	new = NULL;
 	buf = malloc(BUFFER_SIZE + 1);
-	if (!buf)
-		return (NULL);
-	len = read(fd, buf, BUFFER_SIZE);
-	if (len == ERROR || (len == 0 && len_total == 0))
-		new = (void *)(42 * (unsigned long)(len != ERROR));
-	else
+	if (buf)
 	{
-		buf[len] = 0;
-		if (len > 0 && !ft_strchr(buf, '\n'))
-			new = get_str(fd, len_total + len);
-		else
+		len = read(fd, buf, BUFFER_SIZE);
+		if (len != ERROR)
 		{
-			new = malloc(len_total + len + 1);
-			ft_memcpy(new + len_total + len, "\0", 1 * (new != NULL));
+			buf[len] = 0;
+			if (len > 0 && !ft_strchr(buf, '\n'))
+				new = get_str(fd, len_total + len);
+			else
+			{
+				new = malloc(len_total + len + 1);
+				ft_memcpy(new + len_total + len, "\0", 1 * (new != NULL));
+			}
+			ft_memcpy(new + len_total, buf, len * (new != NULL));
 		}
-		ft_memcpy(new + len_total, buf, len * (new != NULL));
+		free(buf);
 	}
-	free(buf);
 	return (new);
 }
 
@@ -118,22 +120,22 @@ t_list	*init_node(t_list **head, int fd)
 void	del_node(t_list **head, int fd)
 {
 	t_list	*node;
-	t_list	*node_del;
+	t_list	*del;
 
 	node = *head;
 	if (node->fd == fd)
 	{
-		node_del = node;
+		del = node;
 		*head = node->next;
 	}
 	else
 	{
 		while (node->next->fd != fd)
 			node = node->next;
-		node_del = node->next;
-		node->next = node_del->next;
+		del = node->next;
+		node->next = del->next;
 	}
-	if (node_del->str && node_del->str != EOF)
-		free(node_del->str);
-	free(node_del);
+	if (del->str)
+		free(del->str);
+	free(del);
 }
