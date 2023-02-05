@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 16:15:11 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/02/05 20:01:54 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/02/06 01:19:40 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,11 @@ char	*read_line(t_list *node, int fd)
 	line = NULL;
 	if (node->str && *node->str)
 	{
-		new = NULL;
 		nl = ft_strchr(node->ptr, '\n');
 		if (!nl)
 			new = get_str(fd, 0);
+		else
+			new = NULL;
 		if (nl || new)
 		{
 			line = ft_strjoin(node->ptr, new);
@@ -75,7 +76,7 @@ char	*get_str(int fd, size_t len_total)
 		len = read(fd, buf, BUFFER_SIZE);
 		if (len != ERROR)
 		{
-			buf[len] = 0;
+			buf[len] = '\0';
 			if (len > 0 && !ft_strchr(buf, '\n'))
 				new = get_str(fd, len_total + len);
 			else
