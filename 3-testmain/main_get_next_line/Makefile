@@ -7,29 +7,30 @@ ifdef BUF
 else
 	FLAG		= -Wall -Wextra -Werror
 endif
+
+DIR_SRC		= ~/dev/ecole/2-for_mine/get_next_line
  
 SRC_MAN		= \
-get_next_line.c \
-get_next_line_utils.c
+$(DIR_SRC)/get_next_line.c \
+$(DIR_SRC)/get_next_line_utils.c
 
 SRC_BNS		= \
-get_next_line_bonus.c \
-get_next_line_utils_bonus.c
+$(DIR_SRC)/get_next_line_bonus.c \
+$(DIR_SRC)/get_next_line_utils_bonus.c
 
 OBJ_MAN		= $(SRC_MAN:.c=.o)
 OBJ_BNS		= $(SRC_BNS:.c=.o)
 
-DIR_MAIN	= ../testmain/main_get_next_line
 
 all			: $(NAME_MAN)
 
 bonus		: $(NAME_BNS)
 
 $(NAME_MAN)	: $(OBJ_MAN)
-			@$(CC) $(FLAG) $(DIR_MAIN)/main.c $(OBJ_MAN) -o $(NAME_MAN)
+			@$(CC) $(FLAG) main.c $(OBJ_MAN) -o $(NAME_MAN)
 
 $(NAME_BNS)	: $(OBJ_BNS)
-			@$(CC) $(FLAG) $(DIR_MAIN)/main.c $(OBJ_BNS) -o $(NAME_BNS)
+			@$(CC) $(FLAG) main.c $(OBJ_BNS) -o $(NAME_BNS)
 
 %.o			: %.c
 			@$(CC) $(FLAG) -c $< -o $@
@@ -38,23 +39,21 @@ clean		:
 			@$(RM) $(OBJ_MAN) $(OBJ_BNS)
 	
 fclean		: 
-			make clean
+			@make clean
 			@$(RM) $(NAME_MAN) $(NAME_BNS)
 
 re			:
-			make fclean
-			make all
+			@make fclean
+			@make all
 
 .PHONY		: clean fclean re bonus
 
 ################ FOR TEST ###############
 
-man			: $(NAME_MAN) 
-			@./gnl_man.out
-			@rm gnl_man.out
+man			: $(NAME_MAN)
+			@./$(NAME_MAN)
+			@rm $(NAME_MAN)
 
-bns			: $(NAME_BNS) 
-			@./gnl_bns.out
-			@rm gnl_bns.out
-
-.PHONY		: bns
+bns			: $(NAME_BNS)
+			@./$(NAME_BNS)
+			@rm $(NAME_BNS)
