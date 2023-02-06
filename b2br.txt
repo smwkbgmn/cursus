@@ -1,0 +1,22 @@
+## signature.txt 
+## a graphical interface is of no use
+	- X.org or any other graphics server
+## 'Debian' or 'Rocky'
+	- in case of 'Rocky', don't have to set up 'KDump'
+	but 'SELinux' must be running at startup
+	- in case of 'Debian', 'AppArmor' must be running at startup
+## at least 2 encrypted partitions using 'LVM'
+## differences between 'aptitude' and 'apt'
+## A 'SSH' service will be running on 'port 4242' only
+	- it must not be possible to connect using 'SSH' as 'root'
+## you have to configure your operating system with the 'UFW'
+and it will allow only 'port 4242'
+	- in case of 'Rocky', use 'firewalld'
+## the 'hostname' of your virtual machine must be your login ending with 42
+	- I have to be aware of how to change 'hostname'
+## You have to implement a [strong password policy]
+## You have to install and configure 'sudo' following strict rules
+## In addition to the 'root' user,
+a user with your login as username has to be present (?)
+## This user has to [belong to the 'user42' and 'sudo' groups]
+	- you will have to create a new user and assign it to a group

@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 19:07:17 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/02/05 20:01:35 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/02/06 14:08:22 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	adjust(t_list *node, char *new)
 		node->str = new;
 		node->ptr = new + get_len(new);
 	}
-	if (*node->ptr == 0)
+	if (*node->ptr == '\0')
 	{
 		free(node->str);
 		node->str = NULL;
