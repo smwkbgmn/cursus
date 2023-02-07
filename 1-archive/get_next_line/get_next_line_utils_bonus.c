@@ -6,11 +6,9 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 19:07:17 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/02/06 14:08:22 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/02/07 10:44:02 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdlib.h>
 
 #include "get_next_line_bonus.h"
 
@@ -67,7 +65,7 @@ size_t	get_len(char *str)
 	}
 }
 
-void	adjust(t_list *node, char *new)
+void	adjust_node(t_list *node, char *new)
 {
 	if (!new)
 		node->ptr += get_len(node->ptr);

@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:01:02 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/02/05 20:01:19 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/02/07 10:43:18 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 # define ERROR -1
 
+# include <stdlib.h>
 # include <stddef.h>
 
 typedef struct s_list
@@ -39,6 +40,6 @@ char	*ft_strjoin(char *s1, char *s2);
 void	ft_memcpy(char *dst, char *src, size_t n);
 char	*ft_strchr(char *s, int c);
 size_t	get_len(char *str);
-void	adjust(t_list *node, char *new);
+void	adjust_node(t_list *node, char *new);
 
 #endif

@@ -6,11 +6,10 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 16:15:11 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/02/06 14:09:16 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/02/07 10:43:37 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include <unistd.h>
 
 #include "get_next_line.h"
@@ -56,7 +55,7 @@ char	*read_line(t_list *node, int fd)
 		if (nl || new)
 		{
 			line = ft_strjoin(node->ptr, new);
-			adjust(node, new);
+			adjust_node(node, new);
 		}
 	}
 	return (line);
@@ -65,10 +64,10 @@ char	*read_line(t_list *node, int fd)
 char	*get_str(int fd, size_t len_total)
 {
 	char	*buf;
-	char	*new;
+	char	*str;
 	ssize_t	len;
 
-	new = NULL;
+	str = NULL;
 	buf = malloc(BUFFER_SIZE + 1);
 	if (buf)
 	{
@@ -77,18 +76,18 @@ char	*get_str(int fd, size_t len_total)
 		{
 			buf[len] = '\0';
 			if (len > 0 && !ft_strchr(buf, '\n'))
-				new = get_str(fd, len_total + len);
+				str = get_str(fd, len_total + len);
 			else
 			{
-				new = malloc(len_total + len + 1);
-				if (new)
-					new[len_total + len] = '\0';
+				str = malloc(len_total + len + 1);
+				if (str)
+					str[len_total + len] = '\0';
 			}
-			ft_memcpy(new + len_total, buf, len * (new != NULL));
+			ft_memcpy(str + len_total, buf, len * (str != NULL));
 		}
 		free(buf);
 	}
-	return (new);
+	return (str);
 }
 
 t_list	*init_node(t_list **head, int fd)
