@@ -3,7 +3,7 @@ NAME		= push_swap
 CC			= cc
 FLAG		= -Wall -Wextra -Werror -I $(DIR_LIBFT)/include
 
-DIR_LIBFT	= 1-archive/libft
+DIR_LIBFT	= ../1-archive/libft
 
 SRCS		= $(wildcard *.c)
 OBJS		= $(SRCS:.c=.o)
@@ -15,15 +15,22 @@ all			: $(NAME)
 $(NAME)		: $(OBJS)
 			$(CC) $(FLAG) $(OBJS) -o $@
 
-%.o			: %.c
+%.o			: %.c $(LIBFT)
 			$(CC) $(FLAG) $(LIBFT) -c $< -o $@
+
+# %.o			: %.c
+# 			$(CC) $(FLAG) -c $< -o $@
+
+$(LIBFT)	:
+			$(MAKE) -C $(DIR_LIBFT) all
 
 clean		:
 			$(RM) $(OBJS)
+			$(MAKE) -C $(DIR_LIBFT) clean
 
 fclean		:
 			make clean
-			$(RM) $(NAME)
+			$(RM) $(NAME) $(LIBFT)
 
 re			:
 			make fclean
