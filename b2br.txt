@@ -2,11 +2,14 @@
 
 ## A graphical interface is of no use
 	- X.org or any other graphics server
+> by showing a terminal is first show up when just get logged in you can address about this 
 
 ## 'Debian' or 'Rocky'
 	- In case of 'Rocky', don't have to set up 'KDump'
 	but 'SELinux' must be running at startup
 	- In case of 'Debian', 'AppArmor' must be running at startup
+> printf list services that is running on this linux
+> systemctl list-units --type=service
 
 ## At least 2 encrypted partitions using 'LVM'
 
