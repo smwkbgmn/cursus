@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:37:46 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/02/09 17:05:13 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/02/27 04:01:39 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,74 +14,30 @@
 // 2. init the stack a
 // 3. check existence of duplication with stack a
 
-#include <stdio.h>
-#include <stddef.h>
-
 #include "push_swap.h"
 
 int	main(int ac, char **av)
 {
-	int	*a;
-	int	*b;
-	int	cnt;
+	t_que	a;
+	t_que	b;
+	t_uint	cnt;
 
-	a = init_stack_a(ac, av, *cnt);
-	b = ft_calloc(cnt, sizeof(int));
+	cnt = ac - 1;
+	a.ary = ft_calloc(cnt, sizeof(int));
+	a.size = cnt;
+	a.head = 0;
+	a.tail = 0;
+	b.ary = ft_calloc(cnt, sizeof(int));
+	b.size = cnt;
+	b.head = 0;
+	b.tail = 0;
 	return (0);
 }
 
-int	*init_stack(int ac, char **av, int *cnt)
+t_uint	idx(t_que *ptr, int idx)
 {
-	int	*stack;
-	int	idx;
-
-	idx = 0;
-	if (ac == 1)
-	{
-		*cnt = get_cnt(av[1]);
-		stackr = ft_calloc(*cnt, sizeof(int));
-		while (idx < cnt)
-		{
-			stack[idx] = 
-		}
-	}
+	if (idx < 0)
+		return (ptr->size + idx);
 	else
-	{
-		*cnt = ac - 1;
-		stack = ft_calloc(*cnt, sizeof(int));
-		while (idx < cnt)
-		{
-			stack[idx] = ft_atoi(av[idx + 1]);
-			idx++;
-		}
-	}
-}
-
-int	get_cnt(char *input)
-{
-	int	cnt;
-
-	cnt = 0;
-	while (*input)
-	{
-		if (ft_isdigit(*input))
-			cnt++;
-		input += move_to_next_num(input);
-	}
-	return (cnt);
-}
-
-int	*move_to_next_num(char *input)
-{
-	int	idx;
-
-	idx = 0;
-	while (ft_isdigit(input[idx]))
-		idx++;
-	// check if the continuous space is a error or not 
-	// if (*input == ' ')
-	// 	input++;
-	while (input[idx] == ' ')
-		idx++;
-	return (idx);
+		return ((t_uint)idx);
 }
