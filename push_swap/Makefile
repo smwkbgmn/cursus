@@ -12,11 +12,11 @@ LIBFT		= $(DIR_LIBFT)/libft.a
 
 all			: $(NAME)
 
-$(NAME)		: $(OBJS)
-			$(CC) $(FLAG) $(OBJS) -o $@
+$(NAME)		: $(LIBFT) $(OBJS)
+			$(CC) $(FLAG) $(LIBFT) $(OBJS) -o $@
 
-%.o			: %.c $(LIBFT)
-			$(CC) $(FLAG) $(LIBFT) -c $< -o $@
+%.o			: %.c
+			$(CC) $(FLAG) -c $< -o $@
 
 # %.o			: %.c
 # 			$(CC) $(FLAG) -c $< -o $@
