@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:15:16 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/03/15 23:25:41 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/03/16 00:02:57 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	pa(t_list **a, t_list **b)
 		push(a, (*b)->content);
 		del_node(b);
 	}
+	printf("op_pa\n");
 }
 
 void	pb(t_list **a, t_list **b)
@@ -33,6 +34,7 @@ void	pb(t_list **a, t_list **b)
 		push(b, (*a)->content);
 		del_node(a);
 	}
+	printf("op_pb\n");
 }
 
 void	push(t_list **head, void *data)
