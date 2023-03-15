@@ -33,5 +33,6 @@
 		"unistd.h": "c",
 		"stddef.h": "c",
 		"push_swap.h": "c"
-	}
+	},
+	"C_Cpp.errorSquiggles": "enabled"
 }

@@ -3,7 +3,7 @@ NAME		= push_swap
 CC			= cc
 FLAG		= -Wall -Wextra -Werror -I $(DIR_LIBFT)/include
 
-DIR_LIBFT	= ../1-archive/libft
+DIR_LIBFT	= ../1_archive/libft
 
 SRCS		= $(wildcard *.c)
 OBJS		= $(SRCS:.c=.o)

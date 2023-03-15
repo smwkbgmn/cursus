@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:37:46 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/03/14 19:54:07 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/03/15 23:25:49 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,14 @@ void	init_stack(t_list **head, int ac, char **av);
 
 int	main(int ac, char **av)
 {
-	t_list	*head;
+	t_list	*head_a;
+	t_list	*head_b;
 
 	av++;
 	// test_print_input(av);
-	head = NULL;
-	init_stack(&head, ac, av);
+	head_a = NULL;
+	head_b = NULL;
+	init_stack(&head_a, ac, av);
 	// test_print_stack(head);
 }
 

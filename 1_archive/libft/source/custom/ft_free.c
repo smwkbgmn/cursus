@@ -1,38 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   op_swap.c                                          :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/08 17:39:01 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/03/15 22:53:24 by donghyu2         ###   ########.fr       */
+/*   Created: 2023/03/15 23:00:18 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/03/15 23:04:23 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include <stdlib.h>
 
-void	sa(t_list *a)
+#include "libft.h"
+
+void	ft_free(void **content)
 {
-	swap(a);
-}
-
-void	sb(t_list *b)
-{
-	swap(b);
-}
-
-void	ss(t_list *a, t_list *b)
-{
-	sa(a);
-	sb(b);
-}
-
-void	swap(t_list *head)
-{
-	void	*tmp;
-
-	tmp = head->content;
-	head->content = head->next->content;
-	head->next->content = tmp;
+	free(*content);
+	*content = NULL;
 }
