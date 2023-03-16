@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:37:46 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/03/16 00:07:16 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/03/16 16:26:36 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,25 +26,11 @@ int	main(int ac, char **av)
 	t_list	*b;
 
 	av++;
-	printf("[[input]]\n");
-	test_print_input(av);
 	a = NULL;
 	b = NULL;
 	init_stack(&a, ac, av);
-	sa(a);
-	pb(&a, &b);
-	pb(&a, &b);
-	pb(&a, &b);
-	// sb(b);
-	printf("[[stack_a]]\n");
-	test_print_stack(a);
-	printf("[[stack_b]]\n");
-	test_print_stack(b);
-	ss(a, b);
-	printf("[[stack_a]]\n");
-	test_print_stack(a);
-	printf("[[stack_b]]\n");
-	test_print_stack(b);
+	test_sample_implement(&a, &b);
+
 }
 
 void	init_stack(t_list **head, int ac, char **av)

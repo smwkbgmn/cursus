@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 19:53:22 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/03/16 00:04:47 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/03/16 16:28:23 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,51 @@
 
 void	test_print_input(char **av)
 {
+	printf("[[input]]\n");
 	while (*av)
 		printf("%s\n", *(av++));
 }
 
-void	test_print_stack(t_list *head)
+void	test_print_stack(t_list *a, t_list *b)
 {
-	if (head == NULL)
-		printf("empty\n");
-	while (head)
+	printf("a            b\n");
+	printf("-            -\n");
+	while (a || b)
 	{
-		printf("%d\n", *(int *)head->content);
-		head = head->next;
+		if (a)
+		{
+			printf("%-13d", *(int *)a->content);
+			a = a->next;
+		}
+		else
+			printf("             ");
+		if (b)
+		{
+			printf("%-13d", *(int *)b->content);
+			b = b->next;
+		}
+		printf("\n");
 	}
+}
+
+void	test_sample_implement(t_list **a, t_list **b)
+{
+	sa(*a);
+	test_print_stack(*a, *b);
+	pb(a, b);
+	pb(a, b);
+	pb(a, b);
+	test_print_stack(*a, *b);
+	ra(a);
+	rb(b);
+	test_print_stack(*a, *b);
+	rra(a);
+	rrb(b);
+	test_print_stack(*a, *b);
+	sa(*a);
+	test_print_stack(*a, *b);
+	pa(a, b);
+	pa(a, b);
+	pa(a, b);
+	test_print_stack(*a, *b);
 }
