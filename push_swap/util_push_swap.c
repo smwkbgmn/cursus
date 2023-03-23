@@ -6,13 +6,9 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:37:46 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/03/16 16:26:36 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/03/23 18:27:03 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// 1. check input char* valid
-// 2. init the stack a
-// 3. check existence of duplication with stack a
 
 #include <stdlib.h>
 
@@ -25,12 +21,22 @@ int	main(int ac, char **av)
 	t_list	*a;
 	t_list	*b;
 
-	av++;
 	a = NULL;
 	b = NULL;
-	init_stack(&a, ac, av);
-	test_sample_implement(&a, &b);
 
+	// 1. Check valid
+	// - integer
+	// - is it sorted
+	// 2. Check the count of disordered data &
+	// select best algorithm
+	// - sorted backward 
+	// - small amount
+	// - large amount
+
+	init_stack(&a, ac, ++av);
+	// test_sample_implement(&a, &b);
+	sort(&a, &b);
+	test_print_stack(a, b);
 }
 
 void	init_stack(t_list **head, int ac, char **av)

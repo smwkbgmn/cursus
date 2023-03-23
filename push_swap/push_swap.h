@@ -6,15 +6,17 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:38:17 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/03/16 16:28:14 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/03/23 18:26:51 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-// # include "../1_archive/libft/include/libft.h"
 # include "libft.h"
+
+# define TRUE 1
+# define FALSE 0
 
 typedef short			t_bool;
 typedef unsigned int	t_uint;
@@ -30,6 +32,8 @@ void	rr(t_list **a, t_list **b);
 void	rra(t_list **a);
 void	rrb(t_list **b);
 void	rrr(t_list **a, t_list **b);
+
+void	sort(t_list **a, t_list **b);
 
 ////////////// for test ///////////
 

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   op_push.c                                          :+:      :+:    :+:   */
+/*   push.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -24,7 +24,7 @@ void	pa(t_list **a, t_list **b)
 		push(a, (*b)->content);
 		del_node(b);
 	}
-	printf("op_pa\n");
+	printf("pa\n");
 }
 
 void	pb(t_list **a, t_list **b)
@@ -34,7 +34,7 @@ void	pb(t_list **a, t_list **b)
 		push(b, (*a)->content);
 		del_node(a);
 	}
-	printf("op_pb\n");
+	printf("pb\n");
 }
 
 void	push(t_list **head, void *data)

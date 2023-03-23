@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   op_swap.c                                          :+:      :+:    :+:   */
+/*   swap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -17,20 +17,20 @@ void	swap(t_list *head);
 void	sa(t_list *a)
 {
 	swap(a);
-	printf("op_sa\n");
+	printf("sa\n");
 }
 
 void	sb(t_list *b)
 {
 	swap(b);
-	printf("op_sb\n");
+	printf("sb\n");
 }
 
 void	ss(t_list *a, t_list *b)
 {
 	sa(a);
 	sb(b);
-	printf("op_ss\n");
+	printf("ss\n");
 }
 
 void	swap(t_list *head)

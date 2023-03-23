@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 19:53:22 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/03/16 16:28:23 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/03/23 18:27:17 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	test_print_input(char **av)
 {
 	printf("[[input]]\n");
 	while (*av)
-		printf("%s\n", *(av++));
+		printf("[%s]", *(av++));
 }
 
 void	test_print_stack(t_list *a, t_list *b)

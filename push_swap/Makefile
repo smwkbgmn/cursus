@@ -38,7 +38,7 @@ re			:
 
 .PHONY		: all celan fclean re
 
-TEST_INPUT	= 2 1 3 6 5 8
+TEST_INPUT	= 2 1 3 6 5 8 9 11 10 44 95 24 35
 
 test		: $(NAME)
 			@./$(NAME) $(TEST_INPUT)
