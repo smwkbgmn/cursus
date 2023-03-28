@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 19:53:22 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/03/23 18:27:17 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/03/28 19:49:37 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	test_print_input(char **av)
 
 void	test_print_stack(t_list *a, t_list *b)
 {
+	printf("\n");
 	printf("a            b\n");
 	printf("-            -\n");
 	while (a || b)
@@ -39,6 +40,7 @@ void	test_print_stack(t_list *a, t_list *b)
 		}
 		printf("\n");
 	}
+	printf("\n");
 }
 
 void	test_sample_implement(t_list **a, t_list **b)
@@ -48,12 +50,6 @@ void	test_sample_implement(t_list **a, t_list **b)
 	pb(a, b);
 	pb(a, b);
 	pb(a, b);
-	test_print_stack(*a, *b);
-	ra(a);
-	rb(b);
-	test_print_stack(*a, *b);
-	rra(a);
-	rrb(b);
 	test_print_stack(*a, *b);
 	sa(*a);
 	test_print_stack(*a, *b);

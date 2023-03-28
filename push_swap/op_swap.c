@@ -28,8 +28,8 @@ void	sb(t_list *b)
 
 void	ss(t_list *a, t_list *b)
 {
-	sa(a);
-	sb(b);
+	swap(a);
+	swap(b);
 	printf("ss\n");
 }
 
@@ -37,7 +37,10 @@ void	swap(t_list *head)
 {
 	void	*tmp;
 
-	tmp = head->content;
-	head->content = head->next->content;
-	head->next->content = tmp;
+	if (head && head->next)
+	{
+		tmp = head->content;
+		head->content = head->next->content;
+		head->next->content = tmp;
+	}
 }

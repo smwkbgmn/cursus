@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:37:46 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/03/23 18:27:03 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/03/28 19:54:16 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ int	main(int ac, char **av)
 	// 1. Check valid
 	// - integer
 	// - is it sorted
-	// 2. Check the count of disordered data &
-	// select best algorithm
+	// 2. Check the count of disordered data & select best algorithm
 	// - sorted backward 
 	// - small amount
 	// - large amount
