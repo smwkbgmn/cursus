@@ -1,46 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap.c                                          :+:      :+:    :+:   */
+/*   op_rotate.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/08 17:39:01 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/03/16 00:03:24 by donghyu2         ###   ########.fr       */
+/*   Created: 2023/02/09 16:16:56 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/03/16 16:22:58 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap(t_stack *head);
+void	set_rotate(t_list **head);
 
-void	sa(t_stack *a)
+void	ra(t_list **a)
 {
-	swap(a);
-	printf("sa\n");
+	set_rotate(a);
+	printf("ra\n");
 }
 
-void	sb(t_stack *b)
+void	rb(t_list **b)
 {
-	swap(b);
-	printf("sb\n");
+	set_rotate(b);
+	printf("rb\n");
 }
 
-void	ss(t_stack *a, t_stack *b)
+void	rr(t_list **a, t_list **b)
 {
-	swap(a);
-	swap(b);
-	printf("ss\n");
+	ra(a);
+	rb(b);
+	printf("rr\n");
 }
 
-void	swap(t_stack *head)
+void	set_rotate(t_list **head)
 {
-	int	tmp;
+	t_list	*tmp;
+	t_list	*tail;
 
-	if (head && head->next)
-	{
-		tmp = head->data;
-		head->data = head->next->data;
-		head->next->data = tmp;
-	}
+	tmp = *head;
+	tail = ft_lstlast(*head);
+	*head = tmp->next;
+	tmp->next = NULL;
+	tail->next = tmp;
 }
