@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 17:42:25 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/04/01 06:05:58 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/04/01 19:39:08 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,16 @@ void tim_sort(int arr[], int n) {
         insertion_sort(arr, i, (i + min_run - 1 < n - 1) ? i + min_run - 1 : n - 1);
     }
 
-    for (int size = min_run; size < n; size = 2 * size) {
-        for (int left = 0; left < n; left += 2 * size) {
+    for (int size = min_run; size < n; size = 2 * size)
+    {
+        for (int left = 0; left < n; left += 2 * size)
+        {
             int mid = left + size - 1;
             int right = (left + 2 * size - 1 < n - 1) ? left + 2 * size - 1 : n - 1;
 
             merge(arr, left, mid, right);
         }
+		printf("check here\n");
     }
 }
 
@@ -108,16 +111,16 @@ int	find_meadian(int ac, char **av)
 {
 	int	*ary;
 	int	size;
-	// int	idx;
+	int	idx;
 
 	size = ac - 1;
 	ary = init_array(size, av);
 	tim_sort(ary, size);
-	// printf("\n[[sorted]]\n");
-	// idx = 0;
-	// while (idx < size)
-		// printf("[%d]", ary[idx++]);
-	// printf("\n");
-	// printf("\nmeadian --- %d\n", ary[size / 2]);
+	printf("\n[[sorted]]\n");
+	idx = 0;
+	while (idx < size)
+		printf("[%d]", ary[idx++]);
+	printf("\n");
+	printf("\nmeadian --- %d\n", ary[size / 2]);
 	return (ary[size / 2]);
 }

@@ -6,14 +6,15 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:38:17 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/04/01 02:23:04 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/04/01 20:00:55 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include "libft.h"
+# include "../1_archive/libft/include/libft.h"
+// # include "libft.h"
 
 # define TRUE 1
 # define FALSE 0
@@ -39,7 +40,7 @@ void	rra(t_stack **a);
 void	rrb(t_stack **b);
 void	rrr(t_stack **a, t_stack **b);
 
-void	sort(t_stack **a, t_stack **b, int med);
+void	sort(t_stack **a, t_stack **b);
 
 t_stack	*ft_stknew(int data);
 void	ft_stkadd_back(t_stack **stack, t_stack *new);
@@ -54,8 +55,6 @@ int		ft_stksize(t_stack *stack);
 void	test_print_input(char **av);
 void	test_print_stack(t_stack *a, t_stack *b);
 void	test_sample_implement(t_stack **a, t_stack **b);
-
-int	find_meadian(int ac, char **av);
 
 ///////////////////////////////////
 

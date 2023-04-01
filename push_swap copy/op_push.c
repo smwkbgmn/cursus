@@ -14,41 +14,41 @@
 
 #include "push_swap.h"
 
-void	push(t_list **head, void *data);
-void	del_node(t_list **head);
+void	push(t_stack **head, int data);
+void	del_node(t_stack **head);
 
-void	pa(t_list **a, t_list **b)
+void	pa(t_stack **a, t_stack **b)
 {
 	if (*b != NULL)
 	{
-		push(a, (*b)->content);
+		push(a, (*b)->data);
 		del_node(b);
 	}
 	printf("pa\n");
 }
 
-void	pb(t_list **a, t_list **b)
+void	pb(t_stack **a, t_stack **b)
 {
 	if (*a != NULL)
 	{
-		push(b, (*a)->content);
+		push(b, (*a)->data);
 		del_node(a);
 	}
 	printf("pb\n");
 }
 
-void	push(t_list **head, void *data)
+void	push(t_stack **head, int data)
 {
-	t_list	*new;
+	t_stack	*new;
 
-	new = ft_lstnew(data);
+	new = ft_stknew(data);
 	new->next = *head;
 	*head = new;
 }
 
-void	del_node(t_list **head)
+void	del_node(t_stack **head)
 {
-	t_list	*del;
+	t_stack	*del;
 
 	del = *head;
 	*head = del->next;
