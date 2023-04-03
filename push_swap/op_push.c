@@ -15,7 +15,6 @@
 #include "push_swap.h"
 
 void	push(t_stack **head, int data);
-void	del_node(t_stack **head);
 
 void	pa(t_stack **a, t_stack **b)
 {

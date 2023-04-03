@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:37:46 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/04/01 20:01:29 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/04/03 19:50:06 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,12 @@ int	main(int ac, char **av)
 {
 	t_stack	*a;
 	t_stack	*b;
-	int		median;
 
 	a = NULL;
 	b = NULL;
 	av++;
-	test_print_input(av);
 	ac++;
+	// test_print_input(av);
 
 	init_stack(&a, av);
 	sort(&a, &b);

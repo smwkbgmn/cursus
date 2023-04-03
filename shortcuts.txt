@@ -1,0 +1,12 @@
+cmd K 0 : Fold all
+cmd K J : Unfold all w
+cmd K L : Toggle fold
+opt cmd [ : Folds the innermost uncollapsed region at the cursor
+opt cmd ] : Unfolds the collapsed region at the cursor
+cmd shift P : Show command pannel
+
+[[[ CUSTOM ]]]
+shift cmd x : collapse folders in explorer
+
+500 -> under 5500
+100 -> under 700

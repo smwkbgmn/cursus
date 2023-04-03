@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 16:10:50 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/03/31 22:07:15 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/04/03 20:04:39 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ t_stack	*ft_stkidx(t_stack *stack, int idx)
 	return (stack);
 }
 
-int	ft_stksize(t_stack *stack)
+t_uint	ft_stksize(t_stack *stack)
 {
-	int	len;
+	t_uint	len;
 
 	len = 0;
 	while (stack)
