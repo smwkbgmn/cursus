@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:38:17 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/04/05 19:28:00 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/04/03 20:04:19 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ t_uint	ft_stksize(t_stack *stack);
 
 # include <stdio.h>
 
-void	gen_input(int size);
 void	test_print_input(char **av);
 void	test_print_stack(t_stack *a, t_stack *b);
 void	test_sample_implement(t_stack **a, t_stack **b);

@@ -6,72 +6,17 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 19:53:22 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/04/05 20:31:59 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/04/01 01:25:47 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
 #include "push_swap.h"
-
-t_bool	is_there_same(int *ary, int size, int n);
-
-void	gen_input(int size)
-{
-	FILE	*fp;
-	int		*ary;
-	int		idx;
-	int		n_rand;
-
-	if (size > 0)
-	{
-		fp = fopen("in", "w");
-		ary = malloc(sizeof(int) * size);
-		idx = 0;
-		while (idx < size)
-		{
-			ary[idx] = -1;
-			n_rand = rand() % size;
-			if (!is_there_same(ary, size, n_rand))
-			{
-				ary[idx] = n_rand;
-				if (idx + 1 != size)
-					fprintf(fp, "%d ", ary[idx]);
-				else
-					fprintf(fp, "%d", ary[idx]);
-				idx++;
-			}
-		}
-		fclose(fp);
-	}
-}
-
-t_bool	is_there_same(int *ary, int size, int n)
-{
-	int	idx;
-
-	idx = 0;
-	while (idx < size)
-	{
-		if (ary[idx] == n)
-			return (TRUE);
-		else if (ary[idx] == -1)
-			break ;
-		else
-			idx++;
-	}
-	return (FALSE);
-}
 
 void	test_print_input(char **av)
 {
 	printf("\n[[input]]\n");
 	while (*av)
-	{
-		printf("%s", *(av++));
-		if (*av)
-			printf(" ");
-	}
+		printf("[%s]", *(av++));
 	printf("\n");
 }
 

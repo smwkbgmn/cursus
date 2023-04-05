@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:37:46 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/04/05 20:40:49 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/04/04 04:21:55 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,8 @@ int	main(int ac, char **av)
 	ac++;
 	// test_print_input(av);
 
-	gen_input(32);
-
 	init_stack(&a, av);
 	sort(&a, &b);
-
 
 	// printf("\n[FINISH]\n");
 	// test_print_stack(a, b);

@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 17:46:30 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/04/05 20:42:29 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/04/04 04:32:06 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int		ref(t_stack *stk, int idx_to_move);
 // int	get_run_size(t_stack *a);
 void	merge(t_stack **a, t_stack **b);
 
-// -- sort by rotating stack a ---
+// -- sort with rotating stack a ---
 void	push_run_ascend(t_stack **a, t_stack **b, t_uint size);
 void	push_run_descend(t_stack **a, t_stack **b, t_uint size);
 int		find_max(t_stack *run);
@@ -25,7 +25,7 @@ int		find_position_max(t_stack *run, t_uint idx, t_uint size);
 int		find_position_min(t_stack *run, t_uint idx, t_uint size);
 t_stack	*init_run(t_stack *a, t_uint *size);
 
-// -- sort by rotating stack b ---
+// -- sort with rotating stack b ---
 // void	push_mini_run(t_stack **a, t_stack **b, t_uint size);
 // void	search_push(t_stack **a, t_stack **b, t_uint cnt);
 // t_uint	search(t_stack *b, int data);
@@ -35,15 +35,15 @@ void	sort(t_stack **a, t_stack **b)
 	t_uint	size;
 
 	// size = get_run_size(*a);
-	size = 16;
+	size = 32;
 	push_run_ascend(a, b, size);
 	push_run_descend(a, b, size);
 	merge(a, b);
 }
 
-// ----------------------------
-// | sort by rotating stack a |
-// ----------------------------
+// ------------------------------
+// | sort with rotating stack a |
+// ------------------------------
 
 void	merge(t_stack **a, t_stack **b)
 {
@@ -59,9 +59,9 @@ void	merge(t_stack **a, t_stack **b)
 	}	
 }
 
-// ----------------------------
-// | sort by rotating stack a |
-// ----------------------------
+// ------------------------------
+// | sort with rotating stack a |
+// ------------------------------
 
 
 void	push_run_ascend(t_stack **a, t_stack **b, t_uint size)
@@ -239,9 +239,9 @@ t_stack	*init_run(t_stack *a, t_uint *size)
 	return (run);
 }
 
-// ----------------------------
-// | sort by rotating stack b |
-// ----------------------------
+// ------------------------------
+// | sort with rotating stack b |
+// ------------------------------
 
 // void	push_mini_run(t_stack **a, t_stack **b, t_uint size)
 // {
