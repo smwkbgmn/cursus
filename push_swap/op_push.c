@@ -10,39 +10,33 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include <stdlib.h>
-
 #include "push_swap.h"
 
-void	push(t_stack **head, int data);
+void	del_node(t_stack **head);
+
+void	push(t_stack **stk_push, t_stack **stk_pop);
 
 void	pa(t_stack **a, t_stack **b)
 {
 	if (*b != NULL)
-	{
-		push(a, (*b)->data);
-		del_node(b);
-	}
+		push(a, b);
 	printf("pa\n");
 }
 
 void	pb(t_stack **a, t_stack **b)
 {
 	if (*a != NULL)
-	{
-		push(b, (*a)->data);
-		del_node(a);
-	}
+		push(b, a);
 	printf("pb\n");
 }
 
-void	push(t_stack **head, int data)
+void	push(t_stack **stk_push, t_stack **stk_pop)
 {
 	t_stack	*node_move;
-	
-	// ft_stkadd_front(head, ft_stknew(data));
-	ft_stkadd_back(head, );
-	*head = (*head)->prev;
+
+	node_move = *stk_pop;
+	del_node(stk_pop);
+	ft_stkadd_front(stk_push, node_move);
 }
 
 void	del_node(t_stack **head)
@@ -50,7 +44,15 @@ void	del_node(t_stack **head)
 	t_stack	*del;
 
 	del = *head;
-	*head = del->next;
-	(*head)->prev = del->prev;
-	free(del);
+	if (del)
+	{
+		if (del->next == *head)
+			*head = NULL;
+		else
+		{
+			del->prev->next = del->next;
+			del->next->prev = del->prev;
+			*head = (*head)->next;
+		}
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 16:10:50 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/04/06 14:13:32 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/04/06 17:27:50 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,11 @@ void	ft_stkadd_back(t_stack **stack, t_stack *new)
 	t_stack	*tail;
 
 	if (*stack == NULL)
+	{
 		*stack = new;
+		new->next = new;
+		new->prev = new;
+	}
 	else
 	{
 		head = *stack;

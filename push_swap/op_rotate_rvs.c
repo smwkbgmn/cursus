@@ -6,11 +6,13 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:16:37 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/04/06 14:02:15 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/04/06 17:39:54 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	set_rotate_rvs(t_stack **head);
 
 void	rra(t_stack **a)
 {
