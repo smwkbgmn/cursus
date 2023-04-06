@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 16:10:50 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/04/06 14:13:32 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/04/03 20:04:39 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,34 +22,27 @@ t_stack	*ft_stknew(int data)
 	if (new)
 	{
 		new->data = data;
-		new->next = new;
-		new->prev = new;
+		new->next = NULL;
 	}
 	return (new);
 }
 
-void	ft_stkadd_front(t_stack **stack, t_stack *new)
-{
-	ft_stkadd_back(stack, new);
-	*stack = new;
-}
-
 void	ft_stkadd_back(t_stack **stack, t_stack *new)
 {
-	t_stack	*head;
-	t_stack	*tail;
-
-	if (*stack == NULL)
-		*stack = new;
+	if (*stack)
+		ft_stklast(*stack)->next = new;
 	else
+		*stack = new;
+}
+
+t_stack	*ft_stklast(t_stack *stack)
+{
+	if (stack)
 	{
-		head = *stack;
-		tail = head->prev;
-		head->prev = new;
-		tail->next = new;
-		new->next = head;
-		new->prev = tail;
+		while (stack->next)
+			stack = stack->next;
 	}
+	return (stack);
 }
 
 t_stack	*ft_stkidx(t_stack *stack, int idx)
@@ -73,7 +66,7 @@ t_uint	ft_stksize(t_stack *stack)
 	t_uint	len;
 
 	len = 0;
-	while (stack->next != stack)
+	while (stack)
 	{
 		stack = stack->next;
 		len++;

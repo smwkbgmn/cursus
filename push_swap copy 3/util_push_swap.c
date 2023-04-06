@@ -6,9 +6,17 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:37:46 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/04/06 14:46:04 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/04/05 20:40:49 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+// 1. Check valid
+	// - integer
+	// - is it sorted
+	// 2. Check the count of disordered data & select best algorithm
+	// - sorted backward 
+	// - small amount
+	// - large amount
 
 #include <stdlib.h>
 
@@ -25,15 +33,16 @@ int	main(int ac, char **av)
 	b = NULL;
 	av++;
 	ac++;
-	test_print_input(av);
+	// test_print_input(av);
+
+	gen_input(32);
 
 	init_stack(&a, av);
-	// sort(&a, &b);
+	sort(&a, &b);
 
-	test_sample_implement(&a, &b);
 
-	printf("\n[FINISH]\n");
-	test_print_stack(a, b);
+	// printf("\n[FINISH]\n");
+	// test_print_stack(a, b);
 }
 
 void	init_stack(t_stack **head, char **av)

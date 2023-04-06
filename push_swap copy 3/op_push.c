@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include <stdlib.h>
+#include <stdlib.h>
 
 #include "push_swap.h"
 
@@ -38,11 +38,11 @@ void	pb(t_stack **a, t_stack **b)
 
 void	push(t_stack **head, int data)
 {
-	t_stack	*node_move;
-	
-	// ft_stkadd_front(head, ft_stknew(data));
-	ft_stkadd_back(head, );
-	*head = (*head)->prev;
+	t_stack	*new;
+
+	new = ft_stknew(data);
+	new->next = *head;
+	*head = new;
 }
 
 void	del_node(t_stack **head)
@@ -51,6 +51,5 @@ void	del_node(t_stack **head)
 
 	del = *head;
 	*head = del->next;
-	(*head)->prev = del->prev;
 	free(del);
 }

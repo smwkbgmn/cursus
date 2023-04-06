@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:38:17 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/04/06 14:00:15 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/04/05 19:28:00 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,10 @@
 # define TRUE 1
 # define FALSE 0
 
-// typedef struct s_stack
-// {
-// 	int				data;
-// 	struct s_stack	*next;
-// }	t_stack;
-
 typedef struct s_stack
 {
 	int				data;
 	struct s_stack	*next;
-	struct s_stack	*prev;
 }	t_stack;
 
 typedef short			t_bool;
@@ -54,7 +47,6 @@ void	set_rotate_rvs(t_stack **head);
 void	del_node(t_stack **head);
 
 t_stack	*ft_stknew(int data);
-void	ft_stkadd_front(t_stack **stack, t_stack *new);
 void	ft_stkadd_back(t_stack **stack, t_stack *new);
 t_stack	*ft_stklast(t_stack *stack);
 t_stack	*ft_stkidx(t_stack *stack, int idx);

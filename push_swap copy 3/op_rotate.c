@@ -1,37 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   op_rotate_rvs.c                                    :+:      :+:    :+:   */
+/*   op_rotate.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/09 16:16:37 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/04/06 14:02:15 by donghyu2         ###   ########.fr       */
+/*   Created: 2023/02/09 16:16:56 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/04/03 18:16:32 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	rra(t_stack **a)
+void	ra(t_stack **a)
 {
-	set_rotate_rvs(a);
-	printf("rra\n");
+	set_rotate(a);
+	printf("ra\n");
 }
 
-void	rrb(t_stack **b)
+void	rb(t_stack **b)
 {
-	set_rotate_rvs(b);
-	printf("rrb\n");
+	set_rotate(b);
+	printf("rb\n");
 }
 
-void	rrr(t_stack **a, t_stack **b)
+void	rr(t_stack **a, t_stack **b)
 {
-	set_rotate_rvs(a);
-	set_rotate_rvs(b);
-	printf("rrr\n");
+	set_rotate(a);
+	set_rotate(b);
+	printf("rr\n");
 }
 
-void	set_rotate_rvs(t_stack **head)
+void	set_rotate(t_stack **head)
 {
-	*head = (*head)->prev;
+	t_stack	*tmp;
+	t_stack	*tail;
+
+	if (*head && (*head)->next)
+	{
+		tmp = *head;
+		tail = ft_stklast(*head);
+		*head = tmp->next;
+		tmp->next = NULL;
+		tail->next = tmp;
+	}
 }
