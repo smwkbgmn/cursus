@@ -23,7 +23,7 @@
 //     // buf = (char *)malloc(-1);
 //     if (buf == NULL)
 //         return (NULL);
-//     temp = read_buf(fd, &data, buf, 1);
+//     temp = read_buf(fd, &data, buf, 1);ㅈ
 //     if (temp == NULL)
 //     {
 //         if (data)
@@ -88,18 +88,18 @@ char *read_buf(int fd, char **data, char *buf, int size)
     return temp;
 }
 
-// char *read_buf(int fd, char **data, char *buf, int size)
-// {
-// 	char	*temp;
+char *read_buf(int fd, char **data, char *buf, int size)
+{
+	char	*temp;
 	
-// 	temp = NULL;
-// 	while (size)
-// 	{
-// 		size = read(fd, buf, BUFFER_SIZE);
-// 		if (size == ERROR)
+	temp = NULL;
+	while (size)
+	{
+		size = read(fd, buf, BUFFER_SIZE);
+		if (size == ERROR)
 
-// 	}
-// }
+	}
+}
 
 char    *size_is_zero(char **data)
 {

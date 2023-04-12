@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 16:10:50 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/04/10 17:42:27 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/04/12 18:12:12 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,14 @@ t_stack	*ft_stkidx(t_stack *stack, int idx)
 
 t_uint	ft_stksize(t_stack *stack)
 {
+	t_stack	*head;
 	t_uint	len;
 
 	len = 0;
 	if (stack)
 	{
-		while (stack->next != stack)
+		head = stack;
+		while (stack->next != head)
 		{
 			stack = stack->next;
 			len++;
