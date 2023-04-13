@@ -65,4 +65,4 @@ test		: $(NAME)
 
 out			: $(NAME)
 			@./$(NAME) $$(cat test_in) > test_out
-			@$(R M) $(NAME)
+			@$(RM) $(NAME)

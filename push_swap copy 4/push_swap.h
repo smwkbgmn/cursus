@@ -6,23 +6,30 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:38:17 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/04/13 20:08:25 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/04/10 17:21:24 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-// # include "../1_archive/libft/include/libft.h"
-# include "libft.h"
+# include "../1_archive/libft/include/libft.h"
+// # include "libft.h"
 
 # define TRUE 1
 # define FALSE 0
+
+// typedef struct s_stack
+// {
+// 	int				data;
+// 	struct s_stack	*next;
+// }	t_stack;
 
 typedef struct s_stack
 {
 	int				data;
 	struct s_stack	*next;
+	struct s_stack	*prev;
 }	t_stack;
 
 typedef short			t_bool;
@@ -41,12 +48,10 @@ void	rrb(t_stack **b);
 void	rrr(t_stack **a, t_stack **b);
 
 void	sort(t_stack **a, t_stack **b);
-
-void	set_rotate(t_stack **head);
-void	set_rotate_rvs(t_stack **head);
-void	del_node(t_stack **head);
+int		ref(t_stack *stk, int idx);
 
 t_stack	*ft_stknew(int data);
+void	ft_stkadd_front(t_stack **stack, t_stack *new);
 void	ft_stkadd_back(t_stack **stack, t_stack *new);
 t_stack	*ft_stklast(t_stack *stack);
 t_stack	*ft_stkidx(t_stack *stack, int idx);

@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 17:46:30 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/04/05 20:42:29 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/04/13 20:14:26 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	sort(t_stack **a, t_stack **b)
 	t_uint	size;
 
 	// size = get_run_size(*a);
-	size = 16;
+	size = 50;
 	push_run_ascend(a, b, size);
 	push_run_descend(a, b, size);
 	merge(a, b);
