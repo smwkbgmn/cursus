@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 13:07:57 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/19 17:02:07 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/04/17 19:21:17 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,30 +115,3 @@ static short	check_format(char *format, short flag)
 	}
 	return (get_flag(*format) == flag);
 }
-
-// static short	check_format(char *format, short flag)
-// {
-// 	while (*format)
-// 	{
-// 		if (flag == 4)
-// 		{
-// 			if (!(get_flag(*format) < 3))
-// 				break ;
-// 		}
-// 		else if (flag == 6)
-// 		{
-// 			if (!(get_flag(*format) < 3 || *format == '0'))
-// 				break ;
-// 		}
-// 		else
-// 		{
-// 			if (get_flag(*format) == flag)
-// 				break ;
-// 		}
-// 		format++;
-// 	}
-// 	if (get_flag(*format) == flag)
-// 		return (TRUE);
-// 	else
-// 		return (FALSE);
-// }

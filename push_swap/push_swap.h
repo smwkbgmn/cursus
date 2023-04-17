@@ -6,24 +6,18 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:38:17 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/04/10 17:21:24 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/04/17 18:49:25 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include "../1_archive/libft/include/libft.h"
-// # include "libft.h"
+// # include "../1_archive/libft/include/libft.h"
+# include "libft.h"
 
 # define TRUE 1
 # define FALSE 0
-
-// typedef struct s_stack
-// {
-// 	int				data;
-// 	struct s_stack	*next;
-// }	t_stack;
 
 typedef struct s_stack
 {
@@ -61,7 +55,6 @@ t_uint	ft_stksize(t_stack *stack);
 
 # include <stdio.h>
 
-void	gen_input(int size);
 void	test_print_input(char **av);
 void	test_print_stack(t_stack *a, t_stack *b);
 void	test_sample_implement(t_stack **a, t_stack **b);

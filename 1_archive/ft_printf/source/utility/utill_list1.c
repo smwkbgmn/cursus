@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 13:07:57 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/19 05:26:35 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/04/17 19:23:02 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ short	init_list(t_list **head)
 int	write_list(t_list *head, short type)
 {
 	size_t	len_content;
-	int		len;
+	int		len_printed;
 
-	len = 0;
-	while (head && len != ERROR)
+	len_printed = 0;
+	while (head && len_printed != ERROR)
 	{
 		if (head->content)
 		{
@@ -51,11 +51,11 @@ int	write_list(t_list *head, short type)
 				len_content = 1;
 			else
 				len_content = ft_strlen(head->content);
-			apply_len(write(1, head->content, len_content), &len, -1);
+			apply_len(write(1, head->content, len_content), &len_printed, -1);
 		}
 		head = head->next;
 	}
-	return (len);
+	return (len_printed);
 }
 
 void	free_content(void *content)

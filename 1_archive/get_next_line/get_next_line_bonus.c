@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 16:15:11 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/02/07 10:43:34 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/04/17 18:18:26 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*get_next_line(int fd)
 				node->ptr = node->str;
 			}
 			line = read_line(node, fd);
-			if (!line || !node->str)
+			if (!line)
 				del_node(&head, fd);
 		}
 	}
@@ -42,26 +42,25 @@ char	*get_next_line(int fd)
 char	*read_line(t_list *node, int fd)
 {
 	char	*line;
-	char	*new;
-	char	*nl;
+	char	*str_new;
+	char	*ptr_nl;
 
 	line = NULL;
 	if (node->str && *node->str)
 	{
-		new = NULL;
-		nl = ft_strchr(node->ptr, '\n');
-		if (!nl)
-			new = get_str(fd, 0);
-		if (nl || new)
-		{
-			line = ft_strjoin(node->ptr, new);
-			adjust_node(node, new);
-		}
+		ptr_nl = ft_strchr(node->ptr, '\n');
+		if (!ptr_nl)
+			str_new = get_str(fd, 0);
+		else
+			str_new = NULL;
+		if (ptr_nl || str_new)
+			line = ft_strjoin(node->ptr, str_new);
+		adjust_node(node, str_new);
 	}
 	return (line);
 }
 
-char	*get_str(int fd, size_t len_total)
+char	*get_str(int fd, size_t total)
 {
 	char	*buf;
 	char	*str;
@@ -76,14 +75,14 @@ char	*get_str(int fd, size_t len_total)
 		{
 			buf[len] = '\0';
 			if (len > 0 && !ft_strchr(buf, '\n'))
-				str = get_str(fd, len_total + len);
+				str = get_str(fd, total + len);
 			else
 			{
-				str = malloc(len_total + len + 1);
+				str = malloc(total + len + 1);
 				if (str)
-					str[len_total + len] = '\0';
+					str[total + len] = '\0';
 			}
-			ft_memcpy(str + len_total, buf, len * (str != NULL));
+			ft_memcpy(str + total, buf, len * (str != NULL));
 		}
 		free(buf);
 	}

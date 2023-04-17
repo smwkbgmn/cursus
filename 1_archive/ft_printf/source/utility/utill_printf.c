@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 22:06:50 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/27 15:08:40 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/04/17 19:19:39 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,24 +70,24 @@ static size_t	get_len(const char *str)
 
 static int	write_format(const char **str, va_list *ptr)
 {
-	t_list	*list_fm;
-	char	*str_fm;
-	size_t	len_fm;	
+	t_list	*list_f;
+	char	*str_f;
+	size_t	len_f;	
 	int		len;
 
 	len = ERROR;
-	if (init_list(&list_fm))
+	if (init_list(&list_f))
 	{
-		len_fm = get_len_format(*str);
-		str_fm = ft_substr(*str, 1, len_fm);
-		if (str_fm)
+		len_f = get_len_format(*str);
+		str_f = ft_substr(*str, 1, len_f);
+		if (str_f)
 		{
-			if (get_conversion(str_fm, list_fm, ptr))
-				len = write_list(list_fm, get_type_str(str_fm));
-			free(str_fm);
+			if (get_conversion(str_f, list_f, ptr))
+				len = write_list(list_f, get_type_str(str_f));
+			free(str_f);
 		}
-		ft_lstclear(&list_fm, &free_content);
-		*str += len_fm + 1;
+		ft_lstclear(&list_f, &free_content);
+		*str += len_f + 1;
 	}
 	return (len);
 }
