@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 17:46:30 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/04/17 22:01:07 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/04/18 19:35:24 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	push_to_stack_b(t_stack **a, t_stack **b)
 					}
 					rotate_until_min(b, find_min(*b));
 					pb(a, b);
+					// rb(b);
 				}
 				else
 					break ;
@@ -125,43 +126,43 @@ t_stack	*find_stk_to_push(t_stack *a, int chunk, t_bool *direction)
 		return (NULL);
 }
 
-// void	rotate_until_min(t_stack **b, int min)
-// {
-// 	while (ref(*b, 0) != min)
-// 		rb(b);
-// }
-
 void	rotate_until_min(t_stack **b, int min)
 {
-	t_stack	*stk;
-	t_uint	mid;
-	t_uint	idx;
-
-	stk = *b;
-	idx = 0;
-	while (stk && stk->next != *b)
-	{
-		if (ref(stk, 0) == min)
-			break ;
-		else
-		{
-			stk = stk->next;
-			idx++;
-		}
-	}
-	mid = ft_stksize(*b) / 2;
-	if (idx < mid)
-	{
-		while (idx-- > 0)
-			rb(b);
-	}
-	else
-	{
-		idx = ft_stksize(*b) - idx;
-		while (idx-- > 0)
-			rrb(b);
-	}
+	while (ref(*b, 0) != min)
+		rb(b);
 }
+
+// void	rotate_until_min(t_stack **b, int min)
+// {
+// 	t_stack	*stk;
+// 	t_uint	mid;
+// 	t_uint	idx;
+
+// 	stk = *b;
+// 	idx = 0;
+// 	while (stk && stk->next != *b)
+// 	{
+// 		if (ref(stk, 0) == min)
+// 			break ;
+// 		else
+// 		{
+// 			stk = stk->next;
+// 			idx++;
+// 		}
+// 	}
+// 	mid = ft_stksize(*b) / 2;
+// 	if (idx < mid)
+// 	{
+// 		while (idx-- > 0)
+// 			rb(b);
+// 	}
+// 	else
+// 	{
+// 		idx = ft_stksize(*b) - idx;
+// 		while (idx-- > 0)
+// 			rrb(b);
+// 	}
+// }
 
 int	find_min(t_stack *b)
 {
@@ -215,7 +216,6 @@ void	rotate_until_max(t_stack **b, int max)
 		}
 	}
 	mid = ft_stksize(*b) / 2;
-	// printf("idx --- %d\nmid --- %d\n", idx, mid);
 	if (idx < mid)
 	{
 		while (idx-- > 0)
@@ -238,7 +238,8 @@ int	find_max(t_stack *b)
 	{
 		stk = b;
 		max = ref(b, 0);
-		while (stk->next != b)
+		stk = stk->next;
+		while (stk != b)
 		{
 			if (ref(stk, 0) > max)
 				max = ref(stk, 0);
