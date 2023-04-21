@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:37:46 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/04/21 15:38:48 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/04/18 19:31:11 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,4 @@ int	ref(t_stack *stk, int idx)
 		return (ft_stkidx(stk, idx)->data);
 	else
 		return (0);
-}
-
-int	top(t_stack *stk)
-{
-	return (ref(stk, 0));
 }

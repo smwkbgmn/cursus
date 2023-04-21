@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:38:17 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/04/21 15:38:58 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/04/17 18:49:25 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	rrr(t_stack **a, t_stack **b);
 
 void	sort(t_stack **a, t_stack **b);
 int		ref(t_stack *stk, int idx);
-int		top(t_stack *stk);
 
 t_stack	*ft_stknew(int data);
 void	ft_stkadd_front(t_stack **stack, t_stack *new);

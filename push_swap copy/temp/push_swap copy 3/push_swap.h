@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:38:17 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/04/21 15:38:58 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/04/13 20:08:25 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ typedef struct s_stack
 {
 	int				data;
 	struct s_stack	*next;
-	struct s_stack	*prev;
 }	t_stack;
 
 typedef short			t_bool;
@@ -42,11 +41,12 @@ void	rrb(t_stack **b);
 void	rrr(t_stack **a, t_stack **b);
 
 void	sort(t_stack **a, t_stack **b);
-int		ref(t_stack *stk, int idx);
-int		top(t_stack *stk);
+
+void	set_rotate(t_stack **head);
+void	set_rotate_rvs(t_stack **head);
+void	del_node(t_stack **head);
 
 t_stack	*ft_stknew(int data);
-void	ft_stkadd_front(t_stack **stack, t_stack *new);
 void	ft_stkadd_back(t_stack **stack, t_stack *new);
 t_stack	*ft_stklast(t_stack *stack);
 t_stack	*ft_stkidx(t_stack *stack, int idx);
@@ -56,6 +56,7 @@ t_uint	ft_stksize(t_stack *stack);
 
 # include <stdio.h>
 
+void	gen_input(int size);
 void	test_print_input(char **av);
 void	test_print_stack(t_stack *a, t_stack *b);
 void	test_sample_implement(t_stack **a, t_stack **b);

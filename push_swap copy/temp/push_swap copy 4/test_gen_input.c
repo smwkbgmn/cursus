@@ -6,16 +6,13 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 12:48:56 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/04/20 19:29:24 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/04/06 13:27:50 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <time.h>
-
-#define DEFAULT -1
 
 void	generate(FILE *fp, int *ary, int size);
 short	is_there_same(int *ary, int size, int n);
@@ -26,10 +23,7 @@ int	main(int ac, char **av)
 
 	size = atoi(*(av + 1));
 	if (ac > 1 && size > 0)
-	{
-		srand(time(0));
 		generate(fopen("test_in", "w"), malloc(sizeof(int) * size), size);
-	}
 	return (0);
 }
 
@@ -41,7 +35,7 @@ void	generate(FILE *fp, int *ary, int size)
 	idx = 0;
 	while (idx < size)
 	{
-		ary[idx] = DEFAULT;
+		ary[idx] = -1;
 		n_rand = rand() % size;
 		if (!is_there_same(ary, size, n_rand))
 		{
