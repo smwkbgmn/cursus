@@ -11,7 +11,9 @@ op_swap.c \
 op_rotate.c \
 op_rotate_rvs.c \
 util_push_swap.c \
-util_sort.c \
+util_strtoi.c \
+util_sort_hourgalss1.c \
+util_sort_hourglass2.c \
 util_stack.c \
 util_valid.c \
 test.c

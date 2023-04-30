@@ -38,20 +38,20 @@ void	push(t_stack **push, t_stack **pop)
 	ft_stkadd_front(push, stk_move);
 }
 
-void	del_node(t_stack **stk)
+void	del_node(t_stack **head)
 {
 	t_stack	*del;
 
-	del = *stk;
+	del = *head;
 	if (del)
 	{
-		if (del->next == *stk)
-			*stk = NULL;
+		if (del->next == *head)
+			*head = NULL;
 		else
 		{
 			del->prev->next = del->next;
 			del->next->prev = del->prev;
-			*stk = (*stk)->next;
+			*head = (*head)->next;
 		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:38:17 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/01 01:47:04 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/04/25 09:13:56 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,10 @@
 
 # define TRUE 1
 # define FALSE 0
-# define INT_MAX 2147483647
-# define INT_MIN -2147483648
 
-typedef void			(*t_sort)(t_stack **, t_stack **);
 typedef short			t_bool;
 typedef unsigned int	t_uint;
+
 typedef struct s_stack
 {
 	int				data;
@@ -43,19 +41,15 @@ void	rra(t_stack **a);
 void	rrb(t_stack **b);
 void	rrr(t_stack **a, t_stack **b);
 
-void	write_error(void);
-
-void	sort_swap(t_stack **a, t_stack **b);
-void	sort_insertion(t_stack **a, t_stack **b);
-void	sort_hourglass(t_stack **a, t_stack **b);
+void	sort(t_stack **a, t_stack **b);
+t_uint	ref(t_stack *stk);
 
 t_stack	*ft_stknew(int data);
+void	ft_stkadd_front(t_stack **stack, t_stack *new);
 void	ft_stkadd_back(t_stack **stack, t_stack *new);
+t_stack	*ft_stklast(t_stack *stack);
+t_stack	*ft_stkidx(t_stack *stack, int idx);
 t_uint	ft_stksize(t_stack *stack);
-void	ft_stkclear(t_stack *stk);
-t_uint	ref(t_stack *stk);
-// t_stack	*ft_stkidx(t_stack *stack, int idx);
-// void	ft_stkadd_front(t_stack **stack, t_stack *new);
 
 ////////////// for test ///////////
 

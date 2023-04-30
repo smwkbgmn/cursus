@@ -6,70 +6,81 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:37:46 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/01 02:05:47 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/04/25 09:14:02 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <unistd.h>
 
 #include "push_swap.h"
 
-t_bool			check_valid(int ac, char **av);
-t_bool			check_duplication(t_stack *a);
-t_bool			init_stack(t_stack **a, int ac, char **av);
-static t_sort	select_algorithm(t_stack *a);
-static t_uint	get_cnt_disorder(t_stack *a);
+void	init_stack(t_stack **head, int ac, char **av);
+void	fill_order(t_stack *a);
+t_uint	get_order(t_stack *a, int num);
 
 int	main(int ac, char **av)
 {
 	t_stack	*a;
-	t_sort	sort;
+	t_stack	*b;
+
+	a = NULL;
+	b = NULL;
 
 	// test_print_input(av);
 
-	a = NULL;
-	av += 1;
-	if (ac > 1 && check_valid(ac, av) && init_stack(&a, ac, av))
-	{
-		if (check_duplication(a))
-		{
-			sort = selct_algorithm(a);
-			sort(a, NULL);
-		}
-		ft_stkclear(a);
-	}
-	return (0);
+	init_stack(&a, ac, ++av);
+	fill_order(a);
+	sort(&a, &b);
+
+	// printf("\n[FINISH]\n");
+	// test_print_stack(a, b);
 }
 
-static t_sort	select_algorithm(t_stack *a)
+void	init_stack(t_stack **head, int ac, char **av)
 {
-	t_uint	cnt;
+	if (ac)
+	{
+		while (*av)
+			ft_stkadd_back(head, ft_stknew(ft_atoi(*(av++))));
+	}
+}
 
-	cnt = get_cnt_disorder;
-	if (cnt < 3)
-		return (&sort_swap);
-	else if (cnt < 5)
-		return (&sort_insertion);
+void	fill_order(t_stack *a)
+{
+	t_stack	*stk;
+
+	stk = a;
+	while (stk)
+	{
+		stk->order = get_order(stk, stk->data);
+		stk = stk->next;
+		if (stk == a)
+			break ;
+	}
+}
+
+t_uint	get_order(t_stack *a, int num)
+{
+	t_stack	*stk;
+	t_uint	order;
+
+	stk = a;
+	order = 0;
+	while (stk)
+	{
+		if (stk->data < num)
+			order++;
+		stk = stk->next;
+		if (stk == a)
+			break ;
+	}
+	return (order);
+}
+
+t_uint	ref(t_stack *stk)
+{
+	if (stk)
+		return (stk->order);
 	else
-		return (&sort_hourglass);
-}
-
-static t_uint	get_cnt_disorder(t_stack *a)
-{
-	t_uint	cnt;
-
-	cnt = 0;
-	while (a->next != a)
-	{
-		if (ref(a) > ref(a->next))
-			cnt++;
-		a = a->next;
-	}
-	return (cnt);
-}
-
-void	write_error(void)
-{
-	write(2, "Error\n", 6);
+		return (0);
 }
