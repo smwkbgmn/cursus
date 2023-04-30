@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:37:46 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/01 02:05:47 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/05/01 02:17:05 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ int	main(int ac, char **av)
 
 	// test_print_input(av);
 
+	av++;
 	a = NULL;
-	av += 1;
 	if (ac > 1 && check_valid(ac, av) && init_stack(&a, ac, av))
 	{
 		if (check_duplication(a))
 		{
-			sort = selct_algorithm(a);
+			sort = select_algorithm(a);
 			sort(a, NULL);
 		}
 		ft_stkclear(a);
