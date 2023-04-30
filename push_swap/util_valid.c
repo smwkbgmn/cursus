@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:28:49 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/01 01:08:09 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/05/01 03:38:47 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,24 +64,30 @@ static t_bool	count_digit(char *av)
 t_bool	check_duplication(t_stack *a)
 {
 	t_stack	*stk;
-	t_uint	*table;
+	t_uint	size;
+	t_bool	*table;
 
 	stk = a;
-	table = ft_calloc(ft_stksize(a), sizeof(t_uint));
-	while (stk)
+	size = ft_stksize(stk);
+	table = ft_calloc(size, sizeof(t_uint));
+	if (table)
 	{
-		if (table[a->order] == 0)
+		while (size-- > 0)
 		{
-			table[a->order]++;
-			stk = stk->next;
+			if (table[a->order] == FALSE)
+			{
+				table[a->order] = TRUE;
+				stk = stk->next;
+			}
+			else
+			{
+				write_error();
+				break ;
+			}
 		}
-		else
-		{
-			write_error();
-			return (FALSE);
-		}
+		free(table);
 		if (stk == a)
-			break ;
+			return (TRUE);
 	}
-	return (TRUE);
+	return (FALSE);
 }
