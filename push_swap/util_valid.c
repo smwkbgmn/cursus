@@ -6,9 +6,11 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:28:49 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/01 03:38:47 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/05/01 23:32:34 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdlib.h>
 
 #include "push_swap.h"
 
@@ -69,14 +71,15 @@ t_bool	check_duplication(t_stack *a)
 
 	stk = a;
 	size = ft_stksize(stk);
+	// printf("size of stack --- %d\n", size);
 	table = ft_calloc(size, sizeof(t_uint));
 	if (table)
 	{
 		while (size-- > 0)
 		{
-			if (table[a->order] == FALSE)
+			if (table[stk->order] == FALSE)
 			{
-				table[a->order] = TRUE;
+				table[stk->order] = TRUE;
 				stk = stk->next;
 			}
 			else

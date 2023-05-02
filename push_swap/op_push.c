@@ -29,13 +29,15 @@ void	pb(t_stack **a, t_stack **b)
 	printf("pb\n");
 }
 
-void	push(t_stack **push, t_stack **pop)
+void	push(t_stack **pushed, t_stack **poped)
 {
-	t_stack	*stk_move;
+	t_stack	*temp;
 
-	stk_move = *pop;
-	del_node(pop);
-	ft_stkadd_front(push, stk_move);
+	temp = *poped;
+	del_node(poped);
+	// ft_stkadd_front(pushed, temp);
+	ft_stkadd_back(pushed, temp);
+	*pushed = (*pushed)->prev;
 }
 
 void	del_node(t_stack **stk)

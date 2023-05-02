@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util_sort_insertion.c                              :+:      :+:    :+:   */
+/*   util_sort_3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/01 01:50:34 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/01 01:51:18 by donghyu2         ###   ########.fr       */
+/*   Created: 2023/05/01 01:50:07 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/05/03 01:44:58 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sort_insertion(t_stack **a, t_stack **b)
+void	sort_3(t_stack **a, t_stack **b)
 {
-	
+	if (!(*b))
+	{
+		if (ref(*a) == 2)
+			ra(a);
+		else if (ref((*a)->next) == 2)
+			rra(a);
+		if (ref(*a) == 1)
+			sa(*a);
+	}
 }

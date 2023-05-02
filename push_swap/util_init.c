@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 01:13:59 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/01 02:17:32 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/05/01 23:26:58 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static t_uint	get_order(t_stack *a, int num);
 t_bool	init_stack(t_stack **a, int ac, char **av)
 {
 	t_stack	*stk_new;
-	long	data;
 
 	while (ac-- > 1)
 	{
