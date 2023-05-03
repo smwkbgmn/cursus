@@ -4,6 +4,7 @@ cmd K L : Toggle fold
 opt cmd [ : Folds the innermost uncollapsed region at the cursor
 opt cmd ] : Unfolds the collapsed region at the cursor
 cmd shift P : Show command pannel
+cmt K F : Close folder
 
 [[[ CUSTOM ]]]
 shift cmd x : collapse folders in explorer

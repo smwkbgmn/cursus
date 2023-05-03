@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util_sort_3.c                                      :+:      :+:    :+:   */
+/*   sort_reverse.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/01 01:50:07 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/03 01:44:58 by donghyu2         ###   ########.fr       */
+/*   Created: 2023/05/03 18:19:03 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/05/03 23:01:42 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sort_3(t_stack **a, t_stack **b)
+void	sort_reverse(t_stack **a, t_stack **b)
 {
-	if (!(*b))
+	printf("reverse\n");
+	while (*a)
 	{
-		if (ref(*a) == 2)
-			ra(a);
-		else if (ref((*a)->next) == 2)
-			rra(a);
-		if (ref(*a) == 1)
-			sa(*a);
+		rra(a);
+		pb(a, b);
 	}
+	while (*b)
+		pa(a, b);
 }

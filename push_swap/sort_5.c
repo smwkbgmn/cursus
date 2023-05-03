@@ -1,65 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util_sort_5.c                                      :+:      :+:    :+:   */
+/*   sort_5.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 01:50:34 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/03 02:20:38 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/05/03 23:02:06 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* example
-5 2 4 3 1
-
-
-*/
-
 #include "push_swap.h"
 
-static t_bool	is_sorted(t_stack *a, t_uint size);
+static void		make_a_be_three(t_stack **a, t_stack **b, t_uint *size);
 
 void	sort_5(t_stack **a, t_stack **b)
 {
+	printf("five\n");
 	t_uint	size;
 	t_uint	idx;
 
 	size = ft_stksize(*a);
-	if (*b)
-		return ;
-	while (!is_sorted(*a, size))
+	make_a_be_three(a, b, &size);
+	sort_3(a, b);
+	while (*b)
 	{
-		idx = 0;
-		while (idx++ < size)
-		{
-			test_print_stack(*a, *b);
-			if (ref(*a) > ref((*a)->next))
-				sa(*a);
-			else
-				ra(a);
-		}
-		test_print_stack(*a, *b);
+		idx = find_position_asc(*a, size, ref(*b));
+		rotate_a_idx(a, size, idx);
+		pa(a, b);
+		size++;
 	}
-	// while (ref(*a) != 0)
-	// 	ra(a);
+	idx = find_start(*a);
+	rotate_a_idx(a, size, idx);
 }
 
-static t_bool	is_sorted(t_stack *a, t_uint size)
+static void	make_a_be_three(t_stack **a, t_stack **b, t_uint *size)
 {
-	t_uint	cnt_disorder;
-
-	size = ft_stksize(a);
-	cnt_disorder = 0;
-	while (size-- > 0)
+	while (*size > 3)
 	{
-		if (ref(a) > ref(a->next))
-		{
-			cnt_disorder++;
-			if (cnt_disorder > 1)
-				return (FALSE);
-		}
-		a = a->next;
+		pb(a, b);
+		(*size)--;
 	}
-	return (TRUE);
 }

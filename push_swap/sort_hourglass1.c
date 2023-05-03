@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util_sort_hourglass1.c                             :+:      :+:    :+:   */
+/*   sort_hourglass1.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 17:46:30 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/02 01:08:27 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/05/03 23:01:25 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void			sort_to_a(t_stack **a, t_stack **b);
 
 void	sort_hourglass(t_stack **a, t_stack **b)
 {
+	printf("hourglass\n");
 	sort_to_b(a, b);
 	sort_to_a(a, b);
 }
@@ -72,8 +73,8 @@ static t_uint	get_chunk(t_uint size)
 	t_uint	cnt_fifty;
 
 	cnt_fifty = size / 50;
-	return (14 + ((cnt_fifty) * 2)
-		+ (1 * ((cnt_fifty > 0) && (cnt_fifty % 4) == 0)));
+	return (14 + (cnt_fifty * 2)
+		+ (1 * (cnt_fifty > 0 && cnt_fifty % 4 == 0)));
 }
 
 static void	check_swap(t_stack **a, t_stack **b)

@@ -10,12 +10,16 @@ op_push.c \
 op_rotate_rvs.c \
 op_rotate.c \
 op_swap.c \
+sort_3.c \
+sort_5.c \
+sort_insertion.c \
+sort_reverse.c \
+sort_rotate.c \
+sort_hourglass1.c \
+sort_hourglass2.c \
 util_init.c \
 util_push_swap.c \
-util_sort_3.c \
-util_sort_5.c \
-util_sort_hourglass1.c \
-util_sort_hourglass2.c \
+util_sort.c \
 util_stack.c \
 util_valid.c \
 test.c

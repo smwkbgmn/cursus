@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:38:17 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/03 01:45:33 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/05/03 22:58:32 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,13 @@ typedef struct s_stack
 typedef void			(*t_sort)(t_stack **, t_stack **);
 
 void	write_error(void);
-t_uint	get_cnt_disorder(t_stack *a);
+t_uint	get_cnt_disorder(t_stack *a, t_uint size);
+
+t_stack	*ft_stknew(int data);
+void	ft_stkadd_back(t_stack **stack, t_stack *new);
+t_uint	ft_stksize(t_stack *stack);
+void	ft_stkclear(t_stack *stk);
+t_uint	ref(t_stack *stk);
 
 void	sa(t_stack *a);
 void	sb(t_stack *b);
@@ -48,13 +54,17 @@ void	rrr(t_stack **a, t_stack **b);
 
 void	sort_3(t_stack **a, t_stack **b);
 void	sort_5(t_stack **a, t_stack **b);
+void	sort_rotate(t_stack **a, t_stack **b);
+void	sort_reverse(t_stack **a, t_stack **b);
+void	sort_insertion(t_stack **a, t_stack **b);
 void	sort_hourglass(t_stack **a, t_stack **b);
 
-t_stack	*ft_stknew(int data);
-void	ft_stkadd_back(t_stack **stack, t_stack *new);
-t_uint	ft_stksize(t_stack *stack);
-void	ft_stkclear(t_stack *stk);
-t_uint	ref(t_stack *stk);
+t_uint	find_start(t_stack *a);
+t_uint	find_position_asc(t_stack *stk, t_uint size, t_uint order);
+t_uint	find_position_dsc(t_stack *stk, t_uint size, t_uint order);
+void	rotate_a_idx(t_stack **a, t_uint size, t_uint idx);
+void	rotate_b_idx(t_stack **b, t_uint size, t_uint idx);
+
 
 ////////////// for test ///////////
 
