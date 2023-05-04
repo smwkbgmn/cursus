@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:28:49 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/01 23:32:34 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/05/04 21:53:58 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,22 +71,18 @@ t_bool	check_duplication(t_stack *a)
 
 	stk = a;
 	size = ft_stksize(stk);
-	// printf("size of stack --- %d\n", size);
 	table = ft_calloc(size, sizeof(t_uint));
 	if (table)
 	{
 		while (size-- > 0)
 		{
-			if (table[stk->order] == FALSE)
-			{
-				table[stk->order] = TRUE;
-				stk = stk->next;
-			}
-			else
+			if (table[stk->order] != FALSE)
 			{
 				write_error();
 				break ;
 			}
+			table[stk->order] = TRUE;
+			stk = stk->next;
 		}
 		free(table);
 		if (stk == a)

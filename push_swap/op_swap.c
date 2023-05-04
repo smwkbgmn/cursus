@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	swap(t_stack *head);
+static void	swap(t_stack *head);
 
 void	sa(t_stack *a)
 {
@@ -33,7 +33,7 @@ void	ss(t_stack *a, t_stack *b)
 	printf("ss\n");
 }
 
-void	swap(t_stack *head)
+static void	swap(t_stack *head)
 {
 	t_uint	tmp_order;
 	int		tmp;

@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 17:46:30 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/03 23:01:25 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/05/04 18:30:38 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void			sort_to_a(t_stack **a, t_stack **b);
 
 void	sort_hourglass(t_stack **a, t_stack **b)
 {
-	printf("hourglass\n");
 	sort_to_b(a, b);
 	sort_to_a(a, b);
 }

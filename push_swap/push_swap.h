@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:38:17 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/03 22:58:32 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/05/04 18:38:32 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ typedef struct s_stack
 typedef void			(*t_sort)(t_stack **, t_stack **);
 
 void	write_error(void);
-t_uint	get_cnt_disorder(t_stack *a, t_uint size);
 
 t_stack	*ft_stknew(int data);
 void	ft_stkadd_back(t_stack **stack, t_stack *new);
@@ -65,8 +64,7 @@ t_uint	find_position_dsc(t_stack *stk, t_uint size, t_uint order);
 void	rotate_a_idx(t_stack **a, t_uint size, t_uint idx);
 void	rotate_b_idx(t_stack **b, t_uint size, t_uint idx);
 
-
-////////////// for test ///////////
+////////////// for test //////////////
 
 # include <stdio.h>
 
@@ -74,6 +72,6 @@ void	test_print_input(char **av);
 void	test_print_stack(t_stack *a, t_stack *b);
 void	test_sample_implement(t_stack **a, t_stack **b);
 
-///////////////////////////////////
+//////////////////////////////////////
 
 #endif

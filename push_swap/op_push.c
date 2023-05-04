@@ -12,8 +12,8 @@
 
 #include "push_swap.h"
 
-void	push(t_stack **push, t_stack **pop);
-void	del_node(t_stack **head);
+static void	push(t_stack **push, t_stack **pop);
+static void	del_node(t_stack **head);
 
 void	pa(t_stack **a, t_stack **b)
 {
@@ -29,18 +29,17 @@ void	pb(t_stack **a, t_stack **b)
 	printf("pb\n");
 }
 
-void	push(t_stack **pushed, t_stack **poped)
+static void	push(t_stack **pushed, t_stack **poped)
 {
 	t_stack	*temp;
 
 	temp = *poped;
 	del_node(poped);
-	// ft_stkadd_front(pushed, temp);
 	ft_stkadd_back(pushed, temp);
 	*pushed = (*pushed)->prev;
 }
 
-void	del_node(t_stack **stk)
+static void	del_node(t_stack **stk)
 {
 	t_stack	*del;
 

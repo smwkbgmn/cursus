@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 01:50:34 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/03 23:02:06 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/05/04 18:30:42 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static void		make_a_be_three(t_stack **a, t_stack **b, t_uint *size);
 
 void	sort_5(t_stack **a, t_stack **b)
 {
-	printf("five\n");
 	t_uint	size;
 	t_uint	idx;
 
@@ -42,3 +41,4 @@ static void	make_a_be_three(t_stack **a, t_stack **b, t_uint *size)
 		(*size)--;
 	}
 }
+ 

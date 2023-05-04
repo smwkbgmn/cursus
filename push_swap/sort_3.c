@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 01:50:07 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/03 23:01:59 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/05/04 20:02:44 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,26 @@ static void	set_max_mid(t_stack *a, t_uint *max, t_uint *mid);
 
 void	sort_3(t_stack **a, t_stack **b)
 {
-	printf("three\n");
 	t_uint	max;
 	t_uint	mid;
 
 	if (b)
 	{
-		set_max_mid(*a, &max, &mid);
-		if (ref(*a) == max)
-			ra(a);
-		else if (ref((*a)->next) == max)
-			rra(a);
-		if (ref(*a) == mid)
-			sa(*a);
+		if (ft_stksize(*a) == 2)
+		{
+			if (ref(*a) > ref((*a)->next))
+				sa(*a);
+		}
+		else
+		{
+			set_max_mid(*a, &max, &mid);
+			if (ref(*a) == max)
+				ra(a);
+			else if (ref((*a)->next) == max)
+				rra(a);
+			if (ref(*a) == mid)
+				sa(*a);
+		}
 	}
 }
 

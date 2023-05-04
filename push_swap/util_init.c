@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 01:13:59 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/01 23:26:58 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/05/04 21:51:47 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,20 @@ t_bool	init_stack(t_stack **a, int ac, char **av)
 
 	while (ac-- > 1)
 	{
-		while (**av == ' ')
-			(*av)++;
-		stk_new = get_stack(*av);
-		if (!stk_new)
+		while (**av)
 		{
-			ft_stkclear(*a);
-			return (FALSE);
-		}
-		else
+			while (**av == ' ')
+				(*av)++;
+			stk_new = get_stack(*av);
+			if (!stk_new)
+			{
+				ft_stkclear(*a);
+				return (FALSE);
+			}
 			ft_stkadd_back(a, stk_new);
+			while (**av != ' ' && **av)
+				(*av)++;
+		}
 		av++;
 	}
 	init_order(*a);
