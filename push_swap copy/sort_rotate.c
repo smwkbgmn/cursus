@@ -1,13 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_hourglass2.c                                  :+:      :+:    :+:   */
+/*   sort_rotate.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/30 15:47:59 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/07 04:49:52 by donghyu2         ###   ########.fr       */
+/*   Created: 2023/05/03 19:50:00 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/05/04 18:30:49 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	sort_rotate(t_stack **a, t_stack **b)
+{
+	if (b)
+		rotate_a_idx(a, ft_stksize(*a), find_start((*a)));
+}
