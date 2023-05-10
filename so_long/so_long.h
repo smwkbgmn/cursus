@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 22:29:41 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/10 02:40:22 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/05/10 17:38:41 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define SO_LONG_H
 
 # include <stdio.h>
+# include <stdlib.h>
 
 # include "libft.h"
 # include "mlx.h"
@@ -22,6 +23,9 @@
 
 # define FALSE 0
 # define TRUE 1
+
+# define LEFT 0
+# define RIGHT 1
 
 # define EMTY '0'
 # define WALL '1'
@@ -57,25 +61,24 @@ typedef struct s_img
 	int		y;
 }	t_img;
 
-typedef struct s_character
-{
-	t_img	cut[7];
-	t_uint	frame;
-}	t_character;
-
 typedef struct s_asset
 {
-	t_img		tile[3];
-	t_img		collect;
-	t_character	walk;
+	t_img	tile[3];
+	t_img	collect;
+	t_img	walk[2][7];
+	t_img	death[2][10];	
 }	t_asset;
 
 typedef struct s_game
 {
+	t_uint	frame;
+	t_uint	direction;
 	t_uint	x;
 	t_uint	y;
+	t_uint	move;
 	t_uint	collected;
 	t_uint	goal;
+	t_uint	end;
 }	t_game;
 
 typedef struct s_data

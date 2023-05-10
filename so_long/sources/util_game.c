@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 00:18:01 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/10 02:01:58 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/05/10 17:39:24 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,27 +17,34 @@
 t_game	init_game(char **map)
 {
 	t_game	player;
-	t_uint	ptr;
-	t_uint	idx;
+	t_uint	y;
+	t_uint	x;
 
-	ptr = 0;
 	player.collected = 0;
 	player.goal = 0;
-	while (ptr < 5)
+	player.move = 0;
+	y = 0;
+	while (y < 5)
 	{
-		idx = 0;
-		while (idx < 20)
+		x = 0;
+		while (x < 20)
 		{
-			if (map[ptr][idx] == PLYR)
+			if (map[y][x] == PLYR)
 			{
-				player.x = idx;
-				player.y = ptr;
+				player.x = x;
+				player.y = y;
 			}
-			else if (map[ptr][idx] == CLEC)
+			else if (map[y][x] == CLEC)
 				player.goal++;
-			idx++;
+			x++;
 		}
-		ptr++;
+		y++;
 	}
+	if (player.x < 10)
+		player.direction = RIGHT;
+	else
+		player.direction = LEFT;
+	player.frame = 0;
+	player.end = FALSE;
 	return (player);
 }
