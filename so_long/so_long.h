@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 22:29:41 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/10 17:38:41 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/05/11 12:21:16 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # define EXIT 'E'
 # define PLYR 'P'
 
+# define ESC 53
 # define W 13
 # define A 0
 # define S 1
@@ -50,15 +51,15 @@ typedef struct s_mlx
 typedef struct s_map
 {
 	char	**map;
-	t_uint	x;
-	t_uint	y;
+	t_uint	width;
+	t_uint	height;
 }	t_map;
 
 typedef struct s_img
 {
 	void	*ptr;
-	int		x;
-	int		y;
+	int		width;
+	int		height;
 }	t_img;
 
 typedef struct s_asset
@@ -69,16 +70,20 @@ typedef struct s_asset
 	t_img	death[2][10];	
 }	t_asset;
 
-typedef struct s_game
+typedef struct s_char
 {
 	t_uint	frame;
 	t_uint	direction;
 	t_uint	x;
 	t_uint	y;
 	t_uint	move;
+}	t_char;
+
+typedef struct s_game
+{
 	t_uint	collected;
 	t_uint	goal;
-	t_uint	end;
+	t_uint	win;
 }	t_game;
 
 typedef struct s_data
@@ -86,7 +91,9 @@ typedef struct s_data
 	t_mlx	mlx;
 	t_map	map;
 	t_asset	imgs;
-	t_game	player;	
+	t_game	game;
+	t_char	player;
+	// t_char	enemy;
 }	t_data;
 
 /*    FOR TEST    */

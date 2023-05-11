@@ -6,14 +6,17 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 14:58:04 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/10 15:46:44 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/05/11 12:42:39 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <string.h>
 
 #include "so_long.h"
 
 void	draw_images(t_data *data);
 void	put_image(t_mlx mlx, t_img img, int x, int y);
+void	put_string(t_data *data);
 t_bool	check_win(t_data *data);
 
 int	write_frame(t_data *data)
@@ -35,10 +38,10 @@ void	draw_images(t_data *data)
 	t_uint	y;
 
 	y = 0;
-	while (y < data->map.y)
+	while (y < data->map.height)
 	{
 		x = 0;
-		while (x < data->map.x)
+		while (x < data->map.width)
 		{
 			tile = data->map.map[y][x];
 			put_image(data->mlx, data->imgs.tile[0], x * 32, y * 32);
@@ -57,6 +60,7 @@ void	draw_images(t_data *data)
 		}
 		y++;
 	}
+	put_string(data);
 }
 
 void	put_image(t_mlx mlx, t_img img, int x, int y)
@@ -64,8 +68,17 @@ void	put_image(t_mlx mlx, t_img img, int x, int y)
 	mlx_put_image_to_window(mlx.ptr, mlx.window, img.ptr, x, y);
 }
 
+void	put_string(t_data *data)
+{
+	char	*str;
+
+	str = ft_itoa(data->player.move);
+	mlx_string_put(data->mlx.ptr, data->mlx.window,
+		(data->player.x + 1) * 32 - 5, data->player.y * 32, 0x00FFFFFF, str);
+}
+
 t_bool	check_win(t_data *data)
 {
-	return (data->player.collected == data->player.goal
-		&& data->player.end == TRUE);
+	return (data->game.collected == data->game.goal
+		&& data->game.win == TRUE);
 }

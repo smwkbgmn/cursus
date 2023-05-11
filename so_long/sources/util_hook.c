@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 20:34:21 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/10 18:19:45 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/05/11 12:45:45 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 t_bool	dose_meet_goal(t_game player);
 t_bool	is_arrow(int keycode);
-t_bool	is_moveable(t_game player, char map);
+t_bool	is_moveable(t_game game, char map);
 
 int	move_character(int keycode, t_data *data)
 {
@@ -24,33 +24,45 @@ int	move_character(int keycode, t_data *data)
 	t_uint	x;
 	t_uint	y;
 
-	if (is_arrow(keycode))
+	if (keycode == ESC)
+	{
+		mlx_destroy_window(data->mlx.ptr, data->mlx.window);
+		exit(0);
+	}
+	else if (is_arrow(keycode))
 	{
 		x = data->player.x;
 		y = data->player.y;
 		if (keycode == W)
 			y--;
 		else if (keycode == A)
+		{
 			x--;
+			data->player.direction = LEFT;
+		}
 		else if (keycode == S)
 			y++;
 		else if (keycode == D)
-			x++;
-		tile = data->map.map[y][x];
-		if (is_moveable(data->player, tile))
 		{
+			x++;
+			data->player.direction = RIGHT;
+		}
+		tile = data->map.map[y][x];
+		if (is_moveable(data->game, tile))
+		{
+			data->player.move++;
 			if (tile == CLEC)
-				data->player.collected++;
+				data->game.collected++;
 			data->map.map[data->player.y][data->player.x] = EMTY;
 			data->map.map[y][x] = PLYR;
-			if (data->player.x > x)
-				data->player.direction = LEFT;
-			else if (data->player.x < x)
-				data->player.direction = RIGHT;
+			// if (data->player.x > x)
+			// 	data->player.direction = LEFT;
+			// else if (data->player.x < x)
+			// 	data->player.direction = RIGHT;
 			data->player.x = x;
 			data->player.y = y;
 			if (tile == EXIT)
-				data->player.end = TRUE;
+				data->game.win = TRUE;
 		}
 		// printf("position %d,%d[%d]\n", data->player.x, data->player.y, data->player.direction);
 	}
@@ -63,13 +75,8 @@ t_bool	is_arrow(int keycode)
 		|| keycode == S || keycode == D);
 }
 
-t_bool	is_moveable(t_game player, char tile)
+t_bool	is_moveable(t_game game, char tile)
 {
 	return (tile == EMTY || tile == CLEC
-		|| (tile == EXIT && player.collected == player.goal));
+		|| (tile == EXIT && game.collected == game.goal));
 }
-
-// t_bool	dose_meet_goal(t_game player)
-// {
-// 	return (player.collected == player.goal);
-// }

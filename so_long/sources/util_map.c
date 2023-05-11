@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 13:34:58 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/10 00:24:47 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/05/11 12:13:34 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ t_map	init_map(void)
 	map.map[4] = strdup("11111111111111111111");
 	map.map[5] = NULL;
 	// map->dms = 32;
-	map.x = 20;
-	map.y = 5;
+	map.width = 20;
+	map.height = 5;
 	// map.x_char = 18;
 	// map.y_char = 1;
 	return (map);

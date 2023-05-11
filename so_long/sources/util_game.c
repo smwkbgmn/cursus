@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 00:18:01 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/10 17:39:24 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/05/11 12:46:35 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,12 @@
 
 #include "so_long.h"
 
-t_game	init_game(char **map)
+t_char	init_player(t_game *game, char **map)
 {
-	t_game	player;
+	t_char	player;
 	t_uint	y;
 	t_uint	x;
 
-	player.collected = 0;
-	player.goal = 0;
-	player.move = 0;
 	y = 0;
 	while (y < 5)
 	{
@@ -35,7 +32,7 @@ t_game	init_game(char **map)
 				player.y = y;
 			}
 			else if (map[y][x] == CLEC)
-				player.goal++;
+				game->goal++;
 			x++;
 		}
 		y++;
@@ -45,6 +42,16 @@ t_game	init_game(char **map)
 	else
 		player.direction = LEFT;
 	player.frame = 0;
-	player.end = FALSE;
+	player.move = 0;
 	return (player);
+}
+
+t_game	init_game(void)
+{
+	t_game	game;
+
+	game.collected = 0;
+	game.goal = 0;
+	game.win = FALSE;
+	return (game);
 }

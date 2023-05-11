@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 18:52:40 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/10 15:19:20 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/05/11 12:14:38 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ t_img	set_img(t_mlx mlx, char *filename)
 {
 	t_img	img;
 
-	img.x = 32;
-	img.y = 32;
-	img.ptr = mlx_png_file_to_image(mlx.ptr, filename, &img.x, &img.y);
+	img.width = 32;
+	img.height = 32;
+	img.ptr = mlx_png_file_to_image(mlx.ptr, filename, &img.width, &img.height);
 	printf("[finish set_img]\n");
 	return (img);
 }
