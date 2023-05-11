@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 14:58:04 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/11 12:42:39 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/05/12 02:16:54 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,13 @@ void	draw_images(t_data *data)
 				put_image(data->mlx, data->imgs.collect, x * 32, y * 32);
 			else if (tile == PLYR)
 			{
-				put_image(data->mlx, data->imgs.walk[data->player.direction][data->player.frame / 10], x * 32, y * 32);
+				put_image(data->mlx, data->imgs.player_walk[data->player.direction][data->player.frame / 10], x * 32, y * 32);
 				data->player.frame = (data->player.frame + 1) % 70;
+			}
+			else if (tile == ENMY)
+			{
+				put_image(data->mlx, data->imgs.enemy[data->enemy.direction][data->enemy.frame / 10], x * 32, y * 32);
+				data->enemy.frame = (data->enemy.frame + 1) % 140;
 			}
 			x++;
 		}
@@ -74,7 +79,7 @@ void	put_string(t_data *data)
 
 	str = ft_itoa(data->player.move);
 	mlx_string_put(data->mlx.ptr, data->mlx.window,
-		(data->player.x + 1) * 32 - 5, data->player.y * 32, 0x00FFFFFF, str);
+		(data->player.x + 1) * 32 - 2, data->player.y * 32, 0x00FFFFFF, str);
 }
 
 t_bool	check_win(t_data *data)

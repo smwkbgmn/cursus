@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 22:29:41 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/11 12:21:16 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/05/12 02:16:43 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define CLEC 'C'
 # define EXIT 'E'
 # define PLYR 'P'
+# define ENMY 'M'
 
 # define ESC 53
 # define W 13
@@ -66,8 +67,9 @@ typedef struct s_asset
 {
 	t_img	tile[3];
 	t_img	collect;
-	t_img	walk[2][7];
-	t_img	death[2][10];	
+	t_img	player_walk[2][7];
+	t_img	player_death[2][10];
+	t_img	enemy[2][14];
 }	t_asset;
 
 typedef struct s_char
@@ -93,7 +95,7 @@ typedef struct s_data
 	t_asset	imgs;
 	t_game	game;
 	t_char	player;
-	// t_char	enemy;
+	t_char	enemy;
 }	t_data;
 
 /*    FOR TEST    */

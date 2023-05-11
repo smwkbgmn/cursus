@@ -13,3 +13,6 @@ shift cmd x : collapse folders in explorer
 100 -> under 700
 3->2
 5->11
+
+[[ FINDER ]]
+shift cmd N : New folder

@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 22:29:33 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/11 12:17:13 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/05/12 02:14:07 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 t_map	init_map(void);
 t_mlx	init_mlx(t_map map);
+t_game	init_game(t_map map);
+t_char	init_character(t_map map, char target);
 t_asset	init_asset(t_mlx mlx);
-t_game	init_game(void);
-t_char	init_player(t_game *gmea, char **map);
 
 int		move_character(int keycode, t_data *data);
 int		write_frame(t_data *data);
@@ -28,10 +28,10 @@ int	main(void)
 
 	data.map = init_map();
 	data.mlx = init_mlx(data.map);
+	data.game = init_game(data.map);
+	data.player = init_character(data.map, PLYR);
+	data.enemy = init_character(data.map, ENMY);
 	data.imgs = init_asset(data.mlx);
-	data.game = init_game();
-	data.player = init_player(&data.game, data.map.map);
-	// data.enemy = init_enemy();
 
 	mlx_loop_hook(data.mlx.ptr, write_frame, &data);
 	// mlx_key_hook(data.mlx.window, key_hook, &data);

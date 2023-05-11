@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 20:34:21 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/11 12:45:45 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/05/12 02:02:26 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 #include "so_long.h"
 
-t_bool	dose_meet_goal(t_game player);
 t_bool	is_arrow(int keycode);
 t_bool	is_moveable(t_game game, char map);
 
@@ -55,16 +54,11 @@ int	move_character(int keycode, t_data *data)
 				data->game.collected++;
 			data->map.map[data->player.y][data->player.x] = EMTY;
 			data->map.map[y][x] = PLYR;
-			// if (data->player.x > x)
-			// 	data->player.direction = LEFT;
-			// else if (data->player.x < x)
-			// 	data->player.direction = RIGHT;
 			data->player.x = x;
 			data->player.y = y;
 			if (tile == EXIT)
 				data->game.win = TRUE;
 		}
-		// printf("position %d,%d[%d]\n", data->player.x, data->player.y, data->player.direction);
 	}
 	return (0);
 }
