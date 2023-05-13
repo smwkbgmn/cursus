@@ -36,7 +36,8 @@
 		"__string": "c",
 		"cstring": "c",
 		"list": "c",
-		"so_long.h": "c"
+		"so_long.h": "c",
+		"mlx.h": "c"
 	},
 	"C_Cpp.errorSquiggles": "enabled",
 	"files.autoSave": "onFocusChange",

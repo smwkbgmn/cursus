@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 22:29:41 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/12 02:16:43 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/05/13 15:06:40 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,30 +63,42 @@ typedef struct s_img
 	int		height;
 }	t_img;
 
+typedef struct s_img_char
+{
+	t_img	**cut;
+	t_uint	cnt_img;
+}	t_img_char;
+
 typedef struct s_asset
 {
-	t_img	tile[3];
-	t_img	collect;
-	t_img	player_walk[2][7];
-	t_img	player_death[2][10];
-	t_img	enemy[2][14];
+	t_img		tile[3];
+	t_img		collect;
+	t_img_char	player_walk;
+	t_img_char	player_death;
+	t_img_char	enemy;
 }	t_asset;
-
-typedef struct s_char
-{
-	t_uint	frame;
-	t_uint	direction;
-	t_uint	x;
-	t_uint	y;
-	t_uint	move;
-}	t_char;
 
 typedef struct s_game
 {
 	t_uint	collected;
 	t_uint	goal;
-	t_uint	win;
+	t_bool	win;
 }	t_game;
+
+typedef struct s_coord
+{
+	t_uint	x;
+	t_uint	y;
+}	t_coord;
+
+typedef struct s_char
+{
+	t_uint	frame;
+	t_bool	direction;
+	t_coord	coord;
+	t_uint	move;
+	t_bool	death;
+}	t_char;
 
 typedef struct s_data
 {
@@ -97,6 +109,11 @@ typedef struct s_data
 	t_char	player;
 	t_char	enemy;
 }	t_data;
+
+void	exit_program(t_data *data);
+void	swap_tile(char **map, t_char *chartr, t_coord moved, char target);
+char	ref_tile(char **map, t_coord coord);
+void	put_image(t_mlx mlx, t_img img, t_coord coord);
 
 /*    FOR TEST    */
 void	test_print_map(t_map map);

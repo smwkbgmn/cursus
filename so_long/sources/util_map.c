@@ -6,12 +6,9 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 13:34:58 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/12 02:13:28 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/05/13 13:38:50 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdlib.h>
-#include <string.h>
 
 #include "so_long.h"
 
@@ -19,17 +16,31 @@ t_map	init_map(void)
 {
 	t_map	map;
 
-	map.map = calloc(6, sizeof(char *));
-	map.map[0] = strdup("11111111111111111111");
-	map.map[1] = strdup("100000000000000000P1");
-	map.map[2] = strdup("100000000M0000000001");
-	map.map[3] = strdup("1E0000000000000000C1");
-	map.map[4] = strdup("11111111111111111111");
+	map.map = ft_calloc(6, sizeof(char *));
+	// map.map[0] = ft_strdup("11111111111111111111");
+	// map.map[1] = ft_strdup("100000000010000000P1");
+	// map.map[2] = ft_strdup("100000000M0000000001");
+	// map.map[3] = ft_strdup("1E0000000000000000C1");
+	// map.map[4] = ft_strdup("11111111111111111111");
+	map.map[0] = ft_strdup("11111111111111111111");
+	map.map[1] = ft_strdup("1CCCCCCCC01CCCCCCCP1");
+	map.map[2] = ft_strdup("1CCCCCC10M0CCCCCCCC1");
+	map.map[3] = ft_strdup("1ECCCCCCCCCCCCCCCCC1");
+	map.map[4] = ft_strdup("11111111111111111111");
 	map.map[5] = NULL;
-	// map->dms = 32;
 	map.width = 20;
 	map.height = 5;
-	// map.x_char = 18;
-	// map.y_char = 1;
 	return (map);
+}
+
+char	ref_tile(char **map, t_coord coord)
+{
+	return (map[coord.y][coord.x]);
+}
+
+void	swap_tile(char **map, t_char *chartr, t_coord moved, char target)
+{
+	map[chartr->coord.y][chartr->coord.x] = EMTY;
+	map[moved.y][moved.x] = target;
+	chartr->coord = moved;
 }
