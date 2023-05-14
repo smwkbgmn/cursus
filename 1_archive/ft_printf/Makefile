@@ -1,13 +1,14 @@
 NAME		= libftprintf.a
 
 CC			= cc
-FLAG		= -Wall -Wextra -Werror -I include -I $(DIR_LIBFT)/include
+FLAG		= -Wall -Wextra -Werror -I . -I $(DIR_LIBFT)
 
 SRCS		= \
+ft_printf.c \
+\
 $(DIR_UTIL)/utill_flag.c \
 $(DIR_UTIL)/utill_list1.c \
 $(DIR_UTIL)/utill_list2.c \
-$(DIR_UTIL)/utill_printf.c \
 $(DIR_UTIL)/utill_type.c \
 \
 $(DIR_TYPE)/type_c.c \
@@ -49,7 +50,7 @@ $(LIBFT)	:
 			@cp $(LIBFT) $(NAME)
 
 $(NAME)(%)	: %
-			@ar rc $@ $<
+			@ar -r -c $@ $<
 
 		
 %.o			: %.c

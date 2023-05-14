@@ -3,8 +3,9 @@ NAME		= so_long
 ARCH		= arch -x86_64
 CC			= $(ARCH) cc
 
-FLAG		= -Wall -Wextra -Werror -I . -I $(DIR_LIBFT)/include -I $(DIR_LIBMLX)
-FLAG_MLX	= -framework OpenGL -framework AppKit -lz
+FLAG		= -Wall -Wextra -Werror -I .
+FLAG_LIBFT	= -I $(DIR_LIBFT)/include
+FLAG_MLX	= -I $(DIR_LIBMLX) -framework OpenGL -framework AppKit -lz
 # FLAG_MNLBX	= -framework Metal -framework Metalkit
 
 DIR_SRCS	= sources
