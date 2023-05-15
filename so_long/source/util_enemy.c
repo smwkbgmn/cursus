@@ -6,13 +6,13 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 13:33:22 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/13 14:28:33 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/05/15 15:46:43 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void		check_direction(t_bool *direction, t_uint cnt);
+static void		check_direction(t_direc *direction, t_uint cnt);
 static t_bool	is_enemy(t_char enemy, t_uint x, t_uint y);
 
 void	patrol_enemy(t_char *enemy, char **map)
@@ -48,7 +48,7 @@ static t_bool	is_enemy(t_char enemy, t_uint x, t_uint y)
 	return (enemy.coord.x == x && enemy.coord.y == y);
 }
 
-static void	check_direction(t_bool *direction, t_uint cnt)
+static void	check_direction(t_direc *direction, t_uint cnt)
 {
 	if (*direction == LEFT && cnt == 1)
 		*direction = RIGHT;

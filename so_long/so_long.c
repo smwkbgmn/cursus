@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 22:29:33 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/14 14:53:53 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/05/15 16:41:40 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,8 @@ int	main(int ac, char **av)
 {
 	t_data	data;
 
-	if (ac == 2)
+	if (ac == 2 && init_data(&data, *(av + 1)))
 	{
-		init_data(&data, *(av + 1));
 		mlx_hook(data.mlx.window, ON_DESTROY, 0, window_closed, &data);
 		mlx_key_hook(data.mlx.window, key_hook, &data);
 		mlx_loop_hook(data.mlx.ptr, loop_hook, &data);

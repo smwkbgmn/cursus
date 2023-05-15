@@ -6,33 +6,54 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 13:34:58 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/14 15:06:27 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/05/15 21:20:18 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <fcntl.h>
 #include <unistd.h>
 
 #include "so_long.h"
+
+void	read_map(int fd, t_map *map, t_uint x, t_uint y);
 
 t_map	init_map(char *filename)
 {
 	t_map	map;
 
-	// map.map = ft_calloc(6, sizeof(char *));
-	// // map.map[0] = ft_strdup("11111111111111111111");
-	// // map.map[1] = ft_strdup("100000000010000000P1");
-	// // map.map[2] = ft_strdup("100000000M0000000001");
-	// // map.map[3] = ft_strdup("1E0000000000000000C1");
-	// // map.map[4] = ft_strdup("11111111111111111111");
-	// map.map[0] = ft_strdup("11111111111111111111");
-	// map.map[1] = ft_strdup("1CCCCCCCC01CCCCCCCP1");
-	// map.map[2] = ft_strdup("1CCCCCC10M0CCCCCCCC1");
-	// map.map[3] = ft_strdup("1ECCCCCCCCCCCCCCCCC1");
-	// map.map[4] = ft_strdup("11111111111111111111");
-	// map.map[5] = NULL;
-	// map.width = 20;
-	// map.height = 5;
+	map.map = NULL;
+	read_map(open(filename, O_RDONLY), &map, 0, 0);
 	return (map);
+}
+
+void	read_map(int fd, t_map *map, t_uint x, t_uint y)
+{
+	char	*line;
+
+	line = get_next_line(fd);
+	if (line)
+	{
+		x = ft_strlen(line);
+		if (ft_strchr(line, '\n'))
+			x--;
+		y++;
+		if (x == map->width || y == 1)
+		{
+			map->width = x;
+			map->height = y;
+			read_map(fd, map, x, y);
+		}
+	}
+	else
+	{
+		if ((x > 3 && y > 3)
+			|| (x > 2 && y > 4) || (x > 4 && y > 2))
+			map->map = ft_calloc(map->height, sizeof(char *));
+	}
+	if (map->map)
+		map->map[y - 1] = line;
+	else
+		ft_free(line);
 }
 
 char	ref_tile(char **map, t_coord coord)

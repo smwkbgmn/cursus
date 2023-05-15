@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 18:52:40 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/13 14:42:11 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/05/15 15:19:06 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ t_asset	init_asset(void *mlx)
 {
 	t_asset	imgs;
 
-	imgs.tile[0] = set_img(mlx, "assets/tile/empty.png");
-	imgs.tile[1] = set_img(mlx, "assets/tile/tree.png");
-	imgs.tile[2] = set_img(mlx, "assets/tile/exit.png");
-	imgs.collect = set_img(mlx, "assets/object/collectible.png");
-	imgs.player_walk = set_img_char(mlx, "./assets/character/player/Walk", 7);
+	imgs.tile[0] = set_img(mlx, "asset/tile/empty.png");
+	imgs.tile[1] = set_img(mlx, "asset/tile/tree.png");
+	imgs.tile[2] = set_img(mlx, "asset/tile/exit.png");
+	imgs.collect = set_img(mlx, "asset/object/collectible.png");
+	imgs.player_walk = set_img_char(mlx, "./asset/character/player/Walk", 7);
 	imgs.player_death = set_img_char(mlx,
-			"./assets/character/player/Death", 10);
-	imgs.enemy = set_img_char(mlx, "./assets/character/enemy/Walk", 14);
+			"./asset/character/player/Death", 10);
+	imgs.enemy = set_img_char(mlx, "./asset/character/enemy/Walk", 14);
 	return (imgs);
 }
 
@@ -39,7 +39,6 @@ static t_img	set_img(void *mlx, char *filename)
 	img.width = 32;
 	img.height = 32;
 	img.ptr = mlx_png_file_to_image(mlx, filename, &img.width, &img.height);
-	// printf("set_img \"%s\"\n", filename);
 	return (img);
 }
 

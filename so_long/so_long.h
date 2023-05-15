@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 22:29:41 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/13 15:06:40 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/05/15 16:13:27 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,27 +21,45 @@
 
 # define ON_DESTROY 17
 
-# define FALSE 0
-# define TRUE 1
-
-# define LEFT 0
-# define RIGHT 1
-
-# define EMTY '0'
-# define WALL '1'
-# define CLEC 'C'
-# define EXIT 'E'
-# define PLYR 'P'
-# define ENMY 'M'
-
-# define ESC 53
-# define W 13
-# define A 0
-# define S 1
-# define D 2
-
 typedef unsigned int	t_uint;
-typedef short			t_bool;
+
+typedef enum e_direc
+{
+	LEFT,
+	RIGHT
+}	t_direc;
+
+typedef enum e_tile
+{
+	EMTY = '0',
+	WALL = '1',
+	CLEC = 'C',
+	EXIT = 'E',
+	PLYR = 'P',
+	ENMY = 'M'
+}	t_tile;
+
+typedef enum e_key
+{
+	ESC = 53,
+	W = 13,
+	A = 0,
+	S = 1,
+	D = 2
+}	t_key;
+
+// # define EMTY '0'
+// # define WALL '1'
+// # define CLEC 'C'
+// # define EXIT 'E'
+// # define PLYR 'P'
+// # define ENMY 'M'
+
+// # define ESC 53
+// # define W 13
+// # define A 0
+// # define S 1
+// # define D 2
 
 typedef struct s_mlx
 {
@@ -94,7 +112,7 @@ typedef struct s_coord
 typedef struct s_char
 {
 	t_uint	frame;
-	t_bool	direction;
+	t_direc	direction;
 	t_coord	coord;
 	t_uint	move;
 	t_bool	death;

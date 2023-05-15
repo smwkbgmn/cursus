@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 20:34:21 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/14 13:56:55 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/05/15 15:48:24 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static t_bool	is_arrow(int keycode);
 static t_bool	is_moveable(t_game game, char map);
-static void		check_direction(t_bool *direction, int keycode);
+static void		check_direction(t_direc *direction, int keycode);
 
 int	key_hook(int keycode, t_data *data)
 {
@@ -54,7 +54,7 @@ static t_bool	is_moveable(t_game game, char tile)
 		|| (tile == EXIT && game.collected == game.goal));
 }
 
-static void	check_direction(t_bool *direction, int keycode)
+static void	check_direction(t_direc *direction, int keycode)
 {
 	if (*direction == RIGHT && keycode == A)
 		*direction = LEFT;
