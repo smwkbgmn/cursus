@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 19:07:17 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/15 02:03:40 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/05/15 16:11:34 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static size_t	get_len(char *str);
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*gnl_strjoin(char *s1, char *s2)
 {
 	char	*result;
 	size_t	len_1;
@@ -25,8 +25,8 @@ char	*ft_strjoin(char *s1, char *s2)
 	result = malloc(len_1 + len_2 + 1);
 	if (result)
 	{
-		ft_memcpy(result, s1, len_1);
-		ft_memcpy(result + len_1, s2, len_2);
+		gnl_memcpy(result, s1, len_1);
+		gnl_memcpy(result + len_1, s2, len_2);
 		result[len_1 + len_2] = '\0';
 	}
 	return (result);
@@ -49,7 +49,7 @@ void	adjust_node(t_fd *node, char *new)
 	}
 }
 
-void	ft_memcpy(char *dst, char *src, size_t n)
+void	gnl_memcpy(char *dst, char *src, size_t n)
 {
 	while (n > 0)
 	{
@@ -58,7 +58,7 @@ void	ft_memcpy(char *dst, char *src, size_t n)
 	}
 }
 
-char	*ft_strchr(char *s, int c)
+char	*gnl_strchr(char *s, int c)
 {
 	while (*s != c && *s)
 		s++;

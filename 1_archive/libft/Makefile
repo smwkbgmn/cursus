@@ -29,7 +29,7 @@ FLAG		= -Wall -Wextra -Werror \
 
 all			: $(NAME)
 
-$(NAME)		: $(OBJS) $(NAME)($(OBJS))
+$(NAME)		: $(NAME)($(OBJS))
 
 $(NAME)(%)	: %
 			ar rc $@ $<

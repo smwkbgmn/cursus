@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:29:06 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/15 02:23:12 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/05/15 14:28:29 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ char	*ft_itoa_uint(unsigned int n);
 char	*ft_itoa_ulong(unsigned long n);
 char	*ft_itoa_uint_base(unsigned int dec, char *base);
 char	*ft_itoa_ulong_base(unsigned long dec, char *base);
+void	ft_free(void *ptr);
 
 char	*get_next_line(int fd);
 int		ft_printf(const char *str, ...);

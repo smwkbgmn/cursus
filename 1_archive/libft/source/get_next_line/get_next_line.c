@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 16:15:11 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/15 02:03:37 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/05/15 16:12:07 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,14 @@ static char	*read_line(t_fd *node, int fd)
 	line = NULL;
 	if (node->str && *node->str)
 	{
-		ptr_nl = ft_strchr(node->ptr, '\n');
+		ptr_nl = gnl_strchr(node->ptr, '\n');
 		if (!ptr_nl)
 			str_new = get_str(fd, 0);
 		else
 			str_new = NULL;
 		if (ptr_nl || str_new)
 		{
-			line = ft_strjoin(node->ptr, str_new);
+			line = gnl_strjoin(node->ptr, str_new);
 			adjust_node(node, str_new);
 		}
 	}
@@ -81,7 +81,7 @@ static char	*get_str(int fd, size_t total)
 		if (len != ERROR)
 		{
 			buf[len] = '\0';
-			if (len > 0 && !ft_strchr(buf, '\n'))
+			if (len > 0 && !gnl_strchr(buf, '\n'))
 				str = get_str(fd, total + len);
 			else
 			{
@@ -89,7 +89,7 @@ static char	*get_str(int fd, size_t total)
 				if (str)
 					str[total + len] = '\0';
 			}
-			ft_memcpy(str + total, buf, len * (str != NULL));
+			gnl_memcpy(str + total, buf, len * (str != NULL));
 		}
 		free(buf);
 	}

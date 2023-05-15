@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:01:02 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/15 02:20:11 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/05/15 16:13:13 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ typedef struct s_fd
 	struct s_fd	*next;
 }	t_fd;
 
-char	*ft_strjoin(char *s1, char *s2);
-char	*ft_strchr(char *s, int c);
-void	ft_memcpy(char *dst, char *src, size_t n);
+char	*gnl_strjoin(char *s1, char *s2);
+char	*gnl_strchr(char *s, int c);
+void	gnl_memcpy(char *dst, char *src, size_t n);
 void	adjust_node(t_fd *node, char *new);
 
 #endif
