@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 13:34:58 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/15 21:20:18 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/05/18 19:03:30 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "so_long.h"
 
 void	read_map(int fd, t_map *map, t_uint x, t_uint y);
+t_bool	is_valid_size(t_uint x, t_uint y);
 
 t_map	init_map(char *filename)
 {
@@ -44,16 +45,19 @@ void	read_map(int fd, t_map *map, t_uint x, t_uint y)
 			read_map(fd, map, x, y);
 		}
 	}
-	else
-	{
-		if ((x > 3 && y > 3)
-			|| (x > 2 && y > 4) || (x > 4 && y > 2))
+	else if (!line && is_valid_size(x, y))
 			map->map = ft_calloc(map->height, sizeof(char *));
-	}
 	if (map->map)
 		map->map[y - 1] = line;
 	else
 		ft_free(line);
+}
+
+t_bool	is_valid_size(t_uint x, t_uint y)
+{
+	return ((x > 2 && y > 4)
+		|| (x > 3 && y > 3)
+		|| (x > 4 && y > 2));
 }
 
 char	ref_tile(char **map, t_coord coord)
@@ -67,5 +71,3 @@ void	swap_tile(char **map, t_char *chartr, t_coord moved, char target)
 	map[moved.y][moved.x] = target;
 	chartr->coord = moved;
 }
-
-// t_bool	valid_map()

@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 22:29:41 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/15 16:13:27 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/05/18 15:39:37 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,19 +47,6 @@ typedef enum e_key
 	S = 1,
 	D = 2
 }	t_key;
-
-// # define EMTY '0'
-// # define WALL '1'
-// # define CLEC 'C'
-// # define EXIT 'E'
-// # define PLYR 'P'
-// # define ENMY 'M'
-
-// # define ESC 53
-// # define W 13
-// # define A 0
-// # define S 1
-// # define D 2
 
 typedef struct s_mlx
 {
