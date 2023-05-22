@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 19:03:13 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/18 19:40:42 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/05/21 21:02:41 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,40 @@
 
 t_bool	valid_path(t_map map)
 {
-	t_coord	coord;
-	t_list	*searched;
-	t_list	*nearby;
+	t_coord	crd;
+	t_bool	**visit;
+	t_coord	*stack;
 
-	coord = find_player(map);
-	searched = NULL;
-	nearby = NULL;
-	return (search(map, coord, &searched, &nearby));
+	crd = find_player(map);
+	visit = init_visit(map);
+	stack = ft_calloc(map.width * map.height, sizeof(t_coord));
+	return (TRUE);
 }
 
-t_bool	search(t_map map, t_coord coord, t_list **searched, t_list **nearby)
+t_bool	search(t_map map, t_coord coord, )
 {
-	if (ref_tile(map.map, coord) == PLYR)
+	if (ref_tile(map.map, coord) == EXIT)
 		return (TRUE);
 	else
 	{
-		ft_lstadd_back(searched, ft_lstnew(&map.map[coord.y][coord.x]));
-		
+		assign_nearby(map, coord, visit, stack);
 	}
 }
 
-t_bool	is_searched(t_map map, t_uint x, t_uint y, t_list searched)
+void	assign_nearby(t_map map, t_coord coord, t_list *visit, t_list *stack)
 {
-	char	*tile;
-
-	tile = &map.map[y][x];ß
 	
+}
+
+t_bool	**init_visit(t_map map)
+{
+	t_bool	**visit;
+	t_uint	ptr;
+
+	visit = ft_calloc(map.height, sizeof(t_bool *));
+	ptr = 0;
+	while (ptr < map.height)
+		visit[ptr++] = ft_calloc(map.width, sizeof(t_bool));
 }
 
 t_coord	find_player(t_map map)
