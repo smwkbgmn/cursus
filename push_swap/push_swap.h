@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:38:17 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/04 18:38:32 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/06/07 12:36:32 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # define INT_MAX 2147483647
 # define INT_MIN -2147483648
 
-typedef short			t_bool;
 typedef unsigned int	t_uint;
 typedef struct s_stack
 {

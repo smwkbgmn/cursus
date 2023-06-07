@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 19:03:13 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/22 11:47:26 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/05/23 01:32:02 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 // 	crd = find_player(map);
 // 	visit = init_visit(map);
 // 	stack = ft_calloc(map.width * map.height, sizeof(t_coord));
-// 	return (TRUE);
+// 	return (TRUE)
 // }
 
 // t_bool	search(t_map map, t_coord coord, )
