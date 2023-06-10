@@ -6,17 +6,17 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:28:49 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/04 21:53:58 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/06/10 22:45:02 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include <unistd.h>
 
 #include "push_swap.h"
 
 static t_bool	one_line(char *av);
 static t_bool	count_digit(char *av);
-
 
 t_bool	check_valid(int ac, char **av)
 {
@@ -89,4 +89,9 @@ t_bool	check_duplication(t_stack *a)
 			return (TRUE);
 	}
 	return (FALSE);
+}
+
+void	write_error(void)
+{
+	write(2, "Error\n", 6);
 }

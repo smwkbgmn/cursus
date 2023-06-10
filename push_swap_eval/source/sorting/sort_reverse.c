@@ -1,35 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   sort_reverse.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/08 17:37:46 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/06/11 02:56:04 by donghyu2         ###   ########.fr       */
+/*   Created: 2023/05/03 18:19:03 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/05/04 18:30:52 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	main(int ac, char **av)
-{
-	char			**input;
-	t_sort			sort;
-	static t_stack	*a;
-	static t_stack	*b;
+static t_uint	find_position_max(t_stack *a, t_uint size);
 
-	if (ac > 1)
+void	sort_reverse(t_stack **a, t_stack **b)
+{
+	t_uint	size;
+
+	size = ft_stksize(*a);
+	if (ref(*a) != size - 1)
+		rotate_a_idx(a, size, find_position_max(*a, size));
+	while (*a)
 	{
-		input = av + 1;
-		if (check_valid(ac, input) && init_stack(&a, ac, input)
-			&& check_duplication(a) && ft_stksize(a) > 1)
-		{
-			sort = select_algorithm(a);
-			if (sort)
-				sort(&a, &b);
-		}
-		ft_stkclear(a);
+		rra(a);
+		pb(a, b);
 	}
-	return (0);
+	while (*b)
+		pa(a, b);
+}
+
+static t_uint	find_position_max(t_stack *a, t_uint size)
+{
+	t_uint	idx;
+
+	idx = 0;
+	while (ref(a) != size - 1)
+	{
+		a = a->next;
+		idx++;
+	}
+	return (idx);
 }

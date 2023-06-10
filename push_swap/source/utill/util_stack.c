@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 16:10:50 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/01 23:44:58 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/06/11 02:56:09 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,6 @@ t_stack	*ft_stknew(int data)
 		new->prev = new;
 	}
 	return (new);
-}
-
-void	ft_stkadd_front(t_stack **stack, t_stack *new)
-{
-	ft_stkadd_back(stack, new);
-	*stack = new;
 }
 
 void	ft_stkadd_back(t_stack **stack, t_stack *new)
@@ -56,22 +50,6 @@ void	ft_stkadd_back(t_stack **stack, t_stack *new)
 		new->prev = tail;
 	}
 }
-
-// t_stack	*ft_stkidx(t_stack *stack, int idx)
-// {
-// 	int	size;
-
-// 	size = ft_stksize(stack);
-// 	if (-1 * size <= idx && idx < size)
-// 	{
-// 		idx += size * (idx < 0);
-// 		while (idx-- > 0)
-// 			stack = stack->next;
-// 	}
-// 	else
-// 		stack = NULL;
-// 	return (stack);
-// }
 
 t_uint	ft_stksize(t_stack *head)
 {
@@ -108,8 +86,5 @@ void	ft_stkclear(t_stack *stk)
 
 t_uint	ref(t_stack *stk)
 {
-	if (stk)
-		return (stk->order);
-	else
-		return (0);
+	return (stk->order);
 }

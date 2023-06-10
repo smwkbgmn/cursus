@@ -12,24 +12,23 @@
 
 #include "push_swap.h"
 
-static void	push(t_stack **push, t_stack **pop);
-static void	del_node(t_stack **head);
+static void	del_node(t_stack **stk);
 
 void	pa(t_stack **a, t_stack **b)
 {
 	if (*b != NULL)
 		push(a, b);
-	printf("pa\n");
+	ft_printf("pa\n");
 }
 
 void	pb(t_stack **a, t_stack **b)
 {
 	if (*a != NULL)
 		push(b, a);
-	printf("pb\n");
+	ft_printf("pb\n");
 }
 
-static void	push(t_stack **pushed, t_stack **poped)
+void	push(t_stack **pushed, t_stack **poped)
 {
 	t_stack	*temp;
 

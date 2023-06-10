@@ -1,35 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   swap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/08 17:37:46 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/06/11 02:56:04 by donghyu2         ###   ########.fr       */
+/*   Created: 2023/02/08 17:39:01 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/03/16 00:03:24 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	main(int ac, char **av)
+void	sa(t_stack *a)
 {
-	char			**input;
-	t_sort			sort;
-	static t_stack	*a;
-	static t_stack	*b;
+	swap(a);
+	ft_printf("sa\n");
+}
 
-	if (ac > 1)
+void	sb(t_stack *b)
+{
+	swap(b);
+	ft_printf("sb\n");
+}
+
+void	ss(t_stack *a, t_stack *b)
+{
+	swap(a);
+	swap(b);
+	ft_printf("ss\n");
+}
+
+void	swap(t_stack *head)
+{
+	t_uint	tmp_order;
+	int		tmp;
+
+	if (head && head->next)
 	{
-		input = av + 1;
-		if (check_valid(ac, input) && init_stack(&a, ac, input)
-			&& check_duplication(a) && ft_stksize(a) > 1)
-		{
-			sort = select_algorithm(a);
-			if (sort)
-				sort(&a, &b);
-		}
-		ft_stkclear(a);
+		tmp = head->data;
+		tmp_order = head->order;
+		head->data = head->next->data;
+		head->order = head->next->order;
+		head->next->data = tmp;
+		head->next->order = tmp_order;
 	}
-	return (0);
 }

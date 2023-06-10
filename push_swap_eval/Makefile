@@ -77,22 +77,3 @@ $(NAME_BNS)	: $(LIBFT) $(OBJS_BNS)
 			$(CC) $(FLAG) $(LIBFT) $(OBJS_BNS) -o $@
 
 .PHONY		: all celan fclean re bonus
-
-####################################
-############ FOR TEST ##############
-####################################
-
-SIZE		= 10
-
-gen			: 
-			@$(CC) test_gen_input.c -o test_gen_input
-			@./test_gen_input $(SIZE)
-			@$(RM) test_gen_input
-
-test		: $(NAME_MAN)
-			@./$(NAME_MAN) $$(cat test_in)
-			@$(RM) $(NAME_MAN)
-
-out			: $(NAME_MAN)
-			@./$(NAME_MAN) $$(cat test_in) > test_out
-			@$(RM) $(NAME_MAN)

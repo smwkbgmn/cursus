@@ -1,35 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   sort_rotate.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/08 17:37:46 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/06/11 02:56:04 by donghyu2         ###   ########.fr       */
+/*   Created: 2023/05/03 19:50:00 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/05/04 18:30:49 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	main(int ac, char **av)
+void	sort_rotate(t_stack **a, t_stack **b)
 {
-	char			**input;
-	t_sort			sort;
-	static t_stack	*a;
-	static t_stack	*b;
-
-	if (ac > 1)
-	{
-		input = av + 1;
-		if (check_valid(ac, input) && init_stack(&a, ac, input)
-			&& check_duplication(a) && ft_stksize(a) > 1)
-		{
-			sort = select_algorithm(a);
-			if (sort)
-				sort(&a, &b);
-		}
-		ft_stkclear(a);
-	}
-	return (0);
+	if (b)
+		rotate_a_idx(a, ft_stksize(*a), find_start((*a)));
 }

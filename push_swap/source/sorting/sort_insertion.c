@@ -6,13 +6,12 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 18:04:13 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/04 18:37:30 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/06/10 18:35:53 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_uint			get_cnt_disorder(t_stack *a, t_uint size);
 static t_uint	set_stack_a(t_stack **a);
 static void		push_to_b(t_stack **a, t_stack **b, t_uint *order);
 static void		push_to_a(t_stack **a, t_stack **b, t_uint order);

@@ -12,28 +12,26 @@
 
 #include "push_swap.h"
 
-static void	swap(t_stack *head);
-
 void	sa(t_stack *a)
 {
 	swap(a);
-	printf("sa\n");
+	ft_printf("sa\n");
 }
 
 void	sb(t_stack *b)
 {
 	swap(b);
-	printf("sb\n");
+	ft_printf("sb\n");
 }
 
 void	ss(t_stack *a, t_stack *b)
 {
 	swap(a);
 	swap(b);
-	printf("ss\n");
+	ft_printf("ss\n");
 }
 
-static void	swap(t_stack *head)
+void	swap(t_stack *head)
 {
 	t_uint	tmp_order;
 	int		tmp;

@@ -1,35 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   op_rotate_rvs.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/08 17:37:46 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/06/11 02:56:04 by donghyu2         ###   ########.fr       */
+/*   Created: 2023/02/09 16:16:37 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/06/10 23:27:18 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	main(int ac, char **av)
+void	rra(t_stack **a)
 {
-	char			**input;
-	t_sort			sort;
-	static t_stack	*a;
-	static t_stack	*b;
+	set_rotate_rvs(a);
+	ft_printf("rra\n");
+}
 
-	if (ac > 1)
-	{
-		input = av + 1;
-		if (check_valid(ac, input) && init_stack(&a, ac, input)
-			&& check_duplication(a) && ft_stksize(a) > 1)
-		{
-			sort = select_algorithm(a);
-			if (sort)
-				sort(&a, &b);
-		}
-		ft_stkclear(a);
-	}
-	return (0);
+void	rrb(t_stack **b)
+{
+	set_rotate_rvs(b);
+	ft_printf("rrb\n");
+}
+
+void	rrr(t_stack **a, t_stack **b)
+{
+	set_rotate_rvs(a);
+	set_rotate_rvs(b);
+	ft_printf("rrr\n");
+}
+
+void	set_rotate_rvs(t_stack **head)
+{
+	*head = (*head)->prev;
 }

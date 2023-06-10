@@ -6,13 +6,12 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 18:33:12 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/04 20:39:31 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/06/10 22:21:31 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_uint			get_cnt_disorder(t_stack *a, t_uint size);
 static t_bool	reverse(t_stack *a, t_uint size);
 static t_bool	wrong_position(t_stack *a, t_uint size);
 static t_bool	reverse_wrong_position(t_stack *a, t_uint size);
@@ -24,16 +23,16 @@ t_sort	select_algorithm(t_stack *a)
 
 	size = ft_stksize(a);
 	cnt = get_cnt_disorder(a, size);
-	if ((cnt == 0 && ref(a) == 0) || size < 2)
+	if ((cnt == 0 && ref(a) == 0))
 		return (NULL);
 	else if (size <= 3)
 		return (&sort_3);
+	else if (size <= 5)
+		return (&sort_5);
 	else if (reverse(a, size) || reverse_wrong_position(a, size))
 		return (&sort_reverse);
 	else if (wrong_position(a, size))
 		return (&sort_rotate);
-	else if (size <= 5)
-		return (&sort_5);
 	else if (cnt < 16)
 		return (&sort_insertion);
 	else
