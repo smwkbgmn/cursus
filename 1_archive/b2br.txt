@@ -2,7 +2,7 @@
 
 ## A graphical interface is of no use
 	- X.org or any other graphics server
-> by showing a terminal is first show up when just get logged in you can address about this 
+> by showing that the terminal is showed up when just get logged in, you can address about this 
 
 ## 'Debian' or 'Rocky'
 	- In case of 'Rocky', don't have to set up 'KDump'
