@@ -1,4 +1,4 @@
-NAME_MAN	= push_swap
+NAME	= push_swap
 NAME_BNS	= checker
 
 CC			= cc
@@ -47,9 +47,9 @@ OBJS_BNS	= $(SRCS_BNS:.c=.o)
 
 LIBFT		= $(DIR_LIBFT)/libft.a
 
-all			: $(NAME_MAN)
+all			: $(NAME)
 
-$(NAME_MAN)	: $(LIBFT) $(OBJS_MAN)
+$(NAME)	: $(LIBFT) $(OBJS_MAN)
 			$(CC) $(FLAG) $(LIBFT) $(OBJS_MAN) -o $@
 
 %.o			: %.c
@@ -65,7 +65,7 @@ clean		:
 
 fclean		:
 			make clean
-			$(RM) $(NAME_MAN) $(NAME_BNS) $(LIBFT)
+			$(RM) $(NAME) $(NAME_BNS) $(LIBFT)
 
 re			:
 			make fclean
