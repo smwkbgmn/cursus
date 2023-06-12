@@ -1,7 +1,15 @@
-NAME	= libft.a
+NAME		= libft.a
+CC			= cc
 
-CC		= cc
-FLAG	= -Wall -Wextra -Werror -I $(DIR_HEADER)
+DIR_HDR		= .
+DIR_SRC		= source
+DIR_FT		= original
+DIR_LIBC	= $(DIR_SRC)/$(DIR_FT)/libc
+DIR_ADD		= $(DIR_SRC)/$(DIR_FT)/add
+DIR_BONUS	= $(DIR_SRC)/$(DIR_FT)/list
+DIR_CUSTOM	= $(DIR_SRC)/custom
+DIR_GNL		= $(DIR_SRC)/get_next_line
+DIR_PRNTF	= $(DIR_SRC)/ft_printf
 
 SRCS	= \
 $(DIR_LIBC)/ft_strnstr.c \
@@ -51,22 +59,49 @@ $(DIR_BONUS)/ft_lstadd_front.c \
 $(DIR_BONUS)/ft_lstdelone.c \
 \
 $(DIR_CUSTOM)/ft_atoi_long.c \
-$(DIR_CUSTOM)/ft_itoa_uint.c \
+$(DIR_CUSTOM)/ft_free.c \
 $(DIR_CUSTOM)/ft_itoa_uint_base.c \
-$(DIR_CUSTOM)/ft_itoa_ulong.c \
+$(DIR_CUSTOM)/ft_itoa_uint.c \
 $(DIR_CUSTOM)/ft_itoa_ulong_base.c \
+$(DIR_CUSTOM)/ft_itoa_ulong.c \
 $(DIR_CUSTOM)/ft_lstadd_idx.c \
 $(DIR_CUSTOM)/ft_lstidx.c \
-$(DIR_CUSTOM)/write_hex.c \
 $(DIR_CUSTOM)/write_hex_len.c
+$(DIR_CUSTOM)/write_hex.c \
+\
+$(DIR_GNL)/get_next_line_utils.c \
+$(DIR_GNL)/get_next_line.c \
+\
+$(DIR_PRNTF)/flag/flag_dash.c \
+$(DIR_PRNTF)/flag/flag_hash.c \
+$(DIR_PRNTF)/flag/flag_plus.c \
+$(DIR_PRNTF)/flag/flag_precision.c \
+$(DIR_PRNTF)/flag/flag_space.c \
+$(DIR_PRNTF)/flag/flag_width.c \
+$(DIR_PRNTF)/flag/flag_zero.c \
+$(DIR_PRNTF)/type/type_c.c \
+$(DIR_PRNTF)/type/type_d.c \
+$(DIR_PRNTF)/type/type_i.c \
+$(DIR_PRNTF)/type/type_p.c \
+$(DIR_PRNTF)/type/type_percent.c \
+$(DIR_PRNTF)/type/type_s.c \
+$(DIR_PRNTF)/type/type_u.c \
+$(DIR_PRNTF)/type/type_x_lower.c \
+$(DIR_PRNTF)/type/type_x_upper.c \
+\
+$(DIR_PRNTF)/utility/utill_flag.c \
+$(DIR_PRNTF)/utility/utill_list1.c \
+$(DIR_PRNTF)/utility/utill_list2.c \
+$(DIR_PRNTF)/utility/utill_type.c \
+\
+$(DIR_PRNTF)/ft_printf.c
 
 OBJS	= $(SRCS:.c=.o)
 
-DIR_HEADER	= include
-DIR_LIBC	= source/libc
-DIR_ADD		= source/additional
-DIR_BONUS	= source/bonus
-DIR_CUSTOM	= source/custom
+FLAG		= -Wall -Wextra -Werror \
+-I $(DIR_HDR) \
+-I $(DIR_GNL) \
+-I $(DIR_PRNTF)
 
 all			: $(NAME)
 
@@ -84,6 +119,8 @@ clean		:
 fclean		: clean
 			$(RM) $(NAME)
 
-re			: fclean all
+re			: 
+			$(MAKE) fclean
+			$(MAKE) all
 
 .PHONY		: all clan fcelan re
