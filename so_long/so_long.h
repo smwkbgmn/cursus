@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 22:29:41 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/18 15:39:37 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/06/13 16:57:51 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,13 @@ void	swap_tile(char **map, t_char *chartr, t_coord moved, char target);
 char	ref_tile(char **map, t_coord coord);
 void	put_image(t_mlx mlx, t_img img, t_coord coord);
 
+t_coord	get_coord_target(t_map map, char target);
+t_bool	check_valid_path(t_map map, t_coord curnt);
+
 /*    FOR TEST    */
 void	test_print_map(t_map map);
+void	test_print_lists(t_list *checked, t_list *near, t_bool valid);
+void	test_print_checked(t_list *checked);
+void	test_print_near(t_list *near);
 
 #endif

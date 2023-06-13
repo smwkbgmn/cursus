@@ -1,7 +1,7 @@
 NAME		= so_long
 
 ARCH		= arch -x86_64
-CC			= $(ARCH) cc
+CC			= cc
 
 DIR_HDR		= .
 DIR_SRCS	= source
@@ -34,10 +34,10 @@ $(NAME)		: $(LIBFT) $(LIBMLX) $(OBJS)
 			$(CC) $(FLAG) $(FLAG_MLX) $(LIBMLX) $(LIBFT) $(OBJS) -o $@			
 
 $(LIBFT)	:
-			$(ARCH) $(MAKE) -C $(DIR_LIBFT) all
+			$(MAKE) -C $(DIR_LIBFT) all
 
 $(LIBMLX)	:
-			$(ARCH) $(MAKE) -C $(DIR_LIBMLX)
+			$(MAKE) -C $(DIR_LIBMLX)
 
 %.o			: %.c
 			$(CC) $(FLAG) -c $< -o $@

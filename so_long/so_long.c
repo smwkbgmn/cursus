@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 22:29:33 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/15 16:41:40 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/06/13 14:07:40 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,8 @@ static int	window_closed(t_data *data)
 void	exit_program(t_data *data)
 {
 	mlx_destroy_window(data->mlx.ptr, data->mlx.window);
+	// while (data->map.height-- > 0)
+	// 	ft_free(data->map.map[hright]);
+	// ft_free(data->map.map);
 	exit(0);
 }

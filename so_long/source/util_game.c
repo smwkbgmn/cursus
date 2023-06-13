@@ -6,13 +6,12 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 00:18:01 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/12 20:16:46 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/06/13 14:58:29 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	set_coord_target(t_map map, t_char *chartr, char target);
 void	set_game_goal(t_map map, t_game *game);
 
 t_char	init_character(t_map map, char target)
@@ -20,7 +19,7 @@ t_char	init_character(t_map map, char target)
 	t_char	chartr;
 
 	chartr.frame = 0;
-	set_coord_target(map, &chartr, target);
+	chartr.coord = get_coord_target(map, target);
 	if (chartr.coord.x < map.width / 2)
 		chartr.direction = RIGHT;
 	else
@@ -30,7 +29,7 @@ t_char	init_character(t_map map, char target)
 	return (chartr);
 }
 
-void	set_coord_target(t_map map, t_char *chartr, char target)
+t_coord	get_coord_target(t_map map, char target)
 {
 	t_coord	coord;
 
@@ -41,13 +40,12 @@ void	set_coord_target(t_map map, t_char *chartr, char target)
 		while (coord.x < map.width)
 		{
 			if (ref_tile(map.map, coord) == target)
-			{
-				chartr->coord = coord;
-			}
+				return (coord);
 			coord.x++;
 		}
 		coord.y++;
 	}
+	return (coord);
 }
 
 t_game	init_game(t_map map)
