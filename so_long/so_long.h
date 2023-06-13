@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 22:29:41 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/06/13 16:57:51 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/06/13 18:22:04 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,12 @@ typedef enum e_key
 	S = 1,
 	D = 2
 }	t_key;
+
+typedef struct s_dfs
+{
+	t_list	*checked;
+	t_list	*stack;
+}	t_dfs;
 
 typedef struct s_mlx
 {

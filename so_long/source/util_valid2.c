@@ -6,64 +6,94 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 16:01:01 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/06/13 17:54:45 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/06/13 18:32:58 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-t_bool			find_exit(t_map map, t_list **checked, t_list **near, t_uint *cnt_clec);
+// t_bool			find_exit(t_map map, t_list **checked, t_list **near, t_uint *cnt_clec);
 void			assign_near(t_map map, t_list *checked, t_list **near, t_coord curnt);
+t_bool			find_exit(t_map map, t_dfs *dfs, t_uint *collected);
 t_bool			is_checked(t_list *checked, t_coord crd);
 t_bool			is_listed(t_list *near, t_coord crd);
+t_uint			get_cnt_all_clec(t_map map);
 static t_bool	is_moveable(char tile);
 
-t_uint	get_cnt_all_collecti(t_map map);
+void	check_tile(char tile, t_bool *valid, t_uint *collected);
+void	adjust_dfs(t_dfs *dfs, t_list *current);
+t_coord	ref_coord(t_list *node);
 
-t_bool	check_valid_path(t_map map, t_coord curnt)
+t_bool	check_valid_path(t_map map, t_coord start)
 {
-	static t_list	*checked;
-	static t_list	*near;
-	t_uint			cnt_clec;
+	t_dfs	dfs;
+	t_uint	collected;
 
-	near = ft_lstnew(&curnt);
-	return (find_exit(map, &checked, &near, &cnt_clec)
-		&& cnt_clec == get_cnt_all_collecti(map));
+	dfs.checked = NULL;
+	dfs.stack = ft_lstnew(&start);
+	return (find_exit(map, &dfs, &collected));
+	// return (find_exit(map, &checked, &near, &cnt_clec)
+	// 	&& cnt_clec == get_cnt_all_collecti(map));
 }
 
-t_bool	find_exit(t_map map, t_list **checked, t_list **near, t_uint *cnt_clec)
+t_bool	find_exit(t_map map, t_dfs *dfs, t_uint *collected)
 {
-	static t_bool	valid_exit;
-	t_list			*curnt;
+	static t_bool	valid;
+	t_list			*current;
+	char			tile;
 
-	test_print_lists(*checked, *near, valid_exit);
-	// curnt = *near;
-	// if (ref_tile(map.map, *(t_coord *)curnt->content) == EXIT)
-	// 	valid = TRUE;
-	// else
-	// {
-	// 	*near = (*near)->next;
-	// 	ft_lstadd_front(checked, curnt);
-	// 	assign_near(map, *checked, near, *(t_coord *)curnt->content);
-	// 	if (*near)
-	// 		find_exit(map, checked, near);
-	// }
-	curnt = *near;
-	if (ref_tile(map.map, *(t_coord *)curnt->content) == EXIT)
-		valid_exit = TRUE;
-	else if (ref_tile(map.map, *(t_coord *)curnt->content) == CLEC)
-		(*cnt_clec)++;
-	*near = (*near)->next;
-	ft_lstadd_front(checked, curnt);
-	if (ref_tile(map.map, *(t_coord *)curnt->content) != EXIT)
-		assign_near(map, *checked, near, *(t_coord *)curnt->content);
-	if (*near)
-		find_exit(map, checked, near, cnt_clec);
-	return (valid_exit);
-	// return (cnt_clec == get_cnt_all_collecti(map) && valid_exit);
+	test_print_lists(dfs->checked, dfs->stack, valid);
+	current = dfs->stack;
+	tile = ref_tile(map.map, ref_coord(current));
+	check_tile(tile, &valid, collected);
+	adjust_dfs(dfs, current);
+	if (tile != EXIT)
+		assign_near(map, dfs->checked, &dfs->stack, ref_coord(current));
+	if (dfs->stack)
+		find_exit(map, dfs, collected);
+	return (valid && *collected == get_cnt_all_clec(map));
 }
 
-t_uint	get_cnt_all_collecti(t_map map)
+void	check_tile(char tile, t_bool *valid, t_uint *collected)
+{
+	if (tile == EXIT)
+		*valid = TRUE;
+	else if (tile == CLEC)
+		(*collected)++;
+}
+
+void	adjust_dfs(t_dfs *dfs, t_list *current)
+{
+	dfs->stack = dfs->stack->next;
+	ft_lstadd_front(&dfs->checked, current);
+}
+
+t_coord	ref_coord(t_list *node)
+{
+	return (*(t_coord *)node->content);
+}
+
+// t_bool	find_exit(t_map map, t_list **checked, t_list **near, t_uint *cnt_clec)
+// {
+// 	static t_bool	valid;
+// 	t_list			*curnt;
+
+// 	test_print_lists(*checked, *near, valid);
+// 	curnt = *near;
+// 	if (ref_tile(map.map, *(t_coord *)curnt->content) == EXIT)
+// 		valid = TRUE;
+// 	else if (ref_tile(map.map, *(t_coord *)curnt->content) == CLEC)
+// 		(*cnt_clec)++;
+// 	*near = (*near)->next;
+// 	ft_lstadd_front(checked, curnt);
+// 	if (ref_tile(map.map, *(t_coord *)curnt->content) != EXIT)
+// 		assign_near(map, *checked, near, *(t_coord *)curnt->content);
+// 	if (*near)
+// 		find_exit(map, checked, near, cnt_clec);
+// 	return (valid);
+// }
+
+t_uint	get_cnt_all_clec(t_map map)
 {
 	t_uint	cnt_clec;
 	t_coord	crd;
