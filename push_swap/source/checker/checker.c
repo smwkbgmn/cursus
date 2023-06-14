@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 19:54:16 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/06/11 02:24:38 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/06/14 21:18:17 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,18 @@ int	main(int ac, char **av)
 	if (ac > 1)
 	{
 		input = av + 1;
-		if (check_valid(ac, input) && init_stack(&a, ac, input)
-			&& check_duplication(a) && ft_stksize(a) > 1)
+		if (check_valid(ac, input) && init_stack(&a, ac, input))
 		{
-			if (parse_stdin(&a, &b))
-				write_call(a, b);
-			else
-				write_error();
+			if (check_duplication(a) && ft_stksize(a) > 1)
+			{
+				if (parse_stdin(&a, &b))
+					write_call(a, b);
+				else
+					write_error();
+			}
+			ft_stkclear(a);
+			ft_stkclear(b);
 		}
-		ft_stkclear(a);
-		ft_stkclear(b);
 	}
 	return (0);
 }
