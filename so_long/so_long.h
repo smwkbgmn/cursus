@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 22:29:41 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/06/13 18:22:04 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/06/14 12:39:43 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,8 @@ typedef struct s_data
 	t_char	player;
 	t_char	enemy;
 }	t_data;
+
+void	write_error(void);
 
 void	exit_program(t_data *data);
 void	swap_tile(char **map, t_char *chartr, t_coord moved, char target);

@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 14:52:57 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/06/13 14:05:42 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/06/14 12:42:22 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ t_bool	init_data(t_data *data, char *filename)
 		data->imgs = init_asset(data->mlx.ptr);
 		return (TRUE);
 	}
+	write_error();
 	return (FALSE);
 }

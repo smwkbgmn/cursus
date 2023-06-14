@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 22:29:33 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/06/13 14:07:40 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/06/14 12:39:37 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,9 @@ void	exit_program(t_data *data)
 	// 	ft_free(data->map.map[hright]);
 	// ft_free(data->map.map);
 	exit(0);
+}
+
+void	write_error(void)
+{
+	write(2, "Error\n", 6);
 }
