@@ -59,6 +59,7 @@ $(DIR_BONUS)/ft_lstadd_front.c \
 $(DIR_BONUS)/ft_lstdelone.c \
 \
 $(DIR_CUSTOM)/ft_atoi_long.c \
+$(DIR_CUSTOM)/ft_free_set_null.c \
 $(DIR_CUSTOM)/ft_free.c \
 $(DIR_CUSTOM)/ft_itoa_uint_base.c \
 $(DIR_CUSTOM)/ft_itoa_uint.c \

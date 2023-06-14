@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 23:00:18 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/05/15 14:27:51 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/06/14 17:54:04 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,4 @@ void	ft_free(void *ptr)
 {
 	if (ptr)
 		free(ptr);
-	ptr = NULL;
 }
