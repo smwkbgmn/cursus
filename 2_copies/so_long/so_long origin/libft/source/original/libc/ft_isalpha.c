@@ -1,38 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   op_rotate.c                                        :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/09 16:16:56 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/06/15 13:48:42 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/11/11 16:13:41 by donghyu2          #+#    #+#             */
+/*   Updated: 2022/12/18 04:35:05 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	ra(t_stack **a)
+int	ft_isalpha(int c)
 {
-	set_rotate(a);
-	ft_printf("ra\n");
-}
-
-void	rb(t_stack **b)
-{
-	set_rotate(b);
-	ft_printf("rb\n");
-}
-
-void	rr(t_stack **a, t_stack **b)
-{
-	set_rotate(a);
-	set_rotate(b);
-	ft_printf("rr\n");
-}
-
-void	set_rotate(t_stack **head)
-{
-	if (*head)
-		*head = (*head)->next;
+	return (('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z'));
 }

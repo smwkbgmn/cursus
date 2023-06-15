@@ -1,38 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   op_rotate.c                                        :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/09 16:16:56 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/06/15 13:48:42 by donghyu2         ###   ########.fr       */
+/*   Created: 2023/03/15 23:00:18 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/06/14 17:54:04 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include <stdlib.h>
 
-void	ra(t_stack **a)
-{
-	set_rotate(a);
-	ft_printf("ra\n");
-}
+#include "libft.h"
 
-void	rb(t_stack **b)
+void	ft_free(void *ptr)
 {
-	set_rotate(b);
-	ft_printf("rb\n");
-}
-
-void	rr(t_stack **a, t_stack **b)
-{
-	set_rotate(a);
-	set_rotate(b);
-	ft_printf("rr\n");
-}
-
-void	set_rotate(t_stack **head)
-{
-	if (*head)
-		*head = (*head)->next;
+	if (ptr)
+		free(ptr);
 }

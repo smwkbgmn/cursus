@@ -1,38 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   op_rotate.c                                        :+:      :+:    :+:   */
+/*   write_hex.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/09 16:16:56 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/06/15 13:48:42 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/11/29 01:29:57 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/01/04 12:40:19 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
+#include <unistd.h>
 
-void	ra(t_stack **a)
+static void	write_digit(short digit, short flag);
+
+void	write_hex(unsigned int num, short flag)
 {
-	set_rotate(a);
-	ft_printf("ra\n");
+	if (num < 16)
+		write_digit(num & 0xf, flag);
+	else
+	{
+		write_hex(num >> 4, flag);
+		write_digit(num & 0xf, flag);
+	}
 }
 
-void	rb(t_stack **b)
+static void	write_digit(short digit, short flag)
 {
-	set_rotate(b);
-	ft_printf("rb\n");
-}
-
-void	rr(t_stack **a, t_stack **b)
-{
-	set_rotate(a);
-	set_rotate(b);
-	ft_printf("rr\n");
-}
-
-void	set_rotate(t_stack **head)
-{
-	if (*head)
-		*head = (*head)->next;
+	if (flag == 0)
+		write(1, &"0123456789abcdef"[digit], 1);
+	else
+		write(1, &"0123456789ABCDEF"[digit], 1);
 }

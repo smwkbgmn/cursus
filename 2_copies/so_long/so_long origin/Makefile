@@ -4,7 +4,7 @@ CC			= cc
 
 DIR_HDR		= .
 DIR_SRCS	= source
-DIR_LIBFT	= ../1_archive/libft
+DIR_LIBFT	= libft
 DIR_LIBMLX	= mlx
 
 SRCS		= \

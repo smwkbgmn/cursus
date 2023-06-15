@@ -1,38 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   op_rotate.c                                        :+:      :+:    :+:   */
+/*   type_percent.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/09 16:16:56 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/06/15 13:48:42 by donghyu2         ###   ########.fr       */
+/*   Created: 2023/01/04 18:16:09 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/05/14 19:02:41 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "ft_printf.h"
 
-void	ra(t_stack **a)
+t_bool	type_percent(t_list *head)
 {
-	set_rotate(a);
-	ft_printf("ra\n");
-}
+	char	*content;
 
-void	rb(t_stack **b)
-{
-	set_rotate(b);
-	ft_printf("rb\n");
-}
-
-void	rr(t_stack **a, t_stack **b)
-{
-	set_rotate(a);
-	set_rotate(b);
-	ft_printf("rr\n");
-}
-
-void	set_rotate(t_stack **head)
-{
-	if (*head)
-		*head = (*head)->next;
+	content = ft_calloc(2, 1);
+	if (content)
+	{
+		content[0] = '%';
+		ft_lstidx(head, 3)->content = content;
+		return (TRUE);
+	}
+	else
+		return (FALSE);
 }

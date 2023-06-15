@@ -1,38 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   op_rotate.c                                        :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/09 16:16:56 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/06/15 13:48:42 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/11/11 15:41:10 by donghyu2          #+#    #+#             */
+/*   Updated: 2022/12/19 23:02:02 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	ra(t_stack **a)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	set_rotate(a);
-	ft_printf("ra\n");
-}
+	char		*dst_c;
+	const char	*src_c;
 
-void	rb(t_stack **b)
-{
-	set_rotate(b);
-	ft_printf("rb\n");
-}
-
-void	rr(t_stack **a, t_stack **b)
-{
-	set_rotate(a);
-	set_rotate(b);
-	ft_printf("rr\n");
-}
-
-void	set_rotate(t_stack **head)
-{
-	if (*head)
-		*head = (*head)->next;
+	if (n > 0 && dst != src)
+	{
+		dst_c = (char *)dst;
+		src_c = (char *)src;
+		while (n > 0)
+		{
+			*dst_c++ = *src_c++;
+			n--;
+		}
+	}
+	return (dst);
 }

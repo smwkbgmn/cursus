@@ -1,38 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   op_rotate.c                                        :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/09 16:16:56 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/06/15 13:48:42 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/11/15 15:53:50 by donghyu2          #+#    #+#             */
+/*   Updated: 2022/12/20 00:15:38 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	ra(t_stack **a)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	set_rotate(a);
-	ft_printf("ra\n");
-}
+	const unsigned char	*s1_c;
+	const unsigned char	*s2_c;
 
-void	rb(t_stack **b)
-{
-	set_rotate(b);
-	ft_printf("rb\n");
-}
-
-void	rr(t_stack **a, t_stack **b)
-{
-	set_rotate(a);
-	set_rotate(b);
-	ft_printf("rr\n");
-}
-
-void	set_rotate(t_stack **head)
-{
-	if (*head)
-		*head = (*head)->next;
+	if (n > 0)
+	{
+		s1_c = (const unsigned char *)s1;
+		s2_c = (const unsigned char *)s2;
+		while (n > 0)
+		{
+			if (*s1_c != *s2_c)
+				return (*s1_c - *s2_c);
+			else
+			{
+				s1_c++;
+				s2_c++;
+			}
+			n--;
+		}
+	}
+	return (0);
 }

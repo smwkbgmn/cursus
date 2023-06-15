@@ -1,38 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   op_rotate.c                                        :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/09 16:16:56 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/06/15 13:48:42 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/11/22 15:34:04 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/06/14 16:26:57 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include <stdlib.h>
 
-void	ra(t_stack **a)
-{
-	set_rotate(a);
-	ft_printf("ra\n");
-}
+#include "libft.h"
 
-void	rb(t_stack **b)
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	set_rotate(b);
-	ft_printf("rb\n");
-}
+	t_list	*node_del;
 
-void	rr(t_stack **a, t_stack **b)
-{
-	set_rotate(a);
-	set_rotate(b);
-	ft_printf("rr\n");
-}
-
-void	set_rotate(t_stack **head)
-{
-	if (*head)
-		*head = (*head)->next;
+	if (del)
+	{
+		while (*lst)
+		{
+			node_del = *lst;
+			*lst = (*lst)->next;
+			del(node_del->content);
+			free(node_del);
+		}
+	}
 }

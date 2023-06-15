@@ -1,38 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   op_rotate.c                                        :+:      :+:    :+:   */
+/*   ft_lstadd_idx.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/09 16:16:56 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/06/15 13:48:42 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/12/31 17:46:18 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/01/06 14:41:02 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	ra(t_stack **a)
+void	ft_lstadd_idx(t_list **head, t_list *new, int idx)
 {
-	set_rotate(a);
-	ft_printf("ra\n");
-}
+	t_list	*node_prev;
+	int		size;
 
-void	rb(t_stack **b)
-{
-	set_rotate(b);
-	ft_printf("rb\n");
-}
-
-void	rr(t_stack **a, t_stack **b)
-{
-	set_rotate(a);
-	set_rotate(b);
-	ft_printf("rr\n");
-}
-
-void	set_rotate(t_stack **head)
-{
-	if (*head)
-		*head = (*head)->next;
+	size = ft_lstsize(*head);
+	if (idx == 0)
+		ft_lstadd_front(head, new);
+	else if (idx == size || idx == -1)
+		ft_lstadd_back(head, new);
+	else
+	{
+		node_prev = ft_lstidx(*head, idx - 1);
+		if (node_prev)
+		{
+			new->next = node_prev->next;
+			node_prev->next = new;
+		}
+	}
 }

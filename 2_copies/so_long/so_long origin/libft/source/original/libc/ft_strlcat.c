@@ -1,38 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   op_rotate.c                                        :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/09 16:16:56 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/06/15 13:48:42 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/11/15 20:22:52 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/01/03 20:34:54 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	ra(t_stack **a)
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-	set_rotate(a);
-	ft_printf("ra\n");
-}
+	size_t	l_dst;
+	size_t	l_src;
 
-void	rb(t_stack **b)
-{
-	set_rotate(b);
-	ft_printf("rb\n");
-}
-
-void	rr(t_stack **a, t_stack **b)
-{
-	set_rotate(a);
-	set_rotate(b);
-	ft_printf("rr\n");
-}
-
-void	set_rotate(t_stack **head)
-{
-	if (*head)
-		*head = (*head)->next;
+	l_dst = ft_strlen(dst);
+	l_src = ft_strlen(src);
+	if (dstsize == 0 || dstsize < l_dst)
+		return (l_src + dstsize);
+	while (dstsize-- > l_dst + 1 && *src)
+		*(dst++ + l_dst) = *src++;
+	*(dst + l_dst) = 0;
+	return (l_dst + l_src);
 }

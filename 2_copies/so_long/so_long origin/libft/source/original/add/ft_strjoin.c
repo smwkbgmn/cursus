@@ -1,38 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   op_rotate.c                                        :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/09 16:16:56 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/06/15 13:48:42 by donghyu2         ###   ########.fr       */
+/*   Created: 2022/11/23 15:12:37 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/01/04 12:39:33 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
+#include <stdlib.h>
 
-void	ra(t_stack **a)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	set_rotate(a);
-	ft_printf("ra\n");
-}
+	char	*result;
+	size_t	len_s1;
+	size_t	len_s2;
 
-void	rb(t_stack **b)
-{
-	set_rotate(b);
-	ft_printf("rb\n");
-}
-
-void	rr(t_stack **a, t_stack **b)
-{
-	set_rotate(a);
-	set_rotate(b);
-	ft_printf("rr\n");
-}
-
-void	set_rotate(t_stack **head)
-{
-	if (*head)
-		*head = (*head)->next;
+	len_s1 = ft_strlen(s1);
+	len_s2 = ft_strlen(s2);
+	result = malloc(len_s1 + len_s2 + 1);
+	if (result)
+	{
+		ft_memmove(result, s1, len_s1);
+		ft_memmove(result + len_s1, s2, len_s2);
+		result[len_s1 + len_s2] = 0;
+	}
+	return (result);
 }
