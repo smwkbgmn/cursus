@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util_valid_dfs1.c                                  :+:      :+:    :+:   */
+/*   valid_map_dfs1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 16:01:01 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/06/14 20:44:08 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/06/21 15:39:26 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,12 @@ t_uint	get_cnt_all_clec(t_map map);
 
 t_bool	check_valid_path(t_map map, t_coord start)
 {
-	t_bool	valid;
-	t_uint	collected;
-	t_dfs	dfs;
-	t_coord	*ptr_start;
+	static t_dfs	dfs;
+	t_bool			valid;
+	t_uint			collected;
+	t_coord			*ptr_start;
 
 	valid = FALSE;
-	dfs.checked = NULL;
-	dfs.stack = NULL;
 	ptr_start = get_coord(start.x, start.y);
 	if (ptr_start)
 	{
