@@ -6,16 +6,23 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 19:05:17 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/06/21 20:15:46 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/07/21 05:13:29 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+/* Remove includes in c files */
 
 #include "pipex.h"
 
-int	main(int ac, char **av)
+int	main(int ac, char **av, char **env)
 {
-	execve("ls -al")
+	static t_data	input;
+
+	if (ac > 4)
+	{
+		init_data(&input, ac, av, env);
+		execute(&input);
+	}
+	free_data(&input);
 	return (0);
 }

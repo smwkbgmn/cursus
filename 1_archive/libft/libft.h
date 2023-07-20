@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:29:06 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/06/14 17:41:11 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/06/28 17:22:23 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,10 @@ void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 
 t_list	*ft_lstnew(void *content);
-void	ft_lstadd_front(t_list **lst, t_list *new);
+void	ft_lstadd_front(t_list **lst, t_list *node_new);
 int		ft_lstsize(t_list *lst);
 t_list	*ft_lstlast(t_list *lst);
-void	ft_lstadd_back(t_list **lst, t_list *new);
+void	ft_lstadd_back(t_list **lst, t_list *node_new);
 void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
@@ -76,7 +76,7 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 void	write_hex(unsigned int num, short flag);
 int		write_hex_len(unsigned int num, short flag);
 t_list	*ft_lstidx(t_list *head, int idx);
-void	ft_lstadd_idx(t_list **head, t_list *new, int idx);
+void	ft_lstadd_idx(t_list **head, t_list *node_new, int idx);
 long	ft_atoi_long(const char *str);
 char	*ft_itoa_uint(unsigned int n);
 char	*ft_itoa_ulong(unsigned long n);

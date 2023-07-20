@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:12:25 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/04 12:39:37 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/06/30 14:08:18 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	**ft_split(char const *s, char c)
 			else
 				return (free_malloc_failure(result, ptr));
 		}
-		result[ptr] = 0;
+		result[ptr] = NULL;
 	}
 	return (result);
 }

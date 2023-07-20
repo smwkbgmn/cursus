@@ -1,0 +1,13 @@
+{
+	"files.associations": {
+		"pipex.h": "c",
+		"libft.h": "c",
+		"stddef.h": "c",
+		"unistd.h": "c",
+		"fcntl.h": "c",
+		"stdlib.h": "c"
+	},
+	"workbench.editor.tabSizing": "shrink",
+	"workbench.editor.doubleClickTabToToggleEditorGroupSizes": false,
+	"workbench.editor.splitOnDragAndDrop": false
+}

@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 23:43:42 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/01/03 20:35:07 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/06/30 13:42:06 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,5 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t n)
 	if (needle[i_ndl] == 0)
 		return ((char *)&haystack[i_hay - i_ndl]);
 	else
-		return (0);
+		return (NULL);
 }
