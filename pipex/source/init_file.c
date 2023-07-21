@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_fd.c                                          :+:      :+:    :+:   */
+/*   init_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 22:22:29 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/07/21 04:04:53 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/07/21 16:35:31 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include "pipex.h"
 
-void	init_fd(t_data *input, int ac, char **av)
+void	init_file(t_data *input, int ac, char **av)
 {
 	if (input->heredoc)
 	{

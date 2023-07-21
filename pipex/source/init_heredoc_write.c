@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 03:06:41 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/07/21 04:04:40 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/07/21 17:02:19 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	write_heredoc(int fd_heredoc, char *limiter)
 	{
 		if (!is_limiter(line, limiter))
 		{
-			write(fd_heredoc, line, ft_strlen(line));
+			if (write(fd_heredoc, line, ft_strlen(line)) == ERROR)
+				exit_with_error("write");
 			write_heredoc(fd_heredoc, limiter);
 		}
 		else
@@ -67,12 +68,7 @@ static void	read_one_char(char *buf, int *byte_read)
 
 static char	*init_line(t_uint len)
 {
-	char	*line;
-
-	line = ft_calloc(len, sizeof(char));
-	if (!line)
-		exit_with_error("malloc");
-	return (line);
+	return (catcher(ft_calloc(len, sizeof(char))));
 }
 
 static t_bool	is_limiter(char *line, char *limiter)

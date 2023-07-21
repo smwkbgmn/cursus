@@ -1,0 +1,3 @@
+cc -Wall -Wextra -Werror -I . -I ../1_archive/libft  -c pipex.c -o pipex.o
+cc -Wall -Wextra -Werror -I . -I ../1_archive/libft  -c source/free.c -o source/free.o
+cc -Wall -Wextra -Werror -I . -I ../1_archive/libft  ../1_archive/libft/libft.a pipex.o source/debug.o source/execute.o source/execute_child.o source/execute_parent.o source/fd.o source/free.o source/init.o source/init_cmd.o source/init_env.o source/init_fd.o source/init_heredoc.o source/init_heredoc_write.o -o pipex			

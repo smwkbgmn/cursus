@@ -23,8 +23,8 @@ FLAG_LIBFT	= -I $(DIR_LIBFT)
 
 all			: $(NAME)
 
-$(NAME)		: $(LIBFT) $(LIBMLX) $(OBJS)
-			$(CC) $(FLAG) $(LIBFT) $(OBJS) -o $@			
+$(NAME)		: $(LIBFT) $(OBJS)
+			$(CC) $(FLAG) $(LIBFT) $(OBJS) -o $@
 
 $(LIBFT)	:
 			$(ARCH) $(MAKE) -C $(DIR_LIBFT) all

@@ -1,18 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   system_free.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 02:00:58 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/07/21 05:28:10 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/07/21 17:28:07 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdio.h>
-#include <stdlib.h>
 
 #include "pipex.h"
 
@@ -27,7 +26,7 @@ void	free_data(t_data *input)
 	close_fd(input->fd_in);
 	close_fd(input->fd_out);
 	free_cmd(input);
-	free_path(input->env_path);
+	free_path(input->path);
 }
 
 static void	remove_file(char *name)

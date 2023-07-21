@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 19:05:17 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/07/21 05:41:04 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/07/21 17:28:50 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 /* Check about the exit function */
 /* Check the way of parsing parameters for cmds again to
 know whether spliting input by space is the right way or not */
+/* What would happen when the env comes as unset */
 
 #include "pipex.h"
 
@@ -26,7 +27,7 @@ int	main(int ac, char **av, char **env)
 	{
 		init_data(&input, ac, av, env);
 		execute(&input);
+		free_data(&input);
 	}
-	free_data(&input);
 	return (0);
 }
