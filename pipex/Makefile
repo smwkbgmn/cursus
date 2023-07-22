@@ -4,12 +4,25 @@ CC			= cc
 
 DIR_HDR		= .
 DIR_SRCS	= source
+# DIR_LIBFT	= libft
 # DIR_LIBFT	= ../1_archive/libft
-DIR_LIBFT	= /Users/donghyun/dev/cursus/1_archive/libft
+# DIR_LIBFT	= /Users/donghyun/dev/cursus/1_archive/libft
+DIR_LIBFT	= /Users/donghyu2/dev/1_archive/libft
 
 SRCS		= \
-pipex.c \
-$(wildcard $(DIR_SRCS)/*.c)
+$(DIR_SRCS)/execute_child.c \
+$(DIR_SRCS)/execute_parent.c \
+$(DIR_SRCS)/execute.c \
+$(DIR_SRCS)/init_cmd.c \
+$(DIR_SRCS)/init_env.c \
+$(DIR_SRCS)/init_file.c \
+$(DIR_SRCS)/init_heredoc_write.c \
+$(DIR_SRCS)/init_heredoc.c \
+$(DIR_SRCS)/init.c \
+$(DIR_SRCS)/system_error.c \
+$(DIR_SRCS)/system_fd.c \
+$(DIR_SRCS)/system_free.c \
+pipex.c
 
 OBJS		= $(SRCS:.c=.o)
 
