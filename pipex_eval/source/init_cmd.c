@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 17:43:40 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/07/22 22:51:07 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/07/23 03:23:36 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static char	*get_name(char **path, char *av_cmd)
 {
 	char	*name;
 
-	if (*av_cmd == '/' || *av_cmd == '.')
+	if (*av_cmd == '.' || ft_strchr(av_cmd, '/'))
 	{
 		if (access(av_cmd, X_OK) == SUCCESS)
 			name = catcher(ft_strdup(av_cmd));
@@ -71,6 +71,25 @@ static char	*get_name(char **path, char *av_cmd)
 		name = find_name(path, catcher(ft_strjoin("/", av_cmd)));
 	return (name);
 }
+
+// static char	*get_name(char **path, char *av_cmd)
+// {
+// 	char	*name;
+
+// 	if (access(av_cmd, X_OK) == SUCCESS)
+// 		name = catcher(ft_strdup(av_cmd));
+// 	else
+// 	{
+// 		if (*av_cmd == '.' || ft_strchr(av_cmd, '/'))
+// 		{
+// 			perror("access");
+// 			name = catcher(ft_strdup("null"));
+// 		}
+// 		else
+// 			name = find_name(path, catcher(ft_strjoin("/", av_cmd)));
+// 	}
+// 	return (name);
+// }
 
 static char	*find_name(char **path, char *av_cmd)
 {

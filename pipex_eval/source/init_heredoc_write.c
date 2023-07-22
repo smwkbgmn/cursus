@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 03:06:41 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/07/22 22:50:23 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/07/23 02:59:12 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 #include "pipex.h"
 
-static char		*read_from_stdin(t_uint len);
-static void		read_one_char(char *buf, int *byte_read);
+static char		*read_from_stdin(int len);
+static int		read_one_char(char *buf, int *byte_read);
 static char		*init_line(t_uint len);
 static t_bool	is_limiter(char *line, char *limiter);
 
@@ -38,32 +38,33 @@ void	write_heredoc(int fd_heredoc, char *limiter)
 	}
 }
 
-static char	*read_from_stdin(t_uint len)
+static char	*read_from_stdin(int len)
 {
-	char	*line;
-	char	buf;
-	int		byte_read;
+	char			*line;
+	char			buf;
+	int				byte_read;
 
-	read_one_char(&buf, &byte_read);
-	if (buf != '\n' && byte_read > 0)
-		line = read_from_stdin(len + 1);
+	len += read_one_char(&buf, &byte_read);
+	if (byte_read > 0 && buf != '\n')
+		line = read_from_stdin(len);
 	else
 	{
-		if (buf == '\n' || len > 0)
-			line = init_line(len + 1 + (buf == '\n'));
+		if (len > 0 || buf == '\n')
+			line = init_line(len + 1);
 		else
 			line = NULL;
 	}
-	if (line)
-		line[len] = buf;
+	if (line && byte_read > 0)
+		line[len - 1] = buf;
 	return (line);
 }
 
-static void	read_one_char(char *buf, int *byte_read)
+static int	read_one_char(char *buf, int *byte_read)
 {
 	*byte_read = read(STDIN_FILENO, buf, 1);
 	if (*byte_read == ERROR)
 		exit_with_error("read");
+	return (*byte_read);
 }
 
 static char	*init_line(t_uint len)
