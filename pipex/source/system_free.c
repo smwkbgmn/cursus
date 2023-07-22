@@ -6,12 +6,11 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 02:00:58 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/07/21 17:28:07 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/07/21 19:22:00 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include <stdio.h>
 
 #include "pipex.h"
 
@@ -66,11 +65,4 @@ static void	free_path(char **path)
 		ptr++;
 	}
 	ft_free(path);
-}
-
-void	exit_with_error(char *msg)
-{
-	if (msg)
-		perror(msg);
-	exit(EXIT_FAILURE);
 }

@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 17:43:40 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/07/21 16:59:29 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/07/21 18:21:23 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 static t_cmd	*get_ary_cmd(char **path, t_uint cnt, char **av);
 static char		**get_argv(char *input);
 static char		*get_name(char **path, char *cmd);
+static char		*find_name(char **path, char *av_cmd);
 
 void	init_cmd(t_data *input, int ac, char **av)
 {
@@ -35,7 +36,7 @@ static t_cmd	*get_ary_cmd(char **path, t_uint cnt, char **av)
 	while (idx < cnt)
 	{
 		cmd[idx].av = get_argv(av[idx]);
-		cmd[idx].name = get_name(path, catcher(ft_strjoin("/", *cmd[idx].av)));
+		cmd[idx].name = get_name(path, *cmd[idx].av);
 		idx++;
 	}
 	return (cmd);
@@ -51,22 +52,33 @@ static char	**get_argv(char *input)
 	return (av);
 }
 
-static char	*get_name(char **path, char *cmd)
+static char	*get_name(char **path, char *av_cmd)
+{
+	char	*name;
+
+	if (access(av_cmd, X_OK) != SUCCESS)
+		name = find_name(path, catcher(ft_strjoin("/", av_cmd)));
+	else
+		name = catcher(ft_strdup(av_cmd));
+	return (name);
+}
+
+static char	*find_name(char **path, char *av_cmd)
 {
 	static char	*name;
 
 	if (*path)
 	{
-		name = catcher(ft_strjoin(*path, cmd));
+		name = catcher(ft_strjoin(*path, av_cmd));
 		if (access(name, X_OK) != SUCCESS)
 		{
 			ft_free_set_null((void *)&name);
-			get_name(path + 1, cmd);
+			find_name(path + 1, av_cmd);
 		}
 		else
-			ft_free(cmd);
+			ft_free(av_cmd);
 	}
 	else
-		ft_free(cmd);
+		ft_free(av_cmd);
 	return (name);
 }

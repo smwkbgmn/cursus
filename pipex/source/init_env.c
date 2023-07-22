@@ -6,9 +6,11 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 22:40:45 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/07/21 16:50:50 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/07/21 18:28:58 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <unistd.h>
 
 #include "pipex.h"
 
@@ -29,7 +31,10 @@ static char	**get_arys_path(char **env)
 
 	env_path = find_path(env);
 	if (!env_path)
-		exit_with_error("env_path not found");
+	{
+		write(STDERR_FILENO, "env_path not found\n", 19);
+		exit_with_error(NULL);
+	}
 	return (ft_split(env_path + 5, ':'));
 }
 

@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 19:04:45 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/07/21 17:28:03 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/07/22 15:37:59 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,16 @@ void	execute(t_data *input);
 void	parent(t_data *input, t_process ps, int *i_cmd, int *fd_prev);
 void	child(t_data *input, t_process *ps, int i_cmd, int fd_prev);
 
-int		open_fd(char *name, int option, int permit);
+int		open_fd(char *name, int option, int permit, int flag);
+// int		open_fd(char *name, int option, int permit);
 void	close_fd(int fd);
-void	*catcher(void *ptr);
 void	redirect(int fd_to_copy, int fd_to_be);
 
 void	free_data(t_data *input);
+
+void	*catcher(void *ptr);
+void	error_bad_arguments(void);
+void	error_command_not_found(char *av_name);
 void	exit_with_error(char *msg);
-
-/// debug ///
-void	dbg_print_av(char **av);
-void	dbg_print_input(t_data *input);
-
 
 #endif

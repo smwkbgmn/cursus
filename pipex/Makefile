@@ -4,7 +4,8 @@ CC			= cc
 
 DIR_HDR		= .
 DIR_SRCS	= source
-DIR_LIBFT	= ../1_archive/libft
+# DIR_LIBFT	= ../1_archive/libft
+DIR_LIBFT	= /Users/donghyun/dev/cursus/1_archive/libft
 
 SRCS		= \
 pipex.c \
@@ -42,6 +43,9 @@ clean		:
 fclean		:
 			make clean
 			$(RM) $(NAME) $(LIBFT)
+
+bonus		:
+			make all
 
 re			:
 			make fclean

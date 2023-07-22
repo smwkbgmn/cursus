@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 23:10:58 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/07/21 17:12:44 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/07/21 17:42:02 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	dbg_print_input(t_data *input)
 {
 	// ft_printf("fd_in : %d\n", input->fd_in);
 	// ft_printf("fd_out : %d\n", input->fd_out);
-	print_env(input->env);
+	// print_env(input->env);
 	print_cmds(input->cmd, input->cnt_cmd);
 }
 

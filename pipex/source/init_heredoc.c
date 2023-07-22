@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 21:38:43 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/07/21 04:03:14 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/07/22 15:43:57 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	init_heredoc(t_data *input, char *av_heredoc, char *av_limiter)
 	{
 		input->heredoc = TRUE;
 		write_heredoc(open_fd("heredoc",
-				O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, 0644), av_limiter);
+				O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, 0644, R), av_limiter);
 	}
 	else
 		input->heredoc = FALSE;

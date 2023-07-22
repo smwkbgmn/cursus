@@ -1,33 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_file.c                                        :+:      :+:    :+:   */
+/*   system_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/19 22:22:29 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/07/22 15:40:38 by donghyu2         ###   ########.fr       */
+/*   Created: 2023/07/21 19:18:36 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/07/22 14:51:19 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
 #include <unistd.h>
 #include <stdio.h>
 
 #include "pipex.h"
 
-void	init_file(t_data *input, int ac, char **av)
+void	*catcher(void *ptr)
 {
-	if (input->heredoc)
-	{
-		input->fd_in = open_fd("heredoc", O_RDONLY, 0, R);
-		input->fd_out = open_fd(av[ac - 1],
-				O_WRONLY | O_CREAT | O_APPEND, 0644, W);
-	}
-	else
-	{
-		input->fd_in = open_fd(av[1], O_RDONLY, 0, R);
-		input->fd_out = open_fd(av[ac - 1],
-				O_WRONLY | O_CREAT | O_TRUNC, 0644, W);
-	}
+	if (!ptr)
+		exit_with_error("malloc");
+	return (ptr);
+}
+
+void	error_command_not_found(char *av_name)
+{
+	write(STDERR_FILENO, "command not found: ", 19);
+	write(STDERR_FILENO, av_name, ft_strlen(av_name));
+	write(STDERR_FILENO, "\n", 1);
+}
+
+void	exit_with_error(char *msg)
+{
+	if (msg)
+		perror(msg);
+	exit(EXIT_FAILURE);
 }

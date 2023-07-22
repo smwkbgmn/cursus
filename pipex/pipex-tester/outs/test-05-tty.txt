@@ -1,1 +1,0 @@
-close: Bad file descriptor
