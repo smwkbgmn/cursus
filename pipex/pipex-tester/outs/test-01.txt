@@ -1,7 +1,0 @@
-cc -Wall -Wextra -Werror -I . -I /Users/donghyu2/dev/1_archive/libft  -c source/execute_child.c -o source/execute_child.o
-cc -Wall -Wextra -Werror -I . -I /Users/donghyu2/dev/1_archive/libft  -c source/init_cmd.c -o source/init_cmd.o
-cc -Wall -Wextra -Werror -I . -I /Users/donghyu2/dev/1_archive/libft  -c source/init_env.c -o source/init_env.o
-cc -Wall -Wextra -Werror -I . -I /Users/donghyu2/dev/1_archive/libft  -c source/init_file.c -o source/init_file.o
-cc -Wall -Wextra -Werror -I . -I /Users/donghyu2/dev/1_archive/libft  -c source/init_heredoc_write.c -o source/init_heredoc_write.o
-cc -Wall -Wextra -Werror -I . -I /Users/donghyu2/dev/1_archive/libft  -c source/system_fd.c -o source/system_fd.o
-cc -Wall -Wextra -Werror -I . -I /Users/donghyu2/dev/1_archive/libft  /Users/donghyu2/dev/1_archive/libft/libft.a source/execute_child.o source/execute_parent.o source/execute.o source/init_cmd.o source/init_env.o source/init_file.o source/init_heredoc_write.o source/init_heredoc.o source/init.o source/system_error.o source/system_fd.o source/system_free.o pipex.o -o pipex

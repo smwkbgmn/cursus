@@ -9,10 +9,105 @@ cmt K F : Close folder
 [[[ CUSTOM ]]]
 shift cmd x : collapse folders in explorer
 
-500 -> under 5500
-100 -> under 700
-3->2
-5->11
-
 [[ FINDER ]]
 shift cmd N : New folder
+
+--------------------------------------------------------------------------------------------------------
+
+# vim (practice site : https://www.openvim.com)
+
+- Change mode 
+INSERT mode : i / a / o			
+NORMAL mode : ESC
+VISUAL mode : v
+
+- Cursor
+[ w ] : start of the next word 
+[ b / e ] : beginning(end) of a current word
+[ 0 / $ ] : beginning(end) of a current line 
+[ % ] : move to next parenthesis 
+
+[ gg / G ] : beginning(end) of the file
+[ Number + G ] : jump to specific line 
+
+- Correction 
+[ Number + i + Text ] : input Text Number times 
+
+[ o / O ] : insert text into a new line(new line above the current line)
+[ x / X ] : delete the character under the cursor and to the left of the cursor 
+
+[ r ] : replace one character under your cursor without changing to INSERT mode 
+
+[ d ] : delete command and it can be combined with movement 
+[ dd ] : delete whole line 
+[ p ] : paste
+[ yy ] : copy current line 
+
+- Find 
+[ f / F + Character ] : find and moves to the next(previous) occurrence of a character 
+[ * / # ] : find the next(previous) occurrence of the word under cursor 
+[ / + Text ] and then [ n / N ] : search text and then move to the next and previous occurrences
+
+- Command
+[ . ] : repeat the previous command 
+[ u ] : undo
+[ ctrl + R ] : redo 
+
+--------------------------------------------------------------------------------------------------------
+
+# VSC
+
+[ cmd + n ] : create new file 
+[ cmd + k ] + [ m ] : select language 
+[ cmd + t ] : cursor to search
+
+[ shift + cmd + e ] : show explorer
+[ shift + cmd + f ] show search
+[ shift + cmd + x ] : show extensions
+
+[ cmd + j ] : show panel
+[ ctrl + ` ] : show terminal panel
+[ shift + cmd + m ] : show problems panel
+
+[ opt + up / down ] : move line up / down
+
+[ cmd + o ] : open..
+[ cmd + k ] + [ f ] : close folder
+view > breadcrumbs
+
+--------------------------------------------------------------------------------------------------------
+
+# Mac
+
+[ ctrl + h ] / [ delete ] : delete character to the left of the insetion point
+[ ctrl + d ] / [ fn + delete] : delete character to the right of the insetion point
+
+--------------------------------------------------------------------------------------------------------
+
+Playback
+	•	Space or ; --- Play/Pause
+	•	K or Shift + P --- Previous Song
+	•	J or Shift + N --- Next Song
+	•	H or Shift + Left Arrow --- Go 10 seconds back
+	•	L or Shift + Right Arrow --- Go 10 seconds forward
+	•	Shift + H or Ctrl + Shift + Left Arrow --- Go 1 second back
+	•	Shift + L or Ctrl + Shift + Right Arrow --- Go 1 second forward
+	•	S --- Shuffle current queue
+	•	R --- Switch repeat modes
+General
+	•	- (Minus*) --- Volume - 10
+	•	= --- Volume + 10
+	•	Shift + - (Minus*) --- Dislike Song and go to next
+	•	Shift + = --- Like Song
+	•	F -- Fullscreen
+	•	M --- Mute/Unmute
+	•	Q --- Maximize/Minimize Player with queue
+Navigation
+	•	GH --- Go to home
+	•	GL --- Go to Library
+	•	GT --- Go to Hotlist
+	•	G, --- Go to Settings
+	•	/ --- Search
+	•	Shift + / --- Show keyboard shortcuts
+Note: This list is unofficial, may not be complete and change over time.
+*Minus on main keyboard, next to 0 and =, keypad is not supported.
