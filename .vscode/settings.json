@@ -5,7 +5,8 @@
 		"stddef.h": "c",
 		"unistd.h": "c",
 		"fcntl.h": "c",
-		"stdlib.h": "c"
+		"stdlib.h": "c",
+		"so_long.h": "c"
 	},
 	"workbench.editor.tabSizing": "shrink",
 	"workbench.editor.doubleClickTabToToggleEditorGroupSizes": false,

@@ -1,40 +1,42 @@
 NAME		= so_long
 
-ARCH		= arch -x86_64
-CC			= $(ARCH) cc
-# CC			= cc
+CC			= cc
 
 DIR_HDR		= .
 DIR_SRCS	= source
 DIR_LIBFT	= ../1_archive/libft
-DIR_LIBMLX	= mlx_open
+DIR_LIBMLX	= mlx_mms
 
 SRCS		= \
 so_long.c \
-$(DIR_SRCS)/init/init_asset1.c \
-$(DIR_SRCS)/init/init_asset2.c \
-$(DIR_SRCS)/init/init_game.c \
-$(DIR_SRCS)/init/init_map.c \
-$(DIR_SRCS)/init/init_mlx.c \
+$(DIR_SRCS)/init/asset_character.c \
+$(DIR_SRCS)/init/asset.c \
+$(DIR_SRCS)/init/character.c \
+$(DIR_SRCS)/init/game.c \
 $(DIR_SRCS)/init/init.c \
+$(DIR_SRCS)/init/map.c \
+$(DIR_SRCS)/init/mlx.c \
 \
-$(DIR_SRCS)/play/play_enemy.c \
-$(DIR_SRCS)/play/play_hook.c \
-$(DIR_SRCS)/play/play_loop1.c \
-$(DIR_SRCS)/play/play_loop2.c \
+$(DIR_SRCS)/play/enemy.c \
+$(DIR_SRCS)/play/hook.c \
+$(DIR_SRCS)/play/loop1.c \
+$(DIR_SRCS)/play/loop2.c \
+$(DIR_SRCS)/play/map.c \
 \
-$(DIR_SRCS)/valid/valid_map_dfs1.c \
-$(DIR_SRCS)/valid/valid_map_dfs2.c \
-$(DIR_SRCS)/valid/valid_map_dfs3.c \
-$(DIR_SRCS)/valid/valid_map.c \
+$(DIR_SRCS)/system/error.c \
+$(DIR_SRCS)/system/exit.c \
+$(DIR_SRCS)/system/fd.c \
+$(DIR_SRCS)/system/free.c \
 \
-$(DIR_SRCS)/util_map.c \
-$(DIR_SRCS)/util_free.c
+$(DIR_SRCS)/valid/map_dfs1.c \
+$(DIR_SRCS)/valid/map_dfs2.c \
+$(DIR_SRCS)/valid/map_dfs3.c \
+$(DIR_SRCS)/valid/map.c
 
 OBJS		= $(SRCS:.c=.o)
 
 LIBFT		= $(DIR_LIBFT)/libft.a
-LIBMLX		= $(DIR_LIBMLX)/libmlx.a
+LIBMLX		= $(DIR_LIBMLX)/libmlx.dylib
 
 FLAG		= -Wall -Wextra -Werror \
 $(FLAG_HDR) \
@@ -44,18 +46,18 @@ $(FLAG_LIBMLX)
 FLAG_HDR	= -I $(DIR_HDR)
 FLAG_LIBFT	= -I $(DIR_LIBFT)
 FLAG_LIBMLX	= -I $(DIR_LIBMLX)
-FLAG_MLX	= -framework OpenGL -framework AppKit -lz
 
 all			: $(NAME)
 
 $(NAME)		: $(LIBFT) $(LIBMLX) $(OBJS)
-			$(CC) $(FLAG) $(FLAG_MLX) $(LIBMLX) $(LIBFT) $(OBJS) -o $@			
+			$(CC) $(FLAG) $(LIBFT) $(LIBMLX) $(OBJS) -o $@
+			cp $(LIBMLX) .	
 
 $(LIBFT)	:
-			$(ARCH) $(MAKE) -C $(DIR_LIBFT) all
+			$(MAKE) -C $(DIR_LIBFT) all
 
 $(LIBMLX)	:
-			$(ARCH) $(MAKE) -C $(DIR_LIBMLX)
+			$(MAKE) -C $(DIR_LIBMLX)
 
 %.o			: %.c
 			$(CC) $(FLAG) -c $< -o $@
@@ -68,6 +70,7 @@ clean		:
 fclean		:
 			make clean
 			$(RM) $(NAME) $(LIBFT) $(LIBMLX)
+			$(RM) libmlx.dylib
 
 re			:
 			make fclean

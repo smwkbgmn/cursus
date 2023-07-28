@@ -1,24 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   system_fd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/13 14:52:57 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/07/28 19:36:17 by donghyu2         ###   ########.fr       */
+/*   Created: 2023/07/27 16:28:56 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/07/27 16:36:09 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <fcntl.h>
+#include <unistd.h>
+
 #include "so_long.h"
 
-void	init_data(t_data *data, char *filename)
+int	open_fd(char *name, int mode)
 {
-	init_map(&data->map, filename);
-	valid_map(data->map);
-	init_mlx(&data->map, &data->mlx);
-	init_asset(data->mlx.ptr, &data->imgs);
-	data->game = init_game(data->map);
-	data->player = init_character(data->map, PLYR);
-	data->enemy = init_character(data->map, ENMY);
+	int	fd;
+
+	fd = open(name, mode);
+	if (fd == ERROR)
+		exit_with_error("open");
+	return (fd);
+}
+
+void	close_fd(int fd)
+{
+	if (close(fd) == ERROR)
+		exit_with_error("close");
 }

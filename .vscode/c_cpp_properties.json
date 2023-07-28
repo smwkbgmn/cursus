@@ -3,8 +3,7 @@
         {
             "name": "Mac",
             "includePath": [
-                "${workspaceFolder}/**",
-                "/Users/donghyun/dev/cursus/1_archive/libft"
+                "${workspaceFolder}/**"
             ],
             "defines": [],
             "macFrameworkPath": [
