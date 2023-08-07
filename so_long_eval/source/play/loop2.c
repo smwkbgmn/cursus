@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 13:32:19 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/07/28 19:50:41 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/08/01 13:42:35 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,4 @@ static void	put_character(t_mlx mlx, t_char *chart,
 {
 	put_image(mlx, imgs.cut[chart->direction][chart->frame / 10], coord);
 	chart->frame = (chart->frame + 1) % (imgs.cnt_img * 10);
-}
-
-void	put_image(t_mlx mlx, t_img img, t_coord coord)
-{
-	mlx_put_image_to_window(mlx.ptr, mlx.window, img.ptr,
-		coord.x * 32, coord.y * 32);
-}
-
-void	put_string(t_data *data)
-{
-	char	*str_num;
-
-	str_num = ft_itoa(data->player.move);
-	mlx_string_put(data->mlx.ptr, data->mlx.window,
-		(data->player.coord.x + 1) * 32 - 2, data->player.coord.y * 32,
-		0x00FFFFFF, str_num);
-	ft_free(str_num);
 }
