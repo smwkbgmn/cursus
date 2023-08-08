@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 13:34:58 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/07/29 04:01:50 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/08/08 15:43:12 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	init_map(t_map *map, char *filename)
 	int		fd_map;
 	char	*extension;
 
+	fd_map = open_fd(filename, O_RDONLY);
 	extension = ft_strrchr(filename, '.');
 	if (!extension
 		|| ft_strlen(extension) < 4
@@ -32,7 +33,6 @@ void	init_map(t_map *map, char *filename)
 		write_error("CAN NOT READ FILE");
 		exit_with_error(NULL);
 	}
-	fd_map = open_fd(filename, O_RDONLY);
 	read_map(fd_map, map, 0, 0);
 	close_fd(fd_map);
 }
