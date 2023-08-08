@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 22:29:41 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/07/28 20:05:45 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/08/08 16:03:21 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ typedef struct s_data
 	t_char	enemy;
 }	t_data;
 
+/* Initializing */
 void	init_data(t_data *data, char *filename);
 void	init_map(t_map *map, char *filename);
 void	init_mlx(t_map *map, t_mlx *mlx);
@@ -131,17 +132,34 @@ t_char	init_character(t_map map, char target);
 void	set_img(void *mlx, t_img *img, char *name);
 void	set_img_char(void *mlx, t_img_char *img_char, char *prefix, t_uint cnt);
 
+/* Validation */
 void	valid_map(t_map map);
 void	check_valid_path(t_map map);
 
+void	add_nearby(t_dfs *dfs, t_map map, t_coord curnt);
+t_bool	is_nearby_enemy(t_map map, t_coord plyr);
+
+t_coord	*new_coord(t_coord crd);
+t_uint	game_goal(t_map map);
+
+/* Playing */
 int		key_hook(int keycode, t_data *data);
 int		loop_hook(t_data *data);
 
 void	patrol_enemy(t_char *enemy, char **map);
 void	check_nearby_enemy(t_char *player, t_char enemy);
 
+void	put_image(t_mlx mlx, t_img img, t_coord coord);
+void	put_string(t_data *data);
+
 void	draw_character(t_data *data, char tile, t_coord coord);
 
+t_coord	get_coord_target(t_map map, char target);
+
+char	ref_tile(char **map, t_coord coord);
+void	swap_tile(char **map, t_char *chartr, t_coord moved, char target);
+
+/* System */
 int		open_fd(char *name, int mode);
 void	close_fd(int fd);
 
@@ -155,19 +173,5 @@ void	write_error(char *msg);
 
 int		window_closed(t_data *data);
 void	exit_program(t_data *data);
-
-void	put_image(t_mlx mlx, t_img img, t_coord coord);
-void	put_string(t_data *data);
-
-t_coord	get_coord_target(t_map map, char target);
-
-char	ref_tile(char **map, t_coord coord);
-void	swap_tile(char **map, t_char *chartr, t_coord moved, char target);
-
-void	add_nearby(t_dfs *dfs, t_map map, t_coord curnt);
-t_bool	is_nearby_enemy(t_map map, t_coord plyr);
-
-t_coord	*new_coord(t_coord crd);
-t_uint	game_goal(t_map map);
 
 #endif
