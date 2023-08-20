@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:38:17 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/06/11 02:26:43 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/08/19 19:07:56 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_stack
 	struct s_stack	*next;
 	struct s_stack	*prev;
 }	t_stack;
+
 typedef void			(*t_sort)(t_stack **, t_stack **);
 
 t_bool	check_valid(int ac, char **av);

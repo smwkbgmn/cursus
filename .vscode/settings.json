@@ -6,7 +6,11 @@
 		"unistd.h": "c",
 		"fcntl.h": "c",
 		"stdlib.h": "c",
-		"so_long.h": "c"
+		"so_long.h": "c",
+		"pthread.h": "c",
+		"stdio.h": "c",
+		"philo.h": "c",
+		"__threading_support": "c"
 	},
 	"workbench.editor.tabSizing": "shrink",
 	"workbench.editor.doubleClickTabToToggleEditorGroupSizes": false,

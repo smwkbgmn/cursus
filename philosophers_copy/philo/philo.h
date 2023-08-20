@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 18:32:57 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/08/20 19:06:19 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/08/20 16:45:00 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <pthread.h>
 # include <sys/time.h>
 
-# define LOOP 1
 # define ERROR -1
 
 typedef struct timeval		t_timeval;
@@ -64,8 +63,11 @@ void	mtx_free(t_mutex *key);
 
 /* THREAD */
 void	*thread(void *arg);
-void	philo_do(t_list *list, t_thread *thread, t_stat stat);
+void	philo_think(t_list *list);
+void	philo_eat(t_list *list);
+void	philo_sleep(t_list *list);
 
+void	philo_do(t_thread *thread, t_stat status);
 void	set_status(t_thread *thread, t_stat stat_to_change);
 t_stat	ref_status(t_thread *thread);
 void	set_fork(t_thread *thread, t_bool bool_to_change);
@@ -108,6 +110,7 @@ struct s_data
 	t_config	config;
 	t_time		time_sys;
 	t_mutex		key_print;
+	t_func		routine[3];
 };
 
 struct s_philo
