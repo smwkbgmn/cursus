@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 17:01:28 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/08/20 16:32:37 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/08/20 17:30:38 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	init_data(int ac, char **av, t_data *data)
 		data->config.cnt_eat = -1;
 	set_time(&data->time_sys.start);
 	mtx_init(&data->key_print);
-	data->routine[0] = &philo_think;
-	data->routine[1] = &philo_eat;
-	data->routine[2] = &philo_sleep;
+	// data->routine[0] = &philo_think;
+	// data->routine[1] = &philo_eat;
+	// data->routine[2] = &philo_sleep;
 }
 
 

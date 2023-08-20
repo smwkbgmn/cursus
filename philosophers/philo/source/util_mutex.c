@@ -6,18 +6,11 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:01:54 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/08/20 12:44:52 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/08/20 19:53:40 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-// void	mtx_execute(t_mutex *key, t_func function)
-// {
-// 	mtx_lock(key);
-// 	function();
-// 	mtx_unlock(key);
-// }
 
 void	mtx_lock(t_mutex *key)
 {

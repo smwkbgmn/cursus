@@ -6,21 +6,11 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 18:54:18 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/08/20 16:44:13 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/08/20 18:40:09 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-void	philo_do(t_thread *thread, t_stat status)
-{
-	print_status(thread, status);
-	if (status == EAT)
-		suspend(thread->data->config.delay_eat);
-	else if (status == SLEEP)
-		suspend(thread->data->config.delay_sleep);
-	set_status(thread, (status + 1) % 3);
-}
 
 void	set_status(t_thread *thread, t_stat stat_to_change)
 {

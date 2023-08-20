@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   thread.c                                           :+:      :+:    :+:   */
+/*   init_thread.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 18:04:58 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/08/20 16:08:46 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/08/20 19:39:03 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	init_threads(t_list *list, t_uint cnt)
 	while (idx < cnt)
 	{
 		set_time(&list->thread->philo.timer_death.start);
-		pthread_create(&list->thread->id, NULL, &thread, list);
+		pthread_create(&list->thread->id, NULL, &life, list);
 		pthread_create(&list->thread->id_monitor, NULL, &monitor, list);
 		list = list->next;
 		idx++;

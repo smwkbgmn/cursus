@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 18:32:57 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/08/20 19:06:19 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/08/20 21:31:42 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +62,19 @@ void	mtx_unlock(t_mutex *key);
 void	mtx_init(t_mutex *key);
 void	mtx_free(t_mutex *key);
 
-/* THREAD */
-void	*thread(void *arg);
-void	philo_do(t_list *list, t_thread *thread, t_stat stat);
-
+t_bool	config_can_not_continue(t_thread *thread);
+t_bool	philos_dead_while_mtx_wait(t_list *list);
 void	set_status(t_thread *thread, t_stat stat_to_change);
 t_stat	ref_status(t_thread *thread);
-void	set_fork(t_thread *thread, t_bool bool_to_change);
 t_bool	ref_fork(t_thread *thread);
 
-void	start_monitor(t_list *list);
+/* THREAD */
+void	*life(void *arg);
+void	philo_think(t_list *list);
+void	philo_eat(t_list *list);
+void	philo_sleep(t_list *list);
+void	philo_do(t_thread *thread, t_stat status);
+
 void	*monitor(void *arg);
 
 enum e_bool
@@ -108,6 +111,7 @@ struct s_data
 	t_config	config;
 	t_time		time_sys;
 	t_mutex		key_print;
+	t_func		routine[3];
 };
 
 struct s_philo
@@ -115,10 +119,11 @@ struct s_philo
 	t_uint	name;
 	t_stat	stat;
 	t_bool	fork;
-	t_uint	eating;
+	int		eating;
 	t_time	timer_death;
 	t_mutex	key_stat;
-	t_mutex	key_fork;
+	t_mutex	key_fork_set;
+	t_mutex	key_fork_ref;
 };
 
 struct s_thread
