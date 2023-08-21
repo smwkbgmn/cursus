@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 17:01:28 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/08/20 20:59:53 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/08/21 12:38:20 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,11 @@ void	init_data(int ac, char **av, t_data *data)
 		data->config.cnt_eat = -1;
 	set_time(&data->time_sys.start);
 	mtx_init(&data->key_print);
+	mtx_init(&data->key_death);
 	data->routine[0] = &philo_think;
 	data->routine[1] = &philo_eat;
 	data->routine[2] = &philo_sleep;
+	data->philo_death = FALSE;
 }
 
 void	init_philosophers(t_list **list, t_data *data)
@@ -54,16 +56,16 @@ t_thread	*new_philo(t_uint idx, t_data *data)
 	t_thread	*thread;
 
 	thread = malloc(sizeof(t_thread));
-	thread->philo.name = idx;
-	thread->philo.stat = THINK;
+	thread->philo.name = idx + 1;
+	thread->philo.stat = EAT;
 	if (idx % 2 == 0 && idx != data->config.cnt_philo - 1)
 		thread->philo.fork = TRUE;
 	else
 		thread->philo.fork = FALSE;
 	thread->philo.eating = 0;
-	pthread_mutex_init(&thread->philo.key_stat, NULL);
 	pthread_mutex_init(&thread->philo.key_fork_set, NULL);
 	pthread_mutex_init(&thread->philo.key_fork_ref, NULL);
+	pthread_mutex_init(&thread->philo.key_eating, NULL);
 	thread->data = data;
 	return (thread);
 }

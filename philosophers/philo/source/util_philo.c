@@ -6,51 +6,22 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 18:54:18 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/08/20 21:35:09 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/08/21 21:40:05 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-t_bool	config_can_not_continue(t_thread *thread)
-{
-	t_config	*config;
-
-	config = &thread->data->config;
-	if (config->delay_die == 0)
-		return (TRUE);
-	else if (config->cnt_philo == 1
-		|| config->cnt_eat == 0)
-	{
-		philo_do(thread, THINK);
-		return (TRUE);
-	}
-	else
-		return (FALSE);
-}
-
-t_bool	philos_dead_while_mtx_wait(t_list *list)
-{
-	return (ref_status(list->thread) == DEAD
-		|| ref_status(list->next->thread) == DEAD);
-}
-
 void	set_status(t_thread *thread, t_stat stat_to_change)
 {
-	mtx_lock(&thread->philo.key_stat);
-	if (thread->philo.stat != DEAD)
-		thread->philo.stat = stat_to_change;
-	mtx_unlock(&thread->philo.key_stat);
+	thread->philo.stat = stat_to_change;
 }
 
-t_stat	ref_status(t_thread *thread)
+void	set_fork(t_thread *thread, t_bool bool_to_set)
 {
-	t_stat	result;
-
-	mtx_lock(&thread->philo.key_stat);
-	result = thread->philo.stat;
-	mtx_unlock(&thread->philo.key_stat);
-	return (result);
+	mtx_lock(&thread->philo.key_fork_ref);
+	thread->philo.fork = bool_to_set;
+	mtx_unlock(&thread->philo.key_fork_ref);
 }
 
 t_bool	ref_fork(t_thread *thread)
@@ -60,5 +31,39 @@ t_bool	ref_fork(t_thread *thread)
 	mtx_lock(&thread->philo.key_fork_ref);
 	result = thread->philo.fork;
 	mtx_unlock(&thread->philo.key_fork_ref);
+	return (result);
+}
+
+void	set_death(t_thread *thread)
+{
+	mtx_lock(&thread->data->key_death);
+	thread->data->philo_death = TRUE;
+	mtx_unlock(&thread->data->key_death);
+}
+
+t_bool	is_dead(t_thread *thread)
+{
+	t_bool	result;
+
+	mtx_lock(&thread->data->key_death);
+	result = thread->data->philo_death;
+	mtx_unlock(&thread->data->key_death);
+	return (result);
+}
+
+void	set_eating(t_thread *thread)
+{
+	// mtx_lock(&thread->philo.key_eating);
+	thread->philo.eating++;
+	// mtx_unlock(&thread->philo.key_eating);
+}
+
+int	ref_eating(t_thread *thread)
+{
+	int	result;
+
+	// mtx_lock(&thread->philo.key_eating);
+	result = thread->philo.eating;
+	// mtx_unlock(&thread->philo.key_eating);
 	return (result);
 }

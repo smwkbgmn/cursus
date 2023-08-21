@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:20:17 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/08/20 19:40:10 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/08/21 19:13:50 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,38 +14,39 @@
 
 #include "philo.h"
 
-void	print_info(t_thread *thread);
-t_bool	philo_dead_while_mtx_wait(t_thread *thread);
-
 void	print_status(t_thread *thread, t_stat stat)
 {
 	mtx_lock(&thread->data->key_print);
-	if (!philo_dead_while_mtx_wait(thread))
+	if (!is_dead(thread))
 	{
-		print_info(thread);
 		if (stat == THINK)
-			printf("is thinking\n");
+			printf("%lld %d is thinking\n",
+				get_time_elapsed(&thread->data->time_sys), thread->philo.name);
 		else if (stat == EAT)
-		{
-			printf("has taken a fork\n");
-			print_info(thread);
-			printf("is eating\n");
-		}
+			printf("%lld %d is eating\n",
+				get_time_elapsed(&thread->data->time_sys), thread->philo.name);
 		else if (stat == SLEEP)
-			printf("is sleeping\n");
-		else
-			printf("died\n");
+			printf("%lld %d is sleeping\n",
+				get_time_elapsed(&thread->data->time_sys), thread->philo.name);
 	}
 	mtx_unlock(&thread->data->key_print);
 }
 
-void	print_info(t_thread *thread)
+void	print_taking_fork(t_thread *thread)
 {
-	printf("%lld", get_time_elapsed(&thread->data->time_sys));
-	printf(" %d ", thread->philo.name);
+	mtx_lock(&thread->data->key_print);
+	if (!is_dead(thread))
+	{
+		printf("%lld %d has taken a fork\n",
+			get_time_elapsed(&thread->data->time_sys), thread->philo.name);
+	}
+	mtx_unlock(&thread->data->key_print);
 }
 
-t_bool	philo_dead_while_mtx_wait(t_thread *thread)
+void	print_death(t_thread *thread)
 {
-	return (ref_status(thread) == DEAD);
+	mtx_lock(&thread->data->key_print);
+	printf("%lld %d died\n",
+		get_time_elapsed(&thread->data->time_sys), thread->philo.name);
+	mtx_unlock(&thread->data->key_print);
 }

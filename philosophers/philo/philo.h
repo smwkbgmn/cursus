@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 18:32:57 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/08/20 21:31:42 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/08/21 21:13:15 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <pthread.h>
 # include <sys/time.h>
 
-# define LOOP 1
 # define ERROR -1
 
 typedef struct timeval		t_timeval;
@@ -46,6 +45,8 @@ void	start_life(t_list *list, t_data *data);
 
 /* UTILL */
 void	print_status(t_thread *thread, t_stat stat);
+void	print_taking_fork(t_thread *thread);
+void	print_death(t_thread *thread);
 
 t_list	*ft_lstnew(t_thread *philo_new);
 void	ft_lstadd(t_list **list, t_list *new);
@@ -62,11 +63,15 @@ void	mtx_unlock(t_mutex *key);
 void	mtx_init(t_mutex *key);
 void	mtx_free(t_mutex *key);
 
-t_bool	config_can_not_continue(t_thread *thread);
-t_bool	philos_dead_while_mtx_wait(t_list *list);
+t_bool	meet_cnt_eating(t_thread *thread, int cnt_eat);
+
 void	set_status(t_thread *thread, t_stat stat_to_change);
-t_stat	ref_status(t_thread *thread);
+void	set_death(t_thread *thread);
+t_bool	is_dead(t_thread *thread);
+void	set_fork(t_thread *thread, t_bool bool_to_set);
 t_bool	ref_fork(t_thread *thread);
+void	set_eating(t_thread *thread);
+int		ref_eating(t_thread *thread);
 
 /* THREAD */
 void	*life(void *arg);
@@ -74,6 +79,10 @@ void	philo_think(t_list *list);
 void	philo_eat(t_list *list);
 void	philo_sleep(t_list *list);
 void	philo_do(t_thread *thread, t_stat status);
+
+// void	taking(t_thread *curnt, t_thread *next, t_thread *prev);
+void	taking(t_thread *curnt, t_thread *prev);
+void	putting_down(t_thread *curnt, t_thread *next);
 
 void	*monitor(void *arg);
 
@@ -87,8 +96,7 @@ enum e_stat
 {
 	THINK,
 	EAT,
-	SLEEP,
-	DEAD
+	SLEEP
 };
 
 struct s_time
@@ -110,7 +118,9 @@ struct s_data
 {
 	t_config	config;
 	t_time		time_sys;
+	t_bool		philo_death;
 	t_mutex		key_print;
+	t_mutex		key_death;
 	t_func		routine[3];
 };
 
@@ -120,10 +130,10 @@ struct s_philo
 	t_stat	stat;
 	t_bool	fork;
 	int		eating;
-	t_time	timer_death;
-	t_mutex	key_stat;
+	t_time	timer_die;
 	t_mutex	key_fork_set;
 	t_mutex	key_fork_ref;
+	t_mutex	key_eating;
 };
 
 struct s_thread
