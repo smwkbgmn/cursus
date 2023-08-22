@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 18:32:57 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/08/21 21:13:15 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/08/22 18:52:44 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,7 @@ void	philo_eat(t_list *list);
 void	philo_sleep(t_list *list);
 void	philo_do(t_thread *thread, t_stat status);
 
-// void	taking(t_thread *curnt, t_thread *next, t_thread *prev);
-void	taking(t_thread *curnt, t_thread *prev);
+void	taking(t_thread *curnt, t_thread *next);
 void	putting_down(t_thread *curnt, t_thread *next);
 
 void	*monitor(void *arg);

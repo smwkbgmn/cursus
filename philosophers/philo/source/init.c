@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 17:01:28 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/08/21 12:38:20 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/08/22 18:44:16 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,9 @@ t_thread	*new_philo(t_uint idx, t_data *data)
 	thread = malloc(sizeof(t_thread));
 	thread->philo.name = idx + 1;
 	thread->philo.stat = EAT;
-	if (idx % 2 == 0 && idx != data->config.cnt_philo - 1)
+	// thread->philo.fork = FALSE;
+	// if ((idx + 1) % 2 == 1 && idx != data->config.cnt_philo - 1)
+	if ((idx + 1) % 2 == 1)
 		thread->philo.fork = TRUE;
 	else
 		thread->philo.fork = FALSE;

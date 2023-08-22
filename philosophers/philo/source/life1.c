@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 18:56:16 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/08/21 21:13:26 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/08/22 18:52:58 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,12 @@ void	philo_think(t_list *list)
 
 void	philo_eat(t_list *list)
 {
-	// taking(list->thread, list->next->thread, list->prev->thread);
-	taking(list->thread, list->prev->thread);
+	taking(list->thread, list->next->thread);
 	if (!is_dead(list->thread))
 	{
 		set_time(&list->thread->philo.timer_die.start);
 		philo_do(list->thread, EAT);
 		list->thread->philo.eating++;
-		// set_eating(list->thread);
 	}
 	putting_down(list->thread, list->next->thread);
 }
