@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   life_eat.c                                         :+:      :+:    :+:   */
+/*   life2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 19:24:38 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/08/28 16:42:31 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/08/29 04:28:10 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,24 @@ void	taking(t_list *data)
 {
 	if (data->thread->philo.name % 2 == 1)
 	{
-		lock_fork(data->next);
-		print_taking_fork(data);
-		lock_fork(data);
+		mutex(data->next, FORK, ON);
+		print_taking(data);
+		mutex(data, FORK, ON);
 		if (ref_status(data->prev) == STARVE
 			&& ref_status(data->next) == SLEEP)
 		{
-			unlock_fork(data);
+			mutex(data, FORK, OFF);
 			suspend(10);
-			lock_fork(data);
+			mutex(data, FORK, ON);
 		}
-		print_taking_fork(data);
+		print_taking(data);
 	}
 	else
 	{
-		lock_fork(data);
-		print_taking_fork(data);
-		lock_fork(data->next);
-		print_taking_fork(data);
+		mutex(data, FORK, ON);
+		print_taking(data);
+		mutex(data->next, FORK, ON);
+		print_taking(data);
 	}
 }
 
@@ -41,12 +41,12 @@ void	putting_down(t_list *data)
 {
 	if (data->thread->philo.name % 2 == 1)
 	{
-		unlock_fork(data->next);
-		unlock_fork(data);
+		mutex(data->next, FORK, OFF);
+		mutex(data, FORK, OFF);
 	}
 	else
 	{
-		unlock_fork(data);
-		unlock_fork(data->next);
+		mutex(data, FORK, OFF);
+		mutex(data->next, FORK, OFF);
 	}
 }

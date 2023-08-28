@@ -8,7 +8,8 @@ DIR_SRCS	= source
 SRCS		= \
 philo.c \
 $(wildcard $(DIR_SRCS)/*.c) \
-$(wildcard $(DIR_SRCS)/life/*.c)
+$(wildcard $(DIR_SRCS)/life/*.c) \
+$(wildcard $(DIR_SRCS)/utill/*.c)
 
 OBJS		= $(SRCS:.c=.o)
 

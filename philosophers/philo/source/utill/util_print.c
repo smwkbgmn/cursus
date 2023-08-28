@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:20:17 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/08/28 15:05:46 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/08/29 04:28:04 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,42 +16,42 @@
 
 void	print_status(t_list *data, t_stat stat)
 {
-	mtx_lock(&data->program->key_print);
-	if (!ref_death(data->program))
+	mutex(data, PRINT, ON);
+	if (!ref_death(data))
 	{
 		if (stat == THINK)
 			printf("%lld %d is thinking\n",
-				get_time_elapsed(&data->program->time_sys, NULL),
+				get_time_elapsed(NULL, &data->program->time_sys),
 				data->thread->philo.name);
 		else if (stat == EAT)
 			printf("%lld %d is eating\n",
-				get_time_elapsed(&data->program->time_sys, NULL),
+				get_time_elapsed(NULL, &data->program->time_sys),
 				data->thread->philo.name);
 		else if (stat == SLEEP)
 			printf("%lld %d is sleeping\n",
-				get_time_elapsed(&data->program->time_sys, NULL),
+				get_time_elapsed(NULL, &data->program->time_sys),
 				data->thread->philo.name);
 	}
-	mtx_unlock(&data->program->key_print);
+	mutex(data, PRINT, OFF);
 }
 
-void	print_taking_fork(t_list *data)
+void	print_taking(t_list *data)
 {
-	mtx_lock(&data->program->key_print);
-	if (!ref_death(data->program))
+	mutex(data, PRINT, ON);
+	if (!ref_death(data))
 	{
 		printf("%lld %d has taken a fork\n",
-			get_time_elapsed(&data->program->time_sys, NULL),
+			get_time_elapsed(NULL, &data->program->time_sys),
 			data->thread->philo.name);
 	}
-	mtx_unlock(&data->program->key_print);
+	mutex(data, PRINT, OFF);
 }
 
 void	print_death(t_list *data)
 {
-	mtx_lock(&data->program->key_print);
+	mutex(data, PRINT, ON);
 	printf("%lld %d died\n",
-		get_time_elapsed(&data->program->time_sys, NULL),
+		get_time_elapsed(NULL, &data->program->time_sys),
 		data->thread->philo.name);
-	mtx_unlock(&data->program->key_print);
+	mutex(data, PRINT, OFF);
 }

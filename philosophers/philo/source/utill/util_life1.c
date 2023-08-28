@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 18:54:18 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/08/28 03:21:43 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/08/29 02:01:25 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,34 @@
 
 void	set_status(t_list *data, t_stat stat_to_change)
 {
-	mtx_lock(&data->thread->philo.key_stat);
+	mutex(data, STAT, ON);
 	data->thread->philo.stat = stat_to_change;
-	mtx_unlock(&data->thread->philo.key_stat);
+	mutex(data, STAT, OFF);
 }
 
 t_stat	ref_status(t_list *data)
 {
 	t_stat	result;
 
-	mtx_lock(&data->thread->philo.key_stat);
+	mutex(data, STAT, ON);
 	result = data->thread->philo.stat;
-	mtx_unlock(&data->thread->philo.key_stat);
+	mutex(data, STAT, OFF);
+	return (result);
+}
+
+void	set_death(t_list *data)
+{
+	mutex(data, DEATH, ON);
+	data->program->philo_death = TRUE;
+	mutex(data, DEATH, OFF);
+}
+
+t_bool	ref_death(t_list *data)
+{
+	t_bool	result;
+
+	mutex(data, DEATH, ON);
+	result = data->program->philo_death;
+	mutex(data, DEATH, OFF);
 	return (result);
 }

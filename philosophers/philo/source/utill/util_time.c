@@ -20,40 +20,40 @@ void	suspend(t_msec ms)
 	t_msec	start;
 	t_msec	curnt;
 
-	set_time(&start, NULL);
+	set_time(NULL, &start);
 	curnt = start;
 	while (curnt - start < ms)
 	{
 		usleep(256);
-		set_time(&curnt, NULL);
+		set_time(NULL, &curnt);
 	}
 }
 
-void	set_time(t_msec *time_ms, t_mutex *key)
+void	set_time(t_list *data, t_msec *time_ms)
 {
 	t_timeval	curnt;
 
 	gettimeofday(&curnt, NULL);
-	if (key)
+	if (data)
 	{
-		mtx_lock(key);
+		mutex(data, TIMER, ON);
 		*time_ms = curnt.tv_sec * 1000 + curnt.tv_usec / 1000;
-		mtx_unlock(key);
+		mutex(data, TIMER, OFF);
 	}
 	else
 		*time_ms = curnt.tv_sec * 1000 + curnt.tv_usec / 1000;
 }
 
-t_msec	get_time_elapsed(t_time *time, t_mutex *key)
+t_msec	get_time_elapsed(t_list *data, t_time *time)
 {
 	t_msec	result;
 
-	set_time(&time->curnt, NULL);
-	if (key)
+	set_time(NULL, &time->curnt);
+	if (data)
 	{
-		mtx_lock(key);
+		mutex(data, TIMER, ON);
 		result = time->curnt - time->start;
-		mtx_unlock(key);
+		mutex(data, TIMER, OFF);
 		return (result);
 	}
 	else

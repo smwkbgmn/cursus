@@ -6,21 +6,31 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 17:30:00 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/08/15 18:07:38 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/08/29 04:18:09 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+static t_bool	validate_argv(char **av);
 static t_bool	validate_line(char *av);
+static t_uint	ft_strlen(char *str);
 static t_bool	is_digit(char c);
 
-t_bool	validate_input(char **av)
+t_bool	validate_input(int ac, char **av)
+{
+	if (ac == 5 || ac == 6)
+		return (validate_argv(av + 1));
+	else
+		return (FALSE);
+}
+
+static t_bool	validate_argv(char **av)
 {
 	if (*av)
 	{
 		if (validate_line(*av))
-			return (validate_input(av + 1));
+			return (validate_argv(av + 1));
 		else
 			return (FALSE);
 	}
@@ -38,6 +48,16 @@ static t_bool	validate_line(char *av)
 	}
 	else
 		return (FALSE);
+}
+
+static t_uint	ft_strlen(char *str)
+{
+	t_uint	len;
+
+	len = 0;
+	while (str[len])
+		len++;
+	return (len);
 }
 
 static t_bool	is_digit(char c)

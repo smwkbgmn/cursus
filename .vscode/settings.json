@@ -10,7 +10,11 @@
 		"pthread.h": "c",
 		"stdio.h": "c",
 		"philo.h": "c",
-		"__threading_support": "c"
+		"__threading_support": "c",
+		"array": "c",
+		"string": "c",
+		"string_view": "c",
+		"vector": "c"
 	},
 	"workbench.editor.tabSizing": "shrink",
 	"workbench.editor.doubleClickTabToToggleEditorGroupSizes": false,

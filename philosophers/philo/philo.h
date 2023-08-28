@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 18:32:57 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/08/28 16:32:04 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/08/29 04:28:24 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <pthread.h>
 # include <sys/time.h>
 
-# define ERROR -1
+# define SUCCESS 0
 
 typedef struct timeval		t_timeval;
 typedef unsigned long long	t_msec;
@@ -24,7 +24,9 @@ typedef unsigned int		t_uint;
 typedef pthread_mutex_t		t_mutex;
 
 typedef enum e_bool			t_bool;
+typedef enum e_switch		t_switch;
 typedef enum e_stat			t_stat;
+typedef enum e_keyname		t_keyname;
 
 typedef struct s_list		t_list;
 typedef struct s_thread		t_thread;
@@ -36,63 +38,65 @@ typedef struct s_time		t_time;
 typedef void				(*t_func)(t_list *);
 
 /* DATA */
-t_bool	validate_input(char **av);
-void	init_data(int ac, char **av, t_list **data, t_vars *prgm);
-void	init_program(int ac, char **av, t_vars *prgm);
-void	init_philosophers(t_list **data, t_vars *prgm);
+t_bool	validate_input(int ac, char **av);
 
-void	free_data(t_list *data);
+t_bool	init_program(int ac, char **av, t_vars *prgm);
+t_bool	init_philosophers(t_list **data, t_vars *prgm);
+
+void	free_data(t_list *data, t_vars *prgm);
 
 /* UTILL */
 void	print_status(t_list *data, t_stat stat);
-void	print_taking_fork(t_list *data);
+void	print_taking(t_list *data);
 void	print_death(t_list *data);
 
-t_list	*ft_lstnew(t_thread *philo_new, t_vars *prgm);
-void	ft_lstadd(t_list **data, t_list *new);
-
-t_uint	ft_strlen(char *str);
-t_uint	ft_atoi(char *av);
-
 void	suspend(t_msec ms);
-void	set_time(t_msec *time_ms, t_mutex *key);
-t_msec	get_time_elapsed(t_time *time, t_mutex *key);
+void	set_time(t_list *data, t_msec *time_ms);
+t_msec	get_time_elapsed(t_list *data, t_time *time);
 
-void	mtx_lock(t_mutex *key);
-void	mtx_unlock(t_mutex *key);
-void	mtx_init(t_mutex *key);
+void	mutex(t_list *data, t_keyname name, t_switch lock);
+t_bool	init_keys(t_mutex *key);
 void	mtx_free(t_mutex *key);
 
-t_bool	config_can_not_continue(t_config *config);
-t_bool	meet_philos_eating(t_vars *prgm);
-void	lock_fork(t_list *data);
-void	unlock_fork(t_list *data);
+void	set_philos_eating(t_list *data);
+t_uint	ref_philos_eating(t_list *data);
+t_bool	meet_philos_eating(t_list *data);
 
 void	set_status(t_list *data, t_stat stat_to_change);
 t_stat	ref_status(t_list *data);
-void	set_death(t_vars *prgm);
-t_bool	ref_death(t_vars *prgm);
-void	set_philos_eating(t_vars *prgm);
-t_uint	ref_philos_eating(t_vars *prgm);
+void	set_death(t_list *data);
+t_bool	ref_death(t_list *data);
 
 /* THREAD */
 void	start_life(t_list *data);
 
+void	init_philos_odd(t_list *data, t_uint cnt);
+void	init_philos_even(t_list *data, t_uint cnt);
+void	join_philos(t_list *data, t_uint cnt);
+void	join_monitors(t_list *data, t_uint cnt);
+
 void	*life(void *arg);
 void	philo_think(t_list *data);
-void	philo_sleep(t_list *data);
-void	philo_do(t_list *data, t_stat status);
-
 void	philo_eat(t_list *data);
+void	philo_sleep(t_list *data);
+
 void	taking(t_list *list);
 void	putting_down(t_list *list);
 
 void	*monitor(void *arg);
 
+void	*life_one(void *arg);
+
 enum e_bool
 {
 	FALSE,
 	TRUE
+};
+
+enum e_switch
+{
+	OFF,
+	ON
 };
 
 enum e_stat
@@ -101,6 +105,16 @@ enum e_stat
 	STARVE,
 	EAT,
 	SLEEP
+};
+
+enum e_keyname
+{
+	EATING,
+	DEATH,
+	PRINT,
+	STAT,
+	FORK,
+	TIMER
 };
 
 struct s_time
@@ -125,9 +139,7 @@ struct s_vars
 	t_uint		philo_meet_eating;
 	t_bool		philo_death;
 	t_func		routine[4];
-	t_mutex		key_eating;
-	t_mutex		key_death;
-	t_mutex		key_print;
+	t_mutex		key[3];
 };
 
 struct s_philo
@@ -136,9 +148,7 @@ struct s_philo
 	t_stat	stat;
 	int		eating;
 	t_time	timer_die;
-	t_mutex	key_stat;
-	t_mutex	key_fork;
-	t_mutex	key_timer;
+	t_mutex	key[3];
 };
 
 struct s_thread
