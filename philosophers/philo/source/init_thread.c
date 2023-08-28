@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 18:04:58 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/08/21 22:05:26 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/08/28 15:41:25 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,66 +15,84 @@
 
 #include "philo.h"
 
-t_bool	config_can_not_continue(t_config *config);
-void	init_threads(t_list *list, t_uint cnt);
-void	detach_threads(t_list *list, t_uint cnt);
-void	join_threads(t_list *list, t_uint cnt);
+void	init_philos_odd(t_list *data, t_uint cnt);
+void	init_philos_even(t_list *data, t_uint cnt);
+void	join_philos(t_list *data, t_uint cnt);
+void	join_monitors(t_list *data, t_uint cnt);
 
-void	start_life(t_list *list, t_data *data)
+void	start_life(t_list *data)
 {
-	if (!config_can_not_continue(&data->config))
+	t_uint	cnt_philo;
+
+	if (!config_can_not_continue(&data->program->config))
 	{
-		init_threads(list, data->config.cnt_philo);
-		detach_threads(list, data->config.cnt_philo);
-		join_threads(list, data->config.cnt_philo);
+		cnt_philo = data->program->config.cnt_philo;
+		set_time(&data->program->time_sys.start, NULL);
+		init_philos_odd(data, cnt_philo);
+		init_philos_even(data->next, cnt_philo);
+		join_philos(data, cnt_philo);
+		join_monitors(data, cnt_philo);
 	}
 }
 
-void	init_threads(t_list *list, t_uint cnt)
+void	init_philos_odd(t_list *data, t_uint cnt)
 {
 	t_uint	idx;
 
-	idx = 0;
-	while (idx < cnt && !list->thread->data->philo_death)
+	idx = 1;
+	while (idx < cnt && !ref_death(data->program))
 	{
-		set_time(&list->thread->philo.timer_die.start);
-		pthread_create(&list->thread->id_monitor, NULL, &monitor, list);
-		pthread_create(&list->thread->id, NULL, &life, list);
-		list = list->next;
-		idx++;
+		pthread_create(&data->thread->id, NULL, &life, data);
+		pthread_create(&data->thread->id_monitor, NULL, &monitor, data);
+		data = data->next->next;
+		idx += 2;
 	}
 }
 
-void	detach_threads(t_list *list, t_uint cnt)
+void	init_philos_even(t_list *data, t_uint cnt)
 {
 	t_uint	idx;
 
-	idx = 0;
-	while (idx < cnt)
+	idx = 2;
+	while (idx <= cnt && !ref_death(data->program))
 	{
-		pthread_detach(list->thread->id_monitor);
-		list = list->next;
-		idx++;
+		pthread_create(&data->thread->id, NULL, &life, data);
+		pthread_create(&data->thread->id_monitor, NULL, &monitor, data);
+		data = data->next->next;
+		idx += 2;
 	}
-
+	if (idx - cnt == 1)
+	{
+		data = data->prev;
+		suspend(data->program->config.delay_eat);
+		pthread_create(&data->thread->id, NULL, &life, data);
+		pthread_create(&data->thread->id_monitor, NULL, &monitor, data);
+	}
 }
 
-void	join_threads(t_list *list, t_uint cnt)
+void	join_philos(t_list *data, t_uint cnt)
 {
 	t_uint	idx;
 
-	idx = 0;
-	while (idx < cnt)
+	idx = 1;
+	while (idx <= cnt)
 	{
-		pthread_join(list->thread->id, NULL);
-		list = list->next;
+		pthread_join(data->thread->id, NULL);
+		data = data->next;
 		idx++;
 	}
+	set_death(data->program);
 }
 
-t_bool	config_can_not_continue(t_config *config)
+void	join_monitors(t_list *data, t_uint cnt)
 {
-	return (config->cnt_philo == 1
-		|| config->delay_die == 0
-		|| config->cnt_eat == 0);
+	t_uint	idx;
+
+	idx = 1;
+	while (idx <= cnt)
+	{
+		pthread_join(data->thread->id_monitor, NULL);
+		data = data->next;
+		idx++;
+	}
 }

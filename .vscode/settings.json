@@ -14,5 +14,7 @@
 	},
 	"workbench.editor.tabSizing": "shrink",
 	"workbench.editor.doubleClickTabToToggleEditorGroupSizes": false,
-	"workbench.editor.splitOnDragAndDrop": false
+	"workbench.editor.splitOnDragAndDrop": false,
+	"autoHide.autoHideSideBar": true,
+	"autoHide.autoHidePanel": true
 }
