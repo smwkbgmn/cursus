@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 18:32:57 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/08/28 15:31:58 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/08/28 16:32:04 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void	set_death(t_vars *prgm);
 t_bool	ref_death(t_vars *prgm);
 void	set_philos_eating(t_vars *prgm);
 t_uint	ref_philos_eating(t_vars *prgm);
-
 
 /* THREAD */
 void	start_life(t_list *data);
