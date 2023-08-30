@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 15:21:06 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/08/31 01:00:44 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/08/30 23:55:08 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ void	check_death(t_list *data, t_time *timer, t_msec ms_die)
 	while (!ref_death(data))
 	{
 		if (get_time_elapsed(data, timer) > ms_die)
+		{
+			set_death(data);
 			print_death(data);
+		}
 		else
 			suspend(10);
 	}
