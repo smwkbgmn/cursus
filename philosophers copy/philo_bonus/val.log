@@ -1,0 +1,91 @@
+==280== Memcheck, a memory error detector
+==280== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==280== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==280== Command: ./philo_bonus 2 410 200 200
+==280== 
+==281== Invalid read of size 8
+==281==    at 0x4915AC4: __new_sem_wait_fast (sem_waitcommon.c:136)
+==281==    by 0x4915AC4: sem_wait@@GLIBC_2.34 (sem_wait.c:39)
+==281==    by 0x1094CB: do_sem (in /usr/lab/philosophers/philo_bonus/philo_bonus)
+==281==    by 0x10946B: semaphore (in /usr/lab/philosophers/philo_bonus/philo_bonus)
+==281==    by 0x10908B: ref_death (in /usr/lab/philosophers/philo_bonus/philo_bonus)
+==281==    by 0x108D03: life (in /usr/lab/philosophers/philo_bonus/philo_bonus)
+==281==    by 0x109B17: child (in /usr/lab/philosophers/philo_bonus/philo_bonus)
+==281==    by 0x109A27: start_life (in /usr/lab/philosophers/philo_bonus/philo_bonus)
+==281==    by 0x108CAF: main (in /usr/lab/philosophers/philo_bonus/philo_bonus)
+==281==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==281== 
+==281== 
+==281== Process terminating with default action of signal 11 (SIGSEGV)
+==281==  Access not within mapped region at address 0x0
+==281==    at 0x4915AC4: __new_sem_wait_fast (sem_waitcommon.c:136)
+==281==    by 0x4915AC4: sem_wait@@GLIBC_2.34 (sem_wait.c:39)
+==281==    by 0x1094CB: do_sem (in /usr/lab/philosophers/philo_bonus/philo_bonus)
+==281==    by 0x10946B: semaphore (in /usr/lab/philosophers/philo_bonus/philo_bonus)
+==281==    by 0x10908B: ref_death (in /usr/lab/philosophers/philo_bonus/philo_bonus)
+==281==    by 0x108D03: life (in /usr/lab/philosophers/philo_bonus/philo_bonus)
+==281==    by 0x109B17: child (in /usr/lab/philosophers/philo_bonus/philo_bonus)
+==281==    by 0x109A27: start_life (in /usr/lab/philosophers/philo_bonus/philo_bonus)
+==281==    by 0x108CAF: main (in /usr/lab/philosophers/philo_bonus/philo_bonus)
+==281==  If you believe this happened as a result of a stack
+==281==  overflow in your program's main thread (unlikely but
+==281==  possible), you can try to increase the size of the
+==281==  main thread stack using the --main-stacksize= flag.
+==281==  The main thread stack size used in this run was 8388608.
+==281== 
+==281== HEAP SUMMARY:
+==281==     in use at exit: 1,200 bytes in 5 blocks
+==281==   total heap usage: 5 allocs, 0 frees, 1,200 bytes allocated
+==281== 
+==281== LEAK SUMMARY:
+==281==    definitely lost: 0 bytes in 0 blocks
+==281==    indirectly lost: 0 bytes in 0 blocks
+==281==      possibly lost: 0 bytes in 0 blocks
+==281==    still reachable: 1,200 bytes in 5 blocks
+==281==         suppressed: 0 bytes in 0 blocks
+==281== Rerun with --leak-check=full to see details of leaked memory
+==281== 
+==281== For lists of detected and suppressed errors, rerun with: -s
+==281== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+==280== Invalid read of size 8
+==280==    at 0x4915AC4: __new_sem_wait_fast (sem_waitcommon.c:136)
+==280==    by 0x4915AC4: sem_wait@@GLIBC_2.34 (sem_wait.c:39)
+==280==    by 0x1094CB: do_sem (in /usr/lab/philosophers/philo_bonus/philo_bonus)
+==280==    by 0x10946B: semaphore (in /usr/lab/philosophers/philo_bonus/philo_bonus)
+==280==    by 0x10908B: ref_death (in /usr/lab/philosophers/philo_bonus/philo_bonus)
+==280==    by 0x109ABB: parent (in /usr/lab/philosophers/philo_bonus/philo_bonus)
+==280==    by 0x109A1B: start_life (in /usr/lab/philosophers/philo_bonus/philo_bonus)
+==280==    by 0x108CAF: main (in /usr/lab/philosophers/philo_bonus/philo_bonus)
+==280==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==280== 
+==280== 
+==280== Process terminating with default action of signal 11 (SIGSEGV)
+==280==  Access not within mapped region at address 0x0
+==280==    at 0x4915AC4: __new_sem_wait_fast (sem_waitcommon.c:136)
+==280==    by 0x4915AC4: sem_wait@@GLIBC_2.34 (sem_wait.c:39)
+==280==    by 0x1094CB: do_sem (in /usr/lab/philosophers/philo_bonus/philo_bonus)
+==280==    by 0x10946B: semaphore (in /usr/lab/philosophers/philo_bonus/philo_bonus)
+==280==    by 0x10908B: ref_death (in /usr/lab/philosophers/philo_bonus/philo_bonus)
+==280==    by 0x109ABB: parent (in /usr/lab/philosophers/philo_bonus/philo_bonus)
+==280==    by 0x109A1B: start_life (in /usr/lab/philosophers/philo_bonus/philo_bonus)
+==280==    by 0x108CAF: main (in /usr/lab/philosophers/philo_bonus/philo_bonus)
+==280==  If you believe this happened as a result of a stack
+==280==  overflow in your program's main thread (unlikely but
+==280==  possible), you can try to increase the size of the
+==280==  main thread stack using the --main-stacksize= flag.
+==280==  The main thread stack size used in this run was 8388608.
+==280== 
+==280== HEAP SUMMARY:
+==280==     in use at exit: 1,472 bytes in 6 blocks
+==280==   total heap usage: 6 allocs, 0 frees, 1,472 bytes allocated
+==280== 
+==280== LEAK SUMMARY:
+==280==    definitely lost: 0 bytes in 0 blocks
+==280==    indirectly lost: 0 bytes in 0 blocks
+==280==      possibly lost: 272 bytes in 1 blocks
+==280==    still reachable: 1,200 bytes in 5 blocks
+==280==         suppressed: 0 bytes in 0 blocks
+==280== Rerun with --leak-check=full to see details of leaked memory
+==280== 
+==280== For lists of detected and suppressed errors, rerun with: -s
+==280== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
