@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 00:34:20 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/08/30 20:38:33 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/08/30 21:19:38 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,13 @@ void	suspend(t_msec ms)
 	t_msec	curnt;
 
 	set_time(NULL, &start);
+	// set_time_p(&start);
 	curnt = start;
 	while (curnt - start < ms)
 	{
 		usleep(256);
 		set_time(NULL, &curnt);
+		// set_time_p(&curnt);
 	}
 }
 
@@ -33,9 +35,9 @@ void	set_time(t_list *data, t_msec *time)
 	gettimeofday(&curnt, NULL);
 	if (data)
 	{
-		semaphore(data, TIMER, IN);
+		// semaphore(data, TIMER, IN);
 		*time = curnt.tv_sec * 1000 + curnt.tv_usec / 1000;
-		semaphore(data, TIMER, OUT);
+		// semaphore(data, TIMER, OUT);
 	}
 	else
 		*time = curnt.tv_sec * 1000 + curnt.tv_usec / 1000;
@@ -49,11 +51,33 @@ t_msec	get_time_elapsed(t_list *data, t_msec *start)
 	set_time(NULL, &curnt);
 	if (data)
 	{
-		semaphore(data, TIMER, IN);
+		// semaphore(data, TIMER, IN);
 		result = curnt - *start;
-		semaphore(data, TIMER, OUT);
+		// semaphore(data, TIMER, OUT);
 		return (result);
 	}
 	else
 		return (curnt - *start);
 }
+
+// void	set_time(t_list *data, t_msec *time)
+// {
+// 	t_timeval	curnt;
+
+// 	gettimeofday(&curnt, NULL);
+// 	semaphore(data, TIMER, IN);
+// 	*time = curnt.tv_sec * 1000 + curnt.tv_usec / 1000;
+// 	semaphore(data, TIMER, OUT);
+// }
+
+// t_msec	get_time_elapsed(t_list *data, t_msec *start)
+// {
+// 	t_msec	curnt;
+// 	t_msec	result;
+
+// 	set_time_p(&curnt);
+// 	semaphore(data, TIMER, IN);
+// 	result = curnt - *start;
+// 	semaphore(data, TIMER, OUT);
+// 	return (result);
+// }

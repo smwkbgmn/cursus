@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 21:00:59 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/08/30 19:57:51 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/08/30 21:18:21 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,11 @@ int	main(int ac, char **av)
 
 	if (validate_input(ac, av))
 	{
+		del_semaphore();
 		init_share(ac, av, &share);
 		init_philosophers(&data, share);
 		set_time(NULL, &share->time_life_begin);
+		// set_time_p(&share->time_life_begin);
 		start_life(data);
 	}
 	free_data(data);

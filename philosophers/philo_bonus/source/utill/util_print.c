@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 01:04:11 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/08/30 18:36:02 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/08/30 21:17:55 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,3 +47,19 @@ void	print_death(t_list *data)
 		data->philo->info.name);
 	semaphore(data, PRINT, OUT);
 }
+
+// void	set_time_p(t_msec *time)
+// {
+// 	t_timeval	curnt;
+
+// 	gettimeofday(&curnt, NULL);
+// 	*time = curnt.tv_sec * 1000 + curnt.tv_usec / 1000;
+// }
+
+// t_msec	get_time_elapsed_p(t_msec *start)
+// {
+// 	t_msec	curnt;
+
+// 	set_time_p(&curnt);
+// 	return (curnt - *start);
+// }
