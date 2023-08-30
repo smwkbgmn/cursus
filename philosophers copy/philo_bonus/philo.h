@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 21:00:57 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/08/30 12:24:54 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/08/30 16:17:08 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ typedef void				(*t_func)(t_list *);
 /* DATA */
 t_bool	validate_input(int ac, char **av);
 
-void	init_share(int ac, char **av, t_vars *prgm);
+// void	init_share(int ac, char **av, t_vars *prgm);
+void	init_share(int ac, char **av, t_vars **share);
 void	init_philosophers(t_list **data, t_vars *prgm);
 
 // void	*malloc_erext(size_t size);
@@ -134,6 +135,14 @@ struct s_vars
 	t_bool		death;
 	t_func		routine[4];
 	sem_t		*key[5];
+	/* KEYNAME : CNT_SEM & VALUE : EXPLAIN */
+	/* key_death : one & cnt_philo : every philo enter waitlist and
+	if meet the condition to die, do post so that monitor can
+	kill the simul */
+	/* key_eating : cnt_philo & 1 : when life start each philo
+	get wait and when meet the cnt_eating post it. it works as mutex
+	for each philo so in monitor do wait all the each sem 
+	and only when every philo post the eating, it stop the simul */
 };
 
 struct s_info

@@ -6,9 +6,11 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 23:53:17 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/08/30 12:51:30 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/08/30 20:36:37 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "signal.h"
 
 #include "philo.h"
 
@@ -28,14 +30,13 @@ void	*monitor(void *arg)
 
 void	check_death(t_list *data, t_msec *last_meal, t_msec die)
 {
-	while (!ref_death(data))
+	while (LOOP)
 	{
-		printf("\t\tPhilo %d ref death : %d\n",
-			data->philo->info.name, ref_death(data));
 		if (get_time_elapsed(data, last_meal) > die)
 		{
-			set_death(data);
 			print_death(data);
+			semaphore(data, DEATH, OUT);
+			break ;
 		}
 		else
 			suspend(10);

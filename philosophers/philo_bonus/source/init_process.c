@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 21:41:58 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/08/30 12:38:22 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/08/30 19:51:01 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	start_life(t_list *data)
 {
 	static t_uint	idx;
 
-	printf("start life\n");
+	// printf("start life\n");
 	init_process(&data->philo->id);
 	if (data->philo->id)
 		parent(data, &idx);
@@ -40,18 +40,25 @@ static void	init_process(pid_t *id)
 
 static void	parent(t_list *data, t_uint *idx)
 {
-	// start_monitor(data);
-	if (++(*idx) < data->share->config.cnt_philo
-		&& !ref_death(data))
+	if (++(*idx) < data->share->config.cnt_philo)
 		start_life(data->next);
+	else
+	{
+		suspend(50);
+		if (data->share->config.cnt_eat != -1)
+			pthread_create(&data->share->id_mntr_eaten, NULL,
+				&monitor_eaten, data);
+		pthread_create(&data->share->id_mntr_death, NULL,
+			&monitor_death, data);
+		if (data->share->config.cnt_eat != -1)
+			pthread_detach(data->share->id_mntr_eaten);
+		pthread_join(data->share->id_mntr_death, NULL);
+	}
 	wait_child(data);
-	// join_monitor(data);
-	printf("not dead yet\n");
 }
 
 static void	child(t_list *data)
 {
-	// set_time(NULL, &data->philo->info.time_last_meal);
 	life(data);
 }
 

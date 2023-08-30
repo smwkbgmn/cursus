@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 21:00:57 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/08/30 13:08:06 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/08/30 20:18:04 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 // # define SUCCESS 0
 # define ERROR -1
+# define LOOP 1
 
 typedef struct timeval		t_timeval;
 typedef unsigned long long	t_msec;
@@ -42,14 +43,17 @@ typedef void				(*t_func)(t_list *);
 /* DATA */
 t_bool	validate_input(int ac, char **av);
 
-// void	init_share(int ac, char **av, t_vars *prgm);
 void	init_share(int ac, char **av, t_vars **share);
-void	init_philosophers(t_list **data, t_vars *prgm);
 
-// void	*malloc_erext(size_t size);
+void	init_philosophers(t_list **data, t_vars *prgm);
+char	*ft_itoa(t_uint num);
+
 void	*errext(void *ptr);
 void	exit_with_error(char *msg);
 void	exit_test(t_vars *share, char *msg);
+
+void	free_data(t_list *data);
+void	del_semaphore(void);
 
 /* UTILL */
 void	print_status(t_list *data, t_stat stat);
@@ -60,15 +64,10 @@ void	suspend(t_msec ms);
 void	set_time(t_list *data, t_msec *time);
 t_msec	get_time_elapsed(t_list *data, t_msec *start);
 
-void	set_death(t_list *data);
-t_bool	ref_death(t_list *data);
-void	set_philos_eating(t_list *data);
-t_bool	all_philos_eaten(t_list *data);
 void	set_status(t_list *data, t_stat stat_to_change);
 t_stat	ref_status(t_list *data);
 
 sem_t	*init_sem(char *name, t_uint value);
-void	del_sem(char *name);
 void	semaphore(t_list *data, t_keyname name, t_switch in);
 
 /* LIFE */
@@ -86,6 +85,10 @@ void	start_monitor(t_list *data);
 void	join_monitor(t_list *data);
 
 void	*monitor(void *arg);
+
+void	*monitor_death(void *arg);
+void	*monitor_eaten(void *arg);
+void	quit_life(t_list *data);
 
 enum e_bool
 {
@@ -113,9 +116,8 @@ enum e_keyname
 	DEATH,
 	PRINT,
 	FORK_L,
-	FORK_R
-	// STAT,
-	// TIMER
+	FORK_R,
+	TIMER
 };
 
 struct s_config
@@ -134,7 +136,18 @@ struct s_vars
 	t_uint		cnt_done_eat;
 	t_bool		death;
 	t_func		routine[4];
+	pthread_t	id_mntr_death;
+	pthread_t	id_mntr_eaten;
 	sem_t		*key[5];
+	/* KEYNAME : CNT_SEM & VALUE : EXPLAIN */
+	/* key_death : 1 & cnt_philo : every philo enter waitlist and
+	if meet the condition to die, do post so that monitor can
+	kill the simul */
+	/* key_eating : cnt_philo & 1 : every philo enter waitlist and
+	when philo has eaten cnt_eating, post waitlist. whenever a philo
+	do post, monitor can enter waitlist one time. it means that
+	if monitor enter the waitlist cnt_philo times, every philo have met
+	their cnt_eating */
 };
 
 struct s_info
@@ -143,7 +156,7 @@ struct s_info
 	t_stat	stat;
 	int		eating;
 	t_msec	time_last_meal;
-	// sem_t	*key[2];
+	sem_t	*key_timer;
 };
 
 struct s_process

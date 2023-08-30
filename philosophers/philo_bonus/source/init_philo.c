@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 21:08:35 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/08/30 03:49:11 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/08/30 20:25:59 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,17 @@ void	init_philosophers(t_list **data, t_vars *share)
 static t_process	*new_philo(t_uint idx)
 {
 	t_process	*philo;
+	char		*name;
 
 	philo = errext(malloc(sizeof(t_process)));
 	memset(philo, 0, sizeof(t_process));
 	philo->info.name = idx + 1;
 	philo->info.stat = STARVE;
-	// philo->info.key[0] = init_sem("stat", 1);
-	// philo->info.key[1] = init_sem("timer", 1);
+
+	name = ft_itoa(idx + 1);
+	philo->info.key_timer = init_sem(name, 1);
+	free(name);
+
 	return (philo);
 }
 
@@ -74,4 +78,22 @@ static void	ft_lstadd(t_list **data, t_list *new)
 	}
 	else
 		*data = new;
+}
+
+char	*ft_itoa(t_uint num)
+{
+	static t_uint	len;
+	char			*rst;
+
+	len++;
+	if (num > 10)
+		rst = ft_itoa(num / 10);
+	else
+	{
+		rst = errext(malloc(len + 1));
+		memset(rst, 0, len + 1);
+	}
+	rst[--len] = (num % 10) + '0';
+	printf("itoa check : %s\n", rst);
+	return (rst);
 }

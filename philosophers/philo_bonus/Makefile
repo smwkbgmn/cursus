@@ -13,7 +13,7 @@ $(wildcard $(DIR_SRCS)/*.c)
 
 OBJS		= $(SRCS:.c=.o)
 
-FLAG		= -Wall -Wextra -Werror \
+FLAG		= -Wall -Wextra -Werror -fsanitize=thread \
 $(FLAG_HDR)
 
 FLAG_HDR	= -I $(DIR_HDR)

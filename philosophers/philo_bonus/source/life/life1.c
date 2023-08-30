@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 23:29:41 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/08/30 12:52:38 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/08/30 20:36:46 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ static void	philo_do(t_list *data, t_stat status);
 
 void	life(t_list *data)
 {
+	// printf("\t\tphilo %d waked\n", data->philo->info.name);
+	semaphore(data, DEATH, IN);
+	semaphore(data, EATING, IN);
+	// printf("\t\tphilo %d did sem\n", data->philo->info.name);
 	start_monitor(data);
-	while (!ref_death(data) && !all_philos_eaten(data))
-	{
-		printf("\t\t\tPhilo %d ref death : %d\n",
-			data->philo->info.name, ref_death(data));
-		data->share->routine[data->philo->info.stat](data);
-	}
 	join_monitor(data);
+	while (LOOP)
+		data->share->routine[data->philo->info.stat](data);
 }
 
 void	philo_think(t_list *data)
@@ -34,19 +34,12 @@ void	philo_think(t_list *data)
 void	philo_eat(t_list *data)
 {
 	taking(data);
-	if (!ref_death(data))
-	{
-		set_status(data, EAT);
-		set_time(data, &data->philo->info.time_last_meal);
-		if (++(data->philo->info.eating) == data->share->config.cnt_eat)
-		{
-			printf("\t\t\tJust passed if\n");
-			set_philos_eating(data);
-		}
-		philo_do(data, EAT);
-		printf("\t\t\tPhilo %d eating : %d\n",
-			data->philo->info.name, data->philo->info.eating);
-	}
+	set_status(data, EAT);
+	set_time(data, &data->philo->info.time_last_meal);
+	if (++(data->philo->info.eating)
+		== data->share->config.cnt_eat)
+		semaphore(data, EATING, OUT);
+	philo_do(data, EAT);
 	putting_down(data);
 }
 

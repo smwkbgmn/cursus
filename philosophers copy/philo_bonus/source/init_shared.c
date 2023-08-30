@@ -6,9 +6,11 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 21:08:42 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/08/30 12:27:29 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/08/30 13:10:00 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdlib.h>
 
 #include "philo.h"
 
@@ -17,11 +19,12 @@ static void		set_vars(t_vars *share);
 static void		init_keys(t_vars *share);
 static t_uint	ft_atoi(char *av);
 
-void	init_share(int ac, char **av, t_vars *share)
+void	init_share(int ac, char **av, t_vars **share)
 {
-	set_config(ac, av, share);
-	set_vars(share);
-	init_keys(share);
+	*share = errext(malloc(sizeof(t_vars)));
+	set_config(ac, av, *share);
+	set_vars(*share);
+	init_keys(*share);
 }
 
 static void	set_config(int ac, char **av, t_vars *share)

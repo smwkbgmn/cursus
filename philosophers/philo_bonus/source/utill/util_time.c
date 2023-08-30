@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 00:34:20 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/08/30 03:49:20 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/08/30 20:38:33 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ void	set_time(t_list *data, t_msec *time)
 	gettimeofday(&curnt, NULL);
 	if (data)
 	{
-		// semaphore(data, TIMER, IN);
+		semaphore(data, TIMER, IN);
 		*time = curnt.tv_sec * 1000 + curnt.tv_usec / 1000;
-		// semaphore(data, TIMER, OUT);
+		semaphore(data, TIMER, OUT);
 	}
 	else
 		*time = curnt.tv_sec * 1000 + curnt.tv_usec / 1000;
@@ -49,9 +49,9 @@ t_msec	get_time_elapsed(t_list *data, t_msec *start)
 	set_time(NULL, &curnt);
 	if (data)
 	{
-		// semaphore(data, TIMER, IN);
+		semaphore(data, TIMER, IN);
 		result = curnt - *start;
-		// semaphore(data, TIMER, OUT);
+		semaphore(data, TIMER, OUT);
 		return (result);
 	}
 	else
