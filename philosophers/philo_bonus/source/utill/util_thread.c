@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   util_thread.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/29 21:09:01 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/02 00:50:35 by donghyu2         ###   ########.fr       */
+/*   Created: 2023/09/01 19:16:00 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/09/01 19:20:21 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-
-#include <string.h>
-
 #include "philo.h"
 
-void	*errext(void *ptr)
+void	create_thread(t_list *data, pthread_t *id, void *function)
 {
-	if (!ptr)
-		exit_with_error(NULL, "malloc");
-	return (ptr);
+	if (pthread_create(id, NULL, function, data) != SUCCESS)
+		exit_with_error(data, "pthread_create");
 }
 
-void	exit_with_error(t_list *data, char *msg)
+void	join_thread(t_list *data, pthread_t *id)
 {
-	if (msg)
-		perror(msg);
-		// printf("%s\n", msg);
-	if (data)
-		del_semaphore(data);
-	exit(EXIT_FAILURE);
+	if (pthread_join(*id, NULL) != SUCCESS)
+		exit_with_error(data, "pthread_join");
+}
+
+void	detach_thread(t_list *data, pthread_t *id)
+{
+	if (pthread_detach(*id) != SUCCESS)
+		exit_with_error(data, "pthread_detach");
 }

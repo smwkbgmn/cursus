@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 21:48:45 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/08/31 00:52:31 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/09/02 00:07:23 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ t_stat	ref_status(t_list *data)
 t_bool	config_can_not_continue(t_list *data)
 {
 	return (!data
-		|| data->share->config.cnt_philo == 0
+		|| data->share->config.time_die == 0
 		|| data->share->config.cnt_eat == 0);
 }

@@ -21,6 +21,7 @@ $(DIR_SRCS)/life/life2.c \
 $(DIR_SRCS)/utill/util_life.c \
 $(DIR_SRCS)/utill/util_print.c \
 $(DIR_SRCS)/utill/util_semaphore.c \
+$(DIR_SRCS)/utill/util_thread.c \
 $(DIR_SRCS)/utill/util_time.c
 
 OBJS		= $(SRCS:.c=.o)

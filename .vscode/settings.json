@@ -17,7 +17,8 @@
 		"vector": "c",
 		"semaphore.h": "c",
 		"time.h": "c",
-		"wait.h": "c"
+		"wait.h": "c",
+		"typeinfo": "c"
 	},
 	"workbench.editor.tabSizing": "shrink",
 	"workbench.editor.doubleClickTabToToggleEditorGroupSizes": false,
