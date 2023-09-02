@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 00:08:38 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/02 23:40:08 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/09/03 01:40:06 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,16 @@
 
 #include "philo.h"
 
-static void	*monitor_death(void *arg)
+static void	quit_life(t_list *data);
+
+void	*monitor_death(void *arg)
 {
 	semaphore(arg, DEATH, IN);
 	quit_life(arg);
 	return (NULL);
 }
 
-static void	*monitor_eaten(void *arg)
+void	*monitor_eaten(void *arg)
 {
 	static t_uint	cnt;
 
@@ -30,6 +32,7 @@ static void	*monitor_eaten(void *arg)
 		monitor_eaten(arg);
 	else
 	{
+		semaphore(arg, PRINT, IN);
 		set_meet_eat(arg);
 		semaphore(arg, DEATH, OUT);
 	}

@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 21:00:57 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/02 23:46:36 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/09/03 01:11:18 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ void	join_monitor(t_list *data);
 
 void	*monitor_death(void *arg);
 void	*monitor_eaten(void *arg);
-void	quit_life(t_list *data);
 
 enum e_bool
 {

@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 23:29:41 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/02 14:14:22 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/09/03 01:41:46 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,6 @@ void	philo_eat(t_list *data)
 	taking(data);
 	set_status(data, EAT);
 	set_time(data, &data->philo->info.time_last_meal);
-	if (++(data->philo->info.eating)
-		== data->share->config.cnt_eat)
-		semaphore(data, EATING, OUT);
 	philo_do(data, EAT);
 	putting_down(data);
 }
@@ -50,7 +47,12 @@ static void	philo_do(t_list *data, t_stat status)
 {
 	print_status(data, status);
 	if (status == EAT)
+	{
+		if (++(data->philo->info.eating)
+			== data->share->config.cnt_eat)
+			semaphore(data, EATING, OUT);
 		suspend(data->share->config.time_eat);
+	}
 	else if (status == SLEEP)
 		suspend(data->share->config.time_sleep);
 	set_status(data, (status + 1) % 4);
