@@ -6,13 +6,13 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 00:34:20 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/01 19:14:18 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/09/02 14:14:28 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	suspend(t_list *data, t_msec ms)
+void	suspend(t_msec ms)
 {
 	t_msec	start;
 	t_msec	curnt;
@@ -22,32 +22,17 @@ void	suspend(t_list *data, t_msec ms)
 	while (curnt - start < ms)
 	{
 		if (usleep(256) == ERROR)
-			exit_with_error(data, "usleep");
+			exit_with_error("usleep");
 		set_time(NULL, &curnt);
 	}
 }
-
-// void	suspend(t_msec ms)
-// {
-// 	t_msec	start;
-// 	t_msec	curnt;
-
-// 	set_time(NULL, &start);
-// 	curnt = start;
-// 	while (curnt - start < ms)
-// 	{
-// 		if (usleep(256) == ERROR)
-// 			exit_with_error(NULL, "usleep");
-// 		set_time(NULL, &curnt);
-// 	}
-// }
 
 void	set_time(t_list *data, t_msec *time)
 {
 	t_timeval	curnt;
 
 	if (gettimeofday(&curnt, NULL) == ERROR)
-		exit_with_error(data, "gettimeofday");
+		exit_with_error("gettimeofday");
 	if (data)
 	{
 		semaphore(data, TIMER, IN);

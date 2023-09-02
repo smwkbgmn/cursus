@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 21:00:57 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/02 00:48:06 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/09/02 14:18:01 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,33 +49,33 @@ void	init_philosophers(t_list **data, t_vars *prgm);
 char	*ft_itoa(t_uint num);
 
 void	*errext(void *ptr);
-void	exit_with_error(t_list *data, char *msg);
+void	exit_with_error(char *msg);
 void	exit_test(t_vars *share, char *msg);
 
 void	free_data(t_list *data, t_vars *share);
-void	del_semaphore(t_list *data);
+
+sem_t	*init_sem(char *name, t_uint value);
+void	free_sem(sem_t *key);
+void	del_semaphore(void);
 
 /* UTILL */
 t_bool	config_can_not_continue(t_list *data);
 
 void	create_thread(t_list *data, pthread_t *id, void *function);
-void	join_thread(t_list *data, pthread_t *id);
-void	detach_thread(t_list *data, pthread_t *id);
+void	join_thread(pthread_t *id);
+void	detach_thread(pthread_t *id);
 
 void	print_status(t_list *data, t_stat stat);
 void	print_taking(t_list *data);
 void	print_death(t_list *data);
 
-// void	suspend(t_msec ms);
-void	suspend(t_list *data, t_msec ms);
+void	suspend(t_msec ms);
 void	set_time(t_list *data, t_msec *time);
 t_msec	get_time_elapsed(t_list *data, t_msec *start);
 
 void	set_status(t_list *data, t_stat stat_to_change);
 t_stat	ref_status(t_list *data);
 
-sem_t	*init_sem(char *name, t_uint value);
-void	free_sem(t_list *data, sem_t *key);
 void	semaphore(t_list *data, t_keyname name, t_switch in);
 
 /* LIFE */

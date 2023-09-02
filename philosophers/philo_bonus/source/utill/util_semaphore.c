@@ -6,54 +6,69 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 23:45:42 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/02 01:06:34 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/09/02 14:16:53 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 #include <stdlib.h>
 
-#include <stdio.h>
-
 #include "philo.h"
 
-static void	do_sem(t_list *data, sem_t *key, t_switch in);
+static void	do_sem(sem_t *key, t_switch in);
 
 sem_t	*init_sem(char *name, t_uint value)
 {
 	sem_t	*ptr;
 
-	// ptr = sem_open(name, O_CREAT | O_EXCL, 777, value);
 	ptr = sem_open(name, O_CREAT, 777, value);
-	printf("init: %p\n", ptr);
-	if (ptr == (sem_t *)ERROR)
-		exit_with_error(NULL, "sem_open");
+	if (!ptr || ptr == (sem_t *)ERROR)
+		exit_with_error("sem_open");
 	return (ptr);
 }
 
-void	free_sem(t_list *data, sem_t *key)
+void	free_sem(sem_t *key)
 {
-	printf("free: %p\n", key);
 	if (sem_close(key) != SUCCESS)
-		exit_with_error(data, "sem_close");
+		exit_with_error("sem_close");
+}
+
+void	del_semaphore(void)
+{
+	t_uint	idx;
+	char	*name;
+
+	sem_unlink("EATING");
+	sem_unlink("DEATH");
+	sem_unlink("PRINT");
+	sem_unlink("FORK_L");
+	sem_unlink("FORK_R");
+	idx = 0;
+	while (idx < 200)
+	{
+		name = ft_itoa(idx);
+		sem_unlink(name);
+		free(name);
+		idx++;
+	}
 }
 
 void	semaphore(t_list *data, t_keyname name, t_switch in)
 {
 	if (name < 5)
-		do_sem(data, data->share->key[name], in);
+		do_sem(data->share->key[name], in);
 	else
-		do_sem(data, data->philo->info.key_timer, in);
+		do_sem(data->philo->info.key_timer, in);
 }
 
-static void	do_sem(t_list *data, sem_t *key, t_switch in)
+static void	do_sem(sem_t *key, t_switch in)
 {
 	if (in)
 	{
 		if (sem_wait(key) == ERROR)
-			exit_with_error(data, "sem_wait");
+			exit_with_error("sem_wait");
 	}
 	else
 		if (sem_post(key) == ERROR)
-			exit_with_error(data, "sem_post");
+			exit_with_error("sem_post");
 }

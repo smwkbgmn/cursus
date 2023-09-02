@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 23:29:41 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/01 19:13:49 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/09/02 14:14:22 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ static void	philo_do(t_list *data, t_stat status)
 {
 	print_status(data, status);
 	if (status == EAT)
-		suspend(data, data->share->config.time_eat);
+		suspend(data->share->config.time_eat);
 	else if (status == SLEEP)
-		suspend(data, data->share->config.time_sleep);
+		suspend(data->share->config.time_sleep);
 	set_status(data, (status + 1) % 4);
 }
