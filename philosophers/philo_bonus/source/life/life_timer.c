@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 23:53:17 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/02 14:20:00 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/09/02 23:56:11 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include "philo.h"
 
-void	check_death(t_list *data, t_msec *last_meal, t_msec die);
+static void	check_death(t_list *data, t_msec *last_meal, t_msec die);
 
 void	*timer(void *arg)
 {
@@ -26,7 +26,7 @@ void	*timer(void *arg)
 	return (NULL);
 }
 
-void	check_death(t_list *data, t_msec *last_meal, t_msec die)
+static void	check_death(t_list *data, t_msec *last_meal, t_msec die)
 {
 	while (LOOP && data)
 	{

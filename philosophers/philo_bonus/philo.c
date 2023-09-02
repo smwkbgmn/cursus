@@ -6,11 +6,9 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 21:00:59 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/02 00:43:21 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/09/02 23:46:43 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdio.h>
 
 #include "philo.h"
 

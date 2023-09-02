@@ -6,13 +6,13 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 17:54:27 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/08/29 16:14:01 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/09/03 00:47:58 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-t_bool	wakeup_philo(t_list *data);
+static t_bool	wakeup_philo(t_list *data);
 
 void	init_philos_odd(t_list *data, t_uint cnt)
 {
@@ -73,7 +73,7 @@ void	join_monitors(t_list *data, t_uint cnt)
 	}
 }
 
-t_bool	wakeup_philo(t_list *data)
+static t_bool	wakeup_philo(t_list *data)
 {
 	if (pthread_create(&data->thread->id, NULL, &life, data)
 		== SUCCESS)

@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 21:08:42 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/02 16:46:36 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/09/02 23:35:21 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,12 @@ static void	init_keys(t_vars *share)
 {
 	del_semaphore();
 	share->key[0] = init_sem("EATING", share->config.cnt_philo);
-	share->key[1] = init_sem("DEATH", share->config.cnt_philo);
-	share->key[2] = init_sem("PRINT", 1);
-	share->key[3] = init_sem("FORK_L", share->config.cnt_philo / 2
+	share->key[1] = init_sem("EATING_CHANGE", 1);
+	share->key[2] = init_sem("DEATH", share->config.cnt_philo);
+	share->key[3] = init_sem("PRINT", 1);
+	share->key[4] = init_sem("FORK", share->config.cnt_philo);
+	share->key[5] = init_sem("MOM", share->config.cnt_philo / 2
 			+ (share->config.cnt_philo % 2 == 1));
-	share->key[4] = init_sem("FORK_R", share->config.cnt_philo / 2);
 }
 
 static t_uint	ft_atoi(char *av)

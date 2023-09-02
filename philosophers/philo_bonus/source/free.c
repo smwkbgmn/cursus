@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 18:38:07 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/02 14:17:19 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/09/02 23:48:40 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 #include "philo.h"
 
-void	free_semaphore(t_vars *share);
-void	free_philosophers(t_list *data);
+static void	free_semaphore(t_vars *share);
+static void	free_philosophers(t_list *data);
 
 void	free_data(t_list *data, t_vars *share)
 {
@@ -24,16 +24,16 @@ void	free_data(t_list *data, t_vars *share)
 	del_semaphore();
 }
 
-void	free_semaphore(t_vars *share)
+static void	free_semaphore(t_vars *share)
 {
-	free_sem(share->key[0]);
-	free_sem(share->key[1]);
-	free_sem(share->key[2]);
-	free_sem(share->key[3]);
-	free_sem(share->key[4]);
+	t_uint	cnt;
+
+	cnt = 0;
+	while (cnt < 6)
+		free_sem(share->key[cnt++]);
 }
 
-void	free_philosophers(t_list *data)
+static void	free_philosophers(t_list *data)
 {
 	t_uint	cnt;
 	t_uint	idx;

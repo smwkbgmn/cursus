@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 23:45:42 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/02 14:16:53 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/09/02 23:38:32 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,11 @@ void	del_semaphore(void)
 	char	*name;
 
 	sem_unlink("EATING");
+	sem_unlink("EATING_CHANGE");
 	sem_unlink("DEATH");
 	sem_unlink("PRINT");
-	sem_unlink("FORK_L");
-	sem_unlink("FORK_R");
+	sem_unlink("FORK");
+	sem_unlink("MOM");
 	idx = 0;
 	while (idx < 200)
 	{
@@ -55,7 +56,7 @@ void	del_semaphore(void)
 
 void	semaphore(t_list *data, t_keyname name, t_switch in)
 {
-	if (name < 5)
+	if (name < 6)
 		do_sem(data->share->key[name], in);
 	else
 		do_sem(data->philo->info.key_timer, in);

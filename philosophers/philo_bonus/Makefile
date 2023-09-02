@@ -19,6 +19,7 @@ $(DIR_SRCS)/life/life_timer.c \
 $(DIR_SRCS)/life/life1.c \
 $(DIR_SRCS)/life/life2.c \
 $(DIR_SRCS)/utill/util_life.c \
+$(DIR_SRCS)/utill/util_monitor.c \
 $(DIR_SRCS)/utill/util_print.c \
 $(DIR_SRCS)/utill/util_semaphore.c \
 $(DIR_SRCS)/utill/util_thread.c \

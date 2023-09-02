@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 21:00:57 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/02 16:50:17 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/09/02 23:46:36 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,9 @@ t_msec	get_time_elapsed(t_list *data, t_msec *start);
 void	set_status(t_list *data, t_stat stat_to_change);
 t_stat	ref_status(t_list *data);
 
+void	set_meet_eat(t_list *data);
+t_bool	ref_meet_eat(t_list *data);
+
 void	semaphore(t_list *data, t_keyname name, t_switch in);
 
 /* LIFE */
@@ -97,6 +100,10 @@ void	*timer(void *arg);
 
 void	start_monitor(t_list *data);
 void	join_monitor(t_list *data);
+
+void	*monitor_death(void *arg);
+void	*monitor_eaten(void *arg);
+void	quit_life(t_list *data);
 
 enum e_bool
 {
@@ -121,10 +128,11 @@ enum e_stat
 enum e_keyname
 {
 	EATING,
+	EATING_CHANGE,
 	DEATH,
 	PRINT,
-	FORK_L,
-	FORK_R,
+	FORK,
+	MOM,
 	TIMER
 };
 
@@ -147,7 +155,7 @@ struct s_vars
 	t_func		routine[4];
 	pthread_t	id_mntr_death;
 	pthread_t	id_mntr_eaten;
-	sem_t		*key[5];
+	sem_t		*key[6];
 };
 
 struct s_info

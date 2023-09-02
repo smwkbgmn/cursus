@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 00:54:11 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/08/31 00:43:16 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/09/03 00:51:40 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,16 @@
 
 void	taking(t_list *data)
 {
-	semaphore(data, FORK_L, IN);
+	semaphore(data, MOM, IN);
+	semaphore(data, FORK, IN);
 	print_taking(data);
-	semaphore(data, FORK_R, IN);
+	semaphore(data, FORK, IN);
 	print_taking(data);
 }
 
 void	putting_down(t_list *data)
 {
-	semaphore(data, FORK_R, OUT);
-	semaphore(data, FORK_L, OUT);
+	semaphore(data, FORK, OUT);
+	semaphore(data, FORK, OUT);
+	semaphore(data, MOM, OUT);
 }
