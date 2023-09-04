@@ -6,16 +6,88 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 02:20:19 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/03 02:40:44 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/09/04 16:43:31 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include "libft.h"
+
+
+
 #endif
 
-/*
+/********************************* SUBJECT ************************************
+
+--- External functions ---
+readline
+	rl_clear_history
+	rl_on_new_line
+	rl_replace_line
+	rl_redisplay
+	add_history
+	
+printf
+
+malloc
+free
+open
+read
+close
+unlink
+
+pipe
+dup
+dup2
+
+fork
+wait
+waitpid
+wait3
+wait4
+exit
+
+execve
+access
+
+kill
+signal
+sigaction
+sigemptyset
+sigaddset
+
+getcwd
+
+opendir
+readdir
+closedir
+chdir
+
+stat
+lstat
+fstat
+
+strerror
+perror
+
+isatty
+ttyname
+ttyslot
+ioctl
+
+getenv
+
+tcsetattr
+tcgetattr
+tgetent
+tgetflag
+tgetnum
+tgetstr
+tgoto
+tputs
+
 --- MANDATORY ---
 - Display a prompt when waiting for a new cmmand.
 
@@ -33,12 +105,15 @@ Therefore it is forbidden to use "norm" type structures in global.)
 
 - Not interpret unclosed quotes or special chracters which are not required
 by the subject such as \ (backslash) or ; (semicolon)
+: PARSING
 
 - Handle ' (single quote) which should prevent the shell from interpreting
 the meta-characters in the quoted sequence.
+: PARSING
 
 - Handle " (double quote) which should prevent the shell from interpreting
 the mate-characters in the quoted sequence except for $ (dollor sign).
+: PARSING
 
 - Implement redirections
 	< should redirect input.
@@ -46,22 +121,26 @@ the mate-characters in the quoted sequence except for $ (dollor sign).
 	<< should be given a delimiter, then read the input until a line
 	contaning the delimiter is seen. However, it doesn't have to update the
 	history.
+: USE THE PIPEX I MADE
 
 - Implement pipes (| character). The output of each command in the pipeline is
 connected to the input of the next command via a pipe.
+: USE THE PIPEX I MADE
 
 - Handle environment variables ($ followed by a sequencce of characters) which
-should expand o their values.
+should expand to their values.
 
-- Handlee $? which should expand to the exit status of the most recently
+- Handle $? which should expand to the exit status of the most recently
 executed foreground pipeline.
 
 - Handle CTRL-C, CTRL-D and CTRL-\ which should behave like in bash.
+: GET_NEXT_LINE SHOULD BE MODIFIED AS CAN ACCEPT THESE CONTROL INPUT
 
 - In interactive mode:
 	CTRL-C displays a new prompt on a new line.
 	CTRL-D exits the shell.
 	CTRL-\ does nothing.
+: WHAT IS INTERACTIVE MODE?
 
 - Your shell must implement the following builtins
 	ECHO with option -n
@@ -73,12 +152,22 @@ executed foreground pipeline.
 	EXIT with no options
 
 - The readline() function can cause memory leaks. you don't have to fix them.
-But that doesn't mean your own code, yes the code you wrote, can have memory leaks.
+But that doesn't mean your own code, yes the code you wrote,
+can have memory leaks.
 
-(You should limit yourself to the subject description. Anything that is not asked is not required.
-If you have any doubt about a requirement, take bash as a reference.)
+(You should limit yourself to the subject description.
+Anything that is not asked is not required. If you have any doubt
+about a requirement, take bash as a reference.)
 
---- BONUS PART ---
-- && and || with parenthesis for priorities.
+--- BONUS ---
+- && and || with parenthesis '(', ')' for priorities.
+: UNLIKE PIPE, IT JUST EXECUTES THE COMMANDS THAT LISTED IN THE LINE.
+BUT ONLY WHEN THE EXIT_STATUS OF PRIOR COMMAND CAN NOT DETERMINE
+IF THIS LOGICAL EXPRESSION IS TRUE OR NOT.
+
 - Wildcards * should work for the current working directory.
-*/
+: WILDCARD GIVES SOME ARGUMENTS THAT MATCH WITH THE EXPRESSION
+TO FOLLOWING COMMNAD. I GUESS AFTER LISTING FILES IN CURRENT DIRECTORY,
+I CAN USE THIS LIST AS A WAY FOR GETTING THE ADDTIONAL ARGUMENTS.
+
+******************************************************************************/
