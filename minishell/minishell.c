@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 02:20:20 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/04 16:48:14 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/09/04 18:36:31 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,25 @@
 // Put these WHOLE COMMANDs to pipex following the result of prior
 // command.
 
+#include <unistd.h>
+
 #include "minishell.h"
 
-int	main(int ac, char **av)
+void	write_shell(void);
+
+int	main(void)
 {
-	
+	t_command	**ary_cmds;
+
+	while (LOOP)
+	{
+		write_shell();
+		ary_cmds = parse(get_next_line(STDIN_FILENO));
+	}
 	return (0);
+}
+
+void	write_shell(void)
+{
+	write(STDIN_FILENO, "god-damn$", 10);
 }

@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 02:20:19 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/04 16:43:31 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/09/04 18:34:53 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,20 @@
 
 # include "libft.h"
 
+# define LOOP 1
 
+typedef s_command	t_command;
+
+struct s_command
+{
+	char	*name;
+	char	**av;
+	char	**env;
+	int		exit;
+};
+
+/* DEBUG */
+# include <stdio.h>
 
 #endif
 
