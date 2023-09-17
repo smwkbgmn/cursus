@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 21:56:28 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/15 20:30:29 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/09/17 12:52:24 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,53 +14,51 @@
 
 #include "parse.h"
 
-void	set_value(t_list *tokens);
+void	set_value(t_list *l_token);
 
-void	expand_env_var(t_list *tokens)
+void	expand_env_var(t_list *l_token)
 {
-	tokens = list_metachar(tokens, DOLR);
-	if (tokens)
+	l_token = list_metachar(l_token, DOLR);
+	if (l_token)
 	{
-		set_value(tokens);
-		ft_lstdel_idx(&tokens, 1, &free);
-		expand_env_var(tokens->next);
+		set_value(l_token);
+		ft_lstdel_idx(&l_token, 1, &free);
+		expand_env_var(l_token->next);
 	}
 }
 
-void	set_value(t_list *tokens)
+void	set_value(t_list *l_token)
 {
-	char	*value;
 	t_token	*token;
+	char	*value;
 
-	token = tokens->content;
-	printf("\nenv : original value : %s\n", token->str);
-	value = getenv(token->str + 1);
+	token = l_token->content;
 	free(token->str);
+	value = getenv(((t_token *)l_token->next->content)->str);
 	if (value)
-		token->str = value;
+		token ->str = ft_strdup(value);
 	else
 		token->str = ft_strdup("");
-	printf("env : expanded value : %s\n", token->str);
 }
 
-// void	set_value(t_list *tokens);
+// void	set_value(t_list *l_token);
 
-// void	expand_env_var(t_list *tokens)
+// void	expand_env_var(t_list *l_token)
 // {
-// 	tokens = list_metachar(tokens, DOLR);
-// 	if (tokens)
+// 	l_token = list_metachar(l_token, DOLR);
+// 	if (l_token)
 // 	{
-// 		set_value(tokens);
-// 		expand_env_var(tokens->next);
+// 		set_value(l_token);
+// 		expand_env_var(l_token->next);
 // 	}
 // }
 
-// void	set_value(t_list *tokens)
+// void	set_value(t_list *l_token)
 // {
 // 	char	*value;
 // 	t_token	*token;
 
-// 	token = tokens->content;
+// 	token = l_token->content;
 // 	printf("\nenv : original value : %s\n", token->str);
 // 	value = getenv(token->str + 1);
 // 	free(token->str);

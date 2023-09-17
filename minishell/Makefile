@@ -10,6 +10,7 @@ FLAG_LIBFT	= -L $(DIR_LIBFT) -l ft
 
 SRCS		= \
 minishell.c \
+debug.c \
 $(wildcard $(DIR_SRCS)/*.c) \
 $(wildcard $(DIR_SRCS)/parse/*.c)
 

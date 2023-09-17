@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 02:20:19 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/10 15:49:02 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/09/17 12:59:04 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ struct s_input
 
 /* DEBUG */
 # include <stdio.h>
+
+void	dbg_print_token(t_list *tokens);
 
 #endif
 

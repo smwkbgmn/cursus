@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 21:56:47 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/15 19:18:31 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/09/17 12:32:27 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,14 @@ t_list	*lexer(char *line)
 	t_token	*token;
 	t_list	*tokens;
 
-	while (1)
+	while (LOOP)
 	{
 		str = ft_strtok(&line, "\n\t \0");
 		if (str)
 		{
-			printf("token [%s]\t", str);
 			token = ft_calloc(1, sizeof(t_token));
 			token->str = str;
 			token->type = get_metachar(str);
-			printf("[%d]\n", token->type);
 			ft_lstadd_back(&tokens, ft_lstnew(token));
 		}
 		else

@@ -9,5 +9,6 @@
 		"__mutex_base": "c",
 		"sstream": "c",
 		"stdlib.h": "c"
-	}
+	},
+	"autoHide.autoHidePanel": false
 }

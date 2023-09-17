@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 18:05:01 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/15 20:29:35 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/09/17 12:59:15 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,22 @@
 
 t_list	*parse(char *line)
 {
-	t_list	*tokens;
+	t_list	*l_token;
 
 	// Check unclosed things and errors for parsing.
 	// This also used when getting input from heredoc.
-	tokens = lexer(line);
-	expand_env_var(tokens);
-	return (tokens);
+	l_token = lexer(line);
+	dbg_print_token(l_token);
+	expand_env_var(l_token);
+	dbg_print_token(l_token);
+	expand_wildcard(l_token);
+	return (l_token);
 }
 
-t_list	*list_metachar(t_list *tokens, t_metachar name)
+t_list	*list_metachar(t_list *l_token, t_metachar name)
 {
-	if (!tokens || ((t_token *)tokens->content)->type == name)
-		return (tokens);
+	if (!l_token || ((t_token *)l_token->content)->type == name)
+		return (l_token);
 	else
-		return (list_metachar(tokens->next, name));
+		return (list_metachar(l_token->next, name));
 }
