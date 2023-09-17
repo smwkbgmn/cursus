@@ -3,6 +3,11 @@
 		"libft.h": "c",
 		"stddef.h": "c",
 		"pipex.h": "c",
-		"_types.h": "c"
+		"_types.h": "c",
+		"minishell.h": "c",
+		"parse.h": "c",
+		"__mutex_base": "c",
+		"sstream": "c",
+		"stdlib.h": "c"
 	}
 }

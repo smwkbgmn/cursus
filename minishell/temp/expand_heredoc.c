@@ -1,34 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   expand_heredoc.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/04 18:05:01 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/15 20:29:35 by donghyu2         ###   ########.fr       */
+/*   Created: 2023/09/10 15:50:37 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/09/15 15:14:01 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include <fcntl.h>
 
 #include "parse.h"
 
-t_list	*parse(char *line)
+void	expand_heredoc(t_list *tokens)
 {
-	t_list	*tokens;
+	int	fd;
 
-	// Check unclosed things and errors for parsing.
-	// This also used when getting input from heredoc.
-	tokens = lexer(line);
-	expand_env_var(tokens);
-	return (tokens);
-}
-
-t_list	*list_metachar(t_list *tokens, t_metachar name)
-{
-	if (!tokens || ((t_token *)tokens->content)->type == name)
-		return (tokens);
-	else
-		return (list_metachar(tokens->next, name));
+	tokens = list_token(tokens, HRDC);
+	if (tokens)
+	{
+		fd = open_fd("heredoc",
+				O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, 0644, W);
+		write_heredoc(fd, ((t_token *)tokens->next->content)->str);
+		close_fd(fd);
+		expand_heredoc(tokens->next);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 02:20:19 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/04 18:34:53 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/09/10 15:49:02 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,53 @@
 # define MINISHELL_H
 
 # include "libft.h"
+# include "source/parse/parse.h"
 
+# define SUCCESS 0
+# define ERROR -1
 # define LOOP 1
 
-typedef s_command	t_command;
+extern const char			*g_env;
+
+// typedef enum e_logic		t_logic;
+typedef enum e_direc		t_direc;
+
+typedef struct s_command	t_command;
+typedef struct s_input		t_input;
+
+/***** SYSTEM *****/
+// error.c
+void	*errext(void *ptr);
+void	exit_with_error(char *msg);
+// files.c
+int		open_fd(char *name, int option, int permit, int flag);
+void	close_fd(int fd);
+void	redirect(int fd_to_copy, int fd_to_be);
+
+// enum e_logic
+// {
+// 	NONE,
+// 	AND,
+// 	OR
+// };
+
+enum e_direc
+{
+	R,
+	W
+};
 
 struct s_command
 {
 	char	*name;
 	char	**av;
-	char	**env;
 	int		exit;
+};
+
+struct s_input
+{
+	t_command	**cmds;
+	// t_logic		*logic;
 };
 
 /* DEBUG */
@@ -71,14 +107,14 @@ sigaction
 sigemptyset
 sigaddset
 
-getcwd
+getcwd	: get copy working directory
 
 opendir
 readdir
 closedir
 chdir
 
-stat
+stat	: display file status
 lstat
 fstat
 
@@ -147,13 +183,11 @@ should expand to their values.
 executed foreground pipeline.
 
 - Handle CTRL-C, CTRL-D and CTRL-\ which should behave like in bash.
-: GET_NEXT_LINE SHOULD BE MODIFIED AS CAN ACCEPT THESE CONTROL INPUT
 
 - In interactive mode:
 	CTRL-C displays a new prompt on a new line.
 	CTRL-D exits the shell.
 	CTRL-\ does nothing.
-: WHAT IS INTERACTIVE MODE?
 
 - Your shell must implement the following builtins
 	ECHO with option -n
@@ -174,7 +208,7 @@ about a requirement, take bash as a reference.)
 
 --- BONUS ---
 - && and || with parenthesis '(', ')' for priorities.
-: UNLIKE PIPE, IT JUST EXECUTES THE COMMANDS THAT LISTED IN THE LINE.
+: UNLIKE PIPE, IT JUST EXECUTES THE COMMANDS LISTED IN THE LINE.
 BUT ONLY WHEN THE EXIT_STATUS OF PRIOR COMMAND CAN NOT DETERMINE
 IF THIS LOGICAL EXPRESSION IS TRUE OR NOT.
 

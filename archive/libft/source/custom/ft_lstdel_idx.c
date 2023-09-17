@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstidx.c                                        :+:      :+:    :+:   */
+/*   ft_listdel_idx.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/31 18:14:41 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/15 20:08:05 by donghyu2         ###   ########.fr       */
+/*   Created: 2023/09/15 19:21:04 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/09/15 20:18:18 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstidx(t_list *head, int idx)
+void	ft_lstdel_idx(t_list **head, int idx, void (*del)(void *))
 {
-	short	size;
+	t_list	*node_del;
 
-	size = ft_lstsize(head);
-	if (-1 * size < idx && idx < size)
+	node_del = ft_lstidx(*head, idx);
+	if (node_del)
 	{
-		idx += size * (idx < 0);
-		while (idx-- > 0)
-			head = head->next;
+		if (idx == 0)
+			*head = (*head)->next;
+		else
+			ft_lstidx(*head, idx - 1)->next = node_del->next;
+		ft_lstdelone(node_del, del);
 	}
-	else
-		head = NULL;
-	return (head);
 }

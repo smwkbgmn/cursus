@@ -9,8 +9,9 @@ FLAG_HEADER	= -I $(DIR_HDR) -I $(DIR_LIBFT)
 FLAG_LIBFT	= -L $(DIR_LIBFT) -l ft
 
 SRCS		= \
-minishell.c
-# $(DIR_SRCS)/$(wildcard *.c)
+minishell.c \
+$(wildcard $(DIR_SRCS)/*.c) \
+$(wildcard $(DIR_SRCS)/parse/*.c)
 
 OBJS		= $(SRCS:.c=.o)
 
@@ -23,7 +24,7 @@ DIR_LIBFT	= ../archive/libft
 all			: $(NAME)
 
 $(NAME)		: $(LIBFT) $(OBJS)
-			$(CC) $(FLAG) $(FLAG_LIBFT) $(OBJS) -o $@
+			$(CC) $(FLAG) $(LIBFT) $(OBJS) -o $@
 
 %.o			: %.c
 			$(CC) $(FLAG) -c $< -o $@

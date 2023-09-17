@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 17:01:28 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/08/31 00:58:25 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/09/11 15:02:33 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,8 @@ static void	ft_lstadd(t_list **list, t_list *new)
 		tail = (*list)->prev;
 		tail->next = new;
 		new->next = head;
-		new->prev = tail;
 		head->prev = new;
+		new->prev = tail;
 	}
 	else
 		*list = new;
