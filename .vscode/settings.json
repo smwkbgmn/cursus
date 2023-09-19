@@ -8,7 +8,11 @@
 		"parse.h": "c",
 		"__mutex_base": "c",
 		"sstream": "c",
-		"stdlib.h": "c"
+		"stdlib.h": "c",
+		"dirent.h": "c",
+		"builtins.h": "c",
+		"builtin.h": "c",
+		"stdio.h": "c"
 	},
 	"autoHide.autoHidePanel": false
 }

@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 02:20:19 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/17 12:59:04 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/09/19 16:35:57 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@
 # define ERROR -1
 # define LOOP 1
 
-extern const char			*g_env;
-
 // typedef enum e_logic		t_logic;
 typedef enum e_direc		t_direc;
 
@@ -30,7 +28,7 @@ typedef struct s_input		t_input;
 
 /***** SYSTEM *****/
 // error.c
-void	*errext(void *ptr);
+void	*errex(void *ptr);
 void	exit_with_error(char *msg);
 // files.c
 int		open_fd(char *name, int option, int permit, int flag);

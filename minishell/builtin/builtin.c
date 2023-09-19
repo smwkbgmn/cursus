@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/09 19:21:33 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/19 16:35:44 by donghyu2         ###   ########.fr       */
+/*   Created: 2023/09/17 21:16:04 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/09/17 21:40:38 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include <stdlib.h>
 
-#include "minishell.h"
+#include "builtin.h"
 
-void	*errex(void *ptr)
+void	*errext(void *ptr)
 {
 	if (!ptr)
-	{
-		perror("malloc");
-		exit(EXIT_FAILURE);
-	}
+		exit_with_error("malloc");
 	return (ptr);
 }
 
@@ -28,7 +26,5 @@ void	exit_with_error(char *msg)
 {
 	if (msg)
 		perror(msg);
-	/* NEED TO DECLARE THE EXIT CODES */
 	exit(EXIT_FAILURE);
 }
-

@@ -1,34 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/09 19:21:33 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/19 16:35:44 by donghyu2         ###   ########.fr       */
+/*   Created: 2023/09/17 13:05:49 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/09/18 17:05:41 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 #include <stdlib.h>
+#include <stdio.h>
 
-#include "minishell.h"
+#include "builtin.h"
 
-void	*errex(void *ptr)
+int	main(void)
 {
-	if (!ptr)
-	{
-		perror("malloc");
-		exit(EXIT_FAILURE);
-	}
-	return (ptr);
-}
+	static char	*buf;
 
-void	exit_with_error(char *msg)
-{
-	if (msg)
-		perror(msg);
-	/* NEED TO DECLARE THE EXIT CODES */
-	exit(EXIT_FAILURE);
+	buf = getcwd(buf, 0);
+	if (!buf)
+		exit_with_error("getcwd");
+	printf("%s\n", buf);
+	free(buf);
+	return (EXIT_SUCCESS);
 }
-

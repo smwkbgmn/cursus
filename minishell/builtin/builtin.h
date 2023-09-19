@@ -1,34 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/09 19:21:33 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/19 16:35:44 by donghyu2         ###   ########.fr       */
+/*   Created: 2023/09/17 21:18:01 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/09/17 21:30:51 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#ifndef BUILTIN_H
+# define BUILTIN_H
 
-#include "minishell.h"
+// # include "libft.h"
+# include "../../archive/libft/libft.h"
 
-void	*errex(void *ptr)
-{
-	if (!ptr)
-	{
-		perror("malloc");
-		exit(EXIT_FAILURE);
-	}
-	return (ptr);
-}
+# define SUCCESS 0
+# define ERROR -1
 
-void	exit_with_error(char *msg)
-{
-	if (msg)
-		perror(msg);
-	/* NEED TO DECLARE THE EXIT CODES */
-	exit(EXIT_FAILURE);
-}
+void	*errext(void *ptr);
+void	exit_with_error(char *msg);
 
+#endif

@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 18:05:01 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/17 12:59:15 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/09/19 17:17:36 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ t_list	*parse(char *line)
 	// This also used when getting input from heredoc.
 	l_token = lexer(line);
 	dbg_print_token(l_token);
-	expand_env_var(l_token);
-	dbg_print_token(l_token);
+	// expand_env_var(l_token);
 	expand_wildcard(l_token);
+	dbg_print_token(l_token);
 	return (l_token);
 }
 

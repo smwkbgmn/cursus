@@ -6,63 +6,66 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 21:56:47 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/17 12:32:27 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/09/19 16:54:52 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-char	*ft_strtok(char **line, char *delim);
-char	*proceed_none_meta(char **line, char *delim, t_tokenize *data);
-char	*proceed_zerolen(char **line, char *delim);
+t_token	*ft_strtok(char **line, char *delim);
+t_token	*proceed_none_meta(char **line, char *delim, t_tokenize *data);
+t_token	*proceed_zerolen(char **line, char *delim);
 
 t_list	*lexer(char *line)
 {
-	char	*str;
-	t_token	*token;
-	t_list	*tokens;
+	static t_list	*l_token;
+	t_token			*token;
 
-	while (LOOP)
+	token = ft_strtok(&line, "\n\t \0");
+	if (token)
 	{
-		str = ft_strtok(&line, "\n\t \0");
-		if (str)
-		{
-			token = ft_calloc(1, sizeof(t_token));
-			token->str = str;
-			token->type = get_metachar(str);
-			ft_lstadd_back(&tokens, ft_lstnew(token));
-		}
-		else
-			break ;
+		ft_lstadd_back(&l_token, ft_lstnew(token));
+		lexer(line);
 	}
-	return (tokens);
+	return (l_token);
 }
 
-char	*ft_strtok(char **line, char *delim)
+t_token	*ft_strtok(char **line, char *delim)
 {
 	static t_tokenize	data;
-	char				*token;
+	t_token				*token;
 
-	data.q_sgl ^= (**line == QTE_SGL) && (data.q_dbl == FALSE);
-	data.q_dbl ^= (**line == QTE_DBL) && (data.q_sgl == FALSE);
-	if (data.q_sgl || data.q_dbl
-		|| (!get_metachar(*line) && !hit_delimit(**line, delim)))
-		// || get_metachar(*line) == DOLR || get_metachar(*line) == ASTR
-		token = proceed_none_meta(line, delim, &data);
-	else if (data.len == 0)
-		token = proceed_zerolen(line, delim);
+	if (**line)
+	{
+		data.q_sgl ^= (**line == QTE_SGL) && (data.q_dbl == FALSE);
+		data.q_dbl ^= (**line == QTE_DBL) && (data.q_sgl == FALSE);
+		if (data.q_sgl || data.q_dbl
+			|| (!get_metachar(*line) && !hit_delimit(**line, delim)))
+			token = proceed_none_meta(line, delim, &data);
+		else if (data.len == 0)
+			token = proceed_zerolen(line, delim);
+		else
+		{
+			token = ft_calloc(1, sizeof(t_token));
+			token->str = ft_calloc(data.len + 1, 1);
+		}
+	}
 	else
-		token = ft_calloc(data.len + 1, 1);
+		token = NULL;
 	return (token);
 }
 
-char	*proceed_none_meta(char **line, char *delim, t_tokenize *data)
+t_token	*proceed_none_meta(char **line, char *delim, t_tokenize *data)
 {
-	char	*token;
+	t_token	*token;
 	char	buf;
+	t_bool	wildcard;
 
+	wildcard = FALSE;
 	if (is_literal(**line, data->q_sgl, data->q_dbl))
 	{
+		if (**line == '*' && !data->q_sgl && !data->q_dbl)
+			wildcard = TRUE;
 		buf = **line;
 		data->len++;
 	}
@@ -72,15 +75,17 @@ char	*proceed_none_meta(char **line, char *delim, t_tokenize *data)
 	token = ft_strtok(line, delim);
 	if (buf)
 	{
-		token[data->len - 1] = buf;
+		token->str[data->len - 1] = buf;
+		if (wildcard)
+			token->type = ASTR;
 		data->len -= 1 * (data->len != 0);
 	}
 	return (token);
 }
 
-char	*proceed_zerolen(char **line, char *delim)
+t_token	*proceed_zerolen(char **line, char *delim)
 {
-	char	*token;
+	t_token	*token;
 
 	if (hit_delimit(**line, delim))
 	{
@@ -94,11 +99,12 @@ char	*proceed_zerolen(char **line, char *delim)
 	}
 	else
 	{
-		token = ft_calloc(3, 1);
-		token[0] = **line;
+		token = ft_calloc(1, sizeof(t_token));
+		token->str = ft_calloc(3, 1);
+		token->str[0] = **line;
 		if (get_metachar(*line) > 255)
 		{
-			token[1] = *(*line + 1);
+			token->str[1] = *(*line + 1);
 			++(*line);
 		}
 		++(*line);

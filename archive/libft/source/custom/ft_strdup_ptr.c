@@ -1,34 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   ft_strdup_ptr.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/09 19:21:33 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/19 16:35:44 by donghyu2         ###   ########.fr       */
+/*   Created: 2023/09/19 17:44:21 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/09/19 18:45:08 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-#include "minishell.h"
+#include "libft.h"
 
-void	*errex(void *ptr)
+void	copy_value(char *dup, char *start, char *end);
+
+char	*ft_strdup_ptr(char *start, char *end)
 {
-	if (!ptr)
+	char	*dup;
+
+	if (start && end && start != end)
 	{
-		perror("malloc");
-		exit(EXIT_FAILURE);
+		dup = ft_calloc(end - start + 1, 1);
+		if (dup)
+			copy_value(dup, start, end);
+		return (dup);
 	}
-	return (ptr);
+	return (NULL);
 }
 
-void	exit_with_error(char *msg)
+void	copy_value(char *dup, char *start, char *end)
 {
-	if (msg)
-		perror(msg);
-	/* NEED TO DECLARE THE EXIT CODES */
-	exit(EXIT_FAILURE);
+	if (start != end && *start)
+	{
+		*dup = *start;
+		copy_value(dup + 1, start + 1, end);
+	}
 }
-

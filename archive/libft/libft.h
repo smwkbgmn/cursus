@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:29:06 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/15 20:24:43 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/09/19 17:52:03 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,23 +68,26 @@ void	ft_lstadd_front(t_list **lst, t_list *node_new);
 int		ft_lstsize(t_list *lst);
 t_list	*ft_lstlast(t_list *lst);
 void	ft_lstadd_back(t_list **lst, t_list *node_new);
-void	ft_lstdel_idx(t_list **head, int idx, void (*del)(void *));
 void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 
-void	write_hex(unsigned int num, short flag);
-int		write_hex_len(unsigned int num, short flag);
-t_list	*ft_lstidx(t_list *head, int idx);
-void	ft_lstadd_idx(t_list **head, t_list *node_new, int idx);
 long	ft_atoi_long(const char *str);
-char	*ft_itoa_uint(unsigned int n);
-char	*ft_itoa_ulong(unsigned long n);
-char	*ft_itoa_uint_base(unsigned int dec, char *base);
-char	*ft_itoa_ulong_base(unsigned long dec, char *base);
-void	ft_free(void *ptr);
 void	ft_free_set_null(void **ptr);
+void	ft_free(void *ptr);
+char	*ft_itoa_uint_base(unsigned int dec, char *base);
+char	*ft_itoa_uint(unsigned int n);
+char	*ft_itoa_ulong_base(unsigned long dec, char *base);
+char	*ft_itoa_ulong(unsigned long n);
+void	ft_lstadd_idx(t_list **head, t_list *node_new, int idx);
+void	ft_lstdel_idx(t_list **head, int idx, void (*del)(void *));
+t_list	*ft_lstidx(t_list *head, int idx);
+void	ft_putchar(char letter);
+void	ft_putstr(char *str);
+char	*ft_strdup_ptr(char *start, char *end);
+int		write_hex_len(unsigned int num, short flag);
+void	write_hex(unsigned int num, short flag);
 
 char	*get_next_line(int fd);
 int		ft_printf(const char *str, ...);
