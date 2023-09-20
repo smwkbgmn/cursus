@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 17:31:54 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/02 17:04:27 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/09/20 19:12:32 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 #include "philo.h"
 
-void	suspend(t_msec ms)
+void	suspend(t_list *data, t_msec ms)
 {
 	t_msec	start;
 	t_msec	curnt;
 
 	set_time(NULL, &start);
 	curnt = start;
-	while (curnt - start < ms)
+	while (curnt - start < ms && !ref_death(data))
 	{
 		usleep(256);
 		set_time(NULL, &curnt);

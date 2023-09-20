@@ -14,5 +14,6 @@
 		"builtin.h": "c",
 		"stdio.h": "c"
 	},
-	"autoHide.autoHidePanel": false
+	"autoHide.autoHidePanel": false,
+	"autoHide.autoHideSideBar": false
 }

@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 17:54:27 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/03 00:47:58 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/09/20 19:12:02 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	init_philos_even(t_list *data, t_uint cnt)
 	if (idx - cnt == 1 && !ref_death(data))
 	{
 		data = data->prev;
-		suspend(data->program->config.delay_eat);
+		suspend(data, data->program->config.delay_eat);
 		wakeup_philo(data);
 	}
 }

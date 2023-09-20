@@ -6,12 +6,14 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 18:16:17 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/19 17:16:52 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/09/20 18:03:31 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSE_H
 # define PARSE_H
+
+# include <dirent.h>
 
 # include "minishell.h"
 
@@ -26,7 +28,6 @@ t_list		*parse(char *line);
 t_list		*list_metachar(t_list *tokens, t_metachar name);
 
 t_list		*lexer(char *line);
-t_list		*list_metachar(t_list *tokens, t_metachar name);
 
 t_metachar	get_metachar(char *str);
 t_bool		hit_delimit(char c, char *delim);
@@ -35,6 +36,8 @@ t_bool		is_literal(char c, t_bool qte_sgl, t_bool qte_dbl);
 void		expand_env_var(t_list *tokens);
 
 void		expand_wildcard(t_list *l_token);
+
+char		**list_files(DIR *p_dir, char *pattern, int count);
 
 enum e_metachar
 {

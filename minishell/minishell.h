@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 02:20:19 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/19 16:35:57 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/09/20 17:50:45 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ typedef enum e_direc		t_direc;
 
 typedef struct s_command	t_command;
 typedef struct s_input		t_input;
+
+extern int	g_errno;
 
 /***** SYSTEM *****/
 // error.c

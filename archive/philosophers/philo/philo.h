@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 18:32:57 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/08/29 15:43:47 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/09/20 19:10:27 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	print_status(t_list *data, t_stat stat);
 void	print_taking(t_list *data);
 void	print_death(t_list *data);
 
-void	suspend(t_msec ms);
+void	suspend(t_list *data, t_msec ms);
 void	set_time(t_list *data, t_msec *time_ms);
 t_msec	get_time_elapsed(t_list *data, t_time *time);
 
