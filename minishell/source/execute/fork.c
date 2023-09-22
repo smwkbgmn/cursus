@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   fork.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/15 17:37:16 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/21 18:29:02 by donghyu2         ###   ########.fr       */
+/*   Created: 2023/09/22 14:30:54 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/09/22 14:32:43 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
+#include "execute.h"
 
-size_t	ft_strlen(const char *s)
+void	execute(void)
 {
-	size_t	idx;
-
-	idx = 0;
-	if (s)
-	{
-		while (s[idx])
-			idx++;
-	}
-	return (idx);
+	
 }

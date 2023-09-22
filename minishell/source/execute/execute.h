@@ -1,26 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   execute.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/15 17:37:16 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/21 18:29:02 by donghyu2         ###   ########.fr       */
+/*   Created: 2023/09/22 14:32:21 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/09/22 14:32:39 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef EXECUTE_H
+# define EXECUTE_H
 
-size_t	ft_strlen(const char *s)
-{
-	size_t	idx;
-
-	idx = 0;
-	if (s)
-	{
-		while (s[idx])
-			idx++;
-	}
-	return (idx);
-}
+#endif

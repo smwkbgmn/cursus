@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 02:20:20 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/15 19:39:18 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/09/22 14:19:58 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ void	write_shell(void);
 
 int	main(void)
 {
-	// t_list	*tokens;
-
-	write_shell();
-	// tokens = parse(get_next_line(STDIN_FILENO));
-	parse(get_next_line(STDIN_FILENO));
+	// while (1)
+	// {
+		write_shell();
+		parse(get_next_line(STDIN_FILENO));
+	// }
 	return (0);
 }
 

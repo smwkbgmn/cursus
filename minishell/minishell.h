@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 02:20:19 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/20 17:50:45 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/09/22 18:29:17 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,7 +212,7 @@ about a requirement, take bash as a reference.)
 - && and || with parenthesis '(', ')' for priorities.
 : UNLIKE PIPE, IT JUST EXECUTES THE COMMANDS LISTED IN THE LINE.
 BUT ONLY WHEN THE EXIT_STATUS OF PRIOR COMMAND CAN NOT DETERMINE
-IF THIS LOGICAL EXPRESSION IS TRUE OR NOT.
+WHETHER THIS LOGICAL EXPRESSION IS TRUE OR NOT.
 
 - Wildcards * should work for the current working directory.
 : WILDCARD GIVES SOME ARGUMENTS THAT MATCH WITH THE EXPRESSION

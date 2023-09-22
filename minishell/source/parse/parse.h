@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 18:16:17 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/20 18:03:31 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/09/22 13:34:52 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,41 +15,45 @@
 
 # include <dirent.h>
 
-# include "minishell.h"
+# include "libft.h"
 
-typedef struct dirent		t_dir;
+typedef struct dirent	t_dir;
 
-typedef enum e_metachar		t_metachar;
+typedef enum e_metachar	t_metachar;
 
-typedef struct s_tokenize	t_tokenize;
-typedef struct s_token		t_token;
+typedef struct s_lexer	t_lexer;
+typedef struct s_token	t_token;
 
 t_list		*parse(char *line);
+
 t_list		*list_metachar(t_list *tokens, t_metachar name);
 
 t_list		*lexer(char *line);
-
-t_metachar	get_metachar(char *str);
+t_token		*tokenize(char **line, char *delim, t_lexer *data);
 t_bool		hit_delimit(char c, char *delim);
-t_bool		is_literal(char c, t_bool qte_sgl, t_bool qte_dbl);
+t_metachar	get_metachar(char *str);
 
-void		expand_env_var(t_list *tokens);
+t_token		*proceed_none_meta(char **line, char *delim, t_lexer *data);
+
+t_token		*proceed_zerolen(char **line, char *delim, t_lexer *data);
+
+char		*expand_env_var(char **line);
 
 void		expand_wildcard(t_list *l_token);
-
-char		**list_files(DIR *p_dir, char *pattern, int count);
+char		**list_files(DIR *p_dir, char *pattern);
+// char		**list_files(DIR *p_dir, char *pattern, int count);
 
 enum e_metachar
 {
 	NONE,
-	AND = 9766,
-	OR = 31868,
-	HRDC = 15420,
-	RDR_OUT_APND = 15934,
 	AMPRSND = '&',
+	AND = 9766,
 	PIPE = '|',
-	RDR_IN = '<',
-	RDR_OUT = '>',
+	OR = 31868,
+	RD_IN = '<',
+	RD_IN_HRDC = 15420,
+	RD_OUT = '>',
+	RD_OUT_APND = 15934,
 	DOLR = '$',
 	ASTR = '*',
 	PRNTSIS_OPN = '(',
@@ -58,8 +62,9 @@ enum e_metachar
 	QTE_DBL = '\"'
 };
 
-struct s_tokenize
+struct s_lexer
 {
+	t_bool	wildcard;
 	t_bool	q_sgl;
 	t_bool	q_dbl;
 	size_t	len;
