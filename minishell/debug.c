@@ -22,33 +22,40 @@ static void	print_token(t_list *l_token)
 	}
 }
 
-void	dbg_print_procs(t_list *l_procs)
+void	dbg_print_procs(t_list *l_exe)
 {
-	printf("------ PROCS -------\n");
-	print_procs(l_procs);
-	printf("--------------------\n");
+	if (l_exe)
+	{
+		printf("----------- PROCS ------------\n");
+		print_procs(l_exe);
+		printf("------------------------------\n");
+		dbg_print_procs(l_exe->next);
+	}
 }
 
 static void	print_procs(t_list *l_exe)
 {
 	t_execute	*exe;
+	char		**av;
 
 	if (l_exe)
 	{
 		exe = l_exe->content;
 		if (exe)
 		{
-			printf("%-10s%s\n", "name: ", exe->cmd.name);
-			while (*exe->cmd.av)
+			printf("%-10s%20s\n", "name: ", exe->cmd.name);
+			av = exe->cmd.av;
+			printf("%-10s%20s\n", "av: ", *av);
+			av++;
+			while (*av)
 			{
-				printf("%-10s%s\n", "av: ", *exe->cmd.av);
-				exe->cmd.av++;
+				printf("%30s\n", *av);
+				av++;
 			}
-			printf("%-10s%d\n", "rd_in: ", exe->cmd.rd_in);
-			printf("%-10s%d\n", "rd_out: ", exe->cmd.rd_out);
-			printf("%-10s%s\n", "heredoc: ", exe->cmd.fname_heredoc);
+			printf("%-10s%20d\n", "fd_rd[R]: ", exe->cmd.fd_rd[R]);
+			printf("%-10s%20d\n", "fd_rd[W]: ", exe->cmd.fd_rd[W]);
+			printf("%-10s%20s\n", "heredoc: ", exe->cmd.fname_heredoc);
 		}
-		printf("%-10s%d\n", "op_seq: ", ((t_execute *)l_exe->content)->op_seq);
-		print_procs(l_exe->next);
+		printf("%-10s%20d\n", "op_seq: ", ((t_execute *)l_exe->content)->op_seq);
 	}
 }

@@ -19,6 +19,6 @@
 		"cdefs.h": "c",
 		"execute.h": "c"
 	},
-	"autoHide.autoHidePanel": true,
+	"autoHide.autoHidePanel": false,
 	"autoHide.autoHideSideBar": true
 }

@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 02:20:20 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/08 13:30:55 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/08 17:48:17 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int	main(void)
 	// {
 		write_shell();
 		init_shell(&l_exe, get_next_line(STDIN_FILENO));
+		execute(l_exe);
 	// }
 	return (EXIT_SUCCESS);
 }
