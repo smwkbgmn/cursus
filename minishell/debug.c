@@ -29,22 +29,26 @@ void	dbg_print_procs(t_list *l_procs)
 	printf("--------------------\n");
 }
 
-static void	print_procs(t_list *l_procs)
+static void	print_procs(t_list *l_exe)
 {
-	t_process	*procs;
+	t_execute	*exe;
 
-	if (l_procs)
+	if (l_exe)
 	{
-		procs = l_procs->content;
-		printf("%-10s%s\n", "name: ", procs->exe.name);
-		while (*procs->exe.av)
+		exe = l_exe->content;
+		if (exe)
 		{
-			printf("%-10s%s\n", "av: ", *procs->exe.av);
-			procs->exe.av++;
+			printf("%-10s%s\n", "name: ", exe->cmd.name);
+			while (*exe->cmd.av)
+			{
+				printf("%-10s%s\n", "av: ", *exe->cmd.av);
+				exe->cmd.av++;
+			}
+			printf("%-10s%d\n", "rd_in: ", exe->cmd.rd_in);
+			printf("%-10s%d\n", "rd_out: ", exe->cmd.rd_out);
+			printf("%-10s%s\n", "heredoc: ", exe->cmd.fname_heredoc);
 		}
-		printf("%-10s%d\n", "rd_in: ", procs->exe.rd_in);
-		printf("%-10s%d\n", "rd_out: ", procs->exe.rd_out);
-		printf("%-10s%s\n", "heredoc: ", procs->exe.tmp_heredoc);
-		print_procs(l_procs->next);
+		printf("%-10s%d\n", "op_seq: ", ((t_execute *)l_exe->content)->op_seq);
+		print_procs(l_exe->next);
 	}
 }

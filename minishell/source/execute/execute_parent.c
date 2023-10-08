@@ -1,32 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   execute_parent.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/25 02:26:54 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/08 12:36:11 by donghyu2         ###   ########.fr       */
+/*   Created: 2023/10/08 14:33:01 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/10/08 15:13:37 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
 #include "minishell.h"
 
-void	init_shell(t_list **l_exe, char *line)
+int	parent(t_process *ps, t_execute *exe, t_bool *pipe)
 {
-	get_command(l_exe, parse(line));
-	// printf("init_process done\n");
-	free(line);
-	// dbg_print_procs(exe->l_procs);
+	int	exit;
+
+	if (exe->op_seq == PIPE)
+	{
+		exit = execute(exe);
+		close_fd(ps->fd_pipe[R]);
+		close_fd(ps->fd_pipe[W]);
+	}
+	else
+	{
+		exit = wait_child(ps);
+		*pipe = FALSE;
+	}
+	return (exit);
 }
 
-// void	init_shell(t_execute *exe, char *line)
-// {
-// 	exe->l_token = parse(line);
-// 	exe->l_procs = get_command(exe->l_token);
-// 	// printf("init_process done\n");
-// 	free(line);
-// 	// dbg_print_procs(exe->l_procs);
-// }
+int	wait_child(t_process *ps)
+{
+	int	stat_loc;
+
+	if (waitpid(ps->id, &stat_loc, 0) == ERROR)
+		exit_with_error("waitpid");
+	return (WEXITSTATUS(stat_loc));
+}

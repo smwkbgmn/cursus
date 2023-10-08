@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 02:20:20 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/05 14:30:09 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/08 13:30:55 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,12 @@ void	write_shell(void);
 
 int	main(void)
 {
-	// static t_execute	exe;
-	static t_btree	*exe;
+	static t_list	*l_exe;
 
 	// while (LOOP)
 	// {
 		write_shell();
-		init_shell(&exe, get_next_line(STDIN_FILENO));
+		init_shell(&l_exe, get_next_line(STDIN_FILENO));
 	// }
 	return (EXIT_SUCCESS);
 }

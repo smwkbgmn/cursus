@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 02:20:19 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/04 15:24:37 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/08 12:57:27 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ extern int	g_errno;
 
 /***** SYSTEM *****/
 // init.c
-void	init_shell(t_list **data, char *line);
+void	init_shell(t_list **exe, char *line);
 // error.c
 void	*errex(void *ptr);
 void	exit_with_error(char *msg);

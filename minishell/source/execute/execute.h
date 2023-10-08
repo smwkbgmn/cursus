@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 14:32:21 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/07 23:58:24 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/08 15:02:20 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,34 +20,34 @@
 
 typedef struct s_command	t_command;
 typedef struct s_process	t_process;
-// typedef struct s_execute	t_execute;
+typedef struct s_execute	t_execute;
 
-void		execute(t_btree *exe);
+int		execute(t_list *exe);
 
-t_btree		*get_command(t_list *l_token);
+void	get_execute(t_list **exe, t_list *l_token);
 
-int			get_heredoc(char *tmpfile, char *delim);
+int		get_heredoc(char *tmpfile, char *delim);
 
 struct s_command
 {
 	char	*name;
 	char	**av;
-	int		rd_in;
-	int		rd_out;
-	char	*file_heredoc;
+	int		fd_rd[2];
+	// int		rd_in;
+	// int		rd_out;
+	char	*fname_heredoc;
+};
+
+struct s_execute
+{
+	t_command	cmd;
+	t_meta		op_seq;
 };
 
 struct s_process
 {
 	pid_t		id;
-	int			fd[2];
-	t_command	cmd;
+	int			fd_pipe[2];
 };
-
-// struct s_execute
-// {
-// 	t_list	*l_token;
-// 	t_list	*l_procs;
-// };
 
 #endif

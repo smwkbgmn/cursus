@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 16:04:47 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/08 02:02:06 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/08 15:02:51 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,49 @@
 
 #include "minishell.h"
 
-static t_process	*parse_token(t_list *l_token);
+static t_execute	*get_command(t_list *l_token);
 static t_bool		is_redirect(t_meta type);
-static void			open_fd_redirect(t_process *procs, t_meta type, char *name);
+static void			open_fd_redirect(t_execute *exe, t_meta type, char *name);
 static char			*get_name(char **path, char *av_cmd);
 static char			*find_name(char **path, char *av_cmd);
 
-t_list				*pass_to_next_cmd(t_list *l_token);
-t_bool				is_pipe_and_or(t_list *l_token);
+static t_bool		is_prntsis(t_list *l_token);
+// static t_list		*pass_to_next_cmd(t_list *l_token);
+// static t_bool		is_pipe_and_or(t_list *l_token);
 
-t_btree	*get_command(t_list *l_token)
+void	get_execute(t_list **l_exe, t_list *l_token)
 {
-	t_process	*procs;
-	t_token		*op_seq;
+	t_list		*token;
+	t_meta		op_seq;
+	t_execute	*exe;
 
-	if (is_prntsis(l_token))
+	if (l_token)
 	{
-		btr_add_r(&exe, btr_new(l_token->content));
-		btr_add_l();
+		token = l_token;
+		if (is_prntsis(l_token))
+		{	
+			exe = ft_calloc(1, sizeof(t_execute));
+			exe->op_seq = ((t_token *)token->content)->type;
+			ft_lstadd_back(l_exe, ft_lstnew(exe));
+			get_execute(l_exe, l_token->next);
+			free(((t_token *)token->content)->str);
+			ft_lstdelone(l_token, &free);
+		}
+		else
+		{
+			exe = get_command(l_token);
+			while (token && ((t_token *)token->content)->type == NONE)
+			{
+				token = l_token->next;
+				ft_lstdelone(l_token, &free);
+			}
+			if (token)
+			{
+				exe->op_seq = ((t_token *)token->content)->type;
+				ft_lstadd_back(l_exe, ft_lstnew(exe));
+				get_execute(l_exe, token);
+			}
+		}
 	}
 }
 
@@ -49,35 +74,35 @@ t_btree	*get_command(t_list *l_token)
 // 	return (l_procs);
 // }
 
-t_bool	is_prntsis(t_list *l_token)
+static t_bool	is_prntsis(t_list *l_token)
 {
 	return (((t_token *)l_token->content)->type == PRNTSIS_OPN
 		|| ((t_token *)l_token->content)->type == PRNTSIS_CLS);
 }
 
-t_list	*pass_to_next_cmd(t_list *l_token)
-{
-	if (!l_token)
-		return (l_token);
-	else if (is_pipe_and_or(l_token))
-		return (l_token->next);
-	else
-		return (pass_to_next_cmd(l_token->next));
-}
+// static t_list	*pass_to_next_cmd(t_list *l_token)
+// {
+// 	if (!l_token)
+// 		return (l_token);
+// 	else if (is_pipe_and_or(l_token))
+// 		return (l_token->next);
+// 	else
+// 		return (pass_to_next_cmd(l_token->next));
+// }
 
-t_bool	is_pipe_and_or(t_list *l_token)
-{
-	t_meta	type;
+// static t_bool	is_pipe_and_or(t_list *l_token)
+// {
+// 	t_meta	type;
 
-	type = ((t_token *)l_token->content)->type;
-	return (type == PIPE || type == AND || type == OR);
-}
+// 	type = ((t_token *)l_token->content)->type;
+// 	return (type == PIPE || type == AND || type == OR);
+// }
 
-static t_process	*parse_token(t_list *l_token)
+static t_execute	*get_command(t_list *l_token)
 {
 	static int	argc;
 	t_token		*token;
-	t_process	*procs;
+	t_execute	*exe;
 
 	if (l_token)
 		token = l_token->content;
@@ -87,32 +112,73 @@ static t_process	*parse_token(t_list *l_token)
 	{
 		if (argc)
 		{
-			procs = ft_calloc(1, sizeof(t_process));
-			procs->cmd.av = ft_calloc(argc, sizeof(char *));
+			exe = ft_calloc(1, sizeof(t_execute));
+			exe->cmd.av = ft_calloc(argc, sizeof(char *));
 		}
 		else
-			procs = NULL;
+			exe = NULL;
 	}
 	else
 	{
 		if (token->type == NONE)
 		{
 			argc++;
-			procs = parse_token(l_token->next);
-			procs->cmd.av[--argc] = token->str;
+			exe = get_command(l_token->next);
+			exe->cmd.av[--argc] = token->str;
 			if (argc == 0)
-				procs->cmd.name = get_name(ft_split(getenv("PATH"), ':'),
+				exe->cmd.name = get_name(ft_split(getenv("PATH"), ':'),
 						token->str);
 		}
 		else
 		{
-			procs = parse_token(l_token->next->next);
-			open_fd_redirect(procs, token->type,
+			exe = get_command(l_token->next->next);
+			open_fd_redirect(exe, token->type,
 				((t_token *)l_token->next->content)->str);
 		}
 	}
-	return (procs);
+	return (exe);
 }
+
+// static t_process	*parse_token(t_list *l_token)
+// {
+// 	static int	argc;
+// 	t_token		*token;
+// 	t_process	*procs;
+
+// 	if (l_token)
+// 		token = l_token->content;
+// 	else
+// 		token = NULL;
+// 	if (!token || (token->type != NONE && !is_redirect(token->type)))
+// 	{
+// 		if (argc)
+// 		{
+// 			procs = ft_calloc(1, sizeof(t_process));
+// 			procs->cmd.av = ft_calloc(argc, sizeof(char *));
+// 		}
+// 		else
+// 			procs = NULL;
+// 	}
+// 	else
+// 	{
+// 		if (token->type == NONE)
+// 		{
+// 			argc++;
+// 			procs = parse_token(l_token->next);
+// 			procs->cmd.av[--argc] = token->str;
+// 			if (argc == 0)
+// 				procs->cmd.name = get_name(ft_split(getenv("PATH"), ':'),
+// 						token->str);
+// 		}
+// 		else
+// 		{
+// 			procs = parse_token(l_token->next->next);
+// 			open_fd_redirect(procs, token->type,
+// 				((t_token *)l_token->next->content)->str);
+// 		}
+// 	}
+// 	return (procs);
+// }
 
 static t_bool	is_redirect(t_meta type)
 {
@@ -120,20 +186,20 @@ static t_bool	is_redirect(t_meta type)
 		|| type == RD_IN_HRDC || type == RD_OUT_APND);
 }
 
-static void	open_fd_redirect(t_process *procs, t_meta type, char *value)
+static void	open_fd_redirect(t_execute *exe, t_meta type, char *value)
 {
 	if (type == RD_IN)
-		procs->cmd.rd_in = open_fd(value, O_RDONLY, 0);
+		exe->cmd.fd_rd[R] = open_fd(value, O_RDONLY, 0);
 	else if (type == RD_IN_HRDC)
 	{
-		procs->cmd.file_heredoc = ft_itoa_ulong_base((unsigned long)value,
+		exe->cmd.fname_heredoc = ft_itoa_ulong_base((unsigned long)value,
 				"0123456789ABCDEF");
-		procs->cmd.rd_in = get_heredoc(procs->cmd.file_heredoc, value);
+		exe->cmd.fd_rd[R] = get_heredoc(exe->cmd.fname_heredoc, value);
 	}
 	else if (type == RD_OUT)
-		procs->cmd.rd_out = open_fd(value, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		exe->cmd.fd_rd[W] = open_fd(value, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	else if (type == RD_OUT_APND)
-		procs->cmd.rd_out = open_fd(value, O_WRONLY | O_CREAT | O_APPEND, 0644);
+		exe->cmd.fd_rd[W] = open_fd(value, O_WRONLY | O_CREAT | O_APPEND, 0644);
 }
 
 static char	*get_name(char **path, char *av_cmd)
