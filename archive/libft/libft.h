@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:29:06 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/19 17:52:03 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/07 23:59:24 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,10 @@
 
 # include <stddef.h>
 
-typedef enum e_bool
-{
-	FALSE,
-	TRUE
-}	t_bool;
+typedef enum e_bool		t_bool;
 
-typedef struct s_list
-{
-	void			*content;
-	struct s_list	*next;
-}	t_list;
+typedef struct s_list	t_list;
+typedef struct s_btree	t_btree;
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -89,7 +82,30 @@ char	*ft_strdup_ptr(char *start, char *end);
 int		write_hex_len(unsigned int num, short flag);
 void	write_hex(unsigned int num, short flag);
 
+t_btree	*btr_new(void *val);
+void	btr_add_l(t_btree **root, t_btree *node);
+void	btr_add_r(t_btree **root, t_btree *node);
+
 char	*get_next_line(int fd);
 int		ft_printf(const char *str, ...);
+
+enum e_bool
+{
+	FALSE,
+	TRUE
+};
+
+struct s_list
+{
+	void			*content;
+	struct s_list	*next;
+};
+
+struct s_btree
+{
+	void	*value;
+	t_btree	*left;
+	t_btree	*right;
+};
 
 #endif

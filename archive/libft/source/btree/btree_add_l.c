@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_file.c                                        :+:      :+:    :+:   */
+/*   btree_add_l.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/19 22:22:29 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/26 17:25:51 by donghyu2         ###   ########.fr       */
+/*   Created: 2023/10/05 14:34:07 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/10/07 23:58:07 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
+#include "libft.h"
 
-#include "pipex.h"
-
-void	init_file(t_data *input, int ac, char **av)
+void	btr_add_l(t_btree **root, t_btree *node)
 {
-	if (input->heredoc)
-	{
-		input->fd_in = open_fd("heredoc", O_RDONLY, 0, R);
-		input->fd_out = open_fd(av[ac - 1],
-				O_WRONLY | O_CREAT | O_APPEND, 0644, W);
-	}
+	t_btree	*last;
+
+	if (!(*root))
+		*root = node;
 	else
 	{
-		input->fd_in = open_fd(av[1], O_RDONLY, 0, R);
-		input->fd_out = open_fd(av[ac - 1],
-				O_WRONLY | O_CREAT | O_TRUNC, 0644, W);
+		last = *root;
+		while (last)
+			last = last->left;
+		last->left = node;
 	}
 }

@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/04 18:05:01 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/02 16:59:49 by donghyu2         ###   ########.fr       */
+/*   Created: 2023/09/25 02:26:54 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/10/05 14:30:58 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+
 #include "minishell.h"
 
-t_list	*parse(char *line)
+void	init_shell(t_btree **exe, char *line)
 {
-	t_list	*l_token;
-
-	l_token = NULL;
-	lexer(line, &l_token);
-	// dbg_print_token(*l_token);
-	expand_wildcard(*l_token);
-	dbg_print_token(*l_token);
-	return (l_token);
+	*exe = get_command(parse(line));
+	// printf("init_process done\n");
+	free(line);
+	// dbg_print_procs(exe->l_procs);
 }
 
-t_list	*list_metachar(t_list *l_token, t_metachar name)
-{
-	if (!l_token || ((t_token *)l_token->content)->type == name)
-		return (l_token);
-	else
-		return (list_metachar(l_token->next, name));
-}
+// void	init_shell(t_execute *exe, char *line)
+// {
+// 	exe->l_token = parse(line);
+// 	exe->l_procs = get_command(exe->l_token);
+// 	// printf("init_process done\n");
+// 	free(line);
+// 	// dbg_print_procs(exe->l_procs);
+// }

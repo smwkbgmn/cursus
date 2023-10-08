@@ -6,13 +6,13 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 21:56:11 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/22 18:56:15 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/09/24 18:25:23 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-#include "parse.h"
+#include "minishell.h"
 
 static void	expand(t_list *l_token);
 static void	sort_by_name(char **files);

@@ -6,16 +6,14 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 21:56:47 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/21 20:50:22 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/09/26 02:48:36 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "parse.h"
 
-t_list	*lexer(char *line)
+void	lexer(char *line, t_list **l_token)
 {
-	static t_list	*l_token;
 	t_token			*token;
 	t_lexer			data;
 
@@ -25,10 +23,9 @@ t_list	*lexer(char *line)
 	{
 		if (data.wildcard)
 			token->type = ASTR;
-		ft_lstadd_back(&l_token, ft_lstnew(token));
-		lexer(line);
+		ft_lstadd_back(l_token, ft_lstnew(token));
+		lexer(line, l_token);
 	}
-	return (l_token);
 }
 
 t_token	*tokenize(char **line, char *delim, t_lexer *data)

@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 02:20:19 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/22 18:29:17 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/04 15:24:37 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,58 +15,30 @@
 
 # include "libft.h"
 # include "source/parse/parse.h"
+# include "source/execute/execute.h"
 
 # define SUCCESS 0
 # define ERROR -1
 # define LOOP 1
 
-// typedef enum e_logic		t_logic;
-typedef enum e_direc		t_direc;
-
-typedef struct s_command	t_command;
-typedef struct s_input		t_input;
-
 extern int	g_errno;
 
 /***** SYSTEM *****/
+// init.c
+void	init_shell(t_list **data, char *line);
 // error.c
 void	*errex(void *ptr);
 void	exit_with_error(char *msg);
 // files.c
-int		open_fd(char *name, int option, int permit, int flag);
+int		open_fd(char *name, int option, int permit);
 void	close_fd(int fd);
 void	redirect(int fd_to_copy, int fd_to_be);
-
-// enum e_logic
-// {
-// 	NONE,
-// 	AND,
-// 	OR
-// };
-
-enum e_direc
-{
-	R,
-	W
-};
-
-struct s_command
-{
-	char	*name;
-	char	**av;
-	int		exit;
-};
-
-struct s_input
-{
-	t_command	**cmds;
-	// t_logic		*logic;
-};
 
 /* DEBUG */
 # include <stdio.h>
 
 void	dbg_print_token(t_list *tokens);
+void	dbg_print_procs(t_list *l_procs);
 
 #endif
 

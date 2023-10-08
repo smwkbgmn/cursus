@@ -7,6 +7,7 @@ DIR_FT		= original
 DIR_LIBC	= $(DIR_SRC)/$(DIR_FT)/libc
 DIR_ADD		= $(DIR_SRC)/$(DIR_FT)/add
 DIR_BONUS	= $(DIR_SRC)/$(DIR_FT)/list
+DIR_BTREE	= $(DIR_SRC)/btree
 DIR_CUSTOM	= $(DIR_SRC)/custom
 DIR_GNL		= $(DIR_SRC)/get_next_line
 DIR_PRNTF	= $(DIR_SRC)/ft_printf
@@ -15,6 +16,7 @@ SRCS	= \
 $(wildcard $(DIR_LIBC)/*.c) \
 $(wildcard $(DIR_ADD)/*.c) \
 $(wildcard $(DIR_BONUS)/*.c) \
+$(wildcard $(DIR_BTREE)/*.c) \
 $(wildcard $(DIR_CUSTOM)/*.c) \
 $(wildcard $(DIR_GNL)/*.c) \
 $(wildcard $(DIR_PRNTF)/*.c) \

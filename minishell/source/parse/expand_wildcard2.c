@@ -6,13 +6,13 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:55:20 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/22 19:26:44 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/09/24 18:25:20 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-#include "parse.h"
+#include "minishell.h"
 
 static t_bool	is_hide(char *name);
 static t_bool	does_match_pattern(char *name, char *pattern);

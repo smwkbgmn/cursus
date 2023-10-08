@@ -6,12 +6,11 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 15:37:22 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/21 18:43:20 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/09/24 18:25:11 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "parse.h"
 
 t_token	*proceed_zerolen(char **line, char *delim, t_lexer *data)
 {

@@ -12,7 +12,12 @@
 		"dirent.h": "c",
 		"builtins.h": "c",
 		"builtin.h": "c",
-		"stdio.h": "c"
+		"stdio.h": "c",
+		"locale": "c",
+		"ulimit.h": "c",
+		"unistd.h": "c",
+		"cdefs.h": "c",
+		"execute.h": "c"
 	},
 	"autoHide.autoHidePanel": false,
 	"autoHide.autoHideSideBar": true

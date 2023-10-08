@@ -9,10 +9,12 @@ FLAG_HEADER	= -I $(DIR_HDR) -I $(DIR_LIBFT)
 FLAG_LIBFT	= -L $(DIR_LIBFT) -l ft
 
 SRCS		= \
-minishell.c \
 debug.c \
+minishell.c \
 $(wildcard $(DIR_SRCS)/*.c) \
-$(wildcard $(DIR_SRCS)/parse/*.c)
+$(wildcard $(DIR_SRCS)/execute/*.c) \
+$(wildcard $(DIR_SRCS)/parse/*.c) \
+$(wildcard $(DIR_SRCS)/system/*.c)
 
 OBJS		= $(SRCS:.c=.o)
 

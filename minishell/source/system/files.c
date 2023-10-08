@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 15:43:12 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/10 15:44:21 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/09/26 03:32:28 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 #include "minishell.h"
 
-int	open_fd(char *name, int option, int permit, int flag)
+int	open_fd(char *name, int option, int permit)
 {
 	int	fd;
 
@@ -24,12 +24,10 @@ int	open_fd(char *name, int option, int permit, int flag)
 		fd = open(name, option);
 	else
 		fd = open(name, option, permit);
-	if (fd == ERROR && flag > -1)
+	if (fd == ERROR)
 	{
-		if (flag == R)
-			perror("open");
-		else
-			exit_with_error("open");
+		printf("god-damn: ");
+		perror("name");
 	}
 	return (fd);
 }

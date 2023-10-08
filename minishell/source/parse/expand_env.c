@@ -6,14 +6,13 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 21:56:28 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/22 14:18:50 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/09/24 18:25:27 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
 #include "minishell.h"
-#include "parse.h"
 
 static char	*get_name(char **line);
 static char	*expand(char *name);

@@ -6,14 +6,13 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 15:36:49 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/21 20:22:34 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/09/24 18:25:15 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
 #include "minishell.h"
-#include "parse.h"
 
 static t_token	*copy_buf(t_token *token, t_lexer *data, char *buf);
 static t_bool	is_quote(char c, t_bool qte_sgl, t_bool qte_dbl);
