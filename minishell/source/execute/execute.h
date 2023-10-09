@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 14:32:21 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/09 01:59:34 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/09 14:34:06 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ t_bool		is_sequence(t_list *l_token);
 
 t_execute	*get_command(t_list *l_token);
 
-char		*get_name(char **path, char *av_cmd);
+char		*get_path(char **path, char *av_cmd);
 
 int			get_heredoc(char *tmpfile, char *delim);
 
 struct s_command
 {
-	char	*name;
+	char	*path;
 	char	**av;
 	int		fd_rd[2];
 	char	*fname_heredoc;

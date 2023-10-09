@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 16:04:47 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/09 02:13:22 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/09 14:51:20 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 
 #include "minishell.h"
 
-static void		open_fd_redirect(t_execute *exe, t_meta type, char *name);
+static t_execute	*init_exe(int argc);
+static void			assign_av(t_execute *exe, int argc, t_list *l_token);
+static void			assign_redirect(t_execute *exe, t_meta type, char *name);
 
 // now the rest metacharacters are AND, OR, PIPE, REDIRECTION, PRNTSIS
 
@@ -24,79 +26,54 @@ t_execute	*get_command(t_list *l_token)
 	static int	argc;
 	t_execute	*exe;
 
-	if (!l_token)
-	{
-		if (argc)
-		{
-			exe = ft_calloc(1, sizeof(t_execute));
-			exe->cmd.av = ft_calloc(argc + 1, sizeof(char *));
-		}
-		else
-			exe = NULL;
-	}
+	if (!l_token || is_sequence(l_token) || is_prntsis(l_token))
+		exe = init_exe(argc);
 	else
 	{
-		if (token->type == NONE)
+		if (((t_token *)l_token->content)->type == NONE)
 		{
 			argc++;
 			exe = get_command(l_token->next);
-			exe->cmd.av[--argc] = token->str;
-			if (argc == 0)
-				exe->cmd.name = get_name(ft_split(getenv("PATH"), ':'),
-						token->str);
+			assign_av(exe, --argc, l_token);
 		}
 		else
 		{
 			exe = get_command(l_token->next->next);
-			open_fd_redirect(exe, token->type,
+			assign_redirect(exe, ((t_token *)l_token->content)->type,
 				((t_token *)l_token->next->content)->str);
 		}
 	}
 	return (exe);
 }
 
-// t_execute	*get_command(t_list *l_token)
-// {
-// 	static int	argc;
-// 	t_token		*token;
-// 	t_execute	*exe;
+static t_execute	*init_exe(int argc)
+{
+	t_execute	*exe;
 
-// 	if (l_token)
-// 		token = l_token->content;
-// 	else
-// 		token = NULL;
-// 	if (!token || (token->type != NONE && !is_redirect(token->type)))
-// 	{
-// 		if (argc)
-// 		{
-// 			exe = ft_calloc(1, sizeof(t_execute));
-// 			exe->cmd.av = ft_calloc(argc + 1, sizeof(char *));
-// 		}
-// 		else
-// 			exe = NULL;
-// 	}
-// 	else
-// 	{
-// 		if (token->type == NONE)
-// 		{
-// 			argc++;
-// 			exe = get_command(l_token->next);
-// 			exe->cmd.av[--argc] = token->str;
-// 			if (argc == 0)
-// 				exe->cmd.name = get_name(ft_split(getenv("PATH"), ':'),
-// 						token->str);
-// 		}
-// 		else
-// 		{
-// 			exe = get_command(l_token->next->next);
-// 			open_fd_redirect(exe, token->type,
-// 				((t_token *)l_token->next->content)->str);
-// 		}
-// 	}
-// 	return (exe);
-// }
+	if (argc)
+	{
+		exe = ft_calloc(1, sizeof(t_execute));
+		exe->cmd.av = ft_calloc(argc + 1, sizeof(char *));
+	}
+	else
+		exe = NULL;
+	return (exe);
+}
 
-static void	open_fd_redirect(t_execute *exe, t_meta type, char *value)
+static void	assign_av(t_execute *exe, int argc, t_list *l_token)
+{
+	char	**env_path;
+
+	exe->cmd.av[argc] = ((t_token *)l_token->content)->str;
+	if (argc == 0)
+	{
+		env_path = ft_split(getenv("PATH"), ':');
+		exe->cmd.path = get_path(env_path, ((t_token *)l_token->content)->str);
+		// free env_path
+	}
+}
+
+static void	assign_redirect(t_execute *exe, t_meta type, char *value)
 {
 	if (type == RD_IN)
 		exe->cmd.fd_rd[R] = open_fd(value, O_RDONLY, 0);

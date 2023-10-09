@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 20:27:02 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/08 20:28:51 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/09 14:34:17 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static char	*find_name(char **path, char *av_cmd);
 
-char	*get_name(char **path, char *av_cmd)
+char	*get_path(char **path, char *av_cmd)
 {
 	char	*name;
 

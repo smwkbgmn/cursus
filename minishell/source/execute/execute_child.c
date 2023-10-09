@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 14:33:52 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/08 22:41:53 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/09 14:43:52 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	redirect_pipe(t_process *ps, t_execute *exe);
 int	child(t_process *ps, t_execute *exe)
 {
 	redirect_pipe(ps, exe);
-	execve(exe->cmd.name, exe->cmd.av, NULL);
+	execve(exe->cmd.path, exe->cmd.av, NULL);
 	return (EXIT_SUCCESS);
 }
 

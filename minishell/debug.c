@@ -26,7 +26,7 @@ void	dbg_print_procs(t_list *l_exe)
 {
 	if (l_exe)
 	{
-		printf("----------- PROCS ------------\n");
+		printf("------------ EXE -------------\n");
 		print_procs(l_exe);
 		printf("------------------------------\n");
 		dbg_print_procs(l_exe->next);
@@ -43,9 +43,9 @@ static void	print_procs(t_list *l_exe)
 		exe = l_exe->content;
 		if (exe)
 		{
-			printf("%-10s%20s\n", "name: ", exe->cmd.name);
+			printf("%-10s%20s\n", "name: ", exe->cmd.path);
 			av = exe->cmd.av;
-			printf("%-10s%20s\n", "av: ", *av);
+			printf("%-10s%20s\n", "argv: ", *av);
 			av++;
 			while (*av)
 			{
