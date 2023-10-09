@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 14:32:21 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/08 20:28:59 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/09 01:59:34 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@ int			parent(t_process *ps, t_list *l_exe);
 int			child(t_process *ps, t_execute *exe);
 
 void		get_execute(t_list **exe, t_list *l_token);
+
+t_bool		is_redirect(t_list *l_token);
+t_bool		is_prntsis(t_list *l_token);
+t_bool		is_sequence(t_list *l_token);
 
 t_execute	*get_command(t_list *l_token);
 

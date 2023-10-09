@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 21:56:47 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/26 02:48:36 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/09 01:41:50 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_token	*tokenize(char **line, char *delim, t_lexer *data)
 	return (token);
 }
 
-t_metachar	get_metachar(char *str)
+t_meta	get_metachar(char *str)
 {
 	int	value;
 

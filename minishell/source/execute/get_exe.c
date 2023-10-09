@@ -6,15 +6,13 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 20:25:19 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/08 20:26:07 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/09 01:58:44 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
 #include "minishell.h"
-
-static t_bool		is_prntsis(t_list *l_token);
 
 void	get_execute(t_list **l_exe, t_list *l_token)
 {
@@ -54,11 +52,5 @@ void	get_execute(t_list **l_exe, t_list *l_token)
 				exe->op_seq = NONE;
 		}
 	}
-}
-
-static t_bool	is_prntsis(t_list *l_token)
-{
-	return (((t_token *)l_token->content)->type == PRNTSIS_OPN
-		|| ((t_token *)l_token->content)->type == PRNTSIS_CLS);
 }
 
