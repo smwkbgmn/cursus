@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_child.c                                    :+:      :+:    :+:   */
+/*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 14:33:52 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/09 14:43:52 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/10 20:30:41 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 #include "minishell.h"
 
-static void	redirect_pipe(t_process *ps, t_execute *exe);
+static void	redirect_pipe(t_procs *ps, t_exe *exe);
 
-int	child(t_process *ps, t_execute *exe)
+int	child(t_procs *ps, t_exe *exe)
 {
 	redirect_pipe(ps, exe);
 	execve(exe->cmd.path, exe->cmd.av, NULL);
 	return (EXIT_SUCCESS);
 }
 
-static void	redirect_pipe(t_process *ps, t_execute *exe)
+static void	redirect_pipe(t_procs *ps, t_exe *exe)
 {
 	int	fd[2];
 

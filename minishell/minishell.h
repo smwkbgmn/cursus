@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 02:20:19 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/08 12:57:27 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/10 21:38:19 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,16 @@
 
 extern int	g_errno;
 
-/***** SYSTEM *****/
+// free.c
+void	free_data(t_list **l_exe);
+
 // init.c
-void	init_shell(t_list **exe, char *line);
+void	init_shell(t_list **l_exe, char *line);
+
 // error.c
 void	*errex(void *ptr);
 void	exit_with_error(char *msg);
+
 // files.c
 int		open_fd(char *name, int option, int permit);
 void	close_fd(int fd);

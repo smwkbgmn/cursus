@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 21:56:47 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/09 01:41:50 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/10 18:42:51 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,7 @@ t_meta	get_metachar(char *str)
 	int	value;
 
 	if (*str == AMPRSND || *str == PIPE
-		|| *str == RD_IN || *str == RD_OUT
-		|| *str == PRNTSIS_OPN || *str == PRNTSIS_CLS)
+		|| *str == RD_IN || *str == RD_OUT)
 	{
 		value = (*str << 8) + *(str + 1);
 		if (value == AND || value == OR
