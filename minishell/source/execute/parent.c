@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 14:33:01 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/11 18:05:02 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/12 01:09:43 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ static int		wait_child(t_procs *ps);
 static t_list	*find_next(t_list *l_exe);
 static t_bool	determine_result(t_meta op_seq);
 
-void	parent(t_procs *ps, t_list *l_exe, int *fd_prev_out)
+void	parent(t_procs *ps, t_list *l_exe, int *fd_prev_out, char **env)
 {
 	if (((t_exe *)l_exe->content)->op_seq == PIPE)
 	{
 		close_fd(ps->fd_pipe[W]);
 		*fd_prev_out = ps->fd_pipe[R];
-		execute(l_exe->next);
+		execute(l_exe->next, env);
 		close_fd(ps->fd_pipe[R]);
 		wait_child(ps);
 	}
@@ -35,7 +35,7 @@ void	parent(t_procs *ps, t_list *l_exe, int *fd_prev_out)
 		g_exit = wait_child(ps);
 		l_exe = find_next(l_exe);
 		if (l_exe)
-			execute(l_exe);
+			execute(l_exe, env);
 	}
 }
 

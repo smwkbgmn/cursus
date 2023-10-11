@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 16:04:47 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/11 17:25:40 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/12 03:10:30 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 static t_exe	*init_exe(int argc);
 static void		assign_av(t_exe *exe, int argc, t_list *l_token);
 static void		assign_redirect(t_exe *exe, t_meta type, char *name);
-
-// now the rest metacharacters are AND, OR, PIPE, REDIRECTION, PRNTSIS
 
 t_exe	*get_command(t_list *l_token)
 {

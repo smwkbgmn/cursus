@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 20:25:19 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/10 20:31:35 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/12 03:30:50 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 #include "minishell.h"
 
 static t_list	*remove_token_used(t_list *l_token);
-
-// now the rest metacharacters are AND, OR, PIPE, PRNTSIS
 
 void	get_execute(t_list **l_exe, t_list *l_token)
 {

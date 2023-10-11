@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 14:32:21 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/11 18:05:23 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/12 00:51:22 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ typedef struct s_process	t_procs;
 typedef struct s_execute	t_exe;
 
 // execute.c
-void	execute(t_list *l_exe);
+void	execute(t_list *l_exe, char **env);
 
 // parent.c
-void	parent(t_procs *ps, t_list *l_exe, int *fd_prev_out);
+void	parent(t_procs *ps, t_list *l_exe, int *fd_prev_out, char **env);
 
 // child.c
-void	child(t_procs *ps, t_exe *exe, int fd_prev_out);
+void	child(t_procs *ps, t_exe *exe, int fd_prev_out, char **env);
 
 struct s_process
 {

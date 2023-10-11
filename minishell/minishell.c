@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 02:20:20 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/11 23:40:18 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/12 03:35:44 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,28 +37,32 @@
 */
 
 /* 
-- handle $?
-- parsing error (setting errno)
+- readline o
+- readline-history o
+- handle $? o
+- parsing error (setting errno) o
 - signal (ctrl c, d, \)
 - builtins (add my bin dir to env_path)
 - free data
+- check heredoc and $
+- move get_* files to init
 */
 
 #include "readline/readline.h"
 
 #include "minishell.h"
 
-int	main(int ac, char **av, char **env)
+int	main(void)
 {
 	static t_list	*l_exe;
+	extern char		**environ;
 
-	if (ac || av || env)
+	while (LOOP)
 	{
-		while (LOOP)
+		init_shell(&l_exe, readline("minishell$ "));
+		if (l_exe)
 		{
-			init_shell(&l_exe, readline("minishell$ "));
-			// init_shell(&l_exe, get_next_line(STDIN_FILENO));
-			execute(l_exe);
+			execute(l_exe, environ);
 			free_data(&l_exe);
 		}
 	}

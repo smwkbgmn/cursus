@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 02:20:19 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/11 22:48:55 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/12 03:29:41 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <readline/readline.h>
 
 # include "libft.h"
-// # include "readline.h"
 # include "source/parse/parse.h"
 # include "source/execute/execute.h"
 
@@ -35,13 +34,18 @@ void	init_shell(t_list **l_exe, char *line);
 
 // error.c
 void	*calloc_erx(size_t count, size_t size);
+void	set_error(char *msg, int exit);
 void	exit_error(char *msg);
 void	exit_error_usr(int status);
+void	write_errmsg(char *msg);
 
 // files.c
 int		open_fd(char *name, int option, int permit);
 void	close_fd(int fd);
 void	redirect(int fd_to_copy, int fd_to_be);
+
+// free.c
+void	free_data(t_list **l_exe);
 
 /* DEBUG */
 # include <stdio.h>

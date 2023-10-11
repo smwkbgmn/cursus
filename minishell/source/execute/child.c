@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 14:33:52 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/11 17:11:28 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/12 03:11:12 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ static void	redirect_prev_out_to_curnt_rd(t_procs *ps, int fd_prev);
 static void	redirect_file(int fd_rd[2]);
 static void	valid_command(t_exe *exe);
 
-void	child(t_procs *ps, t_exe *exe, int fd_prev)
+void	child(t_procs *ps, t_exe *exe, int fd_prev, char **env)
 {
 	redirect_pipe(ps, fd_prev, exe->op_seq);
 	redirect_file(exe->cmd.fd_rd);
 	valid_command(exe);
-	execve(exe->cmd.path, exe->cmd.av, NULL);
+	execve(exe->cmd.path, exe->cmd.av, env);
 }
 
 static void	redirect_pipe(t_procs *ps, int fd_prev, t_meta op_seq)
@@ -63,6 +63,6 @@ static void	valid_command(t_exe *exe)
 		exit_error_usr(127);
 	if (ft_strncmp(exe->cmd.path, "null", 4) == MATCH)
 		exit_error_usr(126);
-	if (exe->cmd.fd_rd[R] == ERROR)
+	if (exe->cmd.fd_rd[R] == ERROR || exe->cmd.fd_rd[W] == ERROR)
 		exit_error_usr(1);
 }

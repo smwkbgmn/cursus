@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 01:58:05 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/11 17:17:19 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/12 03:10:26 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	open_fd(char *name, int option, int permit)
 		fd = open(name, option, permit);
 	if (fd == ERROR)
 	{
-		ft_putstr_fd("minishell :", STDERR_FILENO);
+		write_errmsg("minishell: ");
 		perror("open");
 	}
 	return (fd);
@@ -35,7 +35,10 @@ int	open_fd(char *name, int option, int permit)
 void	close_fd(int fd)
 {
 	if (close(fd) == ERROR)
-		exit_error("close");
+	{
+		write_errmsg("minishell: ");
+		perror("close");
+	}
 }
 
 void	redirect(int fd_to_copy, int fd_to_be)
