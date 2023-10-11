@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 18:16:17 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/10 20:27:29 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/11 18:06:05 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_token		t_token;
 typedef struct s_command	t_cmd;
 typedef struct s_execute	t_exe;
 
-/* TOKEN */
+// TOKEN
 t_list	*parse(char *line);
 t_list	*list_metachar(t_list *l_token, t_meta name);
 
@@ -46,7 +46,7 @@ char	*expand_env_var(char **line);
 void	expand_wildcard(t_list *l_token);
 char	**list_files(DIR *p_dir, char *pattern);
 
-/* EXE */
+// EXE
 void	get_execute(t_list **l_exe, t_list *l_token);
 
 t_meta	ref_type(t_list *l_token);

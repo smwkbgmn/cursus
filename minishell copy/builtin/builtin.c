@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 21:16:04 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/17 21:40:38 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/11 17:13:07 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
 void	*errext(void *ptr)
 {
 	if (!ptr)
-		exit_with_error("malloc");
+		exit_error("malloc");
 	return (ptr);
 }
 
-void	exit_with_error(char *msg)
+void	exit_error(char *msg)
 {
 	if (msg)
 		perror(msg);

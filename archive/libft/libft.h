@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:29:06 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/07 23:59:24 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/11 22:43:51 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,6 @@ void	ft_putstr(char *str);
 char	*ft_strdup_ptr(char *start, char *end);
 int		write_hex_len(unsigned int num, short flag);
 void	write_hex(unsigned int num, short flag);
-
-t_btree	*btr_new(void *val);
-void	btr_add_l(t_btree **root, t_btree *node);
-void	btr_add_r(t_btree **root, t_btree *node);
 
 char	*get_next_line(int fd);
 int		ft_printf(const char *str, ...);

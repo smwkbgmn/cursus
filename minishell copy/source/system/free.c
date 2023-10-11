@@ -1,29 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   btree_new.c                                        :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/02 17:22:55 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/02 17:32:47 by donghyu2         ###   ########.fr       */
+/*   Created: 2023/10/10 20:21:33 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/10/10 20:34:06 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-t_btree	*btr_new(void *val)
+void	free_data(t_list **l_exe)
 {
-	t_btree	*new;
-
-	new = ft_calloc(1, sizeof(t_btree));
-	if (new)
-	{
-		new->value = val;
-		new->left = NULL;
-		new->right = NULL;
-		return (new);
-	}
-	else
-		return (NULL);
+	*l_exe = NULL;
 }

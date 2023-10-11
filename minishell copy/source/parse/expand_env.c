@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 21:56:28 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/09 14:34:31 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/11 18:29:04 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,13 @@ static char	*expand(char *name);
 char	*expand_env_var(char **line)
 {
 	(*line)++;
-	return (expand(get_name(line)));
+	if (**line == '?')
+	{
+		(*line)++;
+		return (ft_itoa(g_exit));
+	}
+	else
+		return (expand(get_name(line)));
 }
 
 static char	*get_name(char **line)
@@ -42,7 +48,7 @@ static char	*get_name(char **line)
 		if (len == 0)
 			name = ft_strdup("$");
 		else
-			name = ft_calloc(len + 1, 1);
+			name = calloc_erx(len + 1, 1);
 	}
 	return (name);
 }

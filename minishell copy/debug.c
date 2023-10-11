@@ -35,28 +35,24 @@ void	dbg_print_procs(t_list *l_exe)
 
 static void	print_procs(t_list *l_exe)
 {
-	t_execute	*exe;
-	char		**av;
+	t_exe	*exe;
+	char	**av;
 
 	if (l_exe)
 	{
 		exe = l_exe->content;
-		if (exe->op_seq != PRNTSIS_CLS
-			&& exe->op_seq != PRNTSIS_OPN)
+		printf("%-10s%20s\n", "name: ", exe->cmd.path);
+		av = exe->cmd.av;
+		printf("%-10s%20s\n", "argv: ", *av);
+		av++;
+		while (*av)
 		{
-			printf("%-10s%20s\n", "name: ", exe->cmd.path);
-			av = exe->cmd.av;
-			printf("%-10s%20s\n", "argv: ", *av);
+			printf("%30s\n", *av);
 			av++;
-			while (*av)
-			{
-				printf("%30s\n", *av);
-				av++;
-			}
-			printf("%-10s%20d\n", "fd_rd[R]: ", exe->cmd.fd_rd[R]);
-			printf("%-10s%20d\n", "fd_rd[W]: ", exe->cmd.fd_rd[W]);
-			printf("%-10s%20s\n", "heredoc: ", exe->cmd.fname_heredoc);
 		}
-		printf("%-10s%20d\n", "op_seq: ", ((t_execute *)l_exe->content)->op_seq);
+		printf("%-10s%20d\n", "fd_rd[R]: ", exe->cmd.fd_rd[R]);
+		printf("%-10s%20d\n", "fd_rd[W]: ", exe->cmd.fd_rd[W]);
+		printf("%-10s%20s\n", "heredoc: ", exe->cmd.fname_heredoc);
+		printf("%-10s%20d\n", "op_seq: ", ((t_exe *)l_exe->content)->op_seq);
 	}
 }

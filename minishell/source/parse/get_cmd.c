@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 16:04:47 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/10 20:31:50 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/11 17:25:40 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ static t_exe	*init_exe(int argc)
 
 	if (argc)
 	{
-		exe = ft_calloc(1, sizeof(t_exe));
-		exe->cmd.av = ft_calloc(argc + 1, sizeof(char *));
+		exe = calloc_erx(1, sizeof(t_exe));
+		exe->cmd.av = calloc_erx(argc + 1, sizeof(char *));
 	}
 	else
 		exe = NULL;

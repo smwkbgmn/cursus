@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 21:56:11 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/24 18:25:23 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/11 17:26:03 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static void	replace_token(t_list *l_token, char **files)
 		}
 		else
 		{
-			token = ft_calloc(1, sizeof(t_token));
+			token = calloc_erx(1, sizeof(t_token));
 			token->str = files[idx];
 			ft_lstadd_idx(&l_token, ft_lstnew(token), idx);
 		}

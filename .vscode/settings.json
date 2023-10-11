@@ -17,7 +17,8 @@
 		"ulimit.h": "c",
 		"unistd.h": "c",
 		"cdefs.h": "c",
-		"execute.h": "c"
+		"execute.h": "c",
+		"readline.h": "c"
 	},
 	"autoHide.autoHidePanel": false,
 	"autoHide.autoHideSideBar": true

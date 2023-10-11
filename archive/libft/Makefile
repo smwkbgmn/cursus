@@ -7,7 +7,6 @@ DIR_FT		= original
 DIR_LIBC	= $(DIR_SRC)/$(DIR_FT)/libc
 DIR_ADD		= $(DIR_SRC)/$(DIR_FT)/add
 DIR_BONUS	= $(DIR_SRC)/$(DIR_FT)/list
-DIR_BTREE	= $(DIR_SRC)/btree
 DIR_CUSTOM	= $(DIR_SRC)/custom
 DIR_GNL		= $(DIR_SRC)/get_next_line
 DIR_PRNTF	= $(DIR_SRC)/ft_printf

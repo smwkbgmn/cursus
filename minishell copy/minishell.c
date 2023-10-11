@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 02:20:20 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/09 16:49:40 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/11 17:59:05 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,13 @@
 	signaling to any process made from the shell.
 */
 
-/* Add fd[IN, OUT] and exit_status at the binary tree
-after tokenizing input line */
+/* 
+- handle $?
+- parsing error (setting errno)
+- signal (ctrl c, d, \)
+- builtins (add my bin dir to env_path)
+- free data
+*/
 
 #include <stdlib.h>
 #include <unistd.h>
@@ -50,16 +55,17 @@ int	main(void)
 {
 	static t_list	*l_exe;
 
-	// while (LOOP)
-	// {
+	while (LOOP)
+	{
 		write_shell();
 		init_shell(&l_exe, get_next_line(STDIN_FILENO));
 		execute(l_exe);
-	// }
-	return (EXIT_SUCCESS);
+		free_data(&l_exe);
+	}
+	return (g_exit);
 }
 
 void	write_shell(void)
 {
-	write(STDIN_FILENO, "god-damn$", 10);
+	write(STDIN_FILENO, "minishell$ ", 11);
 }

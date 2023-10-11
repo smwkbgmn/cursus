@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:55:20 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/09/24 18:25:20 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/11 17:25:45 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	**list_files(DIR *p_dir, char *pattern)
 	else
 	{
 		if (count > 0)
-			files = ft_calloc(count + 1, sizeof(char *));
+			files = calloc_erx(count + 1, sizeof(char *));
 		else
 			files = NULL;
 	}

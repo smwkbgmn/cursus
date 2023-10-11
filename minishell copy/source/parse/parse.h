@@ -6,22 +6,29 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 18:16:17 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/03 21:51:32 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/11 18:06:05 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSE_H
 # define PARSE_H
 
+# define R 0
+# define W 1
+
+# include <unistd.h>
 # include <dirent.h>
 
-typedef struct dirent	t_dir;
+typedef enum e_metachar		t_meta;
 
-typedef enum e_metachar	t_meta;
+typedef struct dirent		t_dir;
+typedef struct s_lexer		t_lexer;
+typedef struct s_token		t_token;
 
-typedef struct s_lexer	t_lexer;
-typedef struct s_token	t_token;
+typedef struct s_command	t_cmd;
+typedef struct s_execute	t_exe;
 
+// TOKEN
 t_list	*parse(char *line);
 t_list	*list_metachar(t_list *l_token, t_meta name);
 
@@ -39,6 +46,20 @@ char	*expand_env_var(char **line);
 void	expand_wildcard(t_list *l_token);
 char	**list_files(DIR *p_dir, char *pattern);
 
+// EXE
+void	get_execute(t_list **l_exe, t_list *l_token);
+
+t_meta	ref_type(t_list *l_token);
+t_bool	is_redirect(t_list *l_token);
+t_bool	is_prntsis(t_list *l_token);
+t_bool	is_sequence(t_list *l_token);
+
+t_exe	*get_command(t_list *l_token);
+
+char	*get_path(char **path, char *av_cmd);
+
+int		get_heredoc(char *tmpfile, char *delim);
+
 enum e_metachar
 {
 	NONE,
@@ -52,8 +73,6 @@ enum e_metachar
 	RD_OUT_APND = 15934,
 	DOLR = '$',
 	ASTR = '*',
-	PRNTSIS_OPN = '(',
-	PRNTSIS_CLS = ')',
 	QTE_SGL = '\'',
 	QTE_DBL = '\"'
 };
@@ -70,6 +89,20 @@ struct s_token
 {
 	char	*str;
 	t_meta	type;
+};
+
+struct s_command
+{
+	char	*path;
+	char	**av;
+	int		fd_rd[2];
+	char	*fname_heredoc;
+};
+
+struct s_execute
+{
+	t_cmd	cmd;
+	t_meta	op_seq;
 };
 
 #endif

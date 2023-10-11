@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heredoc.c                                          :+:      :+:    :+:   */
+/*   get_heredoc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 04:10:22 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/01 17:56:01 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/11 17:25:27 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	write_heredoc(int fd_heredoc, char *limiter)
 		if (!is_limiter(line, limiter))
 		{
 			if (write(fd_heredoc, line, ft_strlen(line)) == ERROR)
-				exit_with_error("write");
+				exit_error("write");
 			write_heredoc(fd_heredoc, limiter);
 		}
 		ft_free(line);
@@ -73,13 +73,13 @@ static int	read_one_char(char *buf, int *byte_read)
 {
 	*byte_read = read(STDIN_FILENO, buf, 1);
 	if (*byte_read == ERROR)
-		exit_with_error("read");
+		exit_error("read");
 	return (*byte_read);
 }
 
 static char	*init_line(size_t len)
 {
-	return (ft_calloc(len, sizeof(char)));
+	return (calloc_erx(len, sizeof(char)));
 }
 
 static t_bool	is_limiter(char *line, char *limiter)

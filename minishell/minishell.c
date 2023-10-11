@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 02:20:20 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/10 22:13:52 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/11 23:40:18 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,6 @@
 	signaling to any process made from the shell.
 */
 
-/* Add fd[IN, OUT] and exit_status at the binary tree
-after tokenizing input line */
-
 /* 
 - handle $?
 - parsing error (setting errno)
@@ -47,30 +44,23 @@ after tokenizing input line */
 - free data
 */
 
-#include <stdlib.h>
-#include <unistd.h>
+#include "readline/readline.h"
 
 #include "minishell.h"
 
-void	write_shell(void);
-
-int	main(void)
+int	main(int ac, char **av, char **env)
 {
 	static t_list	*l_exe;
-	static int		exit;
 
-	while (LOOP)
+	if (ac || av || env)
 	{
-		write_shell();
-		init_shell(&l_exe, get_next_line(STDIN_FILENO));
-		exit = execute(l_exe);
-		free_data(&l_exe);
+		while (LOOP)
+		{
+			init_shell(&l_exe, readline("minishell$ "));
+			// init_shell(&l_exe, get_next_line(STDIN_FILENO));
+			execute(l_exe);
+			free_data(&l_exe);
+		}
 	}
-	return (exit);
-	// return (EXIT_SUCCESS);
-}
-
-void	write_shell(void)
-{
-	write(STDIN_FILENO, "god-damn$", 10);
+	return (g_exit);
 }

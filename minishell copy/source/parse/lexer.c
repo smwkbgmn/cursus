@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 21:56:47 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/09 01:41:50 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/11 17:24:53 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ t_token	*tokenize(char **line, char *delim, t_lexer *data)
 			token = proceed_zerolen(line, delim, data);
 		else
 		{
-			token = ft_calloc(1, sizeof(t_token));
-			token->str = ft_calloc(data->len + 1, 1);
+			token = calloc_erx(1, sizeof(t_token));
+			token->str = calloc_erx(data->len + 1, 1);
 		}
 	}
 	else
@@ -57,8 +57,7 @@ t_meta	get_metachar(char *str)
 	int	value;
 
 	if (*str == AMPRSND || *str == PIPE
-		|| *str == RD_IN || *str == RD_OUT
-		|| *str == PRNTSIS_OPN || *str == PRNTSIS_CLS)
+		|| *str == RD_IN || *str == RD_OUT)
 	{
 		value = (*str << 8) + *(str + 1);
 		if (value == AND || value == OR

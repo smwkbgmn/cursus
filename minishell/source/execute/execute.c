@@ -6,45 +6,44 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 14:30:54 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/10 21:38:05 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/11 18:48:03 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+
 #include "minishell.h"
 
-static void	init_pipe(t_procs *ps, t_list *l_exe);
-static void	assign_curnt_wr_to_next_rd(int curnt_wr, t_exe *exe_next);
+static void	init_pipe(t_procs *ps);
 static void	fork_process(t_procs *ps);
 
-int	execute(t_list *l_exe)
+void	execute(t_list *l_exe)
 {
 	t_procs		ps;
+	static int	fd_prev_out;
 
-	if (((t_exe *)l_exe->content)->op_seq == PIPE)
-		init_pipe(&ps, l_exe);
+	ft_putstr_fd("now g_exit ", STDERR_FILENO);
+	ft_putstr_fd(ft_itoa(g_exit), STDERR_FILENO);
+	ft_putstr_fd("\n", STDERR_FILENO);
+	ft_memset(&ps, 0, sizeof(t_procs));
+	if (((t_exe *)l_exe->content)->op_seq == PIPE || fd_prev_out)
+		init_pipe(&ps);
 	fork_process(&ps);
 	if (ps.id)
-		return (parent(&ps, l_exe));
+		parent(&ps, l_exe, &fd_prev_out);
 	else
-		return (child(&ps, l_exe->content));
+		child(&ps, l_exe->content, fd_prev_out);
 }
 
-static void	init_pipe(t_procs *ps, t_list *l_exe)
+static void	init_pipe(t_procs *ps)
 {
 	if (pipe(ps->fd_pipe) == ERROR)
-		exit_with_error("pipe");
-	assign_curnt_wr_to_next_rd(ps->fd_pipe[R], l_exe->next->content);
-}
-
-static void	assign_curnt_wr_to_next_rd(int curnt_wr, t_exe *exe_next)
-{
-	if (!exe_next->cmd.fd_rd[R])
-		exe_next->cmd.fd_rd[R] = curnt_wr;
+		exit_error("pipe");
 }
 
 static void	fork_process(t_procs *ps)
 {
 	ps->id = fork();
 	if (ps->id == ERROR)
-		exit_with_error("fork");
+		exit_error("fork");
 }

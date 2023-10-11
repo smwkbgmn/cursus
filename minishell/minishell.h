@@ -6,22 +6,26 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 02:20:19 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/10 21:38:19 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/11 22:48:55 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include <readline/readline.h>
+
 # include "libft.h"
+// # include "readline.h"
 # include "source/parse/parse.h"
 # include "source/execute/execute.h"
 
 # define SUCCESS 0
+# define MATCH 0
 # define ERROR -1
 # define LOOP 1
 
-extern int	g_errno;
+int		g_exit;
 
 // free.c
 void	free_data(t_list **l_exe);
@@ -30,8 +34,9 @@ void	free_data(t_list **l_exe);
 void	init_shell(t_list **l_exe, char *line);
 
 // error.c
-void	*errex(void *ptr);
-void	exit_with_error(char *msg);
+void	*calloc_erx(size_t count, size_t size);
+void	exit_error(char *msg);
+void	exit_error_usr(int status);
 
 // files.c
 int		open_fd(char *name, int option, int permit);
