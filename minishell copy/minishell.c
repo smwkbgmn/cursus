@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 02:20:20 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/12 13:07:22 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/12 20:26:20 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,18 @@ o - readline
 o - readline-history
 o - handle $? o
 o - parsing error (setting errno)
+o - free data
+o - check heredoc and $ > ft substr
+o - move get_* files to init
 - signal (ctrl c, d, \)
 - builtins (add my bin dir to env_path)
-o - free data
-- check heredoc and $ > ft substr
-o - move get_* files to init
-- 커맨드 path 찾을때 내 bin 먼저 access 해보기 
-- Get path 조금 수정하고, path 해제하기 
-o - Env 기쟈오는 시점 바꾸기
-- Gnu readline 으로 바꿔보기 
+o - 커맨드 path 찾을때 내 bin 먼저 access
+o - Get path 조금 수정하고, path 해제하기 
+o - Env 가져오는 시점 바꾸기
 o - 와일드카드 *** 이런 형식 체크 (되는듯..?)
+- 시그널 리플레이스라인 
+- 히어독 파일 안지워지는거 확인
+- Gnu readline 으로 바꿔보기 
 */
 
 #include "readline/readline.h"
@@ -61,6 +63,8 @@ int	main(void)
 {
 	static t_list	*l_exe;
 
+	init_signal(SHELL);
+	init_terminal();
 	while (LOOP)
 	{
 		init_shell(&l_exe, readline("minishell$ "));

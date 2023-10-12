@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 20:21:33 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/12 03:35:23 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/12 19:05:05 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ static void	clear_argument(char *path, char **argv)
 
 static void	clear_redirection(int fd[2])
 {
-	if (fd[R])
+	if (fd[R] && fd[R] != ERROR)
 		close_fd(fd[R]);
-	if (fd[W])
+	if (fd[W] && fd[W] != ERROR)
 		close_fd(fd[W]);
 }
 

@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 02:20:19 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/12 18:02:04 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/12 21:24:27 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <readline/readline.h>
 
 # include "libft.h"
-# include "source/init/parse/parse.h"
+# include "source/init/init.h"
 # include "source/execute/execute.h"
 
 # define SUCCESS 0
@@ -24,13 +24,15 @@
 # define ERROR -1
 # define LOOP 1
 
+typedef enum e_mode	t_mode;
+
 int		g_exit;
 
 // free.c
 void	free_data(t_list **l_exe);
 
 // signal.c
-void	init_signal(void);
+void	init_signal(t_mode mode);
 
 // init.c
 void	init_shell(t_list **l_exe, char *line);
@@ -53,11 +55,19 @@ void	free_data(t_list **l_exe);
 // terminal.c
 void	init_terminal(void);
 
-/* DEBUG */
+enum e_mode
+{
+	SHELL,
+	HEREDOC,
+	EXE
+};
+
+/////////////* DEBUG *///////////////
 # include <stdio.h>
 
 void	dbg_print_token(t_list *tokens);
 void	dbg_print_procs(t_list *l_procs);
+/////////////////////////////////////
 
 #endif
 

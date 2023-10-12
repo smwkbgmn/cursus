@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 04:10:22 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/12 16:47:01 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/12 20:42:50 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,32 +15,33 @@
 
 #include "minishell.h"
 
-static void		write_heredoc(int fd_heredoc, char *limiter);
 static char		*expand_env(char *line);
 static char		*copy_buf(char *expanded, char *buf, size_t *len);
 static t_bool	is_limiter(char *line, char *limiter);
 
-int	get_heredoc(char *tmpfile, char *delim)
+int	get_heredoc(char *fname, char *delim)
 {
-	int	fd;
-
-	fd = open_fd(tmpfile, O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, 0644);
-	write_heredoc(fd, delim);
-	close_fd(fd);
-	return (open_fd(tmpfile, O_RDONLY, 0));
+	fork_heredoc(fname, delim);
+	if (g_exit == SUCCESS)
+		return (open_fd(fname, O_RDONLY, 0));
+	else
+		return (ERROR);
 }
 
-static void	write_heredoc(int fd_heredoc, char *limiter)
+void	write_heredoc(int fd_heredoc, char *limiter)
 {
 	char	*line;
 	char	*expanded;
 
-	line = readline(">");
+	line = readline("> ");
 	if (line)
 	{
-		expanded = expand_env(line);
-		free(line);
-		line = expanded;
+		if (*line)
+		{
+			expanded = expand_env(line);
+			free(line);
+			line = expanded;
+		}
 		if (!is_limiter(line, limiter))
 		{
 			ft_putstr_fd(line, fd_heredoc);
@@ -96,7 +97,7 @@ static char	*copy_buf(char *expanded, char *buf, size_t *len)
 
 static t_bool	is_limiter(char *line, char *limiter)
 {
-	return (ft_strncmp(line, limiter, ft_strlen(line)) == 0
-		|| (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0
-			&& ft_strlen(line) - 1 == ft_strlen(limiter)));
+	return ((*line) && ((ft_strncmp(line, limiter, ft_strlen(line)) == 0
+				|| (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0
+					&& ft_strlen(line) - 1 == ft_strlen(limiter)))));
 }

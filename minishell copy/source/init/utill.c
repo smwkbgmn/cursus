@@ -1,16 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util_cmd.c                                         :+:      :+:    :+:   */
+/*   utill.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 01:58:23 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/10 18:42:56 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/12 18:29:34 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	free_path(char **path, char **path_my)
+{
+	int	ptr;
+
+	ptr = 0;
+	while (path[ptr])
+		ft_free(path[ptr++]);
+	ft_free(path);
+	ptr = 0;
+	while (path_my[ptr])
+		ft_free(path_my[ptr++]);
+	ft_free(path_my);
+}
 
 t_meta	ref_type(t_list *l_token)
 {

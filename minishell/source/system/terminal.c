@@ -6,13 +6,11 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:36:33 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/12 17:43:29 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/12 20:53:14 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include <termios.h>
 #include <term.h>
-// #include <curses.h>
 #include <stdlib.h>
 
 #include "minishell.h"

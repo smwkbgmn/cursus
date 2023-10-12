@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_name.c                                         :+:      :+:    :+:   */
+/*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 20:27:02 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/09 14:34:17 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/12 17:05:05 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static char	*find_name(char **path, char *av_cmd);
 
-char	*get_path(char **path, char *av_cmd)
+char	*get_path(char **path, char **path_my, char *av_cmd)
 {
 	char	*name;
 
@@ -24,12 +24,17 @@ char	*get_path(char **path, char *av_cmd)
 			name = ft_strdup(av_cmd);
 		else
 		{
+			write_errmsg("minishell: ");
 			perror("access");
-			name = ft_strdup("null");
+			name = ft_strdup("err_cmd");
 		}
 	}
 	else
-		name = find_name(path, ft_strjoin("/", av_cmd));
+	{
+		name = find_name(path_my, ft_strjoin("/", av_cmd));
+		if (!name)
+			name = find_name(path, ft_strjoin("/", av_cmd));
+	}
 	return (name);
 }
 

@@ -5,7 +5,7 @@ CC			= cc
 FLAG		= -Wall -Wextra -Werror -fsanitize=address \
 $(FLAG_HEADER)
 
-FLAG_HEADER	= -I $(DIR_MAIN) -I $(DIR_LIB_FT) -I $(DIR_LIB_RL)/include
+FLAG_HEADER	= -I $(DIR_MAIN) -I $(DIR_LIB_FT) -I $(DIR_LIB_RL)
 
 SRCS		= \
 debug.c \
@@ -20,16 +20,19 @@ OBJS		= $(SRCS:.c=.o)
 
 LIB_FT		= $(DIR_LIB_FT)/libft.a
 LIB_RL		= -lreadline
+LIB_TM		= -lncurses
 
 DIR_MAIN	= .
 DIR_SRCS	= source
 DIR_LIB_FT	= ../archive/libft
-DIR_LIB_RL	= /opt/homebrew/Cellar/readline
+# DIR_LIB_RL	= /opt/homebrew/Cellar/readline
+DIR_LIB_RL	= /opt/homebrew/Cellar/readline/8.2.1/include/readline
 
 all			: $(NAME)
 
 $(NAME)		: $(LIB_FT) $(OBJS)
-			$(CC) $(FLAG) $(LIB_FT) $(LIB_RL) $(OBJS) -o $@
+			$(CC) $(FLAG) $(LIB_FT) $(LIB_RL) $(LIB_TM) \
+			$(OBJS) -o $@
 
 %.o			: %.c
 			$(CC) $(FLAG) -c $< -o $@

@@ -6,85 +6,98 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 04:10:22 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/11 17:25:27 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/12 20:42:50 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include <fcntl.h>
 
 #include "minishell.h"
 
-static void		write_heredoc(int fd_heredoc, char *limiter);
-static char		*read_from_stdin(int len);
-static int		read_one_char(char *buf, int *byte_read);
-static char		*init_line(size_t len);
+static char		*expand_env(char *line);
+static char		*copy_buf(char *expanded, char *buf, size_t *len);
 static t_bool	is_limiter(char *line, char *limiter);
 
-int	get_heredoc(char *tmpfile, char *delim)
+int	get_heredoc(char *fname, char *delim)
 {
-	int	fd;
-
-	fd = open_fd(tmpfile, O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, 0644);
-	write_heredoc(fd, delim);
-	close_fd(fd);
-	return (open_fd(tmpfile, O_RDONLY, 0));
+	fork_heredoc(fname, delim);
+	if (g_exit == SUCCESS)
+		return (open_fd(fname, O_RDONLY, 0));
+	else
+		return (ERROR);
 }
 
-static void	write_heredoc(int fd_heredoc, char *limiter)
+void	write_heredoc(int fd_heredoc, char *limiter)
 {
 	char	*line;
+	char	*expanded;
 
-	write(STDIN_FILENO, ">", 1);
-	line = read_from_stdin(0);
+	line = readline("> ");
 	if (line)
 	{
+		if (*line)
+		{
+			expanded = expand_env(line);
+			free(line);
+			line = expanded;
+		}
 		if (!is_limiter(line, limiter))
 		{
-			if (write(fd_heredoc, line, ft_strlen(line)) == ERROR)
-				exit_error("write");
+			ft_putstr_fd(line, fd_heredoc);
+			ft_putstr_fd("\n", fd_heredoc);
 			write_heredoc(fd_heredoc, limiter);
 		}
 		ft_free(line);
 	}
 }
 
-static char	*read_from_stdin(int len)
+static char	*expand_env(char *line)
 {
-	char			*line;
-	char			buf;
-	int				byte_read;
+	static size_t	len;
+	char			*expanded;
+	char			*buf;
 
-	len += read_one_char(&buf, &byte_read);
-	if (byte_read > 0 && buf != '\n')
-		line = read_from_stdin(len);
+	if (*line)
+	{
+		if (*line == DOLR)
+			buf = expand_env_var(&line);
+		else
+		{
+			buf = calloc_erx(2, 1);
+			*buf = *line++;
+		}
+		len += ft_strlen(buf);
+		expanded = expand_env(line);
+	}
 	else
 	{
-		if (len > 0 || buf == '\n')
-			line = init_line(len + 1);
+		buf = NULL;
+		if (len)
+			expanded = calloc_erx(len + 1, 1);
 		else
-			line = NULL;
+			expanded = NULL;
 	}
-	if (line && byte_read > 0)
-		line[len - 1] = buf;
-	return (line);
+	return (copy_buf(expanded, buf, &len));
 }
 
-static int	read_one_char(char *buf, int *byte_read)
+static char	*copy_buf(char *expanded, char *buf, size_t *len)
 {
-	*byte_read = read(STDIN_FILENO, buf, 1);
-	if (*byte_read == ERROR)
-		exit_error("read");
-	return (*byte_read);
-}
+	size_t	len_buf;
 
-static char	*init_line(size_t len)
-{
-	return (calloc_erx(len, sizeof(char)));
+	if (expanded)
+	{
+		len_buf = ft_strlen(buf);
+		ft_memcpy(expanded + (*len - len_buf), buf, len_buf);
+		*len -= len_buf;
+		free(buf);
+	}
+	return (expanded);
 }
 
 static t_bool	is_limiter(char *line, char *limiter)
 {
-	return (ft_strncmp(line, limiter, ft_strlen(line)) == 0
-		|| (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0
-			&& ft_strlen(line) - 1 == ft_strlen(limiter)));
+	return ((*line) && ((ft_strncmp(line, limiter, ft_strlen(line)) == 0
+				|| (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0
+					&& ft_strlen(line) - 1 == ft_strlen(limiter)))));
 }

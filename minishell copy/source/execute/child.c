@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 14:33:52 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/12 12:54:33 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/12 19:37:54 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void	valid_command(t_exe *exe)
 {
 	if (!exe->cmd.path)
 		exit_error_usr(127);
-	if (ft_strncmp(exe->cmd.path, "null", 4) == MATCH)
+	if (ft_strncmp(exe->cmd.path, "err_cmd", 7) == MATCH)
 		exit_error_usr(126);
 	if (exe->cmd.fd_rd[R] == ERROR || exe->cmd.fd_rd[W] == ERROR)
 		exit_error_usr(1);

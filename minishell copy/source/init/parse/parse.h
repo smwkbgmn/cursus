@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 18:16:17 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/12 03:16:17 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/12 20:46:50 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 
 # include <unistd.h>
 # include <dirent.h>
+
+# include "libft.h"
 
 typedef enum e_metachar		t_meta;
 
@@ -52,19 +54,28 @@ char	*expand_env_var(char **line);
 void	expand_wildcard(t_list *l_token);
 char	**list_files(DIR *p_dir, char *pattern);
 
-// EXE
+// execute.c
 void	get_execute(t_list **l_exe, t_list *l_token);
 
+// utill.c
+void	free_path(char **path, char **path_my);
 t_meta	ref_type(t_list *l_token);
 t_bool	is_redirect(t_list *l_token);
 t_bool	is_prntsis(t_list *l_token);
 t_bool	is_sequence(t_list *l_token);
 
+// get_cmd.c
 t_exe	*get_command(t_list *l_token);
 
-char	*get_path(char **path, char *av_cmd);
+// get_path.c
+char	*get_path(char **path, char **path_my, char *av_cmd);
 
+// get_heredoc.c
 int		get_heredoc(char *tmpfile, char *delim);
+void	write_heredoc(int fd_heredoc, char *limiter);
+
+// get_heredoc_fork.c
+void	fork_heredoc(char *fname, char *delim);
 
 enum e_metachar
 {
