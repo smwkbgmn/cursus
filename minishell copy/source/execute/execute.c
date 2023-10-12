@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 14:30:54 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/11 18:48:03 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/12 13:07:47 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,6 @@ void	execute(t_list *l_exe)
 	t_procs		ps;
 	static int	fd_prev_out;
 
-	ft_putstr_fd("now g_exit ", STDERR_FILENO);
-	ft_putstr_fd(ft_itoa(g_exit), STDERR_FILENO);
-	ft_putstr_fd("\n", STDERR_FILENO);
 	ft_memset(&ps, 0, sizeof(t_procs));
 	if (((t_exe *)l_exe->content)->op_seq == PIPE || fd_prev_out)
 		init_pipe(&ps);

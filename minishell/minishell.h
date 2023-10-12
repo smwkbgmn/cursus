@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 02:20:19 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/12 03:29:41 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/12 18:02:04 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <readline/readline.h>
 
 # include "libft.h"
-# include "source/parse/parse.h"
+# include "source/init/parse/parse.h"
 # include "source/execute/execute.h"
 
 # define SUCCESS 0
@@ -28,6 +28,9 @@ int		g_exit;
 
 // free.c
 void	free_data(t_list **l_exe);
+
+// signal.c
+void	init_signal(void);
 
 // init.c
 void	init_shell(t_list **l_exe, char *line);
@@ -46,6 +49,9 @@ void	redirect(int fd_to_copy, int fd_to_be);
 
 // free.c
 void	free_data(t_list **l_exe);
+
+// terminal.c
+void	init_terminal(void);
 
 /* DEBUG */
 # include <stdio.h>

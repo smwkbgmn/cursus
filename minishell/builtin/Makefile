@@ -1,6 +1,6 @@
 # NAME	= cd echo env exit export pwd unset
 # NAME	= $(DIR_BIN)/$(PROGRAM)
-PROGRAM = pwd cd
+PROGRAM = pwd
 
 CC		= cc
 FLAG	= -Wall -Werror -Wextra \

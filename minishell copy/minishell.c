@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 02:20:20 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/11 17:59:05 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/12 13:07:22 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,25 @@
 */
 
 /* 
-- handle $?
-- parsing error (setting errno)
+o - readline 
+o - readline-history
+o - handle $? o
+o - parsing error (setting errno)
 - signal (ctrl c, d, \)
 - builtins (add my bin dir to env_path)
-- free data
+o - free data
+- check heredoc and $ > ft substr
+o - move get_* files to init
+- 커맨드 path 찾을때 내 bin 먼저 access 해보기 
+- Get path 조금 수정하고, path 해제하기 
+o - Env 기쟈오는 시점 바꾸기
+- Gnu readline 으로 바꿔보기 
+o - 와일드카드 *** 이런 형식 체크 (되는듯..?)
 */
 
-#include <stdlib.h>
-#include <unistd.h>
+#include "readline/readline.h"
 
 #include "minishell.h"
-
-void	write_shell(void);
 
 int	main(void)
 {
@@ -57,15 +63,12 @@ int	main(void)
 
 	while (LOOP)
 	{
-		write_shell();
-		init_shell(&l_exe, get_next_line(STDIN_FILENO));
-		execute(l_exe);
-		free_data(&l_exe);
+		init_shell(&l_exe, readline("minishell$ "));
+		if (l_exe)
+		{
+			execute(l_exe);
+			free_data(&l_exe);
+		}
 	}
 	return (g_exit);
-}
-
-void	write_shell(void)
-{
-	write(STDIN_FILENO, "minishell$ ", 11);
 }
