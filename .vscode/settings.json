@@ -19,7 +19,8 @@
 		"cdefs.h": "c",
 		"execute.h": "c",
 		"readline.h": "c",
-		"struct.h": "c"
+		"struct.h": "c",
+		"rltypedefs.h": "c"
 	},
 	"autoHide.autoHidePanel": false,
 	"autoHide.autoHideSideBar": true
