@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 13:06:20 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/12 21:55:55 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/14 11:35:36 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 
 #include "minishell.h"
 
-static void	handle_shell(int sig);
-static void	handle_heredoc(int sig);
-static void	handle_exe(int sig);
+static void	handle_sigint_shell(int sig);
+static void	handle_sigint_heredoc(int sig);
+static void	handle_sigint_exe(int sig);
+static void	handle_sigterm(int sig);
 
 // SIGQUIT : ctrl + "\"
 // SIGINT : crtl + d
@@ -25,15 +26,18 @@ static void	handle_exe(int sig);
 void	init_signal(t_mode mode)
 {
 	if (mode == SHELL)
-		signal(SIGINT, &handle_shell);
+	{
+		signal(SIGINT, &handle_sigint_shell);
+		signal(SIGTERM, &handle_sigterm);
+	}
 	else if (mode == HEREDOC)
-		signal(SIGINT, &handle_heredoc);
+		signal(SIGINT, &handle_sigint_heredoc);
 	else
-		signal(SIGINT, &handle_exe);
+		signal(SIGINT, &handle_sigint_exe);
 	signal(SIGQUIT, SIG_IGN);
 }
 
-static void	handle_shell(int sig)
+static void	handle_sigint_shell(int sig)
 {
 	if (sig)
 	{
@@ -46,16 +50,22 @@ static void	handle_shell(int sig)
 	}
 }
 
-static void	handle_heredoc(int sig)
+static void	handle_sigint_heredoc(int sig)
 {
 	printf("handle heredoc\n");
 	if (sig)
 		exit(EXIT_FAILURE);
 }
 
-static void	handle_exe(int sig)
+static void	handle_sigint_exe(int sig)
 {
 	printf("handle exe\n");
 	if (sig)
 		exit(130);
+}
+
+static void	handle_sigterm(int sig)
+{
+	if (sig)
+		exit(g_exit);
 }

@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 21:56:28 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/11 18:29:04 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/14 05:43:32 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ static char	*get_name(char **line)
 	else
 	{
 		if (len == 0)
-			name = ft_strdup("$");
+			name = try(ft_strdup("$"));
 		else
-			name = calloc_erx(len + 1, 1);
+			name = try(ft_calloc(len + 1, 1));
 	}
 	return (name);
 }
@@ -63,9 +63,9 @@ static char	*expand(char *name)
 	{
 		value = getenv(name);
 		if (value)
-			value = ft_strdup(value);
+			value = try(ft_strdup(value));
 		else
-			value = ft_strdup("");
+			value = try(ft_strdup(""));
 		return (value);
 	}
 }

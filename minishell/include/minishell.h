@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 02:20:19 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/12 21:24:27 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/14 05:42:38 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@
 # include <readline/readline.h>
 
 # include "libft.h"
-# include "source/init/init.h"
-# include "source/execute/execute.h"
+# include "init.h"
+# include "execute.h"
+# include "builtin.h"
 
 # define SUCCESS 0
 # define MATCH 0
@@ -38,7 +39,7 @@ void	init_signal(t_mode mode);
 void	init_shell(t_list **l_exe, char *line);
 
 // error.c
-void	*calloc_erx(size_t count, size_t size);
+void	*try(void *ptr);
 void	set_error(char *msg, int exit);
 void	exit_error(char *msg);
 void	exit_error_usr(int status);

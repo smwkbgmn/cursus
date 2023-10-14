@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 02:20:20 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/12 21:57:20 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/14 05:18:53 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,19 @@ o - free data
 o - check heredoc and $ > ft substr
 o - move get_* files to init
 o - signal (ctrl c, d, \)
-- builtins (add my bin dir to env_path)
-o - 커맨드 path 찾을때 내 bin 먼저 access
-o - Get path 조금 수정하고, path 해제하기 
-o - Env 가져오는 시점 바꾸기
-o - 와일드카드 *** 이런 형식 체크 (되는듯..?)
-- 시그널 리플레이스라인 
-o - 히어독 파일 안지워지는거 확인
-- ctrl+c exit status 확인 
-o - ctrl+d 일단 종료는 됨 > zshell도 종료되어야 하는지 확인
-- Gnu readline 으로 바꿔보기 
+- implement builtins
+- check if it's builtin before executing and get_cmd
+- builtin is to be executed on chiild process
+o - modify get_path, free path variable
+o - move the position of getting env
+o - multiple wildcard 
+- rl_replace_line on SIGINT
+o - check removing heredoc tmp
+- exit status  on SIGINT
+o - does zshell need to be quit on EOF? (ctrl d)
+- Gnu readline
+- memory leaks 
+- implement terminal attribute
 */
 
 #include "minishell.h"

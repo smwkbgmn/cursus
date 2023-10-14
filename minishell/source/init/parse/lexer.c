@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 21:56:47 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/12 02:29:49 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/14 05:42:24 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ t_token	*tokenize(char **line, char *delim, t_lexer *data)
 			token = proceed_zerolen(line, delim, data);
 		else
 		{
-			token = calloc_erx(1, sizeof(t_token));
-			token->str = calloc_erx(data->len + 1, 1);
+			token = try(ft_calloc(1, sizeof(t_token)));
+			token->str = try(ft_calloc(data->len + 1, 1));
 		}
 	}
 	else

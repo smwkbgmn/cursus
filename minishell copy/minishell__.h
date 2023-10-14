@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 02:20:19 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/12 20:21:24 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/12 21:24:27 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <readline/readline.h>
 
 # include "libft.h"
-# include "source/init/parse/parse.h"
+# include "source/init/init.h"
 # include "source/execute/execute.h"
 
 # define SUCCESS 0
@@ -62,11 +62,12 @@ enum e_mode
 	EXE
 };
 
-/* DEBUG */
+/////////////* DEBUG *///////////////
 # include <stdio.h>
 
 void	dbg_print_token(t_list *tokens);
 void	dbg_print_procs(t_list *l_procs);
+/////////////////////////////////////
 
 #endif
 

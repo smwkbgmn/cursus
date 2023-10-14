@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 04:10:22 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/12 20:42:50 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/14 05:40:31 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static char	*expand_env(char *line)
 			buf = expand_env_var(&line);
 		else
 		{
-			buf = calloc_erx(2, 1);
+			buf = try(ft_calloc(2, 1));
 			*buf = *line++;
 		}
 		len += ft_strlen(buf);
@@ -74,7 +74,7 @@ static char	*expand_env(char *line)
 	{
 		buf = NULL;
 		if (len)
-			expanded = calloc_erx(len + 1, 1);
+			expanded = try(ft_calloc(len + 1, 1));
 		else
 			expanded = NULL;
 	}

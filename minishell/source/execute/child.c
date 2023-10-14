@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 14:33:52 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/12 21:03:47 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/14 05:58:14 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,11 @@ void	child(t_procs *ps, t_exe *exe, int fd_prev)
 	redirect_pipe(ps, fd_prev, exe->op_seq);
 	redirect_file(exe->cmd.fd_rd);
 	valid_command(exe);
-	execve(exe->cmd.path, exe->cmd.av, environ);
+	if (is_builtin(exe->cmd.path))
+		execute_builtin(exe, environ);
+	else
+		if (execve(exe->cmd.path, exe->cmd.av, environ) == ERROR)
+			exit_error("execve");
 }
 
 static void	redirect_pipe(t_procs *ps, int fd_prev, t_meta op_seq)

@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   terminal.c                                         :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/12 17:36:33 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/12 20:53:14 by donghyu2         ###   ########.fr       */
+/*   Created: 2023/09/17 13:05:49 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/10/14 06:04:47 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <term.h>
+#include <unistd.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "minishell.h"
 
-void	init_terminal(void)
+int	pwd(void)
 {
-	struct termios	termi;
+	static char	*buf;
 
-	if (tcgetattr(STDIN_FILENO, &termi) == -1)
-		exit(1);
-	termi.c_lflag &= ~(ECHOCTL);
-	if (tcsetattr(STDIN_FILENO, TCSANOW, &termi) == -1
-		|| tgetent (NULL, "xterm-256color") == -1)
-		exit(1);
+	buf = getcwd(buf, 0);
+	if (!buf)
+		exit_error("getcwd");
+	printf("%s\n", buf);
+	// ft_putstr_fd(buf, STDIN_FILENO);
+	// ft_putstr_fd("\n", STDIN_FILENO);
+	free(buf);
+	return (EXIT_SUCCESS);
 }

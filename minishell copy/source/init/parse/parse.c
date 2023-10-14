@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 18:05:01 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/12 18:09:51 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/12 21:06:00 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_list	*parse(char *line)
 	if (l_token)
 	{
 		expand_wildcard(l_token);
-		dbg_print_token(l_token);
+		// dbg_print_token(l_token);
 		if (!valid_token(l_token))
 		{
 			write_errmsg("minishell: syntax error\n");

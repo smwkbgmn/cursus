@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:55:20 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/11 17:25:45 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/14 05:43:55 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	**list_files(DIR *p_dir, char *pattern)
 		{
 			count++;
 			files = list_files(p_dir, pattern);
-			files[--count] = ft_strdup(dir->d_name);
+			files[--count] = try(ft_strdup(dir->d_name));
 		}
 		else
 			files = list_files(p_dir, pattern);
@@ -41,7 +41,7 @@ char	**list_files(DIR *p_dir, char *pattern)
 	else
 	{
 		if (count > 0)
-			files = calloc_erx(count + 1, sizeof(char *));
+			files = try(ft_calloc(count + 1, sizeof(char *)));
 		else
 			files = NULL;
 	}
@@ -81,7 +81,7 @@ static char	*get_needle(char *pattern, char **p_astr)
 		if (*p_astr)
 			return (ft_strdup_ptr(pattern, *p_astr));
 		else if (*pattern)
-			return (ft_strdup(pattern));
+			return (try(ft_strdup(pattern)));
 		else
 			return (NULL);
 	}

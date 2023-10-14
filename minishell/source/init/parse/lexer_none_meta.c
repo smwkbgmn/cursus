@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 15:36:49 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/12 16:46:18 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/14 05:41:42 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_token	*proceed_none_meta(char **line, char *delim, t_lexer *data)
 		{
 			if (**line == '*')
 				data->wildcard = TRUE;
-			buf = calloc_erx(2, 1);
+			buf = try(ft_calloc(2, 1));
 			*buf = **line;
 		}
 		else

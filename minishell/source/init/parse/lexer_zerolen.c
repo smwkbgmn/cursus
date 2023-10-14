@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_zero_len.c                                   :+:      :+:    :+:   */
+/*   lexer_zerolen.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 15:37:22 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/11 17:25:05 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/14 05:42:05 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ t_token	*proceed_zerolen(char **line, char *delim, t_lexer *data)
 	}
 	else
 	{
-		token = calloc_erx(1, sizeof(t_token));
-		token->str = calloc_erx(3, 1);
+		token = try(ft_calloc(1, sizeof(t_token)));
+		token->str = try(ft_calloc(3, 1));
 		token->str[0] = **line;
 		if (get_metachar(*line) > 255)
 		{

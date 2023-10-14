@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 19:21:33 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/12 03:09:08 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/14 05:42:55 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,8 @@
 
 #include "minishell.h"
 
-void	*calloc_erx(size_t count, size_t size)
+void	*try(void *ptr)
 {
-	void	*ptr;
-
-	ptr = ft_calloc(count, size);
 	if (!ptr)
 		exit_error("malloc");
 	return (ptr);

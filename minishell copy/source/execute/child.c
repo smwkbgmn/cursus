@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 14:33:52 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/12 19:37:54 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/12 21:03:47 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	child(t_procs *ps, t_exe *exe, int fd_prev)
 {
 	extern char	**environ;
 
+	init_signal(EXE);
 	redirect_pipe(ps, fd_prev, exe->op_seq);
 	redirect_file(exe->cmd.fd_rd);
 	valid_command(exe);

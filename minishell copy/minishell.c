@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 02:20:20 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/12 20:26:20 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/13 17:34:07 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,18 @@ o - parsing error (setting errno)
 o - free data
 o - check heredoc and $ > ft substr
 o - move get_* files to init
-- signal (ctrl c, d, \)
+o - signal (ctrl c, d, \)
 - builtins (add my bin dir to env_path)
 o - 커맨드 path 찾을때 내 bin 먼저 access
 o - Get path 조금 수정하고, path 해제하기 
 o - Env 가져오는 시점 바꾸기
 o - 와일드카드 *** 이런 형식 체크 (되는듯..?)
 - 시그널 리플레이스라인 
-- 히어독 파일 안지워지는거 확인
+o - 히어독 파일 안지워지는거 확인
+- ctrl+c exit status 확인 
+o - ctrl+d 일단 종료는 됨 > zshell도 종료되어야 하는지 확인
 - Gnu readline 으로 바꿔보기 
 */
-
-#include "readline/readline.h"
 
 #include "minishell.h"
 
@@ -63,10 +63,11 @@ int	main(void)
 {
 	static t_list	*l_exe;
 
-	init_signal(SHELL);
 	init_terminal();
+	init_signal(SHELL);
 	while (LOOP)
 	{
+		printf("getting g_exit %d\n", g_exit);
 		init_shell(&l_exe, readline("minishell$ "));
 		if (l_exe)
 		{
