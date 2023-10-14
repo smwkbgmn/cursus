@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 02:20:20 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/14 23:53:17 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/15 02:30:32 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,20 @@ o - does zshell need to be quit on EOF? (ctrl d)
 
 /*
 Test
+- redirection without cmd 
+- outfile > 
 - minishell without env
+- cat << a | cat 
+- ctrl+c history check at cluster
+- export aaaaa check
+- echo -nnnnnn
+- check one cycle leak on builtins
+- exit > int overflow 
+- showing av on error
+- input ./
+- env save position rule
+- use env after copy
+- ulimit -u > max process
 */
 
 #include "minishell.h"

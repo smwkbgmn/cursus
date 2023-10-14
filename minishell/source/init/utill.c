@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 01:58:23 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/14 18:07:49 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/15 01:23:23 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,12 @@ void	free_path(char **path)
 	int	ptr;
 
 	ptr = 0;
-	while (path[ptr])
-		ft_free(path[ptr++]);
-	ft_free(path);
+	if (path)
+	{
+		while (path[ptr])
+			ft_free(path[ptr++]);
+		ft_free(path);
+	}
 }
 
 t_meta	ref_type(t_list *l_token)

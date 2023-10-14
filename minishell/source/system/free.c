@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 20:21:33 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/12 19:05:05 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/15 02:42:15 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,12 @@ static void	clear_argument(char *path, char **argv)
 	int	ptr;
 
 	ptr = 0;
-	while (argv[ptr])
-		ft_free(argv[ptr++]);
-	ft_free(argv);
+	if (argv)
+	{
+		while (argv[ptr])
+			ft_free(argv[ptr++]);
+		ft_free(argv);
+	}
 	ft_free(path);
 }
 

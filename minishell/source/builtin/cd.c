@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 22:17:27 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/14 23:29:33 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/15 01:07:16 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ static void	set_env(char *path_cwd, char *path_cd)
 	}
 	if (path_cwd)
 	{
-		*(av + 1) = try(ft_strjoin("OLD_PWD=", path_cwd));
+		*(av + 1) = try(ft_strjoin("OLDPWD=", path_cwd));
 		bltin_export(av);
 		ft_free(*(av + 1));
 	}

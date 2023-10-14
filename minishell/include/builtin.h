@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 21:18:01 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/14 22:56:37 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/15 01:39:15 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ void	bltin_export(char **av);
 // export_proceed.c
 char	*get_exist(char *env, char **av);
 t_bool	is_already_exist(char *arg, t_list *exist);
-t_bool	valid(char *arg);
+t_bool	valid_arg(char *arg);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 19:06:28 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/14 23:25:46 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/15 01:39:25 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static size_t	get_len_name(char *av)
 	return (len);
 }
 
-t_bool	valid(char *arg)
+t_bool	valid_arg(char *arg)
 {
 	if (ft_isalpha(*arg) || *arg == '_')
 	{

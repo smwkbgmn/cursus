@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 14:33:52 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/14 17:09:35 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/15 02:41:38 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,11 @@ static void	redirect_file(int fd_rd[2])
 
 static void	valid_command(t_exe *exe)
 {
+	if (!exe->cmd.av
+		|| exe->cmd.fd_rd[R] == ERROR || exe->cmd.fd_rd[W] == ERROR)
+		exit_error_usr(1);
 	if (!exe->cmd.path)
 		exit_error_usr(127);
 	if (ft_strncmp(exe->cmd.path, "err_cmd", 7) == MATCH)
 		exit_error_usr(126);
-	if (exe->cmd.fd_rd[R] == ERROR || exe->cmd.fd_rd[W] == ERROR)
-		exit_error_usr(1);
 }
