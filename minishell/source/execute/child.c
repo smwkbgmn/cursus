@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 14:33:52 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/14 05:58:14 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/14 17:09:35 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	child(t_procs *ps, t_exe *exe, int fd_prev)
 	redirect_file(exe->cmd.fd_rd);
 	valid_command(exe);
 	if (is_builtin(exe->cmd.path))
-		execute_builtin(exe, environ);
+		execute_builtin(exe, TRUE);
 	else
 		if (execve(exe->cmd.path, exe->cmd.av, environ) == ERROR)
 			exit_error("execve");

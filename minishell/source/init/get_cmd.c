@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 16:04:47 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/14 05:42:50 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/14 18:07:59 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,18 +64,14 @@ static t_exe	*init_exe(int argc)
 
 static void	assign_av(t_exe *exe, int argc, t_list *l_token)
 {
-	char	**path_my;
 	char	**path;
 
 	exe->cmd.av[argc] = ((t_token *)l_token->content)->str;
 	if (argc == 0)
 	{
-		path_my = try(ft_calloc(2, sizeof(char *)));
-		*path_my = try(ft_strdup("./builtin/bin"));
 		path = ft_split(getenv("PATH"), ':');
-		exe->cmd.path = get_path(path, path_my,
-				((t_token *)l_token->content)->str);
-		free_path(path, path_my);
+		exe->cmd.path = get_path(path, ((t_token *)l_token->content)->str);
+		free_path(path);
 	}
 }
 

@@ -6,11 +6,12 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 02:20:20 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/14 05:18:53 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/14 20:18:12 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
+Flowchart
 1. Read line form STDIN
 	1-1. Heredoc mode (Wherever if the Heredoc is, it has to do
 	Heredoc first. If there is more than one Heredoc, do first
@@ -36,7 +37,8 @@
 	signaling to any process made from the shell.
 */
 
-/* 
+/*
+To do 
 o - readline 
 o - readline-history
 o - handle $? o
@@ -46,18 +48,24 @@ o - check heredoc and $ > ft substr
 o - move get_* files to init
 o - signal (ctrl c, d, \)
 - implement builtins
-- check if it's builtin before executing and get_cmd
-- builtin is to be executed on chiild process
+o - check if it's builtin before executing and get_cmd
+o - builtin is to be executed on chiild process
 o - modify get_path, free path variable
 o - move the position of getting env
 o - multiple wildcard 
 - rl_replace_line on SIGINT
 o - check removing heredoc tmp
-- exit status  on SIGINT
+- exit status  on SIGINT (SIGINT on sleep 10)
 o - does zshell need to be quit on EOF? (ctrl d)
-- Gnu readline
 - memory leaks 
 - implement terminal attribute
+*/
+
+/*
+Test
+- minishell without env
+- do I need to free environ?
+- do I need to show the entered argument on error msg?
 */
 
 #include "minishell.h"
@@ -70,7 +78,7 @@ int	main(void)
 	init_signal(SHELL);
 	while (LOOP)
 	{
-		printf("getting g_exit %d\n", g_exit);
+		printf("getting g_exit [%d]\n", g_exit);
 		init_shell(&l_exe, readline("minishell$ "));
 		if (l_exe)
 		{

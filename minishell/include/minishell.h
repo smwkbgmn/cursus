@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 02:20:19 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/14 12:37:07 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/14 20:15:27 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 
 typedef enum e_mode	t_mode;
 
-int		g_exit;
+int	g_exit;
 
 // free.c
 void	free_data(t_list **l_exe);
@@ -65,6 +65,7 @@ enum e_mode
 };
 
 /////////////* DEBUG *///////////////
+
 # include <stdio.h>
 
 void	dbg_print_token(t_list *tokens);
@@ -112,6 +113,9 @@ sigaction
 sigemptyset
 sigaddset
 
+strerror
+perror
+
 getcwd	: get copy working directory
 
 opendir
@@ -122,9 +126,6 @@ chdir
 stat	: display file status
 lstat
 fstat
-
-strerror
-perror
 
 isatty
 ttyname
