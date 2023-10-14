@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 19:06:28 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/14 20:11:46 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/14 23:25:46 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,11 @@ t_bool	valid(char *arg)
 	if (ft_isalpha(*arg) || *arg == '_')
 	{
 		arg++;
-		while (*arg && *arg != '=')
-		{
-			if (!ft_isalnum(*arg) || *arg != '_')
-				set_error("export: not a valid identifier", EXIT_FAILURE);
+		while (*arg && (ft_isalnum(*arg) || *arg == '_'))
 			arg++;
-		}
-		return (*arg == '=');
+		if (*arg != '=' || (*arg && ft_strchr(arg + 1, '=')))
+			set_error("export: not a valid identifier", EXIT_FAILURE);
+		return (!(*arg) || *arg == '=');
 	}
 	else
 	{

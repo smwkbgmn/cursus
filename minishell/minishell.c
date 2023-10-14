@@ -6,36 +6,9 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 02:20:20 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/14 20:18:12 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/14 23:53:17 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/*
-Flowchart
-1. Read line form STDIN
-	1-1. Heredoc mode (Wherever if the Heredoc is, it has to do
-	Heredoc first. If there is more than one Heredoc, do first
-	one that first meet in the line.)
-	1-2. Should be acceptable control input [Ctrl + C, D, \]
-2. Parse (Look some functions like strtok or strsep)
-	2-1. See if there is unclosed metacharacters [(), '', "", &&]
-	2-2. AND, OR sign with parenthesis [&&, ||, ()]
-	2-3. Pipe [|]
-	2-4. Dollor sign (means need to invoke the env or exit status)
-	2-5. Wildcard [*]
-3. Execute entered command
-	3-1. If there is AND, OR, do *whole commad line as many as
-	the count of logical expressions.
-	3-2. If there is pipe, redirect prior STD_OUT to
-	following command's STD_IN
-	3-3. Count quantity of parenthesis and keep it for nesting
-	to send last exit status
-	* whole commadn : one full command or commands that
-	connected with pipes.
-4. Send the signals
-	4-1. While the shell doing things, the main should be available to do
-	signaling to any process made from the shell.
-*/
 
 /*
 To do 
@@ -53,7 +26,7 @@ o - builtin is to be executed on chiild process
 o - modify get_path, free path variable
 o - move the position of getting env
 o - multiple wildcard 
-- rl_replace_line on SIGINT
+o - rl_replace_line on SIGINT
 o - check removing heredoc tmp
 - exit status  on SIGINT (SIGINT on sleep 10)
 o - does zshell need to be quit on EOF? (ctrl d)
@@ -64,8 +37,6 @@ o - does zshell need to be quit on EOF? (ctrl d)
 /*
 Test
 - minishell without env
-- do I need to free environ?
-- do I need to show the entered argument on error msg?
 */
 
 #include "minishell.h"
@@ -78,7 +49,7 @@ int	main(void)
 	init_signal(SHELL);
 	while (LOOP)
 	{
-		printf("getting g_exit [%d]\n", g_exit);
+		// printf("getting g_exit [%d]\n", g_exit);
 		init_shell(&l_exe, readline("minishell$ "));
 		if (l_exe)
 		{

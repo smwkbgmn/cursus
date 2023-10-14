@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 22:17:27 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/14 21:02:52 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/14 23:29:33 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ void	bltin_cd(char **av)
 	int			exit;
 
 	exit = EXIT_SUCCESS;
-	path_cwd = assign_curnt_dir(&exit);
 	if (is_dir(*(av + 1), &exit))
 	{
+		path_cwd = assign_curnt_dir(&exit);
 		path_cd = *(av + 1);
 		if (chdir(path_cd) == ERROR)
 		{
 			write_errmsg("minishell: ");
-			perror("chdir");
+			perror("cd");
 			exit = EXIT_FAILURE;
 		}
 		else
@@ -43,8 +43,8 @@ void	bltin_cd(char **av)
 			set_env(path_cwd, path_cd);
 			ft_free(path_cd);
 		}
+		ft_free(path_cwd);
 	}
-	ft_free(path_cwd);
 	g_exit = exit;
 }
 
@@ -53,10 +53,9 @@ static char	*assign_curnt_dir(int *exit)
 	char	*buf;
 
 	buf = NULL;
-	getcwd(buf, 0);
+	buf = getcwd(buf, 0);
 	if (!buf)
 	{
-		printf("now buf [%s]\n", buf);
 		write_errmsg("minishell: ");
 		perror("getcwd");
 		*exit = EXIT_FAILURE;

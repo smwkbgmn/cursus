@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 14:33:01 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/12 21:42:21 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/14 23:03:42 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	parent(t_procs *ps, t_list *l_exe, int *fd_prev_out)
 	{
 		*fd_prev_out = 0;
 		g_exit = wait_child(ps);
-		printf("right after getting exit stat %d\n", g_exit);
 		l_exe = find_next(l_exe);
 		if (l_exe)
 			execute(l_exe);
