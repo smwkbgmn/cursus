@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 14:32:21 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/12 18:52:16 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/14 20:15:10 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ void	parent(t_procs *ps, t_list *l_exe, int *fd_prev_out);
 
 // child.c
 void	child(t_procs *ps, t_exe *exe, int fd_prev_out);
+
+// child_builtin.c
+void	execute_builtin(t_exe *exe, t_bool pipemode);
+t_bool	is_builtin(char *av);
 
 struct s_process
 {

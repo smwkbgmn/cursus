@@ -1,29 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/17 13:05:49 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/11 17:16:19 by donghyu2         ###   ########.fr       */
+/*   Created: 2023/10/14 05:09:16 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/10/14 15:11:23 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include <stdlib.h>
-#include <stdio.h>
 
-#include "builtin.h"
+#include "minishell.h"
 
-int	main(void)
+static void	print(char **av);
+
+void	bltin_echo(char **av)
 {
-	static char	*buf;
+	t_bool	option;
 
-	buf = getcwd(buf, 0);
-	if (!buf)
-		exit_error("getcwd");
-	printf("%s\n", buf);
-	free(buf);
-	return (EXIT_SUCCESS);
+	option = FALSE;
+	if (*(av + 1))
+	{
+		if (ft_strncmp(*(av + 1), "-n", 3) == MATCH)
+			option = TRUE;
+		print(av + 1 + (option));
+	}
+	if (!option)
+		printf("\n");
+	g_exit = EXIT_SUCCESS;
+}
+
+static void	print(char **av)
+{
+	while (*av)
+	{
+		if (printf("%s", *av++) < 0)
+			exit_error("printf");
+		if (*av)
+			printf(" ");
+	}
 }

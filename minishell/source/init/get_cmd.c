@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 16:04:47 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/15 02:35:52 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/15 12:19:48 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	apply_rd(t_exe *exe, t_exe *tmp);
 
 t_exe	*get_command(t_list *l_token)
 {
-	static t_bool	rd_fail;
 	static int		argc;
 	t_exe			*exe;
+	static t_bool	rd_fail;
 	t_exe			tmp_rd;
 
 	if (!l_token || is_sequence(l_token))
@@ -100,7 +100,10 @@ void	assign_rd(t_exe *exe, t_meta type, char *value, t_bool *rd_fail)
 			exe->cmd.fd_rd[W] = open_fd(value,
 					O_WRONLY | O_CREAT | O_APPEND, 0644);
 		if (exe->cmd.fd_rd[R] == ERROR || exe->cmd.fd_rd[W] == ERROR)
+		{
+			printf("assign rd_fail\n");
 			*rd_fail = TRUE;
+		}
 	}
 }
 

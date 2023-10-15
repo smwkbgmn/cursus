@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 05:14:12 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/15 11:31:50 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/15 01:34:15 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	bltin_export(char **av)
 
 	if (*(av + 1))
 		environ = get_new(environ, av + 1);
-	g_exit = (g_exit == ERROR);
+	g_exit = exit;
 }
 
 static char	**get_new(char **env, char **av)
@@ -66,7 +66,7 @@ static char	**proceed(char **env, char **av, int *ac, t_list **exist)
 	}
 	else
 	{
-		if (valid_arg(*av) && !is_already_exist(*av, *exist))
+		if (valid(*av) && !is_already_exist(*av, *exist))
 		{
 			(*ac)++;
 			new = get_new(env, av + 1);

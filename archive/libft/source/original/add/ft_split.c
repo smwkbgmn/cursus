@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:12:25 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/06/30 14:08:18 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/15 00:51:05 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,15 @@ size_t	get_cnt(char const *s, char c)
 	size_t	cnt_word;
 
 	cnt_word = 0;
-	while (*s)
+	if (s)
 	{
-		s += get_len(s, c, 0);
-		if (*s)
-			cnt_word++;
-		s += get_len(s, c, 1);
+		while (*s)
+		{
+			s += get_len(s, c, 0);
+			if (*s)
+				cnt_word++;
+			s += get_len(s, c, 1);
+		}
 	}
 	return (cnt_word);
 }

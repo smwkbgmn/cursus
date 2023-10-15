@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 19:06:28 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/15 11:50:29 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/14 23:25:46 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,22 @@ static size_t	get_len_name(char *av)
 	return (len);
 }
 
-t_bool	valid_arg(char *arg)
+t_bool	valid(char *arg)
 {
 	if (ft_isalpha(*arg) || *arg == '_')
 	{
 		arg++;
 		while (*arg && (ft_isalnum(*arg) || *arg == '_'))
 			arg++;
-		if (*arg == '=')
-			return (TRUE);
-		else if (!*arg)
-			return (FALSE);
+		if (*arg != '=' || (*arg && ft_strchr(arg + 1, '=')))
+			set_error("export: not a valid identifier", EXIT_FAILURE);
+		return (!(*arg) || *arg == '=');
 	}
-	set_error("export: not a valid identifier", ERROR);
-	return (FALSE);
+	else
+	{
+		set_error("export: not a valid identifier", EXIT_FAILURE);
+		return (FALSE);
+	}
 }
 
 t_bool	is_already_exist(char *arg, t_list *exist)

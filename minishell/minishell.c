@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 02:20:20 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/15 02:30:32 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/15 12:23:45 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ o - free data
 o - check heredoc and $ > ft substr
 o - move get_* files to init
 o - signal (ctrl c, d, \)
-- implement builtins
+o - implement builtins
 o - check if it's builtin before executing and get_cmd
 o - builtin is to be executed on chiild process
 o - modify get_path, free path variable
@@ -28,7 +28,7 @@ o - move the position of getting env
 o - multiple wildcard 
 o - rl_replace_line on SIGINT
 o - check removing heredoc tmp
-- exit status  on SIGINT (SIGINT on sleep 10)
+- exit status on SIGINT (SIGINT on sleep 10)
 o - does zshell need to be quit on EOF? (ctrl d)
 - memory leaks 
 - implement terminal attribute
@@ -36,18 +36,18 @@ o - does zshell need to be quit on EOF? (ctrl d)
 
 /*
 Test
-- redirection without cmd 
-- outfile > 
-- minishell without env
-- cat << a | cat 
-- ctrl+c history check at cluster
-- export aaaaa check
+o - redirection without cmd 
+o - outfile > 
+o - minishell without env
+o - cat << a | cat 
+- ls | ls | cat : ctrl+c history check at cluster
+o - export aaaaa check
 - echo -nnnnnn
 - check one cycle leak on builtins
-- exit > int overflow 
+- bltin_exit > int overflow 
 - showing av on error
 - input ./
-- env save position rule
+- env saving position rule on export
 - use env after copy
 - ulimit -u > max process
 */

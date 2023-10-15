@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin.c                                          :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/17 21:16:04 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/11 17:13:07 by donghyu2         ###   ########.fr       */
+/*   Created: 2023/10/14 05:14:18 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/10/14 18:09:54 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "builtin.h"
+#include "minishell.h"
 
-void	*errext(void *ptr)
+static void	print(char **env);
+
+void	bltin_env(void)
 {
-	if (!ptr)
-		exit_error("malloc");
-	return (ptr);
+	extern char	**environ;
+
+	print(environ);
+	g_exit = EXIT_SUCCESS;
 }
 
-void	exit_error(char *msg)
+static void	print(char **env)
 {
-	if (msg)
-		perror(msg);
-	exit(EXIT_FAILURE);
+	while (*env)
+		if (printf("%s\n", *env++) < 0)
+			exit_error("printf");
 }

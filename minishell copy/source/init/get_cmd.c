@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 16:04:47 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/12 18:40:00 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/15 01:27:22 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ static t_exe	*init_exe(int argc)
 
 	if (argc)
 	{
-		exe = calloc_erx(1, sizeof(t_exe));
-		exe->cmd.av = calloc_erx(argc + 1, sizeof(char *));
+		exe = try(ft_calloc(1, sizeof(t_exe)));
+		exe->cmd.av = try(ft_calloc(argc + 1, sizeof(char *)));
 	}
 	else
 		exe = NULL;
@@ -64,18 +64,21 @@ static t_exe	*init_exe(int argc)
 
 static void	assign_av(t_exe *exe, int argc, t_list *l_token)
 {
-	char	**path_my;
 	char	**path;
+	char	*env;
 
 	exe->cmd.av[argc] = ((t_token *)l_token->content)->str;
 	if (argc == 0)
 	{
-		path_my = calloc_erx(2, sizeof(char *));
-		*path_my = ft_strdup("./builtin/bin");
-		path = ft_split(getenv("PATH"), ':');
-		exe->cmd.path = get_path(path, path_my,
-				((t_token *)l_token->content)->str);
-		free_path(path, path_my);
+		env = getenv("PATH");
+		if (env)
+		{
+			path = ft_split(env, ':');
+			exe->cmd.path = get_path(path, ((t_token *)l_token->content)->str);
+			free_path(path);
+		}
+		else if (is_builtin(((t_token *)l_token->content)->str))
+			exe->cmd.path = try(ft_strdup(((t_token *)l_token->content)->str));
 	}
 }
 

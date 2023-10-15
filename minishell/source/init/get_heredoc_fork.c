@@ -6,10 +6,11 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 18:43:57 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/12 20:44:08 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/15 12:19:34 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include <sys/wait.h>
 #include <fcntl.h>
 
@@ -48,4 +49,5 @@ static void	do_work(char *fname, char *delim)
 	fd = open_fd(fname, O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, 0644);
 	write_heredoc(fd, delim);
 	close_fd(fd);
+	exit(g_exit);
 }

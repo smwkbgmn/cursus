@@ -20,7 +20,8 @@
 		"execute.h": "c",
 		"readline.h": "c",
 		"struct.h": "c",
-		"rltypedefs.h": "c"
+		"rltypedefs.h": "c",
+		"__locale": "c"
 	},
 	"autoHide.autoHidePanel": false,
 	"autoHide.autoHideSideBar": true
