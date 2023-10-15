@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 20:25:19 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/15 12:13:51 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/15 19:30:26 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,10 @@ static t_list	*remove_token_used(t_list *l_token)
 		del = l_token;
 		if (is_redirect(l_token))
 		{
-			free(((t_token *)l_token->content)->str);
-			free(((t_token *)l_token->next->content)->str);
+			ft_free(((t_token *)l_token->content)->str);
+			if (l_token->next && !is_redirect(l_token->next))
+				ft_free_set_null(((void *)&((t_token *) \
+				l_token->next->content)->str));
 		}
 		l_token = remove_token_used(l_token->next);
 		ft_lstdelone(del, &free);

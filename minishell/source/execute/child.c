@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 14:33:52 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/15 11:54:26 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/15 18:59:15 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,21 @@ static void	valid_command(t_exe *exe)
 {
 	if (!exe->cmd.av
 		|| exe->cmd.fd_rd[R] == ERROR || exe->cmd.fd_rd[W] == ERROR)
-		exit_error_usr(1);
+		exit_error_usr(EXIT_SUCCESS);
+	if (ft_strncmp(*exe->cmd.av, ".", 2) == MATCH)
+	{
+		set_error(*exe->cmd.av, "filename argument required", 2);
+		write_errmsg(".: usage: . filename [arguments]\n");
+		exit(2);
+	}
+	if (ft_strncmp(*exe->cmd.av, "./", 3) == MATCH)
+	{
+		set_error(*exe->cmd.av, "is a directory", 126);
+		exit(126);
+	}
 	if (!exe->cmd.path)
 	{
-		write_errmsg("minishell: ");
-		write_errmsg(*exe->cmd.av);
-		write_errmsg(": command not found\n");
+		set_error(*exe->cmd.av, "command not found", 127);
 		exit(127);
 	}
 	if (ft_strncmp(exe->cmd.path, "err_cmd", 7) == MATCH)

@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 14:32:21 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/14 20:15:10 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/15 18:24:41 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	execute(t_list *l_exe);
 
 // parent.c
 void	parent(t_procs *ps, t_list *l_exe, int *fd_prev_out);
+t_list	*find_next(t_list *l_exe, int exit);
 
 // child.c
 void	child(t_procs *ps, t_exe *exe, int fd_prev_out);

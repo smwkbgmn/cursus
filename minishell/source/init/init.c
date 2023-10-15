@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 02:26:54 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/15 12:23:41 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/15 17:19:18 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,19 @@ static t_bool	unclosed_quote(char *line);
 
 void	init_shell(t_list **l_exe, char *line)
 {
-	if (line && !unclosed_quote(line))
+	if (line)
 	{
-		add_history(line);
-		get_execute(l_exe, parse(line));
-		// dbg_print_procs(*l_exe);
+		if (!unclosed_quote(line))
+		{
+			add_history(line);
+			get_execute(l_exe, parse(line));
+		}
 	}
 	else
+	{
+		printf("exit\n");
 		exit(EXIT_SUCCESS);
+	}
 }
 
 static t_bool	unclosed_quote(char *line)
@@ -41,6 +46,6 @@ static t_bool	unclosed_quote(char *line)
 	}
 	result = (data.q_sgl || data.q_dbl);
 	if (result)
-		set_error("unclosed quote is detected", 258);
+		set_error(NULL, "unclosed quote is detected", 258);
 	return (result);
 }

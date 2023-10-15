@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 14:30:54 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/10/14 17:08:19 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/10/15 18:25:59 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,12 @@ void	execute(t_list *l_exe)
 
 	if (is_builtin(((t_exe *)l_exe->content)->cmd.path)
 		&& !is_pipemode(l_exe->content, fd_prev_out))
+	{
 		execute_builtin(l_exe->content, FALSE);
+		l_exe = find_next(l_exe, g_exit);
+		if (l_exe)
+			execute(l_exe);
+	}
 	else
 	{
 		init_process(&ps, l_exe->content, fd_prev_out);
