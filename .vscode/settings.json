@@ -21,7 +21,8 @@
 		"readline.h": "c",
 		"struct.h": "c",
 		"rltypedefs.h": "c",
-		"__locale": "c"
+		"__locale": "c",
+		"wait.h": "c"
 	},
 	"autoHide.autoHidePanel": false,
 	"autoHide.autoHideSideBar": true

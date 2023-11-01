@@ -52,7 +52,7 @@ LIB_TM		= -lncurses
 DIR_HDR		= include 
 DIR_SRCS	= source
 
-DIR_LIB_FT	= libft
+DIR_LIB_FT	= ../archive/libft
 DIR_LIB_RL	= /Users/donghyu2/.brew/Cellar/readline/8.2.1
 
 all			: $(NAME)
