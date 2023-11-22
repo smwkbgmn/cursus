@@ -11,17 +11,19 @@ Sed::Sed( const str_t &fname, const str_t &target, const str_t &replace )
 
 void Sed::proceed( void )
 {
-	str_t		line;
+	std::ifstream	&ifs = _fs.getIn();
+	std::ofstream	&ofs = _fs.getOut();
+	str_t			line;
 
-	if ( _fs.getIn() && _fs.getOut())
+	if (ifs && ofs)
 	{
-		while (std::getline(_fs.getIn(), line))
+		while (std::getline(ifs, line))
 		{
-			_fs.getOut() << change(line, _target, _replace);
-			if (!_fs.getIn().eof())
-				_fs.getOut() << '\n';
+			ofs << change(line, _target, _replace);
+			if (!ifs.eof())
+				ofs << '\n';
 		}
-		if (_fs.getIn().fail())
+		if (!ifs.eof())
 			std::cerr << "error: fail to read from a file" << std::endl;
 	}
 }
@@ -31,10 +33,13 @@ static str_t &change( str_t &line, const str_t &target, const str_t &replace )
 	size_t	len_target = target.length();
 	size_t	pos = 0;
 
-	while ((pos = line.find(target, pos)) != str_t::npos)
+	if (target != replace)
 	{
-		line.erase(pos, len_target);
-		line.insert(pos, replace);
+		while ((pos = line.find(target, pos)) != str_t::npos)
+		{
+			line.erase(pos, len_target);
+			line.insert(pos, replace);
+		}
 	}
 	return line;
 }

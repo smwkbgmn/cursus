@@ -22,10 +22,10 @@ static bool valid( int argc, char *argv[] )
 
 	if (argc == 4)
 	{
-		for (int ptr = 1; ptr < 4 && !str.assign(argv[ptr]).empty(); ++ptr)
-			if (ptr == 3)
-				return TRUE;
-		std::cout << "you may not enter empty string" << std::endl;
+		if (!str.assign(argv[1]).empty()
+			&& !str.assign(argv[2]).empty())
+			return TRUE;
+		std::cout << "you may not enter empty string to fname and target" << std::endl;
 	}
 	else
 		std::cout << "please enter 3 argument " <<
@@ -35,7 +35,7 @@ static bool valid( int argc, char *argv[] )
 
 static void sed( char *argv[] )
 {
-	Sed	data(argv[1], argv[2], argv[3]);
+	Sed		data(argv[1], argv[2], argv[3]);
 
 	data.proceed();
 }
