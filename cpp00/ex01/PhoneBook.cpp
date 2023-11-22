@@ -70,17 +70,12 @@ static bool query_search(PhoneBook &book, int *input)
 
 static void show_list(PhoneBook &book)
 {
-	for (int idx = 0; idx < 8; ++idx)
+	for (int idx = 0; idx < 8 && !book[idx][0].empty(); ++idx)
 	{
-		if (!book[idx][0].empty())
-		{
-			std::cout << format << idx + 1 << '|';
-			std::cout << format << truncate(book[idx][0]) << '|';
-			std::cout << format << truncate(book[idx][1]) << '|';
-			std::cout << format << truncate(book[idx][2]) << std::endl;
-		}
-		else
-			break ;
+		std::cout << format << idx + 1 << '|';
+		std::cout << format << truncate(book[idx][0]) << '|';
+		std::cout << format << truncate(book[idx][1]) << '|';
+		std::cout << format << truncate(book[idx][2]) << std::endl;
 	}
 }
 

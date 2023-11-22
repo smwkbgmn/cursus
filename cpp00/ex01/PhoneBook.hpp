@@ -26,6 +26,7 @@ class Contact
 			}
 			return (phone);
 		}
+
 	private:
 		std::string	name_f;
 		std::string	name_l;
@@ -41,13 +42,16 @@ class PhoneBook
 		{
 			idx = 0;
 		}
+
 		Contact	&operator[](int idx)
 		{
 			return contact[idx];
 		}
+
 		void	Add(PhoneBook &);
 		void	Search(PhoneBook &);
 		void	Exit(void);
+		
 	private:
 		Contact	contact[8];
 		int		idx;
