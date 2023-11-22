@@ -27,9 +27,7 @@ static bool valid( int argc, char *argv[] )
 			return TRUE;
 		std::cout << "you may not enter empty string to fname and target" << std::endl;
 	}
-	else
-		std::cout << "please enter 3 argument " <<
-			"(fname, target, replacement)" << std::endl;
+	std::cout << "please enter 3 argument (fname, target, replacement)" << std::endl;
 	return FALSE;
 }
 
