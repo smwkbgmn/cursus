@@ -1,7 +1,6 @@
-NAME		= phonebook
+NAME		= harlFilter
 
 CC			= c++
-
 FLAG		= -Wall -Wextra -Werror \
 $(FLG_STD)
 

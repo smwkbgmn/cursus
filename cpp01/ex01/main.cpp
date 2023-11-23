@@ -5,7 +5,10 @@
 int main(void)
 {
 	Zombie	*horde;
+	int		n = 3;
 
-	horde = zombieHorde(3, "peter");
+	horde = zombieHorde(n, "peter");
+	for (int idx = 0; idx < n; ++idx)
+		horde[idx].announce();
 	delete[] horde;
 }

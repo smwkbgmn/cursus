@@ -87,5 +87,5 @@
 		"stack": "cpp"
 	},
 	"autoHide.autoHidePanel": false,
-	"autoHide.autoHideSideBar": false
+	"autoHide.autoHideSideBar": true
 }

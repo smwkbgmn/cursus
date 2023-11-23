@@ -12,7 +12,6 @@ int main( void )
 	jim();
 
 	Weapon	weapon("gun");
-
 	HumanA	pete("Pete", weapon);
 	HumanB	harry("Harry");
 
