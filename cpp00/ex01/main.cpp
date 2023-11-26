@@ -1,5 +1,6 @@
 #include <cctype>
 #include <stdexcept>
+#include <iostream>
 #include <limits>
 
 #include "PhoneBook.hpp"

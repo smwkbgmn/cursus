@@ -1,7 +1,19 @@
 #include <cstdlib>
 #include <iomanip>
+#include <iostream>
+#include <limits>
 
 #include "PhoneBook.hpp"
+
+PhoneBook::PhoneBook(void)
+{
+	idx = 0;
+}
+
+Contact &PhoneBook::operator[](int idx)
+{
+	return contact[idx];
+}
 
 static bool	query_add(Contact &, int);
 static void	ask(const char *);

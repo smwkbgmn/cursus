@@ -26,6 +26,7 @@ class Fixed
 
 		Fixed	&operator++( void );
 		Fixed	operator++( int );
+		// Fixed	operator++( int );
 
 		int		getRawBits( void ) const;
 		void	setRawBits( int const );

@@ -3,7 +3,7 @@
 
 #include "Fixed.hpp"
 
-// Con/Destructor
+// Con & Destructor
 Fixed::Fixed( void )
 : _fp(0)
 {
@@ -103,7 +103,7 @@ Fixed Fixed::operator/( const Fixed &fp ) const
 	return rst;
 }
 
-// In/Decreament
+// In & Decreament
 Fixed &Fixed::operator++( void )
 {
 	_fp++;
@@ -111,7 +111,7 @@ Fixed &Fixed::operator++( void )
 	return *this;
 }
 
-Fixed Fixed::operator++( int )
+Fixed Fixed::operator++( int fp )
 {
 	Fixed	res(*this);
 	++(*this);

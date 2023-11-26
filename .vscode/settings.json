@@ -84,8 +84,12 @@
 		"iomanip": "cpp",
 		"deque": "cpp",
 		"fstream": "cpp",
-		"stack": "cpp"
+		"stack": "cpp",
+		"__functional_base": "cpp",
+		"functional": "cpp",
+		"iterator": "cpp",
+		"utility": "cpp"
 	},
-	"autoHide.autoHidePanel": false,
+	"autoHide.autoHidePanel": true,
 	"autoHide.autoHideSideBar": true
 }
