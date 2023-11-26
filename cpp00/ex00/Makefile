@@ -6,7 +6,7 @@ $(F_STD)
 
 F_STD		= -std=c++98
 
-SRC			= megaphone.cpp
+SRC			= $(wildcard *.cpp)
 
 OBJ			= $(SRC:.cpp=.o)
 
