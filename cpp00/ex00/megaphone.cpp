@@ -1,28 +1,28 @@
 #include <iostream>
+#include <string>
 #include <cctype>
 
-char	*toupper_str(char *arg);
+std::string toupper_str( char *str_c );
 
-int main(int ac, char **av)
+int main( int argc, char *argv[] )
 {
-	if (ac == 1)
+	if (argc == 1)
 		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
 	else
 	{
-		for (int ptr = 1; ptr < ac; ++ptr)
-			std::cout << toupper_str(av[ptr]);
+		for (int ptr = 1; ptr < argc; ++ptr)
+			std::cout << toupper_str(argv[ptr]);
 	}
-	std::cout << "\n";
+	std::cout << std::endl;
 }
 
-char	*toupper_str(char *arg)
+std::string toupper_str( char *str_c )
 {
-	int	idx = 0;
+	std::string	str = str_c;
+	size_t		len = str.length();
 
-	while (arg[idx])
-	{
-		arg[idx] = static_cast<char>(toupper(static_cast<unsigned char>(arg[idx])));
-		idx++;
-	}
-	return (arg);
+	for (int idx = 0; idx < len; ++idx)
+		str[idx] = (char)(toupper((unsigned char)str_c[idx]));
+
+	return str;
 }
