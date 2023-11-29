@@ -1,31 +1,42 @@
-#include <cstdlib>
 #include <iomanip>
-#include <iostream>
-#include <limits>
 
 #include "PhoneBook.hpp"
 
 PhoneBook::PhoneBook(void)
+: idx(0)
 {
-	idx = 0;
 }
 
-Contact &PhoneBook::operator[](int idx)
+// PROMPT
+bool PhoneBook::prompt(void)
 {
-	return contact[idx];
+	std::string	input;
+
+	std::cout << "Command: ";
+	if (Stream::std_cin(input))
+	{
+		if (input == "ADD")
+			add();
+		else if (input == "SEARCH")
+			search();
+		else if (input == "EXIT")
+			exit();
+		else
+			std::cout << "please type correct command\n"
+				<< "(ADD, SEARCH, EXIT)" << std::endl;
+	}
+	return TRUE;
 }
 
-static bool	query_add(Contact &, int);
-static void	ask(const char *);
-
-void PhoneBook::Add(PhoneBook &book)
+// ADD
+void PhoneBook::add(void)
 {
 	for (int order = 0; order < 5; ++order)
-		while (!query_add(book[book.idx], order));
-	++(book.idx) %= 8;
+		while (!queryAdd(contact[idx], order));
+	++idx %= 8;
 }
 
-static bool query_add(Contact &contact, int order)
+bool PhoneBook::queryAdd(Contact &contact, int order)
 {
 	switch (order)
 	{
@@ -40,63 +51,52 @@ static bool query_add(Contact &contact, int order)
 		case 4: ask("What is your secretary secret?");
 			break ;
 	}
-	return std_cin(contact[order]);
+	return Stream::std_cin(contact[order]);
 }
 
-static void ask(const char *msg)
+void PhoneBook::ask(const char *msg)
 {
 	std::cout << msg << ' ';
 }
 
-static bool			query_search(PhoneBook &, int *);
-static void 		show_list(PhoneBook &);
-static std::ostream	&format(std::ostream &);
-static std::string	truncate(std::string const &);
-static void			print_contact(Contact &);
-
-void PhoneBook::Search(PhoneBook &book)
+// SEARCH
+void PhoneBook::search(void)
 {
 	int input = 0;
 	
-	if (book[0][0].empty())
+	if (contact[0][0].empty())
 		std::cout << "nothing has saved on this phonebook" << std::endl;
 	else
 	{
-		show_list(book);
+		showList();
 		
-		while (!query_search(book, &input));
+		while (!querySearch(&input));
 		if (input < 1 || input > 8)
 			std::cout << "wrong index, plese type between 1-8\n";
-		else if (book[input - 1][0].empty())
+		else if (contact[input - 1][0].empty())
 			std::cout << "that contact is empty\n";
 		else
-			print_contact(book[input - 1]);
+			printContact(contact[input - 1]);
 	}
 }
 
-static bool query_search(PhoneBook &book, int *input)
+void PhoneBook::showList(void)
 {
-	std::cout << "Which contact do you want to see? ";
-	return std_cin(input);
-}
-
-static void show_list(PhoneBook &book)
-{
-	for (int idx = 0; idx < 8 && !book[idx][0].empty(); ++idx)
+	for (int idx = 0; idx < 8 && !contact[idx][0].empty(); ++idx)
 	{
 		std::cout << format << idx + 1 << '|';
-		std::cout << format << truncate(book[idx][0]) << '|';
-		std::cout << format << truncate(book[idx][1]) << '|';
-		std::cout << format << truncate(book[idx][2]) << std::endl;
+		std::cout << format << truncate(contact[idx][0]) << '|';
+		std::cout << format << truncate(contact[idx][1]) << '|';
+		std::cout << format << truncate(contact[idx][2]) << std::endl;
 	}
 }
 
-static std::ostream	&format(std::ostream &os)
+std::ostream &format(std::ostream &os)
 {
-	return os << std::setw(10) << std::setfill(' ') << std::right;
+	return os << std::setw(10) << std::setfill(' ') << std::right;;
 }
 
-static std::string truncate(std::string const &src)
+std::string PhoneBook::truncate(std::string const &src)
 {
 	std::string	rst;
 
@@ -110,13 +110,20 @@ static std::string truncate(std::string const &src)
 	return (rst);
 }
 
-static void print_contact(Contact &contact)
+bool PhoneBook::querySearch(int *input)
+{
+	std::cout << "Which contact do you want to see? ";
+	return Stream::std_cin(input);
+}
+
+void PhoneBook::printContact(Contact &contact)
 {
 	for (int order = 0; order < 5; ++order)
 		std::cout << contact[order] << std::endl;
 }
 
-void PhoneBook::Exit(void)
+// EXIT
+void PhoneBook::exit(void)
 {
 	std::exit(EXIT_SUCCESS);
 }

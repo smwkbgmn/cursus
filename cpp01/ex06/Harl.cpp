@@ -10,8 +10,6 @@ Harl::Harl( void )
 	_level[3] = "ERROR";
 }
 
-static void insignificant( void );
-
 void Harl::complain( std::string level )
 {
 	int	idx;
@@ -59,7 +57,7 @@ void Harl::error( void )
 	std::cout << "This is unacceptable!, I want to speak to the manager now.\n" << std::endl;
 }
 
-static void insignificant( void )
+void Harl::insignificant( void )
 {
 	std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
 }

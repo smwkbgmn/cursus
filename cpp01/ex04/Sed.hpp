@@ -3,17 +3,17 @@
 
 # include "FileStream.hpp"
 
+# define FALSE 0
+# define TRUE 1
+
 class Sed
 {
 	public:
-		Sed( const str_t &, const str_t &, const str_t & );
-
-		void	proceed( void );
+		static bool	valid( int argc, char *argv[] );
+		static void	proceed( char *argv[] );
 
 	private:
-		FileStream	_fs;
-		str_t		_target;
-		str_t		_replace;
+		static str_t	&change( str_t &line, const str_t &target, const str_t &replace );
 };
 
 #endif

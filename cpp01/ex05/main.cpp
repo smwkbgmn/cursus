@@ -6,13 +6,17 @@ int main( void )
 {
 	Harl	harl;
 
-	harl.complain("DEBUG");
+	harl.complain( "DEBUG" );
 	std::cout << '\n';
-	harl.complain("INFO");
-	std::cout << '\n';
-	harl.complain("WARNING");
-	std::cout << '\n';
-	harl.complain("ERROR");
 
-	harl.complain("NOT EXIST");
+	harl.complain( "INFO" );
+	std::cout << '\n';
+
+	harl.complain( "WARNING" );
+	std::cout << '\n';
+
+	harl.complain( "ERROR" );
+	std::cout << '\n';
+
+	harl.complain( "NOT EXIST" );
 }

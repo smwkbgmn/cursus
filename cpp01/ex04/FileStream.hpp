@@ -12,12 +12,10 @@ class FileStream
 		FileStream( const str_t & );
 		~FileStream( void );
 
-		std::ifstream	&getIn( void );
-		std::ofstream	&getOut( void );
+		std::ifstream	is;
+		std::ofstream	os;
 
 	private:
-		std::ifstream	_ifs;
-		std::ofstream	_ofs;
 };
 
 #endif

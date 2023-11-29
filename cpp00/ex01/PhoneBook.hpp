@@ -1,29 +1,34 @@
 #ifndef PHONEBOOK_HPP
 # define PHONEBOOK_HPP
 
+# include "Stream.hpp"
 # include "Contact.hpp"
 
-# define FALSE 0
-# define TRUE 1
 # define LOOP 1
 
-bool std_cin(std::string &target);
-bool std_cin(int *target);
+std::ostream	&format(std::ostream &);
 
 class PhoneBook
 {
 	public:
 		PhoneBook(void);
 
-		Contact	&operator[](int idx);
-
-		void	Add(PhoneBook &);
-		void	Search(PhoneBook &);
-		void	Exit(void);
+		bool	prompt(void);
+		void	add(void);
+		void	search(void);
+		void	exit(void);
 		
 	private:
 		Contact	contact[8];
 		int		idx;
+
+		bool			queryAdd(Contact &, int);
+		void			ask(const char *);
+		
+		bool			querySearch(int *);
+		void 			showList(void);
+		std::string		truncate(std::string const &);
+		void			printContact(Contact &);
 };
 
 #endif

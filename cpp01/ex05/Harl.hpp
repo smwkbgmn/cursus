@@ -10,9 +10,9 @@ class Harl
 
 		void	complain( std::string );
 
-		typedef void (Harl::*fp)( void );
-
 	private:
+		typedef void (Harl::*fp)( void );
+		
 		std::string	_level[4];
 		fp			_complain[4];
 

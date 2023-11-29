@@ -22,7 +22,7 @@ std::string toupper_str( char *str_c )
 	size_t		len = str.length();
 
 	for (int idx = 0; idx < len; ++idx)
-		str[idx] = (char)(toupper((unsigned char)str_c[idx]));
+		str[idx] = (char)(std::toupper((unsigned char)str_c[idx]));
 
 	return str;
 }

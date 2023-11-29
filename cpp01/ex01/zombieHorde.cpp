@@ -5,13 +5,13 @@
 
 Zombie* zombieHorde( const int N, std::string name )
 {
-	Zombie	*ptr = new Zombie[N];
+	Zombie	*horde = new Zombie[N];
 	
 	for (int idx = 0; idx < N; ++idx)
 	{
-		ptr[idx].getName() = name;
-		std::cout << "zombie " << idx << " named as " << name << std::endl;
+		horde[idx].setName( name );
+		std::cout << "Zombie " << idx << " named as \"" << name << '\"' << std::endl;
 	}
 
-	return (Zombie *)ptr;
+	return (Zombie *)horde;
 }

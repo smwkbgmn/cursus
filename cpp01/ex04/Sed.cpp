@@ -2,43 +2,51 @@
 
 #include "Sed.hpp"
 
-static str_t &change( str_t &, const str_t &, const str_t & );
-
-Sed::Sed( const str_t &fname, const str_t &target, const str_t &replace )
-: _fs(fname), _target(target), _replace(replace)
+bool Sed::valid( int argc, char *argv[] )
 {
+	str_t	str;
+
+	if (argc == 4)
+	{
+		if (!str.assign( argv[1] ).empty()
+			&& !str.assign( argv[2] ).empty())
+			return TRUE;
+		std::cout << "you may not enter empty string to fname and target" << std::endl;
+	}
+	else
+		std::cout << "please enter 3 argument (fname, target, replacement)" << std::endl;
+	return FALSE;
 }
 
-void Sed::proceed( void )
+void Sed::proceed( char *argv[] )
 {
-	std::ifstream	&ifs = _fs.getIn();
-	std::ofstream	&ofs = _fs.getOut();
-	str_t			line;
+	FileStream	fs( argv[1] );
+	str_t		line;
 
-	if (ifs && ofs)
+	if (fs.is && fs.os)
 	{
-		while (std::getline(ifs, line))
+		while (std::getline( fs.is, line ))
 		{
-			ofs << change(line, _target, _replace);
-			if (!ifs.eof())
-				ofs << '\n';
+			fs.os << change( line, argv[2], argv[3] );
+			if (!fs.is.eof())
+				fs.os << '\n';
 		}
-		if (!ifs.eof())
+		if (!fs.is.eof())
 			std::cerr << "error: fail to read from a file" << std::endl;
 	}
 }
 
-static str_t &change( str_t &line, const str_t &target, const str_t &replace )
+str_t &Sed::change( str_t &line, const str_t &target, const str_t &replace )
 {
 	size_t	len_target = target.length();
 	size_t	pos = 0;
 
 	if (target != replace)
 	{
-		while ((pos = line.find(target, pos)) != str_t::npos)
+		while ((pos = line.find( target, pos )) != str_t::npos)
 		{
-			line.erase(pos, len_target);
-			line.insert(pos, replace);
+			line.erase( pos, len_target );
+			line.insert( pos, replace );
 		}
 	}
 	return line;

@@ -6,7 +6,7 @@ int main( int argc, char *argv[] )
 	std::string	level;
 
 	if (argc == 2)
-		harl.complain(level.assign(argv[1]));
+		harl.complain( level.assign( argv[1] ) );
 
 	return 0;
 }
