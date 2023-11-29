@@ -32,12 +32,10 @@ class ClapTrap
 		point_t	_energy;
 		point_t	_damage;
 
-		ClapTrap( point_t, point_t, point_t );
-		ClapTrap( const str_t &, point_t, point_t, point_t );
-
 		point_t	getHit( void ) const;
 		point_t	getEnergy( void ) const;
 
+		virtual void	initAttr( void );
 		virtual void	printName( void );
 		void			printAttr( void );
 		bool			available( void );

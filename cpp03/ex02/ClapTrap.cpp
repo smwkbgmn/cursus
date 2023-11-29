@@ -110,7 +110,7 @@ void ClapTrap::takeDamage( point_t amount )
 	if (available())
 	{
 		_hit = _hit > amount? _hit - amount : 0;
-
+		
 		printName();
 		std::cout << "has taked " << amount << " damage!";
 		std::cout << " (healthPoint changed to " << _hit << ")";

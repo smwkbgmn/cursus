@@ -12,15 +12,14 @@ typedef unsigned int	point_t;
 class ClapTrap
 {
 	public:
-		ClapTrap( const ClapTrap & );
+		ClapTrap( void );
 		ClapTrap( const str_t & );
+		ClapTrap( const ClapTrap & );
 		~ClapTrap( void );
 
 		ClapTrap	&operator=( const ClapTrap & );
 
 		str_t	getName( void ) const;
-		point_t	getHit( void ) const;
-		point_t	getEnergy( void ) const;
 		point_t	getDamage( void ) const;
 
 		void	attack( const str_t & );
@@ -28,14 +27,17 @@ class ClapTrap
 		void	beRepaired( point_t );
 
 	private:
-		bool	available( void );
-		void	printName( void );
-		void	printAttr( void );
-
 		str_t	_name;
 		point_t	_hit;
 		point_t	_energy;
 		point_t	_damage;
+
+		point_t	getHit( void ) const;
+		point_t	getEnergy( void ) const;
+
+		bool	available( void );
+		void	printName( void );
+		void	printAttr( void );
 };
 
 #endif

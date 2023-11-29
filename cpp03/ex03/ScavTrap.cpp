@@ -3,8 +3,9 @@
 #include "ScavTrap.hpp"
 
 ScavTrap::ScavTrap( void )
-: ClapTrap(100, 50, 20)
 {
+	initAttr();
+
 	std::cout << "[CON-DEF] ";
 	printName();
 	std::cout << "has created ";
@@ -13,8 +14,10 @@ ScavTrap::ScavTrap( void )
 }
 
 ScavTrap::ScavTrap( const str_t &name )
-: ClapTrap(name, 100, 50, 20)
+: ClapTrap(name)
 {
+	initAttr();
+
 	std::cout << "[CON-NME] ";
 	printName();
 	std::cout << "has created ";
@@ -44,7 +47,7 @@ ScavTrap::~ScavTrap( void )
 
 ScavTrap &ScavTrap::operator=( const ScavTrap &target )
 {
-	std::cout << "[Copy assignment called]" << std::endl;
+	std::cout << "[ScavTrap's Copy assignment called]" << std::endl;
 	
 	if (this != &target)
 	{
@@ -78,6 +81,13 @@ void ScavTrap::guardGate( void )
 		std::cout << " is now in Gatekepper mode";
 		std::cout << std::endl; 
 	}
+}
+
+void ScavTrap::initAttr( void )
+{
+	_hit = 100;
+	_energy = 50;
+	_damage = 20;
 }
 
 void ScavTrap::printName( void )

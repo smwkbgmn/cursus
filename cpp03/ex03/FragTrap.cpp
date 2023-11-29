@@ -1,10 +1,11 @@
 #include <iostream>
 
-#include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 
-ScavTrap::ScavTrap( void )
-: ClapTrap(100, 50, 20)
+FragTrap::FragTrap( void )
 {
+	initAttr();	
+
 	std::cout << "[CON-DEF] ";
 	printName();
 	std::cout << "has created ";
@@ -12,9 +13,11 @@ ScavTrap::ScavTrap( void )
 	std::cout << std::endl;
 }
 
-ScavTrap::ScavTrap( const str_t &name )
-: ClapTrap(name, 100, 50, 20)
+FragTrap::FragTrap( const str_t &name )
+: ClapTrap(name)
 {
+	initAttr();
+
 	std::cout << "[CON-NME] ";
 	printName();
 	std::cout << "has created ";
@@ -22,7 +25,7 @@ ScavTrap::ScavTrap( const str_t &name )
 	std::cout << std::endl;
 }
 
-ScavTrap::ScavTrap( const ScavTrap &target )
+FragTrap::FragTrap( const FragTrap &target )
 {
 	*this = target;
 
@@ -33,7 +36,7 @@ ScavTrap::ScavTrap( const ScavTrap &target )
 	std::cout << std::endl;
 }
 
-ScavTrap::~ScavTrap( void )
+FragTrap::~FragTrap( void )
 {
 	std::cout << "[DES] ";	
 	printName();
@@ -42,10 +45,10 @@ ScavTrap::~ScavTrap( void )
 	std::cout << std::endl;
 }
 
-ScavTrap &ScavTrap::operator=( const ScavTrap &target )
+FragTrap &FragTrap::operator=( const FragTrap &target )
 {
-	std::cout << "[Copy assignment called]" << std::endl;
-	
+	std::cout << "[FragTrap's Copy assignment called]" << std::endl;
+
 	if (this != &target)
 	{
 		_name = target.getName();
@@ -57,7 +60,7 @@ ScavTrap &ScavTrap::operator=( const ScavTrap &target )
 	return *this;
 }
 
-void ScavTrap::attack( const str_t &name )
+void FragTrap::attack( const str_t &name )
 {
 	if (available())
 	{
@@ -70,17 +73,24 @@ void ScavTrap::attack( const str_t &name )
 	}
 }
 
-void ScavTrap::guardGate( void )
+void FragTrap::highFivesGuys( void )
 {
 	if (available())
 	{
 		printName();
-		std::cout << " is now in Gatekepper mode";
+		std::cout << "raised hands up for HighFives!!";
 		std::cout << std::endl; 
 	}
 }
 
-void ScavTrap::printName( void )
+void FragTrap::initAttr( void )
 {
-	std::cout << "ScavTrap " << _name << " ";
+	_hit = 100;
+	_energy = 100;
+	_damage = 30;
+}
+
+void FragTrap::printName( void )
+{
+	std::cout << "FragTrap " << _name << ' ';
 }

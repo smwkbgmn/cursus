@@ -1,4 +1,4 @@
-NAME		= scavtrap
+NAME		= fragtrap
 
 CPP			= c++
 FLAG		= -Wall -Wextra -Werror \

@@ -2,12 +2,12 @@
 
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap( const ClapTrap &target )
+ClapTrap::ClapTrap( void )
+: _name("_unnamed_"), _hit(10), _energy(10), _damage(0)
 {
-	*this = target;
-
+	std::cout << "[CON-DEF] ";
 	printName();
-	std::cout << "has created with ";
+	std::cout << "has created ";
 	printAttr();
 	std::cout << std::endl;
 }
@@ -15,26 +15,42 @@ ClapTrap::ClapTrap( const ClapTrap &target )
 ClapTrap::ClapTrap( const str_t &name )
 : _name(name), _hit(10), _energy(10), _damage(0)
 {
+	std::cout << "[CON-NME] ";
 	printName();
-	std::cout << "has created with ";
+	std::cout << "has created ";
+	printAttr();
+	std::cout << std::endl;
+}
+
+ClapTrap::ClapTrap( const ClapTrap &target )
+{
+	*this = target;
+
+	std::cout << "[CON-CPY] ";
+	printName();
+	std::cout << "has created ";
 	printAttr();
 	std::cout << std::endl;
 }
 
 ClapTrap::~ClapTrap( void )
 {
+	std::cout << "[DES] ";
 	printName();
-	std::cout << "has destroyed with ";
+	std::cout << "has destroyed ";
 	printAttr();
 	std::cout << std::endl;
 }
 
 ClapTrap &ClapTrap::operator=( const ClapTrap &target )
 {
-	_name = target.getName();
-	_hit = target.getHit();
-	_energy = target.getEnergy();
-	_damage = target.getDamage();
+	if (this != &target)
+	{
+		_name = target.getName();
+		_hit = target.getHit();
+		_energy = target.getEnergy();
+		_damage = target.getDamage();
+	}
 
 	return *this;
 }
@@ -58,11 +74,11 @@ point_t ClapTrap::getDamage( void ) const
 
 void ClapTrap::attack( const str_t &target )
 {
-	printName();
 	if (available())
 	{
 		_energy--;
 
+		printName();
 		std::cout << "attacks " << target << ", ";
 		std::cout << "causing " << _damage << " points of damage!";
 		std::cout << std::endl;
@@ -71,11 +87,15 @@ void ClapTrap::attack( const str_t &target )
 
 void ClapTrap::takeDamage( point_t amount )
 {
-	_hit = _hit > amount? _hit - amount : 0;
+	if (available())
+	{
+		_hit = _hit > amount? _hit - amount : 0;
 
-	printName();
-	std::cout << "has taked " << amount << " damage!";
-	std::cout << std::endl;
+		printName();
+		std::cout << "has taked " << amount << " damage!";
+		std::cout << " (healthPoint changed to " << _hit << ")";
+		std::cout << std::endl;
+	}
 }
 
 void ClapTrap::beRepaired( point_t amount )
@@ -93,14 +113,14 @@ void ClapTrap::beRepaired( point_t amount )
 
 void ClapTrap::printName( void )
 {
-	std::cout << "ClapTrap " << _name << " ";
+	std::cout << "ClapTrap " << _name << ' ';
 }
 
 void ClapTrap::printAttr( void )
 {
-	std::cout << "hit(" << _hit << "), ";
-	std::cout << "energy(" << _energy << "), ";
-	std::cout << "damage(" << _damage << ")";
+	std::cout << "(" << _hit << ", ";
+	std::cout << _energy << ", ";
+	std::cout << _damage << ")";
 }
 
 bool ClapTrap::available( void )

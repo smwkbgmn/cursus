@@ -1,4 +1,4 @@
-NAME		= scavtrap
+NAME		= diamondtrap
 
 CPP			= c++
 FLAG		= -Wall -Wextra -Werror \

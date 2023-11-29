@@ -22,26 +22,6 @@ ClapTrap::ClapTrap( const str_t &name )
 	std::cout << std::endl;
 }
 
-ClapTrap::ClapTrap( point_t hit, point_t energy, point_t damage )
-: _name("_unnamed_"), _hit(hit), _energy(energy), _damage(damage)
-{
-	std::cout << "[CON-ATR] ";
-	printName();
-	std::cout << "has created ";
-	printAttr();
-	std::cout << std::endl;
-}
-
-ClapTrap::ClapTrap( const str_t &name, point_t hit, point_t energy, point_t damage )
-: _name(name), _hit(hit), _energy(energy), _damage(damage)
-{
-	std::cout << "[CON-FUL] ";
-	printName();
-	std::cout << "has created ";
-	printAttr();
-	std::cout << std::endl;
-}
-
 ClapTrap::ClapTrap( const ClapTrap &target )
 {
 	*this = target;
@@ -110,7 +90,7 @@ void ClapTrap::takeDamage( point_t amount )
 	if (available())
 	{
 		_hit = _hit > amount? _hit - amount : 0;
-
+		
 		printName();
 		std::cout << "has taked " << amount << " damage!";
 		std::cout << " (healthPoint changed to " << _hit << ")";
@@ -129,6 +109,10 @@ void ClapTrap::beRepaired( point_t amount )
 		std::cout << "repaired " << amount << " health point!";
 		std::cout << std::endl;
 	}
+}
+
+void ClapTrap::initAttr( void )
+{
 }
 
 void ClapTrap::printName( void )
