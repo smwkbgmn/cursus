@@ -5,12 +5,12 @@
 
 Zombie* zombieHorde( const int N, std::string name )
 {
-	Zombie	*horde;
+	Zombie	*horde = new Zombie[N];
 	
-	try { horde = new Zombie[N]; }
-	catch (std::bad_alloc) { return NULL; }
-	
- 	for (int idx = 0; idx < N; ++idx)
+	if (!horde)
+		return (NULL);
+
+	for (int idx = 0; idx < N; ++idx)
 	{
 		horde[idx].setName( name );
 		std::cout << "Zombie " << idx << " named as \"" << name << '\"' << std::endl;

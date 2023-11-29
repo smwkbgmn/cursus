@@ -5,10 +5,10 @@ void randomChump( std::string );
 
 int main(void)
 {
-	Zombie	*ptr;
+	Zombie	*ptr = newZombie( "peter" );
 
-	try { ptr = newZombie( "peter" ); }
-	catch (std::bad_alloc) { return 1; }
+	if (!ptr)
+		return 1;
 		
 	ptr->announce();
 	randomChump( "john" );

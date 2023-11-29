@@ -1,5 +1,3 @@
-#include <new>
-
 #include "Zombie.hpp"
 
 Zombie* zombieHorde( const int , std::string );

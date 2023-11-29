@@ -18,9 +18,9 @@ void Harl::complain( std::string level )
 	
 	switch (idx)
 	{
-		case 0: debug();
-		case 1: info();
-		case 2: warning();
+		case 0: debug(); __attribute__((fallthrough));
+		case 1: info(); __attribute__((fallthrough));
+		case 2: warning(); __attribute__((fallthrough));
 		case 3:
 		{
 			error();
