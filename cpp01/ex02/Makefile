@@ -1,6 +1,6 @@
 NAME		= brain
 
-CC			= c++
+CPP			= c++
 FLAG		= -Wall -Wextra -Werror \
 $(FLG_STD)
 
@@ -13,10 +13,10 @@ OBJ			= $(SRC:.cpp=.o)
 all			: $(NAME)
 
 $(NAME)		: $(OBJ)
-			$(CC) $(FLAG) $(OBJ) -o $@
+			$(CPP) $(FLAG) $(OBJ) -o $@
 
 %.o			: %.c
-			$(CC) $(FLAG) -c $< -o $@
+			$(CPP) $(FLAG) -c $< -o $@
 
 clean		:
 			$(RM) $(OBJ)

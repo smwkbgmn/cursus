@@ -19,4 +19,6 @@ int main( void )
 	std::cout << '\n';
 
 	harl.complain( "NOT EXIST" );
+
+	return 0;
 }

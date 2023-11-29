@@ -6,16 +6,13 @@
 
 typedef std::string	str_t;
 
-class FileStream
+struct FileStream
 {
-	public:
-		FileStream( const str_t & );
-		~FileStream( void );
+	std::ifstream	is;
+	std::ofstream	os;
 
-		std::ifstream	is;
-		std::ofstream	os;
-
-	private:
+	FileStream( const str_t & );
+	~FileStream( void );
 };
 
 #endif

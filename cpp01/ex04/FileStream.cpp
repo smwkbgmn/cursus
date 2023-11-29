@@ -2,8 +2,6 @@
 
 #include "FileStream.hpp"
 
-static str_t	&change( str_t &, const str_t &, const str_t & );
-
 FileStream::FileStream( const str_t &fname ) 
 {
 	is.open( fname );
@@ -22,6 +20,9 @@ FileStream::FileStream( const str_t &fname )
 
 FileStream::~FileStream( void )
 {
-	is.close();
-	os.close();
+	if (is && os)
+	{
+		is.close();
+		os.close();
+	}
 }
