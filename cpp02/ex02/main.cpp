@@ -16,7 +16,6 @@ int main( void )
 	Fixed	a(1.5f);
 	Fixed	b(1.625f);
 
-
 	std::cout << a + b << std::endl;
 	std::cout << a - b << std::endl;
 	std::cout << a * 3 << std::endl;

@@ -5,9 +5,9 @@ class Fixed
 {
 	public:
 		Fixed( void );
-		Fixed( const Fixed & );
 		Fixed( const int );
 		Fixed( const float );
+		Fixed( const Fixed & );
 		~Fixed( void );
 
 		Fixed	&operator=( const Fixed & );
