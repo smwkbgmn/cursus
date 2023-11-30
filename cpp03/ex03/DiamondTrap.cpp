@@ -3,10 +3,7 @@
 #include "DiamondTrap.hpp"
 
 DiamondTrap::DiamondTrap( void )
-// : ClapTrap("_unnamed__clap_name"), _name("_unnamed_")
 {
-	_name = "_unnamed_";
-	ClapTrap::_name = _name + "_clap_name";
 	initAttr();
 
 	std::cout << "[CON-DEF] ";
@@ -17,10 +14,8 @@ DiamondTrap::DiamondTrap( void )
 }
 
 DiamondTrap::DiamondTrap( const str_t &name )
-// : ClapTrap(name + "_clap_name"), _name(name)
+: ClapTrap(name + "_clap_name"), _name(name)
 {
-	_name = name;
-	ClapTrap::_name = _name + "_clap_name";
 	initAttr();
 
 	std::cout << "[CON-NME] ";
@@ -81,14 +76,14 @@ void DiamondTrap::initAttr( void )
 
 void DiamondTrap::printName( void )
 {
-	std::cout << "DiamondTrap " << _name << " ";
+	std::cout << "DiamondTrap \"" << _name << "\" ";
 }
 
 void DiamondTrap::whoAmI( void )
 {
 	if (available())
 	{
-		std::cout << "DiamondTrap " << _name
-			<< "has second name " << ClapTrap::_name << std::endl;
+		std::cout << "DiamondTrap \"" << _name
+			<< "\" has second name \"" << ClapTrap::_name << '"' << std::endl;
 	}
 }

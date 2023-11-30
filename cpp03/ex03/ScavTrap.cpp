@@ -66,8 +66,8 @@ void ScavTrap::attack( const str_t &name )
 	{
 		_energy--;
 
-		printName();
-		std::cout << "attacks " << name << ", ";
+		ScavTrap::printName();
+		std::cout << "attacks \"" << name << "\", ";
 		std::cout << "causing " << _damage << " points of damage!";
 		std::cout << std::endl;
 	}
@@ -78,7 +78,7 @@ void ScavTrap::guardGate( void )
 	if (available())
 	{
 		printName();
-		std::cout << " is now in Gatekepper mode";
+		std::cout << "is now in Gatekepper mode";
 		std::cout << std::endl; 
 	}
 }
@@ -92,5 +92,5 @@ void ScavTrap::initAttr( void )
 
 void ScavTrap::printName( void )
 {
-	std::cout << "ScavTrap " << _name << " ";
+	std::cout << "ScavTrap \"" << _name << "\" ";
 }

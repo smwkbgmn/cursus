@@ -3,7 +3,7 @@
 #include "ClapTrap.hpp"
 
 ClapTrap::ClapTrap( void )
-: _name("_unnamed_"), _hit(10), _energy(10), _damage(0)
+: _hit(10), _energy(10), _damage(0)
 {
 	std::cout << "[CON-DEF] ";
 	printName();
@@ -79,7 +79,7 @@ void ClapTrap::attack( const str_t &target )
 		_energy--;
 
 		printName();
-		std::cout << "attacks " << target << ", ";
+		std::cout << "attacks \"" << target << "\", ";
 		std::cout << "causing " << _damage << " points of damage!";
 		std::cout << std::endl;
 	}
@@ -113,7 +113,7 @@ void ClapTrap::beRepaired( point_t amount )
 
 void ClapTrap::printName( void )
 {
-	std::cout << "ClapTrap " << _name << ' ';
+	std::cout << "ClapTrap \"" << _name << "\" ";
 }
 
 void ClapTrap::printAttr( void )

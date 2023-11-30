@@ -3,7 +3,7 @@
 #include "ClapTrap.hpp"
 
 ClapTrap::ClapTrap( void )
-: _name("_unnamed_"), _hit(10), _energy(10), _damage(0)
+: _hit(10), _energy(10), _damage(0)
 {
 	std::cout << "[CON-DEF] ";
 	printName();
@@ -16,26 +16,6 @@ ClapTrap::ClapTrap( const str_t &name )
 : _name(name), _hit(10), _energy(10), _damage(0)
 {
 	std::cout << "[CON-NME] ";
-	printName();
-	std::cout << "has created ";
-	printAttr();
-	std::cout << std::endl;
-}
-
-ClapTrap::ClapTrap( point_t hit, point_t energy, point_t damage )
-: _name("_unnamed_"), _hit(hit), _energy(energy), _damage(damage)
-{
-	std::cout << "[CON-ATR] ";
-	printName();
-	std::cout << "has created ";
-	printAttr();
-	std::cout << std::endl;
-}
-
-ClapTrap::ClapTrap( const str_t &name, point_t hit, point_t energy, point_t damage )
-: _name(name), _hit(hit), _energy(energy), _damage(damage)
-{
-	std::cout << "[CON-FUL] ";
 	printName();
 	std::cout << "has created ";
 	printAttr();
@@ -92,14 +72,14 @@ point_t ClapTrap::getDamage( void ) const
 	return _damage;
 }
 
-void ClapTrap::attack( const str_t &target )
+void ClapTrap::attack( const str_t &name )
 {
 	if (available())
 	{
 		_energy--;
 
-		printName();
-		std::cout << "attacks " << target << ", ";
+		ClapTrap::printName();
+		std::cout << "attacks \"" << name << "\", ";
 		std::cout << "causing " << _damage << " points of damage!";
 		std::cout << std::endl;
 	}
@@ -110,7 +90,7 @@ void ClapTrap::takeDamage( point_t amount )
 	if (available())
 	{
 		_hit = _hit > amount? _hit - amount : 0;
-
+		
 		printName();
 		std::cout << "has taked " << amount << " damage!";
 		std::cout << " (healthPoint changed to " << _hit << ")";
@@ -131,9 +111,13 @@ void ClapTrap::beRepaired( point_t amount )
 	}
 }
 
+void ClapTrap::initAttr( void )
+{
+}
+
 void ClapTrap::printName( void )
 {
-	std::cout << "ClapTrap " << _name << ' ';
+	std::cout << "ClapTrap \"" << _name << "\" ";
 }
 
 void ClapTrap::printAttr( void )

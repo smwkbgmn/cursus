@@ -66,8 +66,8 @@ void FragTrap::attack( const str_t &name )
 	{
 		_energy--;
 
-		printName();
-		std::cout << "attacks " << name << ", ";
+		FragTrap::printName();
+		std::cout << "attacks \"" << name << "\", ";
 		std::cout << "causing " << _damage << " points of damage!";
 		std::cout << std::endl;
 	}
@@ -78,7 +78,7 @@ void FragTrap::highFivesGuys( void )
 	if (available())
 	{
 		printName();
-		std::cout << "raised hands up for HighFives!!";
+		std::cout << "positively raised hands up for HighFives!!";
 		std::cout << std::endl; 
 	}
 }
@@ -92,5 +92,5 @@ void FragTrap::initAttr( void )
 
 void FragTrap::printName( void )
 {
-	std::cout << "FragTrap " << _name << ' ';
+	std::cout << "FragTrap \"" << _name << "\" ";
 }

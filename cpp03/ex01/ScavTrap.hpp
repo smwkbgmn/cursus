@@ -3,7 +3,7 @@
 
 # include "ClapTrap.hpp"
 
-class ScavTrap : public ClapTrap
+class ScavTrap : virtual public ClapTrap
 {
 	public:
 		ScavTrap( void );
@@ -17,6 +17,7 @@ class ScavTrap : public ClapTrap
 		void	guardGate( void );
 
 	private:
+		void	initAttr( void );
 		void	printName( void );
 };
 
