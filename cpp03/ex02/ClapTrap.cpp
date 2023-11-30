@@ -111,10 +111,6 @@ void ClapTrap::beRepaired( point_t amount )
 	}
 }
 
-void ClapTrap::initAttr( void )
-{
-}
-
 void ClapTrap::printName( void )
 {
 	std::cout << "ClapTrap \"" << _name << "\" ";

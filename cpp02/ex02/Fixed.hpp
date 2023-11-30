@@ -24,9 +24,10 @@ class Fixed
 		Fixed	operator*( const Fixed & ) const;
 		Fixed	operator/( const Fixed & ) const;
 
-		Fixed	&operator++( void );
-		Fixed	operator++( int );
-		// Fixed	operator++( int );
+		Fixed		&operator++( void );
+		Fixed		&operator--( void );
+		const Fixed	operator++( int );
+		const Fixed	operator--( int );
 
 		int		getRawBits( void ) const;
 		void	setRawBits( int const );

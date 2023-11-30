@@ -2,21 +2,12 @@
 
 #include "Fixed.hpp"
 
-std::ostream &operator<<( std::ostream &os, const Fixed &fp)
+std::ostream &operator<<( std::ostream &os, const Fixed &fp )
 {
 	return os << fp.toFloat();
 }
 
-void	subject( void );
-
 int main( void )
-{
-	subject();
-
-	return 0;
-}
-
-void subject( void )
 {
 	Fixed	a; 
 	Fixed	const b(10);
@@ -34,4 +25,6 @@ void subject( void )
 	std::cout << "b is " << b.toInt() << " as integer" << std::endl;
 	std::cout << "c is " << c.toInt() << " as integer" << std::endl;
 	std::cout << "d is " << d.toInt() << " as integer" << std::endl;
+
+	return 0;
 }

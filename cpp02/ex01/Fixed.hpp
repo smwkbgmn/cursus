@@ -5,15 +5,16 @@ class Fixed
 {
 	public:
 		Fixed( void );
-		Fixed( const Fixed & );
 		Fixed( const int );
 		Fixed( const float );
+		Fixed( const Fixed & );
 		~Fixed( void );
 
 		Fixed	&operator=( const Fixed & );
 
 		int		getRawBits( void ) const;
 		void	setRawBits( int const );
+		
 		float	toFloat( void ) const;
 		int		toInt( void ) const;
 		

@@ -35,7 +35,7 @@ class ClapTrap
 		point_t	getHit( void ) const;
 		point_t	getEnergy( void ) const;
 
-		virtual void	initAttr( void );
+		virtual void	initAttr( void ) = 0;
 		virtual void	printName( void );
 		void			printAttr( void );
 		bool			available( void );

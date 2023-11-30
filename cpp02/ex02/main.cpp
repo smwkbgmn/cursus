@@ -12,6 +12,18 @@ void	subject( void );
 int main( void )
 {
 	subject();
+	
+	Fixed	a(1.5f);
+	Fixed	b(1.625f);
+
+
+	std::cout << a + b << std::endl;
+	std::cout << a - b << std::endl;
+	std::cout << a * 3 << std::endl;
+	std::cout << a / 3 << std::endl;
+
+	std::cout << a-- << std::endl;
+	std::cout << --a << std::endl;
 
 	return 0;
 }
