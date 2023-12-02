@@ -4,6 +4,7 @@
 
 DiamondTrap::DiamondTrap( void )
 {
+	ClapTrap::_name = "_clap_name";
 	initAttr();
 
 	std::cout << "[CON-DEF] ";
