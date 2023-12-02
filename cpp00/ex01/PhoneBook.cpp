@@ -93,8 +93,9 @@ void PhoneBook::showList(void)
 
 std::ostream &format(std::ostream &os)
 {
-	return os << std::setw(10) << std::setfill(' ') << std::right;;
+	return os << std::setw(10) << std::setfill(' ') << std::right;
 }
+
 
 std::string PhoneBook::truncate(std::string const &src)
 {

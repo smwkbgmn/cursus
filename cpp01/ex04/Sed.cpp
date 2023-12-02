@@ -23,15 +23,15 @@ void Sed::proceed( char *argv[] )
 	FileStream	fs( argv[1] );
 	str_t		line;
 
-	if (fs.is && fs.os)
+	if (fs.in && fs.out)
 	{
-		while (std::getline( fs.is, line ))
+		while (std::getline( fs.in, line ))
 		{
-			fs.os << change( line, argv[2], argv[3] );
-			if (!fs.is.eof())
-				fs.os << '\n';
+			fs.out << change( line, argv[2], argv[3] );
+			if (!fs.in.eof())
+				fs.out << '\n';
 		}
-		if (!fs.is.eof())
+		if (!fs.in.eof())
 			std::cerr << "error: fail to read from a file" << std::endl;
 	}
 }

@@ -1,18 +1,27 @@
 #include <iostream>
 
-#include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
 
 int main( void )
 {
-	// ScavTrap	scav1;
-	// ScavTrap	scav2 = scav1;
-	// ScavTrap	scav3("Pete");
+	ClapTrap	pete("pete");
+	ScavTrap	harry("harry");
 
-	ScavTrap	*scav = new ScavTrap;
-	ClapTrap	*clap = scav;
+	std::cout << std::endl;
+	
+	pete.attack(harry.getName());
+	harry.takeDamage(pete.getDamage());
 
-	delete clap;
+	std::cout << std::endl;
+
+	harry.attack(pete.getName());
+	pete.takeDamage(harry.getDamage());
+	
+	std::cout << std::endl;
+
+	harry.guardGate();
+
+	std::cout << std::endl;
 
 	return 0;
 }

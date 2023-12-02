@@ -2,8 +2,10 @@
 
 int main( int argc, char *argv[] )
 {
+	Sed	sed;
+
 	if (Sed::valid( argc, argv ))
-		Sed::proceed( argv );
+		sed.proceed( argv );
 		
 	return 0;
 }

@@ -60,27 +60,13 @@ FragTrap &FragTrap::operator=( const FragTrap &target )
 	return *this;
 }
 
-void FragTrap::attack( const str_t &name )
-{
-	if (available())
-	{
-		_energy--;
-
-		FragTrap::printName();
-		std::cout << "attacks \"" << name << "\", ";
-		std::cout << "causing " << _damage << " points of damage!";
-		std::cout << std::endl;
-	}
-}
-
 void FragTrap::highFivesGuys( void )
 {
-	if (available())
-	{
-		printName();
-		std::cout << "positively raised hands up for HighFives!!";
-		std::cout << std::endl; 
-	}
+	printName();
+	if (_hit)
+		std::cout << "positively raised hands up for HighFives!!" << std::endl; 
+	else
+		std::cout << "is already dead" << std::endl;
 }
 
 void FragTrap::initAttr( void )

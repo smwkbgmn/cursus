@@ -4,25 +4,25 @@
 
 FileStream::FileStream( const str_t &fname ) 
 {
-	is.open( fname.c_str() );
-	if (is.fail())
+	in.open( fname.c_str() );
+	if (in.fail())
 		std::cerr << "error: fail to open file " << fname << std::endl;
 	else
 	{
-		os.open( (fname + ".replace").c_str() );
-		if (os.fail())
+		out.open( (fname + ".replace").c_str() );
+		if (out.fail())
 		{
 			std::cerr << "error: fail to create outfile for " << fname << std::endl;
-			is.close();
+			in.close();
 		}
 	}
 }
 
 FileStream::~FileStream( void )
 {
-	if (is && os)
+	if (in && out)
 	{
-		is.close();
-		os.close();
+		in.close();
+		out.close();
 	}
 }

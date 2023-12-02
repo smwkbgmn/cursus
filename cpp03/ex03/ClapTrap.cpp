@@ -78,7 +78,7 @@ void ClapTrap::attack( const str_t &name )
 	{
 		_energy--;
 
-		ClapTrap::printName();
+		printName();
 		std::cout << "attacks \"" << name << "\", ";
 		std::cout << "causing " << _damage << " points of damage!";
 		std::cout << std::endl;

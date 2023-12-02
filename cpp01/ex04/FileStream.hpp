@@ -8,8 +8,8 @@ typedef std::string	str_t;
 
 struct FileStream
 {
-	std::ifstream	is;
-	std::ofstream	os;
+	std::ifstream	in;
+	std::ofstream	out;
 
 	FileStream( const str_t & );
 	~FileStream( void );

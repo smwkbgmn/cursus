@@ -69,6 +69,15 @@ void DiamondTrap::attack( const str_t &target )
 	ScavTrap::attack( target );
 }
 
+void DiamondTrap::whoAmI( void )
+{
+	printName();
+	if (_hit)
+		std::cout << "has second name \"" << ClapTrap::_name << '"' << std::endl;
+	else
+		std::cout << "is already dead" << std::endl;
+}
+
 void DiamondTrap::initAttr( void )
 {
 	_damage = 30;
@@ -77,13 +86,4 @@ void DiamondTrap::initAttr( void )
 void DiamondTrap::printName( void )
 {
 	std::cout << "DiamondTrap \"" << _name << "\" ";
-}
-
-void DiamondTrap::whoAmI( void )
-{
-	if (available())
-	{
-		std::cout << "DiamondTrap \"" << _name
-			<< "\" has second name \"" << ClapTrap::_name << '"' << std::endl;
-	}
 }

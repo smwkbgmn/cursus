@@ -3,7 +3,7 @@
 
 # include "ClapTrap.hpp"
 
-class ScavTrap : virtual public ClapTrap
+class ScavTrap : public ClapTrap
 {
 	public:
 		ScavTrap( void );
@@ -19,6 +19,7 @@ class ScavTrap : virtual public ClapTrap
 	private:
 		void	initAttr( void );
 		void	printName( void );
+		bool	available( void );
 };
 
 #endif

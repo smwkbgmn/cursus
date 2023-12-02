@@ -35,9 +35,9 @@ class ClapTrap
 		point_t	getHit( void ) const;
 		point_t	getEnergy( void ) const;
 
-		bool	available( void );
 		void	printName( void );
 		void	printAttr( void );
+		bool	available( void );
 };
 
 #endif

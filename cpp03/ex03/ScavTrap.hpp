@@ -19,6 +19,7 @@ class ScavTrap : virtual public ClapTrap
 	private:
 		void	initAttr( void );
 		void	printName( void );
+		bool	available( void );
 };
 
 #endif
