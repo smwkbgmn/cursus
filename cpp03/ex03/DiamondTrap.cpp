@@ -26,6 +26,7 @@ DiamondTrap::DiamondTrap( const str_t &name )
 }
 
 DiamondTrap::DiamondTrap( const DiamondTrap &target )
+: ClapTrap(), FragTrap(), ScavTrap()
 {
 	*this = target;
 
@@ -62,11 +63,6 @@ DiamondTrap	&DiamondTrap::operator=( const DiamondTrap &target )
 str_t DiamondTrap::getDiaName( void ) const
 {
 	return _name;
-}
-
-void DiamondTrap::attack( const str_t &target )
-{
-	ScavTrap::attack( target );
 }
 
 void DiamondTrap::whoAmI( void )

@@ -26,6 +26,7 @@ FragTrap::FragTrap( const str_t &name )
 }
 
 FragTrap::FragTrap( const FragTrap &target )
+: ClapTrap()
 {
 	*this = target;
 

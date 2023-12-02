@@ -26,6 +26,7 @@ ScavTrap::ScavTrap( const str_t &name )
 }
 
 ScavTrap::ScavTrap( const ScavTrap &target )
+: ClapTrap()
 {
 	*this = target;
 

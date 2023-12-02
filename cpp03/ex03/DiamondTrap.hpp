@@ -16,7 +16,6 @@ class DiamondTrap: public FragTrap, public ScavTrap
 
 		str_t	getDiaName( void ) const;
 
-		void	attack( const str_t & );
 		void	whoAmI( void );
 
 	private:

@@ -6,11 +6,13 @@ int main( void )
 {
 	DiamondTrap	dia1("pete");
 	DiamondTrap dia2;
+	DiamondTrap dia3(dia1);
 
 	std::cout << std::endl;
 
 	dia1.whoAmI();
 	dia2.whoAmI();
+	dia3.whoAmI();
 
 	std::cout << std::endl;
 
