@@ -1,24 +1,29 @@
+#include <new>
 #include <iostream>
 
 #include "Dog.hpp"
 
 Dog::Dog( void )
 {
+	std::cout << "[CON_DEF] Dog created" << std::endl;
+
 	_type = "Dog";
 	_brain = new (std::nothrow) Brain;
-
-	std::cout << "[CON_DEF] Dog created" << std::endl;
 }
 
 Dog::Dog( const Dog &target )
 {
-	*this = target;
-
 	std::cout << "[CON_CPY] Dog created" << std::endl;
+
+	_brain = new (std::nothrow) Brain;
+	*this = target;
 }
 
 Dog::~Dog( void )
 {
+	if (_brain)
+		delete _brain;
+
 	std::cout << "[DES] Dog destroyed" << std::endl;
 }
 
@@ -29,7 +34,8 @@ Dog &Dog::operator=( const Dog &target )
 	if (this != &target )
 	{
 		_type = target._type;
-		_brain = target._brain;
+		if (_brain && target._brain)
+			*_brain = *target._brain;
 	}
 	
 	return *this;

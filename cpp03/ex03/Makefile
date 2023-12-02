@@ -1,7 +1,7 @@
 NAME		= diamondtrap
 
 CPP			= c++
-FLAG		= -Wall -Wextra -Werror \
+FLAG		= -Wall -Wextra -Werror -Wno-shadow \
 $(FLG_STD)
 
 FLG_STD		= -std=c++98
