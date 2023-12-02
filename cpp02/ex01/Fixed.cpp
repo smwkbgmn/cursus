@@ -36,11 +36,11 @@ Fixed::~Fixed( void )
 	std::cout << "Destructor called" << std::endl;
 }
 
-Fixed &Fixed::operator=( const Fixed &fp )
+Fixed &Fixed::operator=( const Fixed &target )
 {
 	std::cout << "Copy assignment oprator called" << std::endl;
 	
-	_fp = fp.getRawBits();
+	_fp = target._fp;
 
 	return *this;
 }
@@ -62,5 +62,10 @@ float Fixed::toFloat( void ) const
 
 int Fixed::toInt( void ) const
 {
-	return _fp >> _bitFrac;
+	return _fp / (1 << _bitFrac);
+}
+
+std::ostream &operator<<( std::ostream &os, const Fixed &fp )
+{
+	return os << fp.toFloat();
 }

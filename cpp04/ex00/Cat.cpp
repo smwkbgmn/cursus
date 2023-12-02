@@ -3,13 +3,16 @@
 #include "Cat.hpp"
 
 Cat::Cat( void )
-: _type("Cat")
 {
+	_type = "Cat";
+
 	std::cout << "[CON_DEF] Cat created" << std::endl;
 }
 
 Cat::Cat( const Cat &target )
 {
+	*this = target;
+
 	std::cout << "[CON_CPY] Cat created" << std::endl;
 }
 
@@ -28,7 +31,7 @@ Cat &Cat::operator=( const Cat &target )
 	return *this;
 }
 
-void Cat::makeSound( void )
+void Cat::makeSound( void ) const
 {
 	std::cout << "Nyaong............." << std::endl;
 }

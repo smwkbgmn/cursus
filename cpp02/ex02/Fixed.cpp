@@ -39,71 +39,71 @@ Fixed::~Fixed( void )
 
 // Operator overload
 // Assign
-Fixed &Fixed::operator=( const Fixed &fp )
+Fixed &Fixed::operator=( const Fixed &target )
 {
 	std::cout << "Copy assignment oprator called" << std::endl;
 
-	_fp = fp.getRawBits();
+	_fp = target._fp;
 
 	return *this;
 }
 
 // Comparison
-bool Fixed::operator>( const Fixed &fp ) const
+bool Fixed::operator>( const Fixed &target ) const
 {
-	return _fp > fp.getRawBits();
+	return _fp > target._fp;
 }
 
-bool Fixed::operator<( const Fixed &fp ) const
+bool Fixed::operator<( const Fixed &target ) const
 {
-	return _fp < fp.getRawBits();
+	return _fp < target._fp;
 }
 
-bool Fixed::operator>=( const Fixed &fp ) const
+bool Fixed::operator>=( const Fixed &target ) const
 {
-	return _fp >= fp.getRawBits();
+	return _fp >= target._fp;
 }
 
-bool Fixed::operator<=( const Fixed &fp ) const
+bool Fixed::operator<=( const Fixed &target ) const
 {
-	return _fp <= fp.getRawBits();
+	return _fp <= target._fp;
 }
 
-bool Fixed::operator==( const Fixed &fp ) const
+bool Fixed::operator==( const Fixed &target ) const
 {
-	return _fp == fp.getRawBits();
+	return _fp == target._fp;
 }
 
-bool Fixed::operator!=( const Fixed &fp ) const
+bool Fixed::operator!=( const Fixed &target ) const
 {
-	return _fp != fp.getRawBits();
+	return _fp != target._fp;
 }
 
 // Arithmetic
-Fixed Fixed::operator+( const Fixed &fp ) const
+Fixed Fixed::operator+( const Fixed &target ) const
 {
-	Fixed	rst(this->toFloat() + fp.toFloat());
+	Fixed	rst(this->toFloat() + target.toFloat());
 
 	return rst;
 }
 
-Fixed Fixed::operator-( const Fixed &fp ) const
+Fixed Fixed::operator-( const Fixed &target ) const
 {
-	Fixed	rst(this->toFloat() - fp.toFloat());
+	Fixed	rst(this->toFloat() - target.toFloat());
 
 	return rst;
 }
 
-Fixed Fixed::operator*( const Fixed &fp ) const
+Fixed Fixed::operator*( const Fixed &target ) const
 {
-	Fixed	rst(this->toFloat() * fp.toFloat());
+	Fixed	rst(this->toFloat() * target.toFloat());
 
 	return rst;
 }
 
-Fixed Fixed::operator/( const Fixed &fp ) const
+Fixed Fixed::operator/( const Fixed &target ) const
 {
-	Fixed	rst(this->toFloat() / fp.toFloat());
+	Fixed	rst(this->toFloat() / target.toFloat());
 
 	return rst;
 }
@@ -180,5 +180,10 @@ float Fixed::toFloat( void ) const
 
 int Fixed::toInt( void ) const
 {
-	return _fp >> _bitFrac;
+	return _fp / (1 << _bitFrac);
+}
+
+std::ostream &operator<<( std::ostream &os, const Fixed &fp)
+{
+	return os << fp.toFloat();
 }

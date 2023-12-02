@@ -1,7 +1,19 @@
+#include <new>
+#include <iostream>
+
 #include "Dog.hpp"
 #include "Cat.hpp"
 
+void subject( void );
+
 int main()
+{
+	subject();
+	
+	return 0;
+}
+
+void subject( void )
 {
 	const Animal* meta = new Animal();
 	const Animal* j = new Dog();
@@ -14,6 +26,8 @@ int main()
 	j->makeSound();
 
 	meta->makeSound();
-	
-	return 0;
+
+	delete meta;
+	delete i;
+	delete j;
 }

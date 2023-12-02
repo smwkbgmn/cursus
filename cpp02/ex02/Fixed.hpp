@@ -46,4 +46,6 @@ class Fixed
 		int	_fp;
 };
 
+std::ostream &operator<<( std::ostream &, const Fixed & );
+
 #endif

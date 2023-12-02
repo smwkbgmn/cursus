@@ -1,9 +1,10 @@
-#ifndef DOG_HPP
-# define DOG_HPP
+#ifndef CAT_HPP
+# define CAT_HPP
 
 # include "Animal.hpp"
 
-class Cat: public Animal
+class Cat
+: public Animal
 {
 	public:
 		Cat( void );
@@ -12,7 +13,7 @@ class Cat: public Animal
 
 		Cat &operator=( const Cat & );
 
-		void	makeSound( void );
+		void	makeSound( void ) const;
 
 	private:
 };

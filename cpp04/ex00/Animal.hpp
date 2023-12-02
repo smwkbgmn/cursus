@@ -8,13 +8,13 @@ class Animal
 	public:
 		Animal( void );
 		Animal( const Animal & );
-		~Animal( void );
+		virtual ~Animal( void );
 
 		Animal &operator=( const Animal & );
 
 		const std::string	&getType( void ) const;
 
-		virtual void	makeSound( void ) = 0;
+		virtual void	makeSound( void ) const;
 
 	protected:
 		std::string	_type;
