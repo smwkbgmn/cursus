@@ -10,6 +10,7 @@ Dog::Dog( void )
 }
 
 Dog::Dog( const Dog &target )
+: Animal()
 {
 	*this = target;
 

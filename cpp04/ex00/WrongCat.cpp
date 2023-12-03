@@ -10,6 +10,7 @@ WrongCat::WrongCat( void )
 }
 
 WrongCat::WrongCat( const WrongCat &target )
+: WrongAnimal()
 {
 	*this = target;
 

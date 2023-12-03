@@ -12,6 +12,7 @@ Dog::Dog( void )
 }
 
 Dog::Dog( const Dog &target )
+: Animal()
 {
 	std::cout << "[CON_CPY] Dog created" << std::endl;
 

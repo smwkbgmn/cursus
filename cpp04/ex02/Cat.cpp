@@ -12,6 +12,7 @@ Cat::Cat( void )
 }
 
 Cat::Cat( const Cat &target )
+: AAnimal()
 {
 	std::cout << "[CON_CPY] Cat created" << std::endl;
 

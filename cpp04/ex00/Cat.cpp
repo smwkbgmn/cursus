@@ -10,6 +10,7 @@ Cat::Cat( void )
 }
 
 Cat::Cat( const Cat &target )
+: Animal()
 {
 	*this = target;
 
