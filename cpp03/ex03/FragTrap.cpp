@@ -26,10 +26,8 @@ FragTrap::FragTrap( const str_t &name )
 }
 
 FragTrap::FragTrap( const FragTrap &target )
-: ClapTrap()
+: ClapTrap(target)
 {
-	*this = target;
-
 	std::cout << "[CON-CPY] ";
 	printName();
 	std::cout << "has created ";
@@ -51,12 +49,7 @@ FragTrap &FragTrap::operator=( const FragTrap &target )
 	std::cout << "[FragTrap's Copy assignment called]" << std::endl;
 
 	if (this != &target)
-	{
-		_name = target.getName();
-		_hit = target.getHit();
-		_energy = target.getEnergy();
-		_damage = target.getDamage();
-	}
+		ClapTrap::operator=(target);
 
 	return *this;
 }

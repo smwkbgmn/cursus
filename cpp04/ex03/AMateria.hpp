@@ -4,9 +4,12 @@
 # include <string>
 # include <iostream>
 
-# include "ICharacter.hpp"
+# define FALSE 0
+# define TRUE 1
 
 typedef std::string	str_t;
+
+class ICharacter;
 
 class AMateria
 {
@@ -19,12 +22,15 @@ class AMateria
 		const AMateria	&operator=( const AMateria & );
 
 		str_t const	&getType( void ) const;
+		bool		getEquip( void ) const;
+		void		setEquip( const bool & );
 
 		virtual AMateria	*clone( void ) const = 0;
 		virtual void		use( ICharacter & );
 
 	protected:
 		str_t	_type;
+		bool	_equip;
 };
 
 #endif

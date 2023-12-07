@@ -1,10 +1,19 @@
 #ifndef CHARACTER_HPP
 # define CHARACTER_HPP
 
-# include "AMateria.hpp"
+// class ICharacter;
+# include "ICharacter.hpp"
+
+# define FALSE 0
+# define TRUE 1
+
+# define SIZE_INVEN 4
+
+class	AMateria;
+struct	Floor;
 
 class Character
-: virtual ICharacter
+: public ICharacter
 {
 	public:
 		Character( void );
@@ -14,18 +23,20 @@ class Character
 
 		Character	&operator=( const Character & );
 
-		str_t	&getName( void ) const;
+		const str_t	&getName( void ) const;
 
-		void	equip( AMateria* m );
-		void	unequip( int idx );
-		void	use( int idx, ICharacter& target );
+		void	equip( AMateria * );
+		void	unequip( int );
+		void	use( int, ICharacter & );
 		
 	private:
 		str_t		_name;
-		AMateria	*_inven[4];
-		AMateria	*discard;
+		AMateria	*_inven[SIZE_INVEN];
 
-		void initInven( void );
+		void	initInven( void );
+		void	freeInven( void );
+		void	copyInven( const Character & );
 };
+
 
 #endif

@@ -1,7 +1,9 @@
 #ifndef IMATERIASOURCE_HPP
 # define IMATERIASOURCE_HPP
 
-# include "AMateria.hpp"
+typedef std::string	str_t;
+
+class AMateria;
 
 class IMateriaSource
 {

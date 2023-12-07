@@ -27,9 +27,9 @@ DiamondTrap::DiamondTrap( const str_t &name )
 }
 
 DiamondTrap::DiamondTrap( const DiamondTrap &target )
-: ClapTrap(), FragTrap(), ScavTrap()
+: ClapTrap(target), FragTrap(target), ScavTrap(target)
 {
-	*this = target;
+	_name = target.getDiaName();
 
 	std::cout << "[CON-CPY] ";
 	printName();
@@ -52,12 +52,10 @@ DiamondTrap	&DiamondTrap::operator=( const DiamondTrap &target )
 
 	if (this != &target)
 	{
+		ClapTrap::operator=(target);
 		_name = target.getDiaName();
-		ClapTrap::_name = target.getName();
-		ClapTrap::_hit = target.getHit();
-		ClapTrap::_energy = target.getEnergy();
-		ClapTrap::_damage =target.getDamage();
 	}
+	
 	return *this;
 }
 

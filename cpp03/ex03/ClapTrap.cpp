@@ -44,6 +44,8 @@ ClapTrap::~ClapTrap( void )
 
 ClapTrap &ClapTrap::operator=( const ClapTrap &target )
 {
+	std::cout << "[ClapTrap's Copy assignment called]" << std::endl;
+
 	if (this != &target)
 	{
 		_name = target.getName();

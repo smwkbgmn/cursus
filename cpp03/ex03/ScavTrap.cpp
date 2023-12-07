@@ -26,10 +26,8 @@ ScavTrap::ScavTrap( const str_t &name )
 }
 
 ScavTrap::ScavTrap( const ScavTrap &target )
-: ClapTrap()
+: ClapTrap(target)
 {
-	*this = target;
-
 	std::cout << "[CON-CPY] ";
 	printName();
 	std::cout << "has created ";
@@ -51,12 +49,7 @@ ScavTrap &ScavTrap::operator=( const ScavTrap &target )
 	std::cout << "[ScavTrap's Copy assignment called]" << std::endl;
 	
 	if (this != &target)
-	{
-		_name = target.getName();
-		_hit = target.getHit();
-		_energy = target.getEnergy();
-		_damage = target.getDamage();
-	}
+		ClapTrap::operator=(target);
 
 	return *this;
 }
