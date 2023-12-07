@@ -2,13 +2,12 @@
 #include "AMateria.hpp"
 
 AMateria::AMateria( void )
-: _equip(FALSE)
 {
 	std::cout << "[CON-DEF] AMateria has created" << std::endl;
 }
 
 AMateria::AMateria( str_t const &type )
-: _type(type), _equip(FALSE)
+: _type(type)
 {
 	std::cout << "[CON-CPY] AMateria has created" << std::endl;
 }
@@ -30,10 +29,7 @@ const AMateria	&AMateria::operator=( const AMateria &target )
 	std::cout << "[AMateria's copy assignment called]" << std::endl;
 	
 	if (this != &target)
-	{
 		_type = target.getType();
-		_equip = target.getEquip();
-	}
 
 	return *this;
 }
@@ -41,16 +37,6 @@ const AMateria	&AMateria::operator=( const AMateria &target )
 str_t const	&AMateria::getType( void ) const
 {
 	return _type;
-}
-
-bool AMateria::getEquip( void ) const
-{
-	return _equip;
-}
-
-void AMateria::setEquip( const bool &value )
-{
-	_equip = value;
 }
 
 void AMateria::use( ICharacter &character )

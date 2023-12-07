@@ -27,7 +27,7 @@ void Floor::initSpace( void )
 void Floor::freeSpace( void )
 {
 	for ( int cnt = 0; cnt < SIZE_FLOOR; ++cnt )
-		if ( _space[cnt] && !_space[cnt]->getEquip() )
+		if ( _space[cnt] )
 			delete _space[cnt];
 }
 
@@ -39,10 +39,4 @@ bool Floor::drop( AMateria *materia )
 		return TRUE;
 	}
 	return FALSE;
-}
-
-AMateria *Floor::pickup( int idx )
-{
-	if ( idx < SIZE_FLOOR && !_space[idx]->getEquip() )
-		return _space[idx];
 }

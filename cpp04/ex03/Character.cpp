@@ -1,8 +1,12 @@
+#include <new>
 #include <iostream>
 
 // #include "ICharacter.hpp"
+#include "Floor.hpp"
 #include "AMateria.hpp"
 #include "Character.hpp"
+
+Floor	Character::_floor;
 
 Character::Character( void )
 {
@@ -60,14 +64,15 @@ void	Character::equip( AMateria* m )
 	{
 		for ( cnt = 0; cnt < SIZE_INVEN && _inven[cnt]; ++cnt );
 		
-		if ( cnt != SIZE_INVEN )
+		if ( cnt < SIZE_INVEN )
 		{
 			_inven[cnt] = m;
-			_inven[cnt]->setEquip( TRUE );
 
 			std::cout << _name << " equiped a(an) " << m->getType();
 			std::cout << " to the inventory " << cnt << std::endl;
 		}
+		else
+			delete m;
 
 		/* Equip doesn't have any return value so the main has no way to know if equipment
 		success or not. It means that the pointer to Meteria should be managed in main.
@@ -83,18 +88,14 @@ void	Character::unequip( int idx )
 	{
 		type_del = _inven[idx]->getType();
 
-		_inven[idx]->setEquip( FALSE );
-		_inven[idx] = NULL;
-		
-		std::cout << _name << " unequiped a(an) " << type_del << std::endl;
-		// if ( _floor.drop( _inven[idx] ) )
-		// {
-		// 	_inven[idx] = NULL;
+		if ( _floor.drop( _inven[idx] ) )
+		{
+			_inven[idx] = NULL;
 
-		// 	std::cout << _name << " unequiped a(an) " << type_del << std::endl;
-		// }
-		// else
-		// 	std::cout << "Materias are already everywhere on the floor!" << std::endl;
+			std::cout << _name << " unequiped a(an) " << type_del << std::endl;
+		}
+		else
+			std::cout << "Materias are already everywhere on the floor!" << std::endl;
 	}
 }
 

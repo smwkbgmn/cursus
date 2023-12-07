@@ -19,8 +19,7 @@ struct Floor
 	void	initSpace( void );
 	void	freeSpace( void );
 	
-	bool		drop( AMateria * );
-	AMateria	*pickup( int );
+	bool	drop( AMateria * );
 };
 
 #endif

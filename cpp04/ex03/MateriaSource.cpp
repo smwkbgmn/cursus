@@ -1,3 +1,4 @@
+#include <new>
 #include <iostream>
 
 // #include "IMateriaSource.hpp"
@@ -37,9 +38,11 @@ MateriaSource &MateriaSource::operator=( const MateriaSource &target )
 
 void MateriaSource::learnMateria( AMateria *materia )
 {
-	iter( &MateriaSource::assignMtra, materia );
+	if ( iter( &MateriaSource::assignMtra, materia ) )
+		std::cout << "A materia " << materia->getType() << " is saved to source" << std::endl;
+	else
+		delete materia;
 
-	std::cout << "A materia " << materia->getType() << " is saved to source" << std::endl;
 }
 
 AMateria* MateriaSource::createMateria( str_t const &type )

@@ -99,19 +99,21 @@ void subject( void )
 
 void floor( void )
 {
-	Floor			floor;
 	IMateriaSource	*src = new MateriaSource;
-	// AMateria		*mtr[SIZE_FLOOR + 3];
 	ICharacter		*harry = new Character( "Harry" );
 	
 	newline();
 
 	src->learnMateria( new Ice );
+	src->learnMateria( new Ice );
+	src->learnMateria( new Ice );
+	src->learnMateria( new Ice );
+	src->learnMateria( new Ice );
 
 	for ( int cnt = 0; cnt < SIZE_FLOOR + 3; ++cnt )
 	{
 		harry->equip( src->createMateria( "ice" ) );
-		harry->unequip( 0 );
+		// harry->unequip( 0 );
 	}
 
 	newline();

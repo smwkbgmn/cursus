@@ -22,15 +22,12 @@ class AMateria
 		const AMateria	&operator=( const AMateria & );
 
 		str_t const	&getType( void ) const;
-		bool		getEquip( void ) const;
-		void		setEquip( const bool & );
 
 		virtual AMateria	*clone( void ) const = 0;
 		virtual void		use( ICharacter & );
 
 	protected:
 		str_t	_type;
-		bool	_equip;
 };
 
 #endif

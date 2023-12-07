@@ -30,6 +30,8 @@ class Character
 		void	use( int, ICharacter & );
 		
 	private:
+		static Floor	_floor;
+		
 		str_t		_name;
 		AMateria	*_inven[SIZE_INVEN];
 
