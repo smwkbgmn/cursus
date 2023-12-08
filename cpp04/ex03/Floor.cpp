@@ -4,7 +4,6 @@
 #include "Floor.hpp"
 
 Floor::Floor( void )
-: _idx( 0 )
 {
 	initSpace();
 
@@ -20,23 +19,36 @@ Floor::~Floor( void )
 
 void Floor::initSpace( void )
 {
-	for ( int cnt = 0; cnt < SIZE_FLOOR; ++cnt )
-		_space[cnt] = NULL;
+	for ( int idx = 0; idx < SIZE_FLOOR; ++idx )
+		_space[idx] = NULL;
 }
 
 void Floor::freeSpace( void )
 {
-	for ( int cnt = 0; cnt < SIZE_FLOOR; ++cnt )
-		if ( _space[cnt] )
-			delete _space[cnt];
+	for ( int idx = 0; idx < SIZE_FLOOR; ++idx )
+		if ( _space[idx] )
+			delete _space[idx];
 }
 
 bool Floor::drop( AMateria *materia )
 {
-	if ( _idx < SIZE_FLOOR )
+	for ( int idx = 0; idx < SIZE_FLOOR; ++idx )
 	{
-		_space[_idx++] = materia;
-		return TRUE;
+		if ( !_space[idx] )
+		{
+			_space[idx] = materia;
+			return TRUE;
+		}
 	}
+	std::cout << "Materias are already everywhere!" << std::endl;
+
+	delete materia;
 	return FALSE;
+}
+
+void Floor::remove( const AMateria *target )
+{
+	for ( int idx = 0; idx < SIZE_FLOOR; ++idx )
+		if ( _space[idx] == target )
+			_space[idx] = NULL;
 }

@@ -7,69 +7,64 @@
 #include "Ice.hpp"
 
 void	subject( void );
-void	floor( void );
-
 void	newline( void );
-void	leaks( void );
 
 int main( void )
 {
-	floor();
+	subject();
 
-	// IMateriaSource	*src = new MateriaSource;
+	IMateriaSource	*src = new MateriaSource;
 
-	// newline();
+	newline();
 
-	// src->learnMateria( new Ice );
-	// src->learnMateria( new Cure );
+	src->learnMateria( new Ice );
+	src->learnMateria( new Cure );
 
-	// newline();
+	newline();
 
-	// ICharacter	*pete( new Character( "Pete" ) );
-	// ICharacter	*pete_cpy( new Character( *(Character *)pete ) );
-	// ICharacter	*harry( new Character( "Harry" ) );
-	// ICharacter	*harry_cpy( new Character( *(Character *)harry ));
+	ICharacter	*pete( new Character( "Pete" ) );
+	ICharacter	*pete_cpy( new Character( *(Character *)pete ) );
+	ICharacter	*harry( new Character( "Harry" ) );
+	ICharacter	*harry_cpy( new Character( *(Character *)harry ));
 
-	// newline();
+	newline();
 
-	// pete->equip( src->createMateria( "ice" ) );
-	// pete_cpy->equip( src->createMateria( "cure" ) );
+	pete->equip( src->createMateria( "ice" ) );
+	pete_cpy->equip( src->createMateria( "cure" ) );
 
-	// pete->use( 0, *harry ); // Use Ice
-	// pete_cpy->use( 0, *harry ); // Use Cure
+	pete->use( 0, *harry ); // Use Ice
+	pete_cpy->use( 0, *harry ); // Use Cure
 
-	// pete_cpy->unequip( 0 );
-	// pete_cpy->use( 0, *harry ); // print nothing
+	pete_cpy->unequip( 0 );
+	pete_cpy->use( 0, *harry ); // print nothing
 
-	// harry->use( 0, *pete ); // Print nothing 
-	// harry_cpy->use( 0, *pete ); // print nothing
+	harry->use( 0, *pete ); // Print nothing 
+	harry_cpy->use( 0, *pete ); // print nothing
 
-	// newline();
+	newline();
 
-	// harry->equip( src->createMateria( "cure" ) );
-	// harry_cpy->equip( src->createMateria( "ice" ) );
+	harry->equip( src->createMateria( "cure" ) );
+	harry_cpy->equip( src->createMateria( "ice" ) );
 
-	// harry->use( 0, *pete ); // Use Cure
-	// harry_cpy->use( 0, *pete ); // Use Ice
+	harry->use( 0, *pete ); // Use Cure
+	harry_cpy->use( 0, *pete ); // Use Ice
 
-	// newline();
+	newline();
 
-	// *(Character *)harry_cpy = *(Character *)harry;
-	// // harry_cpy has owned the Ice at inventory[0] and just destroyed by deep copying
-	// harry_cpy->equip( src->createMateria( "ice" ) );
+	*(Character *)harry_cpy = *(Character *)harry;
+	// harry_cpy has owned the Ice at inventory[0] and just destroyed by deep copying
+	harry_cpy->equip( src->createMateria( "ice" ) );
 
-	// harry_cpy->use( 0, *pete ); // Use Cure
-	// harry_cpy->use( 1, *pete ); // Use Ice
+	harry_cpy->use( 0, *pete ); // Use Cure
+	harry_cpy->use( 1, *pete ); // Use Ice
 
-	// newline();
+	newline();
 
-	// delete src;
-	// delete pete;
-	// delete pete_cpy;
-	// delete harry;
-	// delete harry_cpy;
-
-	// leaks();
+	delete src;
+	delete pete;
+	delete pete_cpy;
+	delete harry;
+	delete harry_cpy;
 }
 
 void subject( void )
@@ -97,39 +92,7 @@ void subject( void )
 	delete src;
 }
 
-void floor( void )
-{
-	IMateriaSource	*src = new MateriaSource;
-	ICharacter		*harry = new Character( "Harry" );
-	
-	newline();
-
-	src->learnMateria( new Ice );
-	src->learnMateria( new Ice );
-	src->learnMateria( new Ice );
-	src->learnMateria( new Ice );
-	src->learnMateria( new Ice );
-
-	for ( int cnt = 0; cnt < SIZE_FLOOR + 3; ++cnt )
-	{
-		harry->equip( src->createMateria( "ice" ) );
-		// harry->unequip( 0 );
-	}
-
-	newline();
-
-	delete src;
-	delete harry;
-}
-
 void newline( void )
 {
 	std::cout << '\n';
-}
-
-#include <cstdlib>
-
-void leaks( void )
-{
-	system( "leaks materia" );
 }

@@ -58,44 +58,28 @@ const str_t	&Character::getName( void ) const
 
 void	Character::equip( AMateria* m )
 {
-	int	cnt;
+	int	idx;
 
-	if ( m )
+	if ( m && _floor.drop( m ) )
 	{
-		for ( cnt = 0; cnt < SIZE_INVEN && _inven[cnt]; ++cnt );
-		
-		if ( cnt < SIZE_INVEN )
+		for ( idx = 0; idx < SIZE_INVEN && _inven[idx]; ++idx );
+
+		if ( idx < SIZE_INVEN )
 		{
-			_inven[cnt] = m;
+			_inven[idx] = m;
 
 			std::cout << _name << " equiped a(an) " << m->getType();
-			std::cout << " to the inventory " << cnt << std::endl;
+			std::cout << " to the inventory " << idx << std::endl;
 		}
-		else
-			delete m;
-
-		/* Equip doesn't have any return value so the main has no way to know if equipment
-		success or not. It means that the pointer to Meteria should be managed in main.
-		but in this condition, it may has an possibility of double free */
 	}
 }
 
 void	Character::unequip( int idx )
 {
-	str_t	type_del;
-
 	if ( _inven[idx] )
 	{
-		type_del = _inven[idx]->getType();
-
-		if ( _floor.drop( _inven[idx] ) )
-		{
-			_inven[idx] = NULL;
-
-			std::cout << _name << " unequiped a(an) " << type_del << std::endl;
-		}
-		else
-			std::cout << "Materias are already everywhere on the floor!" << std::endl;
+		std::cout << _name << " unequiped a(an) " << _inven[idx]->getType() << std::endl;
+		_inven[idx] = NULL;
 	}
 }
 
@@ -107,27 +91,39 @@ void	Character::use( int idx, ICharacter& target )
 
 void Character::initInven( void )
 {
-	for ( int cnt = 0; cnt < SIZE_INVEN; ++cnt )
-		_inven[cnt] = NULL;
+	for ( int idx = 0; idx < SIZE_INVEN; ++idx )
+		_inven[idx] = NULL;
 }
 
 void Character::freeInven( void )
 {
-	for ( int cnt = 0; cnt < SIZE_INVEN; ++cnt )
-		if ( _inven[cnt] )
-			delete _inven[cnt];
+	for ( int idx = 0; idx < SIZE_INVEN; ++idx )
+	{
+		if ( _inven[idx] )
+		{
+			_floor.remove( _inven[idx] );
+			delete _inven[idx];
+		}
+	}
 }
 
 void Character::copyInven( const Character &target )
 {
-	for ( int cnt = 0; cnt < SIZE_INVEN; ++cnt )
+	for ( int idx = 0; idx < SIZE_INVEN; ++idx )
 	{
-		if ( _inven[cnt] )
-			delete _inven[cnt];
+		if ( _inven[idx] )
+		{
+			_floor.remove( _inven[idx] );
+			delete _inven[idx];
+		}
 
-		if ( target._inven[cnt] )
-			_inven[cnt] = target._inven[cnt]->clone();
+		if ( target._inven[idx] )
+		{
+			_inven[idx] = target._inven[idx]->clone();
+			if ( !_floor.drop( _inven[idx] ) )
+				delete _inven[idx];
+		}
 		else
-			_inven[cnt] = NULL;
+			_inven[idx] = NULL;
 	}
 }
