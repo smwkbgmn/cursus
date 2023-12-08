@@ -114,7 +114,7 @@ void Character::copyInven( const Character &target )
 		if ( _inven[idx] )
 		{
 			_floor.remove( _inven[idx] );
-			delete _inven[idx];git 
+			delete _inven[idx];
 		}
 
 		if ( target._inven[idx] )
