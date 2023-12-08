@@ -114,13 +114,13 @@ void Character::copyInven( const Character &target )
 		if ( _inven[idx] )
 		{
 			_floor.remove( _inven[idx] );
-			delete _inven[idx];
+			delete _inven[idx];git 
 		}
 
 		if ( target._inven[idx] )
 		{
 			_inven[idx] = target._inven[idx]->clone();
-			if ( !_floor.drop( _inven[idx] ) )
+			if ( !_floor.drop( _inven[idx] ) && _inven[idx] )
 				delete _inven[idx];
 		}
 		else
