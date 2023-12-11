@@ -40,5 +40,4 @@ class Character
 		void	copyInven( const Character & );
 };
 
-
 #endif

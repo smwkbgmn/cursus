@@ -98,32 +98,24 @@ void Character::initInven( void )
 void Character::freeInven( void )
 {
 	for ( int idx = 0; idx < SIZE_INVEN; ++idx )
-	{
 		if ( _inven[idx] )
-		{
 			_floor.remove( _inven[idx] );
-			delete _inven[idx];
-		}
-	}
+			
+	initInven();
 }
 
 void Character::copyInven( const Character &target )
 {
+	freeInven();
+
 	for ( int idx = 0; idx < SIZE_INVEN; ++idx )
 	{
-		if ( _inven[idx] )
-		{
-			_floor.remove( _inven[idx] );
-			delete _inven[idx];
-		}
-
 		if ( target._inven[idx] )
 		{
 			_inven[idx] = target._inven[idx]->clone();
-			if ( !_floor.drop( _inven[idx] ) && _inven[idx] )
-				delete _inven[idx];
+
+			if ( !_floor.drop( _inven[idx] ) )
+				_inven[idx] = NULL;
 		}
-		else
-			_inven[idx] = NULL;
 	}
 }

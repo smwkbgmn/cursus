@@ -42,13 +42,19 @@ bool Floor::drop( AMateria *materia )
 	}
 	std::cout << "Materias are already everywhere!" << std::endl;
 
-	delete materia;
+	if ( materia )
+		delete materia;
 	return FALSE;
 }
 
 void Floor::remove( const AMateria *target )
 {
 	for ( int idx = 0; idx < SIZE_FLOOR; ++idx )
+	{
 		if ( _space[idx] == target )
+		{
+			delete _space[idx];
 			_space[idx] = NULL;
+		}
+	}
 }
