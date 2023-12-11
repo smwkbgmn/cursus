@@ -9,7 +9,7 @@ AMateria::AMateria( void )
 AMateria::AMateria( str_t const &type )
 : _type(type)
 {
-	std::cout << "[CON-CPY] AMateria has created" << std::endl;
+	std::cout << "[CON-TYP] AMateria has created" << std::endl;
 }
 
 AMateria::AMateria( const AMateria &target )

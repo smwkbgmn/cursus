@@ -13,7 +13,7 @@ Floor::Floor( void )
 Floor::~Floor( void )
 {
 	freeSpace();
-	
+
 	std::cout << "[DES] Floor has destroyed" << std::endl;
 }
 

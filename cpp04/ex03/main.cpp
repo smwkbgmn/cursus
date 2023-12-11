@@ -11,7 +11,7 @@ void	newline( void );
 
 int main( void )
 {
-	subject();
+	// subject();
 
 	IMateriaSource	*src = new MateriaSource;
 
