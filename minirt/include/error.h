@@ -1,37 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/03 14:06:47 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/12/28 02:19:14 by donghyu2         ###   ########.fr       */
+/*   Created: 2023/12/28 01:36:42 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/12/28 02:19:33 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#ifndef ERROR_H
+# define ERROR_H
 
-void	*try(void *ptr)
-{
-	if (!ptr)
-		err_sys("malloc");
-	return (ptr);
-}
+# include <stdlib.h>
+# include <stdio.h>
 
-void	err_sys(char *msg)
-{
-	if (msg)
-		perror(msg);
-	exit(EXIT_FAILURE);
-}
+// error.c
+void	*try(void *ptr);
+void	err_sys(char *msg);
+void	err_usr(char *msg);
 
-void	err_usr(char *msg)
-{
-	if (msg)
-	{
-		ft_putstr(msg);
-		ft_putchar('\n');
-	}
-	exit(EXIT_FAILURE);
-}
+#endif

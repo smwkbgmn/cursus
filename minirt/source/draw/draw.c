@@ -1,37 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/03 14:06:47 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/12/28 02:19:14 by donghyu2         ###   ########.fr       */
+/*   Created: 2023/12/28 04:59:04 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/12/28 05:11:30 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "draw.h"
 
-void	*try(void *ptr)
+void	put_pixel(t_color color)
 {
-	if (!ptr)
-		err_sys("malloc");
-	return (ptr);
-}
-
-void	err_sys(char *msg)
-{
-	if (msg)
-		perror(msg);
-	exit(EXIT_FAILURE);
-}
-
-void	err_usr(char *msg)
-{
-	if (msg)
-	{
-		ft_putstr(msg);
-		ft_putchar('\n');
-	}
-	exit(EXIT_FAILURE);
+	printf("%d %d %d\n",
+		(int)(255.999 * color.x),
+		(int)(255.999 * color.y),
+		(int)(255.999 * color.z));
 }

@@ -9,15 +9,18 @@ F_HDR	= -I $(DIR_HDR) -I $(DIR_L_FT) -I $(DIR_L_MLX)
 SRC		= \
 minirt.c \
 $(wildcard $(DIR_SRC)/*.c) \
-$(wildcard $(DIR_SRC)/object/*.c)
+$(wildcard $(DIR_SRC)/draw/*.c) \
+$(wildcard $(DIR_SRC)/draw/vector/*.c) \
+$(wildcard $(DIR_SRC)/object/*.c) \
+$(wildcard $(DIR_SRC)/window/*.c)
 
 OBJ		= $(SRC:.c=.o)
 
 L_FT		= $(DIR_L_FT)/libft.a
 L_MLX		= $(DIR_L_MLX)/libmlx.dylib
 
-DIR_HDR		= .
-DIR_SRC	= source
+DIR_HDR		= include
+DIR_SRC		= source
 DIR_L_FT	= ../archive/libft
 DIR_L_MLX	= mlx
 

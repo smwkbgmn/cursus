@@ -4,7 +4,7 @@
 # define FALSE 0
 # define TRUE 1
 
-# define SIZE_FLOOR 1
+# define SIZE_FLOOR 4
 
 class AMateria;
 

@@ -1,37 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/03 14:06:47 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/12/28 02:19:14 by donghyu2         ###   ########.fr       */
+/*   Created: 2023/11/01 21:54:49 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/12/28 04:52:06 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#ifndef MINIRT_H
+# define MINIRT_H
 
-void	*try(void *ptr)
-{
-	if (!ptr)
-		err_sys("malloc");
-	return (ptr);
-}
+# include "libft.h"
+# include "window.h"
+# include "draw.h"
+# include "error.h"
 
-void	err_sys(char *msg)
-{
-	if (msg)
-		perror(msg);
-	exit(EXIT_FAILURE);
-}
+void	sky(void);
 
-void	err_usr(char *msg)
-{
-	if (msg)
-	{
-		ft_putstr(msg);
-		ft_putchar('\n');
-	}
-	exit(EXIT_FAILURE);
-}
+#endif

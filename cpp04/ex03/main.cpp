@@ -52,7 +52,7 @@ int main( void )
 	newline();
 
 	*(Character *)harry_cpy = *(Character *)harry;
-	// harry_cpy has owned the Ice at inventory[0] and just destroyed by deep copying
+	// harry_cpy has owned the Ice at inventory[0] and this just destroyed by deep copying
 	harry_cpy->equip( src->createMateria( "ice" ) );
 
 	harry_cpy->use( 0, *pete ); // Use Cure

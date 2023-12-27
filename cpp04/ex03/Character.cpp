@@ -66,17 +66,17 @@ void	Character::equip( AMateria* m )
 
 		if ( idx < SIZE_INVEN )
 		{
-			_inven[idx] = m;
-
 			std::cout << _name << " equiped a(an) " << m->getType();
 			std::cout << " to the inventory " << idx << std::endl;
+
+			_inven[idx] = m;
 		}
 	}
 }
 
 void	Character::unequip( int idx )
 {
-	if ( _inven[idx] )
+	if ( idx < SIZE_INVEN && _inven[idx] )
 	{
 		std::cout << _name << " unequiped a(an) " << _inven[idx]->getType() << std::endl;
 		_inven[idx] = NULL;
@@ -85,7 +85,7 @@ void	Character::unequip( int idx )
 
 void	Character::use( int idx, ICharacter& target )
 {
-	if ( _inven[idx] )
+	if ( idx < SIZE_INVEN && _inven[idx] )
 		_inven[idx]->use( target );
 }
 

@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   product.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/01 21:54:49 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/11/03 14:29:07 by donghyu2         ###   ########.fr       */
+/*   Created: 2023/12/27 13:22:01 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/12/28 03:30:29 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#include "vector.h"
 
-# include "libft.h"
-# include "mlx.h"
-
-typedef struct s_mlx	t_mlx;
-
-void	init_mlx(t_mlx *mlx);
-
-void	*try(void *ptr);
-void	err_sys(char *msg);
-void	err_usr(char *msg);
-
-struct s_mlx
+t_scl	dot(t_vec v1, t_vec v2)
 {
-	void	*ptr;
-	void	*win;
-};
+	return (v1.x * v2.x
+		+ v1.y * v2.y
+		+ v1.z * v2.z);
+}
 
-#endif
+t_vec	cross(t_vec v1, t_vec v2)
+{
+	t_vec	rst;
+
+	rst.x = v1.y * v2.z - v1.z * v2.y;
+	rst.y = v1.z * v2.x - v1.x * v2.z;
+	rst.z = v1.x * v2.y - v1.y * v2.x;
+	return (rst);
+}

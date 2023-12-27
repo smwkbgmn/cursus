@@ -1,37 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   window.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/03 14:06:47 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/12/28 02:19:14 by donghyu2         ###   ########.fr       */
+/*   Created: 2023/12/27 12:58:19 by donghyu2          #+#    #+#             */
+/*   Updated: 2023/12/28 05:14:22 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#ifndef WINDOW_H
+# define WINDOW_H
 
-void	*try(void *ptr)
-{
-	if (!ptr)
-		err_sys("malloc");
-	return (ptr);
-}
+# include "mlx.h"
+# include "struct.h"
+# include "error.h"
 
-void	err_sys(char *msg)
-{
-	if (msg)
-		perror(msg);
-	exit(EXIT_FAILURE);
-}
+// init.c
+void	init(t_win *win);
 
-void	err_usr(char *msg)
-{
-	if (msg)
-	{
-		ft_putstr(msg);
-		ft_putchar('\n');
-	}
-	exit(EXIT_FAILURE);
-}
+#endif
