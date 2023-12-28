@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 00:37:31 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/12/28 05:15:19 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/12/28 09:11:45 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_scl	vmgntd(t_vec vec)
 
 t_vec	vunit(t_vec vec)
 {
-	return (vdiv(vec, vmgntd(vec)));
+	return (vdv(vec, vmgntd(vec)));
 }
 
 t_vec	vmin(t_vec v1, t_vec v2)
