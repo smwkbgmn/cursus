@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 13:14:24 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/12/28 09:11:31 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/12/30 14:14:34 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include "vector.h"
 
-t_vec	vad(t_vec v1, t_vec v2)
+t_vec	ad(t_vec v1, t_vec v2)
 {
 	t_vec	rst;
 
@@ -24,7 +24,7 @@ t_vec	vad(t_vec v1, t_vec v2)
 	return (rst);
 }
 
-t_vec	vsb(t_vec v1, t_vec v2)
+t_vec	sb(t_vec v1, t_vec v2)
 {
 	t_vec	rst;
 
@@ -34,7 +34,7 @@ t_vec	vsb(t_vec v1, t_vec v2)
 	return (rst);
 }
 
-// t_vec	vmulti(t_vec v1, t_vec v2)
+// t_vec	multi(t_vec v1, t_vec v2)
 // {
 // 	t_vec	rst;
 
@@ -43,7 +43,7 @@ t_vec	vsb(t_vec v1, t_vec v2)
 // 	rst.z = v1.z * v2.z;
 // }
 
-t_vec	vmt(t_vec vec, t_scl t)
+t_vec	mt(t_vec vec, t_scl t)
 {
 	t_vec	rst;
 
@@ -53,7 +53,7 @@ t_vec	vmt(t_vec vec, t_scl t)
 	return (rst);
 }
 
-t_vec	vdv(t_vec vec, t_scl t)
+t_vec	dv(t_vec vec, t_scl t)
 {
 	t_vec	rst;
 

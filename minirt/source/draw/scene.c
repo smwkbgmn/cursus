@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 04:12:29 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/12/29 16:38:32 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/12/30 14:19:56 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_camera	camera(void)
 {
 	t_camera	cam;
 
-	cam.pos = coordi(0, 0, 0);
+	cam.pos = pos(0, 0, 0);
 	cam.fclen = 1.0;
 
 	// printf("cam\n");
@@ -54,14 +54,14 @@ t_view	viewport(t_canvas *cvs, t_camera *cam)
 	view.grid.h = vec(view.size.x, 0, 0);
 	view.grid.v = vec(0, -view.size.y, 0);
 
-	view.delta.h = vdv(view.grid.h, cvs->size.x);
-	view.delta.v = vdv(view.grid.v, cvs->size.y);
+	view.delta.h = dv(view.grid.h, cvs->size.x);
+	view.delta.v = dv(view.grid.v, cvs->size.y);
 
-	view.upper_left = vsb(cam->pos,
-		vsb(vec(0, 0, cam->fclen),
-		vsb(vdv(view.grid.h, 2), vdv(view.grid.v, 2))));
-	view.pixel00_loc = vad(view.upper_left,
-		vmt(vad(view.delta.h, view.delta.v), 0.5));
+	view.upper_left = sb(cam->pos,
+		sb(vec(0, 0, cam->fclen),
+		sb(dv(view.grid.h, 2), dv(view.grid.v, 2))));
+	view.pixel00_loc = ad(view.upper_left,
+		mt(ad(view.delta.h, view.delta.v), 0.5));
 	
 	// printf("viewport\n");
 	// printf("\tsize: %f, %f\n", view.size.x, view.size.y);
@@ -76,7 +76,7 @@ t_view	viewport(t_canvas *cvs, t_camera *cam)
 	return (view);
 }
 
-t_crd	coordi(t_scl x, t_scl y, t_scl z)
+t_crd	pos(t_scl x, t_scl y, t_scl z)
 {
 	t_crd	crd;
 	

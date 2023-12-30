@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 21:54:32 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/12/29 16:36:05 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/12/30 14:20:19 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ void	sky(void)
 		w = 0;
 		while (w < cvs.size.x)
 		{
-			pixel_center = vad(view.pixel00_loc, vad(vmt(view.delta.h, w), vmt(view.delta.v, h)));
-			ray_direc = vsb(pixel_center, cam.pos);
+			pixel_center = ad(view.pixel00_loc, ad(mt(view.delta.h, w), mt(view.delta.v, h)));
+			ray_direc = sb(pixel_center, cam.pos);
 			r = ray(cam.pos, ray_direc);
 
 			put_pixel(ray_color(&r));

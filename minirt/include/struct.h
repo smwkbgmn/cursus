@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 02:30:19 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/12/28 12:07:04 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/12/30 14:17:20 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ struct s_bias2
 
 struct s_ray
 {
-	t_crd	org;
+	t_crd	pos;
 	t_vec	direc;
 };
 
