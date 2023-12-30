@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 21:54:32 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/12/28 10:55:43 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/12/29 16:36:05 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,16 @@ void	sky(void)
 
 	t_canvas	cvs;
 	t_camera	cam;
+	t_view		view;
 	
-	t_ray		rayy;
+	t_ray		r;
 
 	t_crd		pixel_center;
 	t_vec		ray_direc;
 
 	cvs = canvas();
-	cam = camera(&cvs);
+	cam = camera();
+	view = viewport(&cvs, &cam);
 
 	printf("P3\n%d %d\n%d\n", (int)cvs.size.x, (int)cvs.size.y, CLR_SCALE);
 	
@@ -50,11 +52,11 @@ void	sky(void)
 		w = 0;
 		while (w < cvs.size.x)
 		{
-			pixel_center = vad(cam.view.pixel00_loc, vad(vmt(cam.view.delta.h, w), vmt(cam.view.delta.v, h)));
-			ray_direc = vsb(pixel_center, cam.crd);
-			rayy = ray(cam.crd, ray_direc);
+			pixel_center = vad(view.pixel00_loc, vad(vmt(view.delta.h, w), vmt(view.delta.v, h)));
+			ray_direc = vsb(pixel_center, cam.pos);
+			r = ray(cam.pos, ray_direc);
 
-			put_pixel(ray_color(&rayy));
+			put_pixel(ray_color(&r));
 			w++;
 		}
 		h++;

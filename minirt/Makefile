@@ -10,8 +10,8 @@ SRC		= \
 minirt.c \
 $(wildcard $(DIR_SRC)/*.c) \
 $(wildcard $(DIR_SRC)/draw/*.c) \
+$(wildcard $(DIR_SRC)/draw/ray/*.c) \
 $(wildcard $(DIR_SRC)/draw/vector/*.c) \
-$(wildcard $(DIR_SRC)/object/*.c) \
 $(wildcard $(DIR_SRC)/window/*.c)
 
 OBJ		= $(SRC:.c=.o)

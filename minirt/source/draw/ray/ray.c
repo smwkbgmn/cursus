@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 03:13:25 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/12/28 10:53:08 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/12/29 20:04:24 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ t_color	ray_color(t_ray *ray)
 {
 	t_uvec	unit_direc;
 	t_scl	scale;
+
+	if (hit_sphere(coordi(0, 0, -1), 0.5, *ray))
+		return (color(1, 0, 0));
 
 	unit_direc = vunit(ray->direc);
 	scale = 0.5 * (unit_direc.y + 1.0);

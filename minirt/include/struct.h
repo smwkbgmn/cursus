@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 02:30:19 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/12/28 10:45:11 by donghyu2         ###   ########.fr       */
+/*   Updated: 2023/12/28 12:07:04 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,7 @@ struct s_view
 
 struct s_camera
 {
-	t_crd	crd;
-	t_view	view;
+	t_crd	pos;
 	t_scl	fclen;
 };
 
