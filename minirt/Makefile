@@ -50,4 +50,9 @@ re			:
 			make fclean
 			make all
 
+out			:
+			make all
+			./$(NAME) > out.ppm
+			open out.ppm
+
 .PHONY		: all celan fclean re

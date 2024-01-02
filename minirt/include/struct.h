@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 02:30:19 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/02 11:50:03 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/02 14:18:47 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,9 +181,9 @@ struct s_obj
 
 // struct s_hittable
 // {
-// 	t_list	*obj;
-// 	t_ray	r;
-// 	t_hit	hit;
-// }
+// 	t_list		*objs;
+// 	const t_ray	*r;
+// 	t_scl		t[2];
+// };
 
 #endif

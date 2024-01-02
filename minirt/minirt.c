@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 21:54:32 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/02 11:48:05 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/02 14:21:43 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,6 @@ int	main(void)
 
 void	sky_sphere(void)
 {
-	// OBJECTS
-	t_list	*objs = NULL;
-
-	ft_lstadd_back(&objs, ft_lstnew(new_sphere(point(0, 0, -1), 0.5)));
-	ft_lstadd_back(&objs, ft_lstnew(new_sphere(point(0, -100.5, -1), 100)));
-
 	// IMAGE
 	t_scl	aspect = 16.0 / 9.0;
 	int		w = 400;
@@ -62,6 +56,12 @@ void	sky_sphere(void)
 
 	t_point	pxl00;
 	pxl00 = ad(upleft, mt(ad(view_delta_w, view_delta_h), 0.5));
+
+	// OBJECTS
+	t_list	*objs = NULL;
+
+	ft_lstadd_back(&objs, ft_lstnew(new_sphere(point(0, 0, -1), 0.5)));
+	ft_lstadd_back(&objs, ft_lstnew(new_sphere(point(0, -100.5, -1), 100)));
 
 	// RENDER
 	printf("P3\n%d %d\n%d\n", w, h, CLR_SCALE);
