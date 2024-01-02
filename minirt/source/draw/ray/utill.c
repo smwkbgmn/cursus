@@ -1,21 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   utill.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/28 04:59:04 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/02 06:40:08 by donghyu2         ###   ########.fr       */
+/*   Created: 2024/01/02 11:21:44 by donghyu2          #+#    #+#             */
+/*   Updated: 2024/01/02 11:25:51 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "draw.h"
+#include "ray.h"
 
-void	write_color(t_color color)
+// t_scl	num_infinity(void)
+// {
+// 	return (INFINITY);
+// }
+
+// t_scl	num_pi(void)
+// {
+// 	return (3.1415926535897932385);
+// }
+
+t_scl	degrees_to_radians(t_scl degrees)
 {
-	printf("%d %d %d\n",
-		(int)(255.999 * color.x),
-		(int)(255.999 * color.y),
-		(int)(255.999 * color.z));
+	return (degrees * PI / 180.0);
+	// return (degrees * num_pi() / 180.0);
 }

@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 21:54:49 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/12/28 04:52:06 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/02 11:41:41 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,5 @@
 # include "window.h"
 # include "draw.h"
 # include "error.h"
-
-void	sky(void);
 
 #endif

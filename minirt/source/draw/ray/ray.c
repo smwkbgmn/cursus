@@ -6,38 +6,51 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 03:13:25 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/12/30 14:18:49 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/02 11:52:02 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "draw.h"
+#include "ray.h"
 
 static t_color	color(t_scl x, t_scl y, t_scl z);
 
-t_ray	ray(t_crd pos, t_vec direc)
+t_ray	ray(t_point origin, t_vec direc)
 {
 	t_ray	r;
 
-	r.pos = pos;
+	r.origin = origin;
 	r.direc = direc;
 	return (r);
 }
 
-t_crd	ray_at(t_ray *r, t_scl t)
+t_point	ray_at(const t_ray *r, t_scl t)
 {
-	return (ad(r->pos, mt(r->direc, t)));
+	return (ad(r->origin, mt(r->direc, t)));
 }
 
-t_color	ray_color(t_ray *r)
+t_color	ray_color(const t_ray *r, t_list *objs)
 {
-	t_uvec	unit_direc;
-	t_scl	scale;
+	// SPHERE
+	t_hit	rec;
+	t_scl	t[2];
 
-	if (hit_sphere(pos(0, 0, -1), 0.5, *r))
-		return (color(1, 0, 0));
+	t[MIN] = 0;
+	t[MAX] = INFINITY;
 
-	unit_direc = unit(r->direc);
-	scale = 0.5 * (unit_direc.y + 1.0);
+	if (hit(objs, r, t, &rec))
+		return (mt(ad(rec.normal, color(1, 1, 1)), 0.5));
+		
+	// t_scl	t = hit_sphere(point(0, 0, -1), 0.5, *r);
+
+	// if (t > 0.0)
+	// {
+	// 	t_uvec	uvec = unit(sb(ray_at(r, t), vec(0, 0, -1)));
+	// 	return (mt(color(uvec.x + 1, uvec.y + 1, uvec.z + 1), 0.5));
+	// }
+
+	// SKY
+	t_uvec	unit_direc = unit(r->direc);
+	t_scl	scale = 0.5 * (unit_direc.y + 1.0);
 	return (ad(mt(color(1.0, 1.0, 1.0), 1.0 - scale), mt(color(0.5, 0.7, 1.0), scale)));
 }
 

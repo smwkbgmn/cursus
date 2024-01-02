@@ -39,7 +39,7 @@ MateriaSource &MateriaSource::operator=( const MateriaSource &target )
 void MateriaSource::learnMateria( AMateria *materia )
 {
 	if ( iter( &MateriaSource::assignMtra, materia ) )
-		std::cout << "A materia " << materia->getType() << " is saved to source" << std::endl;
+		std::cout << "A materia \"" << materia->getType() << "\" is saved to source" << std::endl;
 	else
 		delete materia;
 

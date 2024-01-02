@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 04:12:29 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/12/30 14:19:56 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/02 07:01:12 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ t_camera	camera(void)
 {
 	t_camera	cam;
 
-	cam.pos = pos(0, 0, 0);
+	cam.origin = point(0, 0, 0);
 	cam.fclen = 1.0;
 
 	// printf("cam\n");
-	// printf("\tpos: %f, %f, %f\n", cam.pos.x, cam.pos.y, cam.pos.z);
+	// printf("\origin: %f, %f, %f\n", cam.origin.x, cam.origin.y, cam.origin.z);
 	// printf("\tfclen: %f\n", cam.fclen);
 	// printf("\n");
 	
@@ -51,22 +51,22 @@ t_view	viewport(t_canvas *cvs, t_camera *cam)
 	view.size.y = 2.0;
 	view.size.x = view.size.y * (cvs->size.x / cvs->size.y);
 
-	view.grid.h = vec(view.size.x, 0, 0);
-	view.grid.v = vec(0, -view.size.y, 0);
+	view.unit.w = vec(view.size.x, 0, 0);
+	view.unit.h = vec(0, -view.size.y, 0);
 
-	view.delta.h = dv(view.grid.h, cvs->size.x);
-	view.delta.v = dv(view.grid.v, cvs->size.y);
+	view.delta.w = dv(view.unit.w, cvs->size.x);
+	view.delta.h = dv(view.unit.h, cvs->size.y);
 
-	view.upper_left = sb(cam->pos,
+	view.upper_left = sb(cam->origin,
 		sb(vec(0, 0, cam->fclen),
-		sb(dv(view.grid.h, 2), dv(view.grid.v, 2))));
+		sb(dv(view.unit.w, 2), dv(view.unit.h, 2))));
 	view.pixel00_loc = ad(view.upper_left,
-		mt(ad(view.delta.h, view.delta.v), 0.5));
+		mt(ad(view.delta.w, view.delta.h), 0.5));
 	
 	// printf("viewport\n");
 	// printf("\tsize: %f, %f\n", view.size.x, view.size.y);
-	// printf("\tgrid: h(%f, %f, %f), v(%f, %f, %f)\n", view.grid.h.x, view.grid.h.y, view.grid.h.z,
-		// view.grid.v.x, view.grid.v.y, view.grid.v.z);
+	// printf("\tunit: h(%f, %f, %f), v(%f, %f, %f)\n", view.unit.h.x, view.unit.h.y, view.unit.h.z,
+		// view.unit.v.x, view.unit.v.y, view.unit.v.z);
 	// printf("\tdelta: h(%f, %f, %f), v(%f, %f, %f)\n", view.delta.h.x, view.delta.h.y, view.delta.h.z,
 		// view.delta.v.x, view.delta.v.y, view.delta.v.z);
 	// printf("\tupper_left: %f, %f, %f\n", view.upper_left.x, view.upper_left.y, view.upper_left.z);
@@ -76,9 +76,9 @@ t_view	viewport(t_canvas *cvs, t_camera *cam)
 	return (view);
 }
 
-t_crd	pos(t_scl x, t_scl y, t_scl z)
+t_point	point(t_scl x, t_scl y, t_scl z)
 {
-	t_crd	crd;
+	t_point	crd;
 	
 	crd.x = x;
 	crd.y = y;
