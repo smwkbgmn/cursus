@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 04:35:59 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/02 11:51:54 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/02 12:06:19 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 /* ray.c */
 t_ray	ray(t_point org, t_vec direc);
-t_point	ray_at(const t_ray *ray, t_scl t);
+t_point	ray_at(const t_ray *r, t_scl t);
 t_color	ray_color(const t_ray *r, t_list *objs);
 
 /* hit.c */

@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 03:13:25 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/02 11:52:02 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/02 12:06:39 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,6 @@ t_color	ray_color(const t_ray *r, t_list *objs)
 
 	if (hit(objs, r, t, &rec))
 		return (mt(ad(rec.normal, color(1, 1, 1)), 0.5));
-		
-	// t_scl	t = hit_sphere(point(0, 0, -1), 0.5, *r);
-
-	// if (t > 0.0)
-	// {
-	// 	t_uvec	uvec = unit(sb(ray_at(r, t), vec(0, 0, -1)));
-	// 	return (mt(color(uvec.x + 1, uvec.y + 1, uvec.z + 1), 0.5));
-	// }
 
 	// SKY
 	t_uvec	unit_direc = unit(r->direc);

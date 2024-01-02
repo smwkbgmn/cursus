@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 07:47:31 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/02 11:59:16 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/02 12:05:22 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,11 @@ t_bool	hit(t_list *objs, const t_ray *r, t_scl t[2], t_hit *rec)
 
 	while (objs)
 	{
-		if (hit_object(objs->content, r, t, rec))
+		if (hit_object(objs->content, r, t, &rec_tmp))
 		{
 			hit_anything = TRUE;
 			t[MAX] = rec_tmp.t;
-			// If somethings' gone wrong, check below first
 			*rec = rec_tmp;
-			// rec->face = rec_tmp.face;
-			// rec->normal = rec_tmp.normal;
-			// rec->point = rec_tmp.point;
-			// rec->t = rec_tmp.t;
 		}
 		objs = objs->next;
 	}
