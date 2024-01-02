@@ -6,12 +6,14 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 02:30:19 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/02 14:18:47 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/02 14:47:41 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
+
+# include "libft.h"
 
 # define MIN 0
 # define MAX 1
@@ -125,7 +127,7 @@ typedef struct s_value	t_value;
 // typedef struct s_plane	t_plane;
 
 typedef struct s_obj		t_obj;
-// typedef struct s_hittable	t_hittable;
+typedef struct s_hittable	t_hitbl;
 
 enum e_name
 {
@@ -179,11 +181,11 @@ struct s_obj
 	t_hit		hit;
 };
 
-// struct s_hittable
-// {
-// 	t_list		*objs;
-// 	const t_ray	*r;
-// 	t_scl		t[2];
-// };
+struct s_hittable
+{
+	const t_ray	*r;
+	t_scl		t[2];
+	t_list		*objs;
+};
 
 #endif

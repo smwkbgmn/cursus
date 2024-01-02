@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 21:54:32 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/02 14:21:43 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/02 15:04:39 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ t_obj	*new_sphere(t_point center, t_scl radius)
 {
 	t_obj	*sp = ft_calloc(1, sizeof(t_obj));
 
+	sp->name = SPHERE;
 	sp->val.cir.center = center;
 	sp->val.cir.radius = radius;
 	return (sp);

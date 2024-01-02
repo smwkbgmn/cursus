@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 04:35:59 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/02 14:22:40 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/02 14:41:43 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ t_point	ray_at(const t_ray *r, t_scl t);
 t_color	ray_color(const t_ray *r, t_list *objs);
 
 /* hit.c */
-t_bool	hit(t_list *objs, const t_ray *r, t_scl t[2], t_hit *hit);
+t_bool	hit(t_hitbl hittable, t_hit *hit);
+// t_bool	hit(t_list *objs, const t_ray *r, t_scl t[2], t_hit *hit);
 
 /* utill.c*/
 // t_scl	num_infinity(void);

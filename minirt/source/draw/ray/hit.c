@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 07:47:31 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/02 14:22:35 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/02 14:44:25 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,21 @@ static t_bool	hit_object(t_obj *obj, const t_ray *r, t_scl t[2], t_hit *rec);
 static void		set_equation(t_eqa *eqa, const t_obj *obj, const t_ray *r);
 static void		set_face_normal(t_hit *rec, const t_ray *r, t_vec outward_normal);
 
-t_bool	hit(t_list *objs, const t_ray *r, t_scl t[2], t_hit *rec)
+// t_bool	hit(t_list *objs, const t_ray *r, t_scl t[2], t_hit *rec)
+t_bool	hit(t_hitbl able, t_hit *rec)
 {
 	t_hit	rec_tmp;
 	t_bool	hit_anything = FALSE;
 
-	while (objs)
+	while (able.objs)
 	{
-		if (hit_object(objs->content, r, t, &rec_tmp))
+		if (hit_object(able.objs->content, able.r, able.t, &rec_tmp))
 		{
 			hit_anything = TRUE;
-			t[MAX] = rec_tmp.t;
+			able.t[MAX] = rec_tmp.t;
 			*rec = rec_tmp;
 		}
-		objs = objs->next;
+		able.objs = able.objs->next;
 	}
 	return (hit_anything);
 }
