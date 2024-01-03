@@ -1,9 +1,5 @@
 {
 	"files.associations": {
-		"error.h": "c",
-		"stdio.h": "c",
-		"math.h": "c",
-		"vector.h": "c",
-		"limits.h": "c"
+		"draw.h": "c"
 	}
 }

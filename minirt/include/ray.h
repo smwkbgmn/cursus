@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 04:35:59 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/02 14:41:43 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/03 11:52:16 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,26 @@
 
 /* ray.c */
 t_ray	ray(t_point org, t_vec direc);
+t_ray	ray_point(t_scl x, t_scl y, const t_camera *cam);
 t_point	ray_at(const t_ray *r, t_scl t);
 t_color	ray_color(const t_ray *r, t_list *objs);
+t_color	color(t_scl x, t_scl y, t_scl z);
+
+/* interval.c */
+t_intvl	interval(void);
+t_intvl	interval_set(t_scl min, t_scl max);
+t_bool	contains(t_scl x, t_intvl intvl);
+t_bool	surrounds(t_scl x, t_intvl intvl);
+t_scl	clamp(t_scl x, t_intvl intvl);
 
 /* hit.c */
-t_bool	hit(t_hitbl hittable, t_hit *hit);
-// t_bool	hit(t_list *objs, const t_ray *r, t_scl t[2], t_hit *hit);
+t_bool	hit(t_list *objs, const t_ray *r, t_intvl t, t_hit *rec);
 
 /* utill.c*/
 // t_scl	num_infinity(void);
 // t_scl	num_pi(void);
 t_scl	degrees_to_radians(t_scl degrees);
+t_scl	randnum(void);
+t_scl	randnum_range(t_scl min, t_scl max);
 
 #endif

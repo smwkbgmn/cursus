@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 02:30:19 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/02 14:47:41 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/03 11:46:15 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,18 @@
 
 # include "libft.h"
 
-# define MIN 0
-# define MAX 1
+// # define MIN 0
+// # define MAX 1
+
+typedef double			t_scl;
 
 /* ELEMENT */
-typedef double			t_scl;
 typedef struct s_bias3	t_vec;
 typedef struct s_bias3	t_uvec;
 typedef struct s_bias3	t_point;
 typedef struct s_bias3	t_color;
-typedef struct s_bias2	t_size;
+typedef struct s_size	t_size;
+typedef struct s_grid	t_grid;
 
 struct s_bias3
 {
@@ -33,10 +35,16 @@ struct s_bias3
 	t_scl	z;
 };
 
-struct s_bias2
+struct s_size
 {
-	t_scl	x;
-	t_scl	y;
+	t_scl	w;
+	t_scl	h;
+};
+
+struct s_grid
+{
+	t_vec	w;
+	t_vec	h;
 };
 
 /* MLX */
@@ -50,49 +58,42 @@ struct s_window
 };
 
 /* VIEW */
-typedef struct s_canvas	t_canvas;
+typedef struct s_image	t_image;
 typedef struct s_camera	t_camera;
-typedef struct s_grid	t_grid;
 typedef struct s_view	t_view;
 
-struct s_canvas
+struct s_image
 {
 	t_size	size;
-	t_scl	aspect;
-};
-
-struct s_camera
-{
-	t_point	origin;
-	t_scl	fclen;
-};
-
-struct s_grid
-{
-	t_vec	w;
-	t_vec	h;
+	t_scl	aspect;	// Ratio of img width over height
 };
 
 struct s_view
 {
-	t_size	size;
-	t_grid	unit;
-	t_grid	delta;
-	t_point	upper_left;
-	t_point	pixel00_loc;
+	t_point	pxl00;	// Location of pixel 0, 0
+	t_grid	pxl;	// Offset to pxl to the right(w) and below(h)
+};
+
+struct s_camera
+{
+	t_point	center;
+	t_image	img;
+	t_view	view;
+	t_scl	sample;
 };
 
 /* RAY */
-typedef enum e_face			t_face;
+// typedef enum e_face			t_face;
 typedef struct s_ray		t_ray;
+typedef struct s_interval	t_intvl;
 typedef struct s_hit		t_hit;
 typedef struct s_equation	t_eqa;
 
-enum e_face
-{
-	BACK,
-	FRONT
-};
+// enum e_face
+// {
+// 	BACK,
+// 	FRONT
+// };
 
 struct s_ray
 {
@@ -100,12 +101,19 @@ struct s_ray
 	t_vec	direc;
 };
 
+struct s_interval
+{
+	t_scl	min;
+	t_scl	max;
+};
+
 struct s_hit
 {
 	t_point	point;
 	t_uvec	normal;
 	t_scl	t;
-	t_face	face;
+	// t_face	face;
+	t_bool	face;
 };
 
 struct s_equation
@@ -125,9 +133,8 @@ typedef struct s_value	t_value;
 // typedef struct s_sphere	t_sphere;
 // typedef struct s_cylndr	t_cylndr;
 // typedef struct s_plane	t_plane;
+typedef struct s_obj	t_obj;
 
-typedef struct s_obj		t_obj;
-typedef struct s_hittable	t_hitbl;
 
 enum e_name
 {
@@ -178,14 +185,6 @@ struct s_obj
 	// void		*shape;
 	t_name		name;
 	t_value		val;
-	t_hit		hit;
-};
-
-struct s_hittable
-{
-	const t_ray	*r;
-	t_scl		t[2];
-	t_list		*objs;
 };
 
 #endif

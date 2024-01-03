@@ -6,14 +6,13 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 03:13:25 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/02 14:51:15 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/04 07:30:36 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray.h"
 
-static t_hitbl	hittable(const t_ray *r, t_list *objs);
-static t_color	color(t_scl x, t_scl y, t_scl z);
+static t_vec	pxl_sample_square(t_grid pxl);
 
 t_ray	ray(t_point origin, t_vec direc)
 {
@@ -29,11 +28,27 @@ t_point	ray_at(const t_ray *r, t_scl t)
 	return (ad(r->origin, mt(r->direc, t)));
 }
 
+// Get a randomly sampled camera ray for the pixel at location x, y
+t_ray	ray_point(t_scl x, t_scl y, const t_camera *cam)
+{
+	// t_point	pxl_center = ad(cam->view.pxl00, ad(mt(cam->view.pxl.w, (t_scl)x), mt(cam->view.pxl.h, (t_scl)y)));
+	t_point	pxl_center = cam->view.pxl00;
+	pxl_center = ad(pxl_center, mt(cam->view.pxl.w, x));
+	pxl_center = ad(pxl_center, mt(cam->view.pxl.h, y));
+	t_vec	pxl_sample = ad(pxl_center, pxl_sample_square(cam->view.pxl));
+
+	t_point	r_origin = cam->center;
+	t_vec	r_direc = sb(pxl_sample, r_origin);
+
+	return (ray(r_origin, r_direc));
+}
+
 t_color	ray_color(const t_ray *r, t_list *objs)
 {
 	// SPHERE
 	t_hit	rec;
-	if (hit(hittable(r, objs), &rec))
+	
+	if (hit(objs, r, interval_set(0, INFINITY), &rec))
 		return (mt(ad(rec.normal, color(1, 1, 1)), 0.5));
 
 	// SKY
@@ -42,18 +57,15 @@ t_color	ray_color(const t_ray *r, t_list *objs)
 	return (ad(mt(color(1.0, 1.0, 1.0), 1.0 - scale), mt(color(0.5, 0.7, 1.0), scale)));
 }
 
-static t_hitbl	hittable(const t_ray *r, t_list *objs)
+// Returns a random point in the square surrounding a pixel at the origin
+static t_vec	pxl_sample_square(t_grid pxl)
 {
-	t_hitbl	able;
-
-	able.r = r;
-	able.t[MIN] = 0;
-	able.t[MAX] = INFINITY;
-	able.objs = objs;
-	return (able);
+	t_scl	px = -0.5 + randnum();
+	t_scl	py = -0.5 + randnum();
+	return (ad(mt(pxl.w, px), mt(pxl.h, py)));
 }
 
-static t_color	color(t_scl x, t_scl y, t_scl z)
+t_color	color(t_scl x, t_scl y, t_scl z)
 {
 	t_color	color;
 

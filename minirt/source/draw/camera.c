@@ -1,41 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene.c                                            :+:      :+:    :+:   */
+/*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 04:12:29 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/02 07:01:12 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/04 07:35:13 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "scene.h"
+#include "draw.h"
 
-t_canvas	canvas(void)
-{
-	t_canvas	cvs;
+static t_image	image(t_scl aspect, t_scl width);
+static t_view	viewport(const t_camera *cam);
 
-	cvs.aspect = 16.0 / 9.0;
-	cvs.size.x = 400;
-	cvs.size.y = (int)(cvs.size.x / cvs.aspect);
-	if (cvs.size.y < 1)
-		cvs.size.y = 1;
-		
-	// printf("canvas\n");
-	// printf("\tsize: %d, %d\n", (int)cvs.size.x, (int)cvs.size.y);
-	// printf("\n");
-	
-	return (cvs);
-}
-
-t_camera	camera(void)
+t_camera	camera(t_scl aspect, t_scl width, t_scl samples_per_pxl)
 {
 	t_camera	cam;
 
-	cam.origin = point(0, 0, 0);
-	cam.fclen = 1.0;
-
+	cam.center = point(0, 0, 0);
+	cam.img = image(aspect, width);
+	cam.view = viewport(&cam);
+	cam.sample = samples_per_pxl;
+	
 	// printf("cam\n");
 	// printf("\origin: %f, %f, %f\n", cam.origin.x, cam.origin.y, cam.origin.z);
 	// printf("\tfclen: %f\n", cam.fclen);
@@ -44,25 +32,43 @@ t_camera	camera(void)
 	return (cam);
 }
 
-t_view	viewport(t_canvas *cvs, t_camera *cam)
+static t_image	image(t_scl aspect, t_scl width)
+{
+	t_image	img;
+
+	img.aspect = aspect;
+	img.size.w = width;
+	img.size.h = (int)(width / aspect);
+	if (img.size.h < 1)
+		img.size.h = 1;
+	return (img);
+}
+
+static t_view	viewport(const t_camera *cam)
 {
 	t_view	view;
-
-	view.size.y = 2.0;
-	view.size.x = view.size.y * (cvs->size.x / cvs->size.y);
-
-	view.unit.w = vec(view.size.x, 0, 0);
-	view.unit.h = vec(0, -view.size.y, 0);
-
-	view.delta.w = dv(view.unit.w, cvs->size.x);
-	view.delta.h = dv(view.unit.h, cvs->size.y);
-
-	view.upper_left = sb(cam->origin,
-		sb(vec(0, 0, cam->fclen),
-		sb(dv(view.unit.w, 2), dv(view.unit.h, 2))));
-	view.pixel00_loc = ad(view.upper_left,
-		mt(ad(view.delta.w, view.delta.h), 0.5));
 	
+	// Dimension
+	t_scl	fclen = 1.0;
+	t_scl	view_h = 2.0;
+	t_scl	view_w = view_h * ((t_scl)cam->img.size.w / cam->img.size.h);
+
+	// Calculate the vectors aacross the horizontal and down the vertical view edges
+	t_vec	view_grid_w = vec(view_w, 0, 0);
+	t_vec	view_grid_h = vec(0, -1 * view_h, 0);
+
+	// Calculate the horizontal and vertical delta vectors from pixel to pixel
+	view.pxl.w = dv(view_grid_w, (t_scl)cam->img.size.w);
+	view.pxl.h = dv(view_grid_h, (t_scl)cam->img.size.h);
+
+	// Calculate the location of the upper left pxl
+	t_point	upleft;
+	upleft = sb(cam->center, vec(0, 0, fclen));
+	upleft = sb(upleft, dv(view_grid_w, 2));
+	upleft = sb(upleft, dv(view_grid_h, 2));
+
+	view.pxl00 = ad(upleft, mt(ad(view.pxl.w, view.pxl.h), 0.5));
+
 	// printf("viewport\n");
 	// printf("\tsize: %f, %f\n", view.size.x, view.size.y);
 	// printf("\tunit: h(%f, %f, %f), v(%f, %f, %f)\n", view.unit.h.x, view.unit.h.y, view.unit.h.z,
@@ -75,6 +81,7 @@ t_view	viewport(t_canvas *cvs, t_camera *cam)
 
 	return (view);
 }
+
 
 t_point	point(t_scl x, t_scl y, t_scl z)
 {

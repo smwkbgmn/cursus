@@ -6,38 +6,39 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 07:47:31 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/02 14:44:25 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/03 08:12:40 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray.h"
 
-static t_bool	hit_object(t_obj *obj, const t_ray *r, t_scl t[2], t_hit *rec);
+static t_bool	hit_object(t_obj *obj, const t_ray *r, t_intvl t, t_hit *rec);
 static void		set_equation(t_eqa *eqa, const t_obj *obj, const t_ray *r);
 static void		set_face_normal(t_hit *rec, const t_ray *r, t_vec outward_normal);
 
-// t_bool	hit(t_list *objs, const t_ray *r, t_scl t[2], t_hit *rec)
-t_bool	hit(t_hitbl able, t_hit *rec)
+t_bool	hit(t_list *objs, const t_ray *r, t_intvl t, t_hit *rec)
 {
 	t_hit	rec_tmp;
 	t_bool	hit_anything = FALSE;
+	t_scl	closest_so_far = t.max;
 
-	while (able.objs)
+	while (objs)
 	{
-		if (hit_object(able.objs->content, able.r, able.t, &rec_tmp))
+		if (hit_object(objs->content, r, interval_set(t.min, closest_so_far), &rec_tmp))
 		{
 			hit_anything = TRUE;
-			able.t[MAX] = rec_tmp.t;
+			closest_so_far = rec_tmp.t;
 			*rec = rec_tmp;
 		}
-		able.objs = able.objs->next;
+		objs = objs->next;
 	}
 	return (hit_anything);
 }
 
-static t_bool	hit_object(t_obj *obj, const t_ray *r, t_scl t[2], t_hit *rec)
+static t_bool	hit_object(t_obj *obj, const t_ray *r, t_intvl t, t_hit *rec)
 {
 	t_eqa	eqa;
+
 	t_scl	sqrtd;
 	t_scl	root;
 	t_vec	outward_normal;
@@ -47,11 +48,12 @@ static t_bool	hit_object(t_obj *obj, const t_ray *r, t_scl t[2], t_hit *rec)
 		return (FALSE);
 	
 	sqrtd = sqrt(eqa.dscr);
+	// Find the nearest root that lines in the acceptable range
 	root = (-eqa.b_half - sqrtd) / eqa.a;
-	if (root <= t[MIN] || t[MAX] <= root)
+	if (!surrounds(root, t))
 	{
 		root = (-eqa.b_half + sqrtd) / eqa.a;
-		if (root <= t[MIN] || t[MAX] <= root)
+		if (!surrounds(root, t))
 			return (FALSE);
 	}
 
