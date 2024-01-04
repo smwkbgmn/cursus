@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 04:12:29 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/04 07:35:13 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/04 09:48:44 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static t_image	image(t_scl aspect, t_scl width);
 static t_view	viewport(const t_camera *cam);
 
-t_camera	camera(t_scl aspect, t_scl width, t_scl samples_per_pxl)
+t_camera	camera(t_scl aspect, t_scl width, t_scl samples_per_pxl, t_scl depth)
 {
 	t_camera	cam;
 
@@ -23,6 +23,7 @@ t_camera	camera(t_scl aspect, t_scl width, t_scl samples_per_pxl)
 	cam.img = image(aspect, width);
 	cam.view = viewport(&cam);
 	cam.sample = samples_per_pxl;
+	cam.depth = depth;
 	
 	// printf("cam\n");
 	// printf("\origin: %f, %f, %f\n", cam.origin.x, cam.origin.y, cam.origin.z);
@@ -81,7 +82,6 @@ static t_view	viewport(const t_camera *cam)
 
 	return (view);
 }
-
 
 t_point	point(t_scl x, t_scl y, t_scl z)
 {

@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 04:35:59 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/03 11:52:16 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/04 09:49:36 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 t_ray	ray(t_point org, t_vec direc);
 t_ray	ray_point(t_scl x, t_scl y, const t_camera *cam);
 t_point	ray_at(const t_ray *r, t_scl t);
-t_color	ray_color(const t_ray *r, t_list *objs);
+t_color	ray_color(const t_ray *r, t_scl depth, t_list *objs);
 t_color	color(t_scl x, t_scl y, t_scl z);
 
 /* interval.c */
@@ -42,7 +42,7 @@ t_bool	hit(t_list *objs, const t_ray *r, t_intvl t, t_hit *rec);
 // t_scl	num_infinity(void);
 // t_scl	num_pi(void);
 t_scl	degrees_to_radians(t_scl degrees);
-t_scl	randnum(void);
-t_scl	randnum_range(t_scl min, t_scl max);
+t_scl	randn(void);
+t_scl	randn_range(t_scl min, t_scl max);
 
 #endif

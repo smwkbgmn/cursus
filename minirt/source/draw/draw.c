@@ -6,12 +6,12 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 10:15:03 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/04 07:30:53 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/04 09:50:43 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-// DEBUGGING remove it later
+// for DEBUGGING remove it later
 
 #include "draw.h"
 
@@ -37,7 +37,7 @@ void	render(t_list *objs, const t_camera *cam)
 			while (sample < cam->sample)
 			{
 				t_ray	r = ray_point(x, y, cam);
-				pxl_color = ad(pxl_color, ray_color(&r, objs));
+				pxl_color = ad(pxl_color, ray_color(&r, cam->depth, objs));
 
 				sample++;
 			}
@@ -75,10 +75,4 @@ static void	write_color(t_color pxl_color, int samples_per_pxl)
 		(int)(256 * clamp(r, intensity)),
 		(int)(256 * clamp(g, intensity)),
 		(int)(256 * clamp(b, intensity)));
-
-	// if (samples_per_pxl)
-	// 	printf("%d %d %d\n",
-	// 		(int)(255.999 * pxl_color.x),
-	// 		(int)(255.999 * pxl_color.y),
-	// 		(int)(255.999 * pxl_color.z));
 }

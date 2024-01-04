@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 11:21:44 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/03 14:46:27 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/04 09:09:06 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ t_scl	degrees_to_radians(t_scl degrees)
 	// return (degrees * num_pi() / 180.0);
 }
 
-t_scl	randnum(void)
+t_scl	randn(void)
 {
 	return (rand() / (RAND_MAX + 1.0));
 }
 
-t_scl	randnum_range(t_scl min, t_scl max)
+t_scl	randn_range(t_scl min, t_scl max)
 {
-	return (min + (max - min) * randnum());
+	return (min + (max - min) * randn());
 }

@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 03:13:25 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/04 07:30:36 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/04 10:10:48 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,22 @@ t_ray	ray_point(t_scl x, t_scl y, const t_camera *cam)
 	return (ray(r_origin, r_direc));
 }
 
-t_color	ray_color(const t_ray *r, t_list *objs)
+t_color	ray_color(const t_ray *r, t_scl depth, t_list *objs)
 {
 	// SPHERE
 	t_hit	rec;
 	
-	if (hit(objs, r, interval_set(0, INFINITY), &rec))
-		return (mt(ad(rec.normal, color(1, 1, 1)), 0.5));
+	// If we've exceeded the ray bounce limit, no more light is gathered
+	if (depth <= 0)
+		return (color(0, 0, 0));
+
+	if (hit(objs, r, interval_set(0.001, INFINITY), &rec))
+	{
+		// t_uvec	direction = randv_on_hemisphere(rec.normal); // Original
+		t_uvec	direction = ad(rec.normal, randuv()); // Lambertian
+		t_ray	r_tmp = ray(rec.point, direction);
+		return (mt(ray_color(&r_tmp, depth - 1, objs), 0.5));
+	}
 
 	// SKY
 	t_uvec	unit_direc = unit(r->direc);
@@ -60,8 +69,8 @@ t_color	ray_color(const t_ray *r, t_list *objs)
 // Returns a random point in the square surrounding a pixel at the origin
 static t_vec	pxl_sample_square(t_grid pxl)
 {
-	t_scl	px = -0.5 + randnum();
-	t_scl	py = -0.5 + randnum();
+	t_scl	px = -0.5 + randn();
+	t_scl	py = -0.5 + randn();
 	return (ad(mt(pxl.w, px), mt(pxl.h, py)));
 }
 

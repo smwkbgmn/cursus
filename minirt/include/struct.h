@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 02:30:19 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/03 11:46:15 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/04 09:46:53 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ struct s_camera
 	t_image	img;
 	t_view	view;
 	t_scl	sample;
+	t_scl	depth;
 };
 
 /* RAY */
