@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 02:30:19 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/04 13:29:53 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/05 07:44:47 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ struct s_interval
 
 struct s_material
 {
-		
+	t_scl	albedo;
 };
 
 struct s_hit
@@ -122,7 +122,7 @@ struct s_hit
 	t_scl	t;
 	// t_face	face;
 	t_bool	face;
-	t
+	t_mat	mat;
 };
 
 struct s_equation
@@ -193,6 +193,7 @@ struct s_obj
 {
 	// void		*shape;
 	t_name		name;
+	t_mat		
 	t_value		val;
 };
 
