@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 10:15:03 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/04 09:50:43 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/04 12:01:09 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "draw.h"
 
 static void		write_color(t_color color, int samples_per_pxl);
+static t_scl	linear_to_gamma(t_scl linear_component);
 
 void	render(t_list *objs, const t_camera *cam)
 {
@@ -69,10 +70,20 @@ static void	write_color(t_color pxl_color, int samples_per_pxl)
 	g *= scale;
 	b *= scale;
 	
+	// Apply the linear to gamma transform
+	r = linear_to_gamma(r);
+	g = linear_to_gamma(g);
+	b = linear_to_gamma(b);
+
 	// Write the translated [0, 255] value of each color component
 	t_intvl	intensity = interval_set(0.000, 0.999);
 	printf("%d %d %d\n",
 		(int)(256 * clamp(r, intensity)),
 		(int)(256 * clamp(g, intensity)),
 		(int)(256 * clamp(b, intensity)));
+}
+
+static t_scl	linear_to_gamma(t_scl linear_component)
+{
+	return (sqrt(linear_component));
 }

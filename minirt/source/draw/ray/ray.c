@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 03:13:25 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/04 10:10:48 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/04 12:15:56 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,9 @@ t_color	ray_color(const t_ray *r, t_scl depth, t_list *objs)
 	{
 		// t_uvec	direction = randv_on_hemisphere(rec.normal); // Original
 		t_uvec	direction = ad(rec.normal, randuv()); // Lambertian
-		t_ray	r_tmp = ray(rec.point, direction);
-		return (mt(ray_color(&r_tmp, depth - 1, objs), 0.5));
+		t_ray	r_diffuse = ray(rec.point, direction);
+		return (mt(ray_color(&r_diffuse, depth - 1, objs), 0.8));
+		// return (mt(ad(rec.normal, color(1, 1, 1)), 0.5)); // Colored with 100% RGB
 	}
 
 	// SKY

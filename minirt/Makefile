@@ -18,18 +18,20 @@ minirt.c
 OBJ		= $(SRC:.c=.o)
 
 L_FT		= $(DIR_L_FT)/libft.a
-L_MLX		= $(DIR_L_MLX)/libmlx.dylib
+L_MLX		= $(DIR_L_MLX)/libmlx.a
+# L_MLX		= $(DIR_L_MLX)/libmlx.dylib
 
 DIR_HDR		= include
 DIR_SRC		= source
 DIR_L_FT	= ../archive/libft
-DIR_L_MLX	= mlx
+# DIR_L_MLX	= mlx
+DIR_L_MLX	= mlx_open
 
 all			: $(NAME)
 
 $(NAME)		: $(L_FT) $(OBJ)
 			$(CC) $(FLAG) $(L_FT) $(L_MLX) $(OBJ) -o $@
-			cp $(L_MLX) .
+			# cp $(L_MLX) .
 
 %.o			: %.c
 			$(CC) $(FLAG) -c $< -o $@

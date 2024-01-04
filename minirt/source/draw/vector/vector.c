@@ -6,11 +6,10 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 00:37:31 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/04 10:07:59 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/04 11:40:44 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ray.h"
 #include "vector.h"
 
 t_vec	vec(t_scl x, t_scl y, t_scl z)
