@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 04:12:29 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/04 12:32:38 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/04 12:38:11 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,11 @@ static t_view	viewport(const t_camera *cam)
 	// Dimension
 	t_scl	fclen = 1.0;
 
-	// t_scl	theta = degrees_to_radians(cam->fov);
-	// t_scl	h = tan(theta / 2);
+	t_scl	theta = degrees_to_radians(cam->fov);
+	t_scl	h = tan(theta / 2);
 
-	t_scl	view_h = 2.0;
-	// t_scl	view_h = 2 * h * fclen;
+	// t_scl	view_h = 2.0;
+	t_scl	view_h = 2 * h * fclen;
 	t_scl	view_w = view_h * ((t_scl)cam->img.size.w / cam->img.size.h);
 
 	// Calculate the vectors aacross the horizontal and down the vertical view edges

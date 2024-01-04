@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 02:30:19 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/04 12:25:08 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/04 13:29:53 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ struct s_camera
 // typedef enum e_face			t_face;
 typedef struct s_ray		t_ray;
 typedef struct s_interval	t_intvl;
+typedef struct s_material	t_mat;
 typedef struct s_hit		t_hit;
 typedef struct s_equation	t_eqa;
 
@@ -109,6 +110,11 @@ struct s_interval
 	t_scl	max;
 };
 
+struct s_material
+{
+		
+};
+
 struct s_hit
 {
 	t_point	point;
@@ -116,6 +122,7 @@ struct s_hit
 	t_scl	t;
 	// t_face	face;
 	t_bool	face;
+	t
 };
 
 struct s_equation
