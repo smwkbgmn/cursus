@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 07:47:31 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/04 13:30:15 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/05 10:55:04 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ static t_bool	hit_object(t_obj *obj, const t_ray *r, t_intvl t, t_hit *rec)
 	rec->t = root;
 	rec->point = ray_at(r, rec->t);
 
-	outward_normal = dv(sb(rec->point, obj->val.cir.center),
-		obj->val.cir.radius);
+	outward_normal = dv(sb(rec->point, obj->val.cir.center), obj->val.cir.radius);
 	set_face_normal(rec, r, outward_normal);
-	
+	rec->mtral = obj->mtral;
+
 	return (TRUE);
 }
 

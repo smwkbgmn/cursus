@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 03:13:25 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/05 09:56:41 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/05 10:57:08 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,10 @@ t_color	ray_color(const t_ray *r, t_scl depth, t_list *objs)
 		// MATERIAL
 		t_ray	scattered;
 		t_color	attenuation;
-		t_mtral	*mtral = &((t_obj *)objs->content)->mtral;
-		if (mtral->scatter(mtral->albedo, r, &rec, &attenuation, &scattered))
+
+		if (rec.mtral->scatter(rec.mtral->albedo, r, &rec, &attenuation, &scattered))
 			return (mtv(attenuation, ray_color(&scattered, depth - 1, objs)));
+		return (color(0, 0, 0));
 
 		// DIFFUESE
 		// t_uvec	direction = randv_on_hemisphere(rec.normal); // Original

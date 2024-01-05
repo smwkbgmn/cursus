@@ -6,12 +6,9 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 13:30:27 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/05 09:53:18 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/05 09:58:55 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <unistd.h>
-// for DEBUGGING remove it later
 
 #include "ray.h"
 
@@ -25,15 +22,9 @@ t_mtral	material(t_name name, t_color albedo)
 	t_mtral	mtral;
 	
 	if (name == LMBRT)
-	{
-		dprintf(STDERR_FILENO, "\tassigning LMBRT\n");
 		mtral.scatter = &lambertian;
-	}
 	else
-	{
-		dprintf(STDERR_FILENO, "\tassigning METAL\n");
 		mtral.scatter = &metal;
-	}
 	mtral.albedo = albedo;
 	return (mtral);
 }

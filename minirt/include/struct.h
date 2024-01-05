@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 02:30:19 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/05 09:48:43 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/05 10:58:06 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,26 @@
 // # define MIN 0
 // # define MAX 1
 
-typedef double			t_scl;
+typedef double	t_scl;
 
 /* ELEMENT */
+typedef enum e_name	t_name;
+
 typedef struct s_bias3	t_vec;
 typedef struct s_bias3	t_uvec;
 typedef struct s_bias3	t_point;
 typedef struct s_bias3	t_color;
 typedef struct s_size	t_size;
 typedef struct s_grid	t_grid;
+
+enum e_name
+{
+	SPHERE,
+	CYLNDR,
+	PLANE,
+	LMBRT,
+	METAL
+};
 
 struct s_bias3
 {
@@ -85,17 +96,13 @@ struct s_camera
 };
 
 /* RAY */
-// typedef enum e_face			t_face;
 typedef struct s_ray		t_ray;
 typedef struct s_interval	t_intvl;
+typedef struct s_material	t_mtral;
 typedef struct s_hit		t_hit;
 typedef struct s_equation	t_eqa;
 
-// enum e_face
-// {
-// 	BACK,
-// 	FRONT
-// };
+typedef t_bool (*t_scatter)(t_color, const t_ray *, const t_hit *, t_color *, t_ray *);
 
 struct s_ray
 {
@@ -109,13 +116,19 @@ struct s_interval
 	t_scl	max;
 };
 
+struct s_material
+{
+	t_scatter	scatter;
+	t_color		albedo;
+};
+
 struct s_hit
 {
-	t_point	point;
-	t_uvec	normal;
-	t_scl	t;
-	// t_face	face;
-	t_bool	face;
+	t_point			point;
+	t_uvec			normal;
+	t_scl			t;
+	t_bool			face;
+	const t_mtral	*mtral;
 };
 
 struct s_equation
@@ -128,24 +141,10 @@ struct s_equation
 };
 
 /* OBJECTS */
-typedef t_bool (*t_scatter)(t_color, const t_ray *, const t_hit *, t_color *, t_ray *);
-
-typedef enum e_name	t_name;
-
 typedef struct s_circle		t_circle;
 typedef struct s_square		t_square;
 typedef struct s_value		t_value;
-typedef struct s_material	t_mtral;
 typedef struct s_obj		t_obj;
-
-enum e_name
-{
-	SPHERE,
-	CYLNDR,
-	PLANE,
-	LMBRT,
-	METAL
-};
 
 struct s_circle
 {
@@ -167,17 +166,12 @@ struct s_value
 	t_scl		height;
 };
 
-struct s_material
-{
-	t_scatter	scatter;
-	t_color		albedo;
-};
 
 struct s_obj
 {
-	t_name	name;
-	t_value	val;
-	t_mtral	mtral;
+	t_name			name;
+	t_value			val;
+	const t_mtral	*mtral;
 };
 
 #endif
