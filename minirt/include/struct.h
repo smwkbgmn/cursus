@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 02:30:19 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/05 07:44:47 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/05 09:48:43 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ struct s_camera
 // typedef enum e_face			t_face;
 typedef struct s_ray		t_ray;
 typedef struct s_interval	t_intvl;
-typedef struct s_material	t_mat;
 typedef struct s_hit		t_hit;
 typedef struct s_equation	t_eqa;
 
@@ -110,11 +109,6 @@ struct s_interval
 	t_scl	max;
 };
 
-struct s_material
-{
-	t_scl	albedo;
-};
-
 struct s_hit
 {
 	t_point	point;
@@ -122,7 +116,6 @@ struct s_hit
 	t_scl	t;
 	// t_face	face;
 	t_bool	face;
-	t_mat	mat;
 };
 
 struct s_equation
@@ -135,21 +128,23 @@ struct s_equation
 };
 
 /* OBJECTS */
-typedef enum e_name		t_name;
-typedef struct s_circle	t_circle;
-typedef struct s_square	t_square;
-typedef struct s_value	t_value;
-// typedef struct s_sphere	t_sphere;
-// typedef struct s_cylndr	t_cylndr;
-// typedef struct s_plane	t_plane;
-typedef struct s_obj	t_obj;
+typedef t_bool (*t_scatter)(t_color, const t_ray *, const t_hit *, t_color *, t_ray *);
 
+typedef enum e_name	t_name;
+
+typedef struct s_circle		t_circle;
+typedef struct s_square		t_square;
+typedef struct s_value		t_value;
+typedef struct s_material	t_mtral;
+typedef struct s_obj		t_obj;
 
 enum e_name
 {
 	SPHERE,
 	CYLNDR,
-	PLANE
+	PLANE,
+	LMBRT,
+	METAL
 };
 
 struct s_circle
@@ -164,23 +159,6 @@ struct s_square
 	t_uvec	normal;
 };
 
-// struct s_sphere
-// {
-// 	t_circle	circle;
-// };
-
-// struct s_cylndr
-// {
-// 	t_circle	circle;
-// 	t_uvec		axis;
-// 	t_scl		height;
-// };
-
-// struct s_plane
-// {
-// 	t_square	square;
-// };
-
 struct s_value
 {
 	t_circle	cir;
@@ -189,12 +167,17 @@ struct s_value
 	t_scl		height;
 };
 
+struct s_material
+{
+	t_scatter	scatter;
+	t_color		albedo;
+};
+
 struct s_obj
 {
-	// void		*shape;
-	t_name		name;
-	t_mat		
-	t_value		val;
+	t_name	name;
+	t_value	val;
+	t_mtral	mtral;
 };
 
 #endif

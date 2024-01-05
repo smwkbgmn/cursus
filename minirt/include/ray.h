@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 04:35:59 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/04 12:07:04 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/05 09:29:33 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,8 @@ t_scl	clamp(t_scl x, t_intvl intvl);
 
 // hit.c
 t_bool	hit(t_list *objs, const t_ray *r, t_intvl t, t_hit *rec);
+
+// material.c
+t_mtral	material(t_name name, t_color albedo);
 
 #endif

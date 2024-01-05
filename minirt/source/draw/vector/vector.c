@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 00:37:31 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/04 11:40:44 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/05 09:32:33 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,14 @@ t_vec	randv_range(t_scl min, t_scl max)
 	return (vec(randn_range(min, max), randn_range(min, max), randn_range(min, max)));
 }
 
+// Return true if the vector is close to zero in all dimensions
+t_bool	near_zero(t_vec vec)
+{
+	t_scl	s = 1e-8;
+	return (abs(vec.x < s) && abs(vec.y < s) && abs(vec.z < s));
+	// return (fabs(vec.x < s) && fabs(vec.y < s) && fabs(vec.z < s));
+}
+
 // for DIFFUESE
 static t_vec	randv_in_unit_sphere(void);
 
@@ -86,5 +94,10 @@ static t_vec	randv_in_unit_sphere(void)
 			break ;
 	}
 	return (p);
+}
+
+t_vec	reflect(t_vec vec, t_vec n)
+{
+	return (sb(vec, mt(n, 2 * dot(vec, n))));
 }
 

@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 03:13:25 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/04 12:15:56 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/05 09:56:41 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,6 @@ t_ray	ray(t_point origin, t_vec direc)
 	r.origin = origin;
 	r.direc = direc;
 	return (r);
-}
-
-t_point	ray_at(const t_ray *r, t_scl t)
-{
-	return (ad(r->origin, mt(r->direc, t)));
 }
 
 // Get a randomly sampled camera ray for the pixel at location x, y
@@ -43,6 +38,11 @@ t_ray	ray_point(t_scl x, t_scl y, const t_camera *cam)
 	return (ray(r_origin, r_direc));
 }
 
+t_point	ray_at(const t_ray *r, t_scl t)
+{
+	return (ad(r->origin, mt(r->direc, t)));
+}
+
 t_color	ray_color(const t_ray *r, t_scl depth, t_list *objs)
 {
 	// SPHERE
@@ -54,6 +54,14 @@ t_color	ray_color(const t_ray *r, t_scl depth, t_list *objs)
 
 	if (hit(objs, r, interval_set(0.001, INFINITY), &rec))
 	{
+		// MATERIAL
+		t_ray	scattered;
+		t_color	attenuation;
+		t_mtral	*mtral = &((t_obj *)objs->content)->mtral;
+		if (mtral->scatter(mtral->albedo, r, &rec, &attenuation, &scattered))
+			return (mtv(attenuation, ray_color(&scattered, depth - 1, objs)));
+
+		// DIFFUESE
 		// t_uvec	direction = randv_on_hemisphere(rec.normal); // Original
 		t_uvec	direction = ad(rec.normal, randuv()); // Lambertian
 		t_ray	r_diffuse = ray(rec.point, direction);
