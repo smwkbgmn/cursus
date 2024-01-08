@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 12:32:54 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/06 13:41:27 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/08 14:58:35 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,6 @@ t_vec	dv(t_vec vec, t_scl t);
 
 // product.c
 t_scl	dot(t_vec v1, t_vec v2);
-t_vec	corss(t_vec v1, t_vec v2);
+t_vec	cross(t_vec v1, t_vec v2);
 
 #endif

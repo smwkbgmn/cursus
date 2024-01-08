@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 10:15:03 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/06 15:19:17 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/08 15:17:26 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,42 +18,34 @@
 static void		write_color(t_color color, int samples_per_pxl);
 static t_scl	linear_to_gamma(t_scl linear_component);
 
-void	render(t_list *objs, const t_camera *cam)
+void	render(t_list *objs, const t_scene *scene)
 {
 	int	x, y;
 
-	printf("P3\n%d %d\n%d\n", (int)cam->img.size.w, (int)cam->img.size.h, CLR_SCALE);
+	printf("P3\n%d %d\n%d\n", (int)scene->img.size.w, (int)scene->img.size.h, CLR_SCALE);
 
 	y = 0;
-	while (y < cam->img.size.h)
+	while (y < scene->img.size.h)
 	{
-		dprintf(STDERR_FILENO, "\rScanlines remaning: %d ", (int)cam->img.size.h - y);
+		dprintf(STDERR_FILENO, "\rScanlines remaning: %d ", (int)scene->img.size.h - y);
 		
 		x = 0;
-		while (x < cam->img.size.w)
+		while (x < scene->img.size.w)
 		{
 			t_color	pxl_color = color(0, 0, 0);
 
 			int	sample = 0;
-			while (sample < cam->sample)
+			while (sample < scene->sample)
 			{
-				t_ray	r = ray_point(x, y, cam);
-				pxl_color = ad(pxl_color, ray_color(&r, cam->depth, objs));
+				t_ray	r = ray_point(x, y, scene);
+				pxl_color = ad(pxl_color, ray_color(&r, scene->depth, objs));
 
 				sample++;
 			}
-			write_color(pxl_color, cam->sample);
+			write_color(pxl_color, scene->sample);
 
-			// t_point	pxl_center = ad(cam->view.pxl00, ad(mt(cam->view.pxl.w, (t_scl)x), mt(cam->view.pxl.h, (t_scl)y)));
-			// t_vec	r_direc = sb(pxl_center, cam->center);
-			// t_ray	r = ray(cam->center, r_direc);
-			
-			// t_color	color = ray_color(&r, objs);
-			// write_color(color, cam->sample);
-			
 			x++;
 		}
-		// system("open out.ppm");
 		y++;
 	}
 	dprintf(STDERR_FILENO, "\rDone.                \n");

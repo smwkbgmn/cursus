@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 02:30:19 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/08 14:27:04 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/08 15:23:04 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_bias3	t_point;
 typedef struct s_bias3	t_color;
 typedef struct s_size	t_size;
 typedef struct s_grid	t_grid;
+typedef struct s_frame	t_frame;
 
 enum e_name
 {
@@ -59,6 +60,13 @@ struct s_grid
 	t_vec	h;
 };
 
+struct s_frame
+{
+	t_vec	x;
+	t_vec	y;
+	t_vec	z;
+};
+
 /* MLX */
 typedef struct s_window	t_win;
 
@@ -73,6 +81,7 @@ struct s_window
 typedef struct s_image	t_image;
 typedef struct s_camera	t_camera;
 typedef struct s_view	t_view;
+typedef struct s_scene	t_scene;
 
 struct s_image
 {
@@ -88,12 +97,12 @@ struct s_view
 
 struct s_camera
 {
-	t_point	center;
-	t_point	from; // Point camera is looking from
+	t_point	from;
+	// t_point	from; // Point camera is looking from
 	t_point	at; // Point camera is looking at
 	t_uvec	up; // Camera-relative "up" direction
 	t_scl	fov;
-	
+	t_frame	frame; // Camera frame vasis vectors
 };
 
 struct s_scene

@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 21:54:32 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/06 15:30:49 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/08 15:39:41 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ int	main(void)
 	// t_scl	R = cos(PI / 4);
 
 	t_mtral	mtral_ground = material(LMBRT, color(0.8, 0.8, 0.0), 0, 0);
-	t_mtral	mtral_center = material(LMBRT, color(0.7, 0.3, 0.3), 0.3, 0);
-	t_mtral	mtral_left = material(METAL, color(0.8, 0.8, 0.8), 0.3, 0);
+	t_mtral	mtral_center = material(LMBRT, color(0.1, 0.2, 0.5), 0, 0);
+	t_mtral	mtral_left = material(DIELCT, color(0, 0, 0), 0, 1.5);
 	// t_mtral	mtral_center = material(DIELCT, color(0, 0, 0), 0, 1.5);
 	// t_mtral	mtral_left = material(DIELCT, color(0, 0, 0), 0, 1.5);
-	t_mtral	mtral_right = material(METAL, color(0.8, 0.6, 0.2), 1.0, 0);
+	t_mtral	mtral_right = material(METAL, color(0.8, 0.6, 0.2), 0.0, 0);
 
 	// SET OBJECTS
 	t_list	*objs = NULL;
@@ -36,15 +36,23 @@ int	main(void)
 	// ft_lstadd_back(&objs, ft_lstnew(new_sphere(point(-R, 0, -1), R)));
 	// ft_lstadd_back(&objs, ft_lstnew(new_sphere(point(R, 0, -1), R)));
 
-	ft_lstadd_back(&objs, ft_lstnew(sphere(point(0.0	,-100.5	,-1.0	), 100.0, &mtral_ground)));
-	ft_lstadd_back(&objs, ft_lstnew(sphere(point(0.0	,3.0	,-1.0	), 5, &mtral_center)));
-	ft_lstadd_back(&objs, ft_lstnew(sphere(point(-1.0	,0.0	,-1.0	), 0.5, &mtral_left)));
+	ft_lstadd_back(&objs, ft_lstnew(sphere(point(0.0	,-100.5	,-1.0	), 100.0	, &mtral_ground)));
+	ft_lstadd_back(&objs, ft_lstnew(sphere(point(0.0	,0.0	,-1.0	), 0.5		, &mtral_center)));
+	ft_lstadd_back(&objs, ft_lstnew(sphere(point(-1.0	,0.0	,-1.0	), 0.5		, &mtral_left)));
+	ft_lstadd_back(&objs, ft_lstnew(sphere(point(-1.0	,0.0	,-1.0	), -0.4		, &mtral_left)));
 	ft_lstadd_back(&objs, ft_lstnew(sphere(point(1.0	,0.0	,-1.0	), 0.5, &mtral_right)));
 
-	// SET CAMERA
-	t_camera	cam = camera(16.0 / 9.0, 800, 120, 100, 50);
+	// SET SCENE
+	// t_camera	cam = camera(16.0 / 9.0, 800, 120, 100, 50);
+	t_scene	scene;
 
-	render(objs, &cam);	
+	scene.cam = camera(point(-2, 2, 1), point(0, 0, -1), vec(0, 1, 0), 20);
+	scene.img = image(16.0 / 9.0, 1200);
+	scene.view = viewport(&scene);
+	scene.sample = 100;
+	scene.depth = 50;
+
+	render(objs, &scene);	
 	
 	return (EXIT_SUCCESS);
 }

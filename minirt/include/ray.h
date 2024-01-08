@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 04:35:59 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/06 13:37:49 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/08 14:41:31 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 // ray.c
 t_ray	ray(t_point org, t_vec direc);
-t_ray	ray_point(t_scl x, t_scl y, const t_camera *cam);
+t_ray	ray_point(t_scl x, t_scl y, const t_scene *scene);
 t_point	ray_at(const t_ray *r, t_scl t);
 t_color	ray_color(const t_ray *r, t_scl depth, t_list *objs);
 t_color	color(t_scl x, t_scl y, t_scl z);

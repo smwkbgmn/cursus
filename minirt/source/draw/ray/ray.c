@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 03:13:25 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/06 10:53:18 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/08 14:41:19 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@ t_ray	ray(t_point origin, t_vec direc)
 }
 
 // Get a randomly sampled camera ray for the pixel at location x, y
-t_ray	ray_point(t_scl x, t_scl y, const t_camera *cam)
+t_ray	ray_point(t_scl x, t_scl y, const t_scene *scene)
 {
 	// t_point	pxl_center = ad(cam->view.pxl00, ad(mt(cam->view.pxl.w, (t_scl)x), mt(cam->view.pxl.h, (t_scl)y)));
-	t_point	pxl_center = cam->view.pxl00;
-	pxl_center = ad(pxl_center, mt(cam->view.pxl.w, x));
-	pxl_center = ad(pxl_center, mt(cam->view.pxl.h, y));
-	t_vec	pxl_sample = ad(pxl_center, pxl_sample_square(cam->view.pxl));
+	t_point	pxl_center = scene->view.pxl00;
+	pxl_center = ad(pxl_center, mt(scene->view.pxl.w, x));
+	pxl_center = ad(pxl_center, mt(scene->view.pxl.h, y));
+	t_vec	pxl_sample = ad(pxl_center, pxl_sample_square(scene->view.pxl));
 
-	t_point	r_origin = cam->center;
+	t_point	r_origin = scene->cam.from;
 	t_vec	r_direc = sb(pxl_sample, r_origin);
 
 	return (ray(r_origin, r_direc));
