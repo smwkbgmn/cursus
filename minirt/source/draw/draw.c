@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 10:15:03 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/04 12:01:09 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/06 15:19:17 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	render(t_list *objs, const t_camera *cam)
 			
 			x++;
 		}
+		// system("open out.ppm");
 		y++;
 	}
 	dprintf(STDERR_FILENO, "\rDone.                \n");

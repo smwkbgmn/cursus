@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 00:37:31 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/05 09:32:33 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/06 13:33:36 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,3 +101,10 @@ t_vec	reflect(t_vec vec, t_vec n)
 	return (sb(vec, mt(n, 2 * dot(vec, n))));
 }
 
+t_vec	refract(const t_uvec *unit, const t_vec *n, t_scl etai_over_etat)
+{
+	t_scl	cos_theta = fmin(dot(mt(*unit, -1), *n), 1.0);
+	t_vec	r_out_perp = mt(ad(*unit, mt(*n, cos_theta)), etai_over_etat);
+	t_vec	r_out_parallel = mt(*n, -sqrt(fabs(1.0 - square(r_out_perp))));
+	return (ad(r_out_perp, r_out_parallel));
+}

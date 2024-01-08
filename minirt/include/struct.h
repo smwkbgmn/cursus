@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 02:30:19 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/05 10:58:06 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/08 14:27:04 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ enum e_name
 	CYLNDR,
 	PLANE,
 	LMBRT,
-	METAL
+	METAL,
+	DIELCT
 };
 
 struct s_bias3
@@ -88,11 +89,20 @@ struct s_view
 struct s_camera
 {
 	t_point	center;
+	t_point	from; // Point camera is looking from
+	t_point	at; // Point camera is looking at
+	t_uvec	up; // Camera-relative "up" direction
 	t_scl	fov;
-	t_image	img;
-	t_view	view;
-	t_scl	sample;
-	t_scl	depth;
+	
+};
+
+struct s_scene
+{
+	t_camera	cam;
+	t_image		img;
+	t_view		view;
+	t_scl		sample;
+	t_scl		depth;
 };
 
 /* RAY */
@@ -102,7 +112,7 @@ typedef struct s_material	t_mtral;
 typedef struct s_hit		t_hit;
 typedef struct s_equation	t_eqa;
 
-typedef t_bool (*t_scatter)(t_color, const t_ray *, const t_hit *, t_color *, t_ray *);
+typedef t_bool (*t_scatter)(const t_mtral *, const t_ray *, const t_hit *, t_color *, t_ray *);
 
 struct s_ray
 {
@@ -120,6 +130,8 @@ struct s_material
 {
 	t_scatter	scatter;
 	t_color		albedo;
+	t_scl		fuzz;
+	t_scl		ir; // Index of refraction
 };
 
 struct s_hit
@@ -165,7 +177,6 @@ struct s_value
 	t_uvec		axis;
 	t_scl		height;
 };
-
 
 struct s_obj
 {

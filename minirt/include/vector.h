@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 12:32:54 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/05 09:11:09 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/06 13:41:27 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ t_bool	near_zero(t_vec vec);
 t_vec	randv_on_hemisphere(t_uvec normal);
 t_uvec	randuv(void);
 t_vec	reflect(t_vec vec, t_vec n);
+t_vec	refract(const t_uvec *unit, const t_vec *n, t_scl etai_over_etat);
 
 // operation.c
 t_vec	ad(t_vec v1, t_vec v2);
