@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 02:30:19 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/09 13:12:52 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/10 10:40:16 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,7 @@ struct s_hit
 	t_point			point;
 	t_uvec			normal;
 	t_scl			t;
-	t_scl			tx_u;
+	t_scl			tx_u; // Surface coord of the ray-object hit point
 	t_scl			tx_v;
 	t_bool			face;
 	const t_mtral	*mtral;

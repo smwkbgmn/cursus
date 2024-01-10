@@ -6,13 +6,14 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 07:47:31 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/09 11:34:52 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/10 10:24:54 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray.h"
 
 static t_bool	is_interior(t_scl a, t_scl b, t_hit *rec);
+static void		set_sphere_uv(t_uvec p, t_hit *rec);
 static void		set_equation(t_eqa *eqa, const t_obj *obj, const t_ray *r);
 static void		set_face_normal(t_hit *rec, const t_ray *r, t_vec outward_normal);
 
@@ -108,9 +109,28 @@ t_bool	hit_sphere(const t_obj *obj, const t_ray *r, t_intvl t, t_hit *rec)
 
 	outward_normal = dv(sb(rec->point, obj->val.cir.center), obj->val.cir.radius);
 	set_face_normal(rec, r, outward_normal);
+
+	set_sphere_uv(outward_normal, rec); // For texture mapping
 	rec->mtral = obj->mtral;
 
 	return (TRUE);
+}
+
+static void	set_sphere_uv(t_uvec p, t_hit *rec)
+{
+	/*
+		p: A given point on the sphere of radius one, centered at the origin
+		u: Returned value [0, 1] of angle around the Y axis from x = -1
+		v: Returned value [0, 1] of angle from Y = -1 to y = +1
+			<1 0 0> tyelds <0.50 0.50>	<-1  0  0> yields <0.00 0.50>
+			<0 1 0> tyelds <0.50 1.00>	< 0 -1  0> yields <0.50 0.00>
+			<0 0 1> tyelds <0.25 0.50>	< 0  0 -1> yields <0.75 0.50>
+	*/
+	t_scl	theta = acos(-p.y);
+	t_scl	phi = atan2(-p.z, p.x) + PI;
+
+	rec->tx_u = phi / (2 * PI);
+	rec->tx_v = theta / PI;
 }
 
 static void	set_equation(t_eqa *eqa, const t_obj *obj, const t_ray *r)

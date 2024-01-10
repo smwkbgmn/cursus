@@ -6,14 +6,14 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 03:13:25 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/09 13:59:04 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/10 13:17:40 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray.h"
 
 static t_vec	pxl_sample_square(t_grid pxl);
-static t_color	emitted(t_scl u, t_scl v, const t_point *p);
+static t_color	emitted(const t_mtral *mtral, t_scl u, t_scl v, const t_point *p);
 
 t_ray	ray(t_point origin, t_vec direc)
 {
@@ -46,6 +46,7 @@ t_point	ray_at(const t_ray *r, t_scl t)
 
 t_color	ray_color(const t_ray *r, t_scl depth, t_list *objs)
 {
+	// With light object
 	// SPHERE
 	t_hit	rec;
 	
@@ -54,22 +55,26 @@ t_color	ray_color(const t_ray *r, t_scl depth, t_list *objs)
 		return (color(0, 0, 0));
 
 	// If the ray hits nothing, return the background color
-	if (hit(objs, r, interval_set(0.001, INFINITY), &rec))
-	{
-		t_ray	scattered;
-		t_color	attenuation;
-		t_color	from_emission = emitted(rec.tx_u, rec.tx_v, &rec.point);
-
-		if (rec.mtral->name == MT_LIGHT ||
-			!rec.mtral->scatter(rec.mtral, r, &rec, &attenuation, &scattered))
-			return (from_emission);
-
-		t_color	from_scatter = mtv(attenuation, ray_color(&scattered, depth - 1, objs));
-		return (ad(from_emission, from_scatter));
-	}
+	if (!hit(objs, r, interval_set(0.001, INFINITY), &rec))
+		return (color(0, 0, 0));
+		
+	t_ray	scattered;
+	t_color	attenuation;
+	t_color	from_emission;
 	
-	return (color(0, 0, 0));
+	if (rec.mtral->name == MT_LIGHT)
+		from_emission = emitted(rec.mtral, rec.tx_u, rec.tx_v, &rec.point);
+	else
+		from_emission = color(0, 0, 0);
 
+	if (rec.mtral->name == MT_LIGHT ||
+		!rec.mtral->scatter(rec.mtral, r, &rec, &attenuation, &scattered))
+		return (from_emission);
+
+	t_color	from_scatter = mtv(attenuation, ray_color(&scattered, depth - 1, objs));
+	return (ad(from_emission, from_scatter));
+
+	// No light object
 	// if (hit(objs, r, interval_set(0.001, INFINITY), &rec))
 	// {
 	// 	// MATERIAL
@@ -95,13 +100,9 @@ static t_vec	pxl_sample_square(t_grid pxl)
 	return (ad(mt(pxl.w, px), mt(pxl.h, py)));
 }
 
-static t_color	emitted(t_scl u, t_scl v, const t_point *p)
+static t_color	emitted(const t_mtral *mtral, t_scl u, t_scl v, const t_point *p)
 {
-	(void)u;
-	(void)v;
-	(void)p;
-	
-	return (color(0, 0, 0));
+	return (mtral->texture.value(&mtral->texture, u, v, p));
 }
 
 t_color	color(t_scl x, t_scl y, t_scl z)

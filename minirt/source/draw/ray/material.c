@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 13:30:27 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/09 13:57:24 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/10 12:36:35 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ t_mtral	material(t_name name, t_scl fuzz, t_scl ir, t_txtr txtr)
 			mtral.fuzz = (fuzz * (fuzz < 1)) + (1 * !(fuzz < 1));
 		}
 		// mtral.albedo = albedo;
-		mtral.texture = txtr;
 	}
+		mtral.texture = txtr;
 	return (mtral);
 }
 
