@@ -6,13 +6,14 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 03:13:25 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/08 14:41:19 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/09 13:59:04 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray.h"
 
 static t_vec	pxl_sample_square(t_grid pxl);
+static t_color	emitted(t_scl u, t_scl v, const t_point *p);
 
 t_ray	ray(t_point origin, t_vec direc)
 {
@@ -52,29 +53,38 @@ t_color	ray_color(const t_ray *r, t_scl depth, t_list *objs)
 	if (depth <= 0)
 		return (color(0, 0, 0));
 
+	// If the ray hits nothing, return the background color
 	if (hit(objs, r, interval_set(0.001, INFINITY), &rec))
 	{
-		// MATERIAL
 		t_ray	scattered;
 		t_color	attenuation;
+		t_color	from_emission = emitted(rec.tx_u, rec.tx_v, &rec.point);
 
-		// if (rec.mtral->scatter(rec.mtral->albedo, r, &rec, &attenuation, &scattered))
-		if (rec.mtral->scatter(rec.mtral, r, &rec, &attenuation, &scattered))
-			return (mtv(attenuation, ray_color(&scattered, depth - 1, objs)));
-		return (color(0, 0, 0));
+		if (rec.mtral->name == MT_LIGHT ||
+			!rec.mtral->scatter(rec.mtral, r, &rec, &attenuation, &scattered))
+			return (from_emission);
 
-		// DIFFUESE
-		// t_uvec	direction = randv_on_hemisphere(rec.normal); // Original
-		t_uvec	direction = ad(rec.normal, randuv()); // Lambertian
-		t_ray	r_diffuse = ray(rec.point, direction);
-		return (mt(ray_color(&r_diffuse, depth - 1, objs), 0.8));
-		// return (mt(ad(rec.normal, color(1, 1, 1)), 0.5)); // Colored with 100% RGB
+		t_color	from_scatter = mtv(attenuation, ray_color(&scattered, depth - 1, objs));
+		return (ad(from_emission, from_scatter));
 	}
+	
+	return (color(0, 0, 0));
 
-	// SKY
-	t_uvec	unit_direc = unit(r->direc);
-	t_scl	scale = 0.5 * (unit_direc.y + 1.0);
-	return (ad(mt(color(1.0, 1.0, 1.0), 1.0 - scale), mt(color(0.5, 0.7, 1.0), scale)));
+	// if (hit(objs, r, interval_set(0.001, INFINITY), &rec))
+	// {
+	// 	// MATERIAL
+	// 	t_ray	scattered;
+	// 	t_color	attenuation;
+
+	// 	if (rec.mtral->scatter(rec.mtral, r, &rec, &attenuation, &scattered))
+	// 		return (mtv(attenuation, ray_color(&scattered, depth - 1, objs)));
+	// 	return (color(0, 0, 0));
+	// }
+
+	// // SKY
+	// t_uvec	unit_direc = unit(r->direc);
+	// t_scl	scale = 0.5 * (unit_direc.y + 1.0);
+	// return (ad(mt(color(1.0, 1.0, 1.0), 1.0 - scale), mt(color(0.5, 0.7, 1.0), scale)));
 }
 
 // Returns a random point in the square surrounding a pixel at the origin
@@ -83,6 +93,15 @@ static t_vec	pxl_sample_square(t_grid pxl)
 	t_scl	px = -0.5 + randn();
 	t_scl	py = -0.5 + randn();
 	return (ad(mt(pxl.w, px), mt(pxl.h, py)));
+}
+
+static t_color	emitted(t_scl u, t_scl v, const t_point *p)
+{
+	(void)u;
+	(void)v;
+	(void)p;
+	
+	return (color(0, 0, 0));
 }
 
 t_color	color(t_scl x, t_scl y, t_scl z)

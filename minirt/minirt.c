@@ -6,64 +6,225 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 21:54:32 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/08 15:39:41 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/09 13:47:48 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+// Ambient lighting (+color)
+// Multiple light point
+// Phong reflection model (currently Snell's law)
+// Add one more object 
+
 #include "minirt.h"
 
-// t_obj	*sphere(t_point center, t_scl radius, t_mtral mtral);
-t_obj	*sphere(t_point center, t_scl radius, const t_mtral *mtral);
+void	test_sphere(void);
+void	test_sphere_world(void);
+void	test_plane(void);
 
 int	main(void)
 {
-	// SET MATERIAL
-	// t_scl	R = cos(PI / 4);
-
-	t_mtral	mtral_ground = material(LMBRT, color(0.8, 0.8, 0.0), 0, 0);
-	t_mtral	mtral_center = material(LMBRT, color(0.1, 0.2, 0.5), 0, 0);
-	t_mtral	mtral_left = material(DIELCT, color(0, 0, 0), 0, 1.5);
-	// t_mtral	mtral_center = material(DIELCT, color(0, 0, 0), 0, 1.5);
-	// t_mtral	mtral_left = material(DIELCT, color(0, 0, 0), 0, 1.5);
-	t_mtral	mtral_right = material(METAL, color(0.8, 0.6, 0.2), 0.0, 0);
-
-	// SET OBJECTS
-	t_list	*objs = NULL;
-
-	// ft_lstadd_back(&objs, ft_lstnew(new_sphere(point(0, 0, -1), 0.5)));
-	// ft_lstadd_back(&objs, ft_lstnew(new_sphere(point(0, -100.5, -1), 100)));
-
-	// ft_lstadd_back(&objs, ft_lstnew(new_sphere(point(-R, 0, -1), R)));
-	// ft_lstadd_back(&objs, ft_lstnew(new_sphere(point(R, 0, -1), R)));
-
-	ft_lstadd_back(&objs, ft_lstnew(sphere(point(0.0	,-100.5	,-1.0	), 100.0	, &mtral_ground)));
-	ft_lstadd_back(&objs, ft_lstnew(sphere(point(0.0	,0.0	,-1.0	), 0.5		, &mtral_center)));
-	ft_lstadd_back(&objs, ft_lstnew(sphere(point(-1.0	,0.0	,-1.0	), 0.5		, &mtral_left)));
-	ft_lstadd_back(&objs, ft_lstnew(sphere(point(-1.0	,0.0	,-1.0	), -0.4		, &mtral_left)));
-	ft_lstadd_back(&objs, ft_lstnew(sphere(point(1.0	,0.0	,-1.0	), 0.5, &mtral_right)));
-
-	// SET SCENE
-	// t_camera	cam = camera(16.0 / 9.0, 800, 120, 100, 50);
-	t_scene	scene;
-
-	scene.cam = camera(point(-2, 2, 1), point(0, 0, -1), vec(0, 1, 0), 20);
-	scene.img = image(16.0 / 9.0, 1200);
-	scene.view = viewport(&scene);
-	scene.sample = 100;
-	scene.depth = 50;
-
-	render(objs, &scene);	
+	test_sphere_world();
 	
 	return (EXIT_SUCCESS);
 }
 
-t_obj	*sphere(t_point center, t_scl radius, const t_mtral *mtral)
-{
-	t_obj	*sp = ft_calloc(1, sizeof(t_obj));
+// void	test_sphere(void)
+// {
+// 	// SET MATERIAL
+// 	// t_scl	R = cos(PI / 4);
 
-	sp->name = SPHERE;
-	sp->val.cir.center = center;
-	sp->val.cir.radius = radius;
-	sp->mtral = mtral;
-	return (sp);
+// 	t_mtral	mtral_ground = material(MT_LMBRT, color(0.8, 0.8, 0.0), 0, 0);
+// 	t_mtral	mtral_center = material(MT_LMBRT, color(0.1, 0.2, 0.5), 0, 0);
+// 	t_mtral	mtral_left = material(MT_DIELCT, color(0, 0, 0), 0, 1.5);
+// 	// t_mtral	mtral_center = material(MT_DIELCT, color(0, 0, 0), 0, 1.5);
+// 	// t_mtral	mtral_left = material(MT_DIELCT, color(0, 0, 0), 0, 1.5);
+// 	t_mtral	mtral_right = material(MT_METAL, color(0.8, 0.6, 0.2), 0.0, 0);
+
+// 	// SET OBJECTS
+// 	t_list	*objs = NULL;
+
+// 	// ft_lstadd_back(&objs, ft_lstnew(new_sphere(point(0, 0, -1), 0.5)));
+// 	// ft_lstadd_back(&objs, ft_lstnew(new_sphere(point(0, -100.5, -1), 100)));
+
+// 	// ft_lstadd_back(&objs, ft_lstnew(new_sphere(point(-R, 0, -1), R)));
+// 	// ft_lstadd_back(&objs, ft_lstnew(new_sphere(point(R, 0, -1), R)));
+
+// 	ft_lstadd_back(&objs, ft_lstnew(sphere(point(0.0	,-100.5	,-1.0	), 100.0	, &mtral_ground)));
+// 	ft_lstadd_back(&objs, ft_lstnew(sphere(point(0.0	,0.0	,-1.0	), 0.5		, &mtral_center)));
+// 	ft_lstadd_back(&objs, ft_lstnew(sphere(point(-1.0	,0.0	,-1.0	), 0.5		, &mtral_left)));
+// 	ft_lstadd_back(&objs, ft_lstnew(sphere(point(-1.0	,0.0	,-1.0	), -0.4		, &mtral_left)));
+// 	ft_lstadd_back(&objs, ft_lstnew(sphere(point(1.0	,0.0	,-1.0	), 0.5		, &mtral_right)));
+
+// 	// SET SCENE
+// 	// t_camera	cam = camera(16.0 / 9.0, 800, 120, 100, 50);
+// 	t_scene	scene;
+
+// 	scene.cam = camera(point(-2, 2, 1), point(0, 0, -1), vec(0, 1, 0), 20);
+// 	scene.img = image(16.0 / 9.0, 1200);
+// 	scene.view = viewport(&scene);
+// 	scene.sample = 100;
+// 	scene.depth = 50;
+
+// 	render(objs, &scene);		
+// }
+
+void	test_sphere_world(void)
+{
+	t_color	none = color(0, 0, 0);
+	t_list	*objs = NULL;
+
+	// t_mtral	mtral_ground = material(MT_LMBRT, color(0.5, 0.5, 0.5), 0, 0);
+	t_mtral	mtral_ground = material(MT_LMBRT, NONE, NONE, texture(TX_CHKER, color(.2, .3, .1), color(.9, .9, .9), 0.32));
+	ft_lstadd_back(&objs, ft_lstnew(sphere(point(0, -1000, 0), 1000, &mtral_ground)));
+
+	t_mtral	mtral_sphere[500];
+	int		mtral_idx = 0;
+	
+	int	a = -11;
+	while (a++ < 11)
+	{
+		int b = -11;
+		while (b++ < 11)
+		{
+			t_scl	choose_mtral = randn();
+			t_point	center = point(a + 0.9 * randn(), 0.2, b + 0.9 * randn());
+			
+			if (length(sb(center, point(4, 0.2, 0))) > 0.9)
+			{
+
+				if (choose_mtral < 0.8)
+				{
+					t_color	albedo = mtv(randv(), randv());
+
+					mtral_sphere[mtral_idx] = material(MT_LMBRT, NONE, NONE, texture(TX_SOLID, albedo, none, NONE));
+					ft_lstadd_back(&objs, ft_lstnew(sphere(center, 0.2, &mtral_sphere[mtral_idx++])));
+				}
+				else if (choose_mtral < 0.95)
+				{
+					t_color	albedo = randv_range(0.5, 1);
+					t_scl	fuzz = randn_range(0, 0.5);
+					mtral_sphere[mtral_idx] = material(MT_METAL, fuzz, NONE, texture(TX_SOLID, albedo, none, NONE));
+					ft_lstadd_back(&objs, ft_lstnew(sphere(center, 0.2, &mtral_sphere[mtral_idx++])));
+				}
+				else
+				{
+					mtral_sphere[mtral_idx] = material(MT_DIELCT, NONE, 1.5, texture(TX_SOLID, none, none, NONE));
+					ft_lstadd_back(&objs, ft_lstnew(sphere(center, 0.2, &mtral_sphere[mtral_idx++])));
+				}
+			}
+		}
+	}
+	
+	// t_mtral	mtral1 = material(MT_DIELCT, color(NONE, NONE, NONE), NONE, 1.5);
+	t_mtral	mtral1 = material(MT_DIELCT, NONE, 1.5, texture(TX_SOLID, none, none, NONE));
+	ft_lstadd_back(&objs, ft_lstnew(sphere(point(0, 1, 0), 1.0, &mtral1)));
+
+	t_mtral	mtral2 = material(MT_LMBRT, NONE, NONE, texture(TX_SOLID, color(0.4, 0.2, 0.1), none, NONE));
+	ft_lstadd_back(&objs, ft_lstnew(sphere(point(-4, 1, 0), 1.0, &mtral2)));
+
+	t_mtral	mtral3 = material(MT_METAL, 0.0, NONE, texture(TX_SOLID, color(0.7, 0.6, 0.5), none, NONE));
+	ft_lstadd_back(&objs, ft_lstnew(sphere(point(4, 1, 0), 1.0, &mtral3)));
+
+	t_scene	scene;
+
+	scene.img = image(16.0 / 9.0, 600);
+	scene.sample = 50;
+	scene.depth = 50;
+	scene.cam = camera(point(13, 2, 3), point(0, 0, 0), vec(0, 1, 0), 20);
+	scene.view = viewport(&scene);
+
+	render(objs, &scene);
 }
+
+// void	test_sphere_world(void)
+// {
+// 	t_list	*objs = NULL;
+
+// 	t_mtral	mtral_ground = material(MT_LMBRT, color(0.5, 0.5, 0.5), 0, 0);
+// 	ft_lstadd_back(&objs, ft_lstnew(sphere(point(0, -1000, 0), 1000, &mtral_ground)));
+
+// 	t_mtral	mtral_sphere[500];
+// 	int		mtral_idx = 0;
+	
+// 	int	a = -11;
+// 	while (a++ < 11)
+// 	{
+// 		int b = -11;
+// 		while (b++ < 11)
+// 		{
+// 			t_scl	choose_mtral = randn();
+// 			t_point	center = point(a + 0.9 * randn(), 0.2, b + 0.9 * randn());
+
+			
+// 			if (length(sb(center, point(4, 0.2, 0))) > 0.9)
+// 			{
+
+// 				if (choose_mtral < 0.8)
+// 				{
+// 					t_color	albedo = mtv(randv(), randv());
+// 					mtral_sphere[mtral_idx] = material(MT_LMBRT, albedo, NONE, NONE);
+// 					ft_lstadd_back(&objs, ft_lstnew(sphere(center, 0.2, &mtral_sphere[mtral_idx++])));
+// 				}
+// 				else if (choose_mtral < 0.95)
+// 				{
+// 					t_color	albedo = randv_range(0.5, 1);
+// 					t_scl	fuzz = randn_range(0, 0.5);
+// 					mtral_sphere[mtral_idx] = material(MT_METAL, albedo, fuzz, NONE);
+// 					ft_lstadd_back(&objs, ft_lstnew(sphere(center, 0.2, &mtral_sphere[mtral_idx++])));
+// 				}
+// 				else
+// 				{
+// 					mtral_sphere[mtral_idx] = material(MT_DIELCT, color(NONE, NONE, NONE), NONE, 1.5);
+// 					ft_lstadd_back(&objs, ft_lstnew(sphere(center, 0.2, &mtral_sphere[mtral_idx++])));
+// 				}
+// 			}
+// 		}
+// 	}
+	
+// 	t_mtral	mtral1 = material(MT_DIELCT, color(NONE, NONE, NONE), NONE, 1.5);
+// 	ft_lstadd_back(&objs, ft_lstnew(sphere(point(0, 1, 0), 1.0, &mtral1)));
+
+// 	t_mtral	mtral2 = material(MT_LMBRT, color(0.4, 0.2, 0.1), NONE, NONE);
+// 	ft_lstadd_back(&objs, ft_lstnew(sphere(point(-4, 1, 0), 1.0, &mtral2)));
+
+// 	t_mtral	mtral3 = material(MT_METAL, color(0.7, 0.6, 0.5), 0.0, NONE);
+// 	ft_lstadd_back(&objs, ft_lstnew(sphere(point(4, 1, 0), 1.0, &mtral3)));
+
+// 	t_scene	scene;
+
+// 	scene.img = image(16.0 / 9.0, 600);
+// 	scene.sample = 50;
+// 	scene.depth = 50;
+// 	scene.cam = camera(point(13, 2, 3), point(0, 0, 0), vec(0, 1, 0), 20);
+// 	scene.view = viewport(&scene);
+
+// 	render(objs, &scene);
+// }
+
+// void	test_plane(void)
+// {
+// 	t_mtral	left_red	= material(MT_LMBRT, color(1.0, 0.2, 0.2), NONE, NONE);
+// 	t_mtral	back_green	= material(MT_LMBRT, color(0.2, 1.0, 0.2), NONE, NONE);
+// 	t_mtral	right_blue	= material(MT_LMBRT, color(0.2, 0.2, 1.0), NONE, NONE);
+// 	t_mtral	up_orange	= material(MT_LMBRT, color(1.0, 0.5, 0.0), NONE, NONE);
+// 	t_mtral	lo_teal		= material(MT_LMBRT, color(0.2, 0.8, 0.8), NONE, NONE);
+
+// 	t_list	*objs = NULL;
+
+// 	ft_lstadd_back(&objs, ft_lstnew(plane(point(-3, -2,  5), vec( 0,  0, -4), vec( 0,  4,  0), &left_red)));
+// 	ft_lstadd_back(&objs, ft_lstnew(plane(point(-2, -2,  0), vec( 4,  0,  0), vec( 0,  4,  0), &back_green)));
+// 	ft_lstadd_back(&objs, ft_lstnew(plane(point( 3, -2,  1), vec( 0,  0,  4), vec( 0,  4,  0), &right_blue)));
+// 	ft_lstadd_back(&objs, ft_lstnew(plane(point(-2,  3,  1), vec( 4,  0,  0), vec( 0,  0,  4), &up_orange)));
+// 	ft_lstadd_back(&objs, ft_lstnew(plane(point(-2, -3,  5), vec( 4,  0,  0), vec( 0,  0, -4), &lo_teal)));
+
+// 	t_scene	scene;
+
+// 	scene.cam = camera(point(0, 0, 9), point(0, 0, 0), vec(0, 1, 0), 80);
+// 	scene.img = image(1.0, 400);
+// 	scene.view = viewport(&scene);
+// 	scene.sample = 100;
+// 	scene.depth = 50;
+
+// 	render(objs, &scene);
+
+// }

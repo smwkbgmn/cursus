@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 02:30:19 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/08 15:23:04 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/09 13:12:52 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 // # define MIN 0
 // # define MAX 1
+# define NONE 0
 
 typedef double	t_scl;
 
@@ -36,9 +37,13 @@ enum e_name
 	SPHERE,
 	CYLNDR,
 	PLANE,
-	LMBRT,
-	METAL,
-	DIELCT
+	MT_LMBRT,
+	MT_METAL,
+	MT_DIELCT,
+	MT_LIGHT,
+	TX_SOLID,
+	TX_CHKER,
+	TX_BUMP
 };
 
 struct s_bias3
@@ -118,10 +123,12 @@ struct s_scene
 typedef struct s_ray		t_ray;
 typedef struct s_interval	t_intvl;
 typedef struct s_material	t_mtral;
+typedef struct s_texture	t_txtr;
 typedef struct s_hit		t_hit;
 typedef struct s_equation	t_eqa;
 
-typedef t_bool (*t_scatter)(const t_mtral *, const t_ray *, const t_hit *, t_color *, t_ray *);
+typedef t_bool	(*t_scatter_fp)(const t_mtral *, const t_ray *, const t_hit *, t_color *, t_ray *);
+typedef t_color	(*t_value_fp)(const t_txtr *, t_scl, t_scl, const t_point *);
 
 struct s_ray
 {
@@ -135,12 +142,22 @@ struct s_interval
 	t_scl	max;
 };
 
+struct s_texture
+{
+	t_color		c1;
+	t_color		c2;
+	t_scl		inv_scale;
+	t_value_fp	value;
+};
+
 struct s_material
 {
-	t_scatter	scatter;
-	t_color		albedo;
-	t_scl		fuzz;
-	t_scl		ir; // Index of refraction
+	t_name			name;
+	t_txtr			texture;
+	t_scatter_fp	scatter;
+	// t_color			albedo;
+	t_scl			fuzz;
+	t_scl			ir; // Index of refraction
 };
 
 struct s_hit
@@ -148,6 +165,8 @@ struct s_hit
 	t_point			point;
 	t_uvec			normal;
 	t_scl			t;
+	t_scl			tx_u;
+	t_scl			tx_v;
 	t_bool			face;
 	const t_mtral	*mtral;
 };
@@ -167,6 +186,8 @@ typedef struct s_square		t_square;
 typedef struct s_value		t_value;
 typedef struct s_obj		t_obj;
 
+typedef t_bool	(*t_hit_fp)(const t_obj *, const t_ray *, t_intvl, t_hit *rec);
+
 struct s_circle
 {
 	t_point	center;
@@ -175,8 +196,12 @@ struct s_circle
 
 struct s_square
 {
-	t_point	point;
+	t_point	point; // A point in palne 
 	t_uvec	normal;
+	t_vec	u;
+	t_vec	v;
+	t_scl	d;
+	t_vec	w;
 };
 
 struct s_value
@@ -191,6 +216,7 @@ struct s_obj
 {
 	t_name			name;
 	t_value			val;
+	t_hit_fp		hit;
 	const t_mtral	*mtral;
 };
 

@@ -6,12 +6,9 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 10:15:03 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/08 15:17:26 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/09 10:54:26 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <unistd.h>
-// for DEBUGGING remove it later
 
 #include "draw.h"
 
@@ -27,7 +24,7 @@ void	render(t_list *objs, const t_scene *scene)
 	y = 0;
 	while (y < scene->img.size.h)
 	{
-		dprintf(STDERR_FILENO, "\rScanlines remaning: %d ", (int)scene->img.size.h - y);
+		dprintf(2, "\rScanlines remaning: %d ", (int)scene->img.size.h - y);
 		
 		x = 0;
 		while (x < scene->img.size.w)
@@ -48,7 +45,7 @@ void	render(t_list *objs, const t_scene *scene)
 		}
 		y++;
 	}
-	dprintf(STDERR_FILENO, "\rDone.                \n");
+	dprintf(2, "\rDone.                \n");
 }
 
 static void	write_color(t_color pxl_color, int samples_per_pxl)

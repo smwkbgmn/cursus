@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 04:35:59 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/08 14:41:31 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/09 13:32:37 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,14 @@ t_scl	clamp(t_scl x, t_intvl intvl);
 
 // hit.c
 t_bool	hit(t_list *objs, const t_ray *r, t_intvl t, t_hit *rec);
+t_bool	hit_sphere(const t_obj *obj, const t_ray *r, t_intvl t, t_hit *rec);
+t_bool	hit_plane(const t_obj *obj, const t_ray *r, t_intvl t, t_hit *rec);
+
+// texture.c
+t_txtr	texture(t_name name, t_color c1, t_color c2, t_scl inv_scale);
 
 // material.c
-t_mtral	material(t_name name, t_color albedo, t_scl fuzz, t_scl ir);
+// t_mtral	material(t_name name, t_color albedo, t_scl fuzz, t_scl ir);
+t_mtral	material(t_name name, t_scl fuzz, t_scl ir, t_txtr textrue);
 
 #endif

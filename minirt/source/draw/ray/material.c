@@ -6,48 +6,49 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 13:30:27 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/06 14:29:15 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/09 13:57:24 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray.h"
 
 static t_bool	lambertian(const t_mtral *mtral, const t_ray *r_in, const t_hit *rec,
-	t_color *attenuation, t_ray *scattered);
+	t_color *atnu, t_ray *sctrd);
 static t_bool	metal(const t_mtral *mtral, const t_ray *r_in, const t_hit *rec,
-	t_color *attenuation, t_ray *scattered);
+	t_color *atnu, t_ray *sctrd);
 static t_bool	dielectric(const t_mtral *mtral, const t_ray *r_in, const t_hit *rec,
-	t_color *attenuation, t_ray *scattered);
+	t_color *atnu, t_ray *sctrd);
 static t_scl	reflectance(t_scl cos, t_scl ref_idx);
 
-t_mtral	material(t_name name, t_color albedo, t_scl fuzz, t_scl ir)
+t_mtral	material(t_name name, t_scl fuzz, t_scl ir, t_txtr txtr)
 {
 	t_mtral	mtral;
 	
-	if (name < 5)
-	{
-		if (name == LMBRT)
-			mtral.scatter = &lambertian;
-		else if (name == METAL)
-		{
-			mtral.scatter = &metal;
-			if (fuzz < 1)
-				mtral.fuzz = fuzz;
-			else
-				mtral.fuzz = 1;
-		}
-		mtral.albedo = albedo;
-	}
-	else
+	mtral.name = name;
+	if (name == MT_DIELCT) // which is has no albedo value
 	{
 		mtral.scatter = &dielectric;
 		mtral.ir = ir;
+	}
+	else
+	{
+		if (name == MT_LMBRT)
+			mtral.scatter = &lambertian;
+		else if (name == MT_LIGHT)
+			mtral.scatter = NULL;
+		else if (name == MT_METAL)
+		{
+			mtral.scatter = &metal;
+			mtral.fuzz = (fuzz * (fuzz < 1)) + (1 * !(fuzz < 1));
+		}
+		// mtral.albedo = albedo;
+		mtral.texture = txtr;
 	}
 	return (mtral);
 }
 
 static t_bool	lambertian(const t_mtral *mtral, const t_ray *r_in, const t_hit *rec,
-	t_color *attenuation, t_ray *scattered)
+	t_color *atnu, t_ray *sctrd)
 {
 	t_uvec	scatter_direction = ad(rec->normal, randuv());
 
@@ -55,8 +56,9 @@ static t_bool	lambertian(const t_mtral *mtral, const t_ray *r_in, const t_hit *r
 	if (near_zero(scatter_direction))
 		scatter_direction = rec->normal;
 
-	*scattered = ray(rec->point, scatter_direction);
-	*attenuation = mtral->albedo;
+	*sctrd = ray(rec->point, scatter_direction);
+	// *atnu = mtral->albedo;
+	*atnu = mtral->texture.value(&mtral->texture, rec->tx_u, rec->tx_v, &rec->point);
 
 	(void)r_in;
 	
@@ -64,21 +66,22 @@ static t_bool	lambertian(const t_mtral *mtral, const t_ray *r_in, const t_hit *r
 }
 
 static t_bool	metal(const t_mtral *mtral, const t_ray *r_in, const t_hit *rec,
-	t_color *attenuation, t_ray *scattered)
+	t_color *atnu, t_ray *sctrd)
 {
 	t_vec	reflected = reflect(unit(r_in->direc), rec->normal);
 
-	// *scattered = ray(rec->point, reflected); // Without j='][]
-	*scattered = ray(rec->point, ad(reflected, mt(randuv(), mtral->fuzz)));
-	*attenuation = mtral->albedo;
+	// *sctrd = ray(rec->point, reflected); // Without j='][]
+	*sctrd = ray(rec->point, ad(reflected, mt(randuv(), mtral->fuzz)));
+	// *atnu = mtral->albedo;
+	*atnu = mtral->texture.value(&mtral->texture, rec->tx_u, rec->tx_v, &rec->point);
 
 	return TRUE;
 }
 
 static t_bool	dielectric(const t_mtral *mtral, const t_ray *r_in, const t_hit *rec,
-	t_color *attenuation, t_ray *scattered)
+	t_color *atnu, t_ray *sctrd)
 {
-	*attenuation = color(1.0, 1.0, 1.0);
+	*atnu = color(1.0, 1.0, 1.0);
 	t_scl	refraction_ratio;
 	if (rec->face)
 		refraction_ratio = 1.0 / mtral->ir;
@@ -98,12 +101,18 @@ static t_bool	dielectric(const t_mtral *mtral, const t_ray *r_in, const t_hit *r
 		direction = refract(&unit_direc, &rec->normal, refraction_ratio);
 
 	// t_vec	refracted = refract(&unit_direc, &rec->normal, refraction_ratio);
-	// *scattered = ray(rec->point, refracted);
+	// *sctrd = ray(rec->point, refracted);
 
-	*scattered = ray(rec->point, direction);
+	*sctrd = ray(rec->point, direction);
 	
 	return (TRUE);
 }
+
+// static t_bool	light(const t_mtral *mtral, const t_ray *r_in, const t_hit *rec,
+// 	t_color *atnu, t_ray *sctrd)
+// {
+// 	return FALSE;
+// }
 
 // Schlick's approximation for reflectance
 static t_scl	reflectance(t_scl cos, t_scl ref_idx)
