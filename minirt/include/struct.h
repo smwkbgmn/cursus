@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 02:30:19 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/10 10:40:16 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/11 10:47:17 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,16 @@ typedef struct s_bias3	t_vec;
 typedef struct s_bias3	t_uvec;
 typedef struct s_bias3	t_point;
 typedef struct s_bias3	t_color;
-typedef struct s_size	t_size;
-typedef struct s_grid	t_grid;
-typedef struct s_frame	t_frame;
+
+typedef struct s_bias2	t_map;
+typedef struct s_bias2	t_size;
+
+typedef struct s_vbias3	t_frame;
+typedef struct s_vbias2	t_grid;
+
+// typedef struct s_size	t_size;
+// typedef struct s_grid	t_grid;
+// typedef struct s_frame	t_frame;
 
 enum e_name
 {
@@ -53,24 +60,43 @@ struct s_bias3
 	t_scl	z;
 };
 
-struct s_size
+struct s_bias2
 {
-	t_scl	w;
-	t_scl	h;
+	t_scl	x;
+	t_scl	y;
 };
 
-struct s_grid
+struct s_vbias3
 {
+	t_vec	u;
+	t_vec	v;
 	t_vec	w;
-	t_vec	h;
 };
 
-struct s_frame
+struct s_vbias2
 {
-	t_vec	x;
-	t_vec	y;
-	t_vec	z;
+	t_vec	u;
+	t_vec	v;
 };
+
+// struct s_size
+// {
+// 	t_scl	w;
+// 	t_scl	h;
+// };
+
+// struct s_grid
+// {
+// 	t_vec	w;
+// 	t_vec	h;
+// };
+
+// struct s_frame
+// {
+// 	t_vec	x;
+// 	t_vec	y;
+// 	t_vec	z;
+// };
 
 /* MLX */
 typedef struct s_window	t_win;
@@ -127,8 +153,8 @@ typedef struct s_texture	t_txtr;
 typedef struct s_hit		t_hit;
 typedef struct s_equation	t_eqa;
 
-typedef t_bool	(*t_scatter_fp)(const t_mtral *, const t_ray *, const t_hit *, t_color *, t_ray *);
-typedef t_color	(*t_value_fp)(const t_txtr *, t_scl, t_scl, const t_point *);
+typedef t_bool	(*t_fp_scatter)(const t_mtral *, const t_ray *, const t_hit *, t_color *, t_ray *);
+typedef t_color	(*t_fp_value)(const t_txtr *, t_scl, t_scl, const t_point *);
 
 struct s_ray
 {
@@ -144,31 +170,29 @@ struct s_interval
 
 struct s_texture
 {
-	t_color		c1;
-	t_color		c2;
-	t_scl		inv_scale;
-	t_value_fp	value;
+	t_color		albedo;
+	t_fp_value	value;
+	t_color		chker_secondcolor;
+	t_scl		chker_scale;
 };
 
 struct s_material
 {
 	t_name			name;
 	t_txtr			texture;
-	t_scatter_fp	scatter;
-	// t_color			albedo;
-	t_scl			fuzz;
-	t_scl			ir; // Index of refraction
+	t_fp_scatter	scatter;
+	t_scl			metal_fuzz;
+	t_scl			dielct_ir; // Index of refraction
 };
 
 struct s_hit
 {
 	t_point			point;
-	t_uvec			normal;
 	t_scl			t;
-	t_scl			tx_u; // Surface coord of the ray-object hit point
-	t_scl			tx_v;
+	t_uvec			normal;
 	t_bool			face;
 	const t_mtral	*mtral;
+	t_map			map; // Surface coord of the ray-object hit point
 };
 
 struct s_equation
@@ -186,7 +210,7 @@ typedef struct s_square		t_square;
 typedef struct s_value		t_value;
 typedef struct s_obj		t_obj;
 
-typedef t_bool	(*t_hit_fp)(const t_obj *, const t_ray *, t_intvl, t_hit *rec);
+typedef t_bool	(*t_fp_hit)(const t_obj *, const t_ray *, t_intvl, t_hit *rec);
 
 struct s_circle
 {
@@ -214,10 +238,10 @@ struct s_value
 
 struct s_obj
 {
-	t_name			name;
-	t_value			val;
-	t_hit_fp		hit;
-	const t_mtral	*mtral;
+	t_name		name;
+	t_value		val;
+	t_mtral		mtral;
+	t_fp_hit	hit;
 };
 
 #endif

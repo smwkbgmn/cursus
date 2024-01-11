@@ -6,13 +6,13 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 08:52:26 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/09 09:17:25 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/11 10:03:44 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "draw.h"
 
-t_obj	*sphere(t_point center, t_scl radius, const t_mtral *mtral)
+t_obj	*sphere(t_point center, t_scl radius, t_mtral mtral)
 {
 	t_obj	*obj = ft_calloc(1, sizeof(t_obj));
 
@@ -25,7 +25,7 @@ t_obj	*sphere(t_point center, t_scl radius, const t_mtral *mtral)
 }
 
 // t_obj	*plane(t_point point, t_uvec normal, const t_mtral *mtral)
-t_obj	*plane(t_point q, t_vec u, t_vec v, const t_mtral *mtral)
+t_obj	*plane(t_point q, t_vec u, t_vec v, t_mtral mtral)
 {
 	t_obj	*obj = ft_calloc(1, sizeof(t_obj));
 

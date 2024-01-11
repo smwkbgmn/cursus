@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 04:35:59 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/09 13:32:37 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/11 10:02:24 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,6 @@ t_txtr	texture(t_name name, t_color c1, t_color c2, t_scl inv_scale);
 
 // material.c
 // t_mtral	material(t_name name, t_color albedo, t_scl fuzz, t_scl ir);
-t_mtral	material(t_name name, t_scl fuzz, t_scl ir, t_txtr textrue);
+t_mtral	material(t_name name, t_scl fuzz, t_scl ir, t_txtr txtr);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 07:47:31 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/10 10:24:54 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/11 10:35:45 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_bool	hit_plane(const t_obj *obj, const t_ray *r, t_intvl ray_t, t_hit *rec)
 	// Ray hits the 2D shape; set the rest of the hit record and return TRUE
 	rec->t = t;
 	rec->point = intersection;
-	rec->mtral = obj->mtral;
+	rec->mtral = &obj->mtral;
 	set_face_normal(rec, r, obj->val.sqr.normal);
 	return (TRUE);
 }
@@ -77,8 +77,8 @@ static t_bool	is_interior(t_scl a, t_scl b, t_hit *rec)
 	if (a < 0 || 1 < a || b < 0 || 1 < b)
 		return FALSE;
 
-	rec->tx_u = a;
-	rec->tx_v = b;
+	rec->map.x = a;
+	rec->map.y = b;
 	return TRUE;
 }
 
@@ -111,7 +111,7 @@ t_bool	hit_sphere(const t_obj *obj, const t_ray *r, t_intvl t, t_hit *rec)
 	set_face_normal(rec, r, outward_normal);
 
 	set_sphere_uv(outward_normal, rec); // For texture mapping
-	rec->mtral = obj->mtral;
+	rec->mtral = &obj->mtral;
 
 	return (TRUE);
 }
@@ -129,8 +129,8 @@ static void	set_sphere_uv(t_uvec p, t_hit *rec)
 	t_scl	theta = acos(-p.y);
 	t_scl	phi = atan2(-p.z, p.x) + PI;
 
-	rec->tx_u = phi / (2 * PI);
-	rec->tx_v = theta / PI;
+	rec->map.x = phi / (2 * PI);
+	rec->map.y = theta / PI;
 }
 
 static void	set_equation(t_eqa *eqa, const t_obj *obj, const t_ray *r)
