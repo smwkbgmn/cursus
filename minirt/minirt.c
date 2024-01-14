@@ -6,17 +6,24 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 21:54:32 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/11 13:48:43 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/14 10:44:35 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// Ambient lighting (+color)
-// Multiple light point
+// Parsing
+// Init MLX
+
+// Epsylon for fractured image
+// Light source
+// Consider Phong reflection model 
+
+// Ambient lighting (+color) > ray_color & see within light object
+// Multiple light point > light object
 // Phong reflection model (currently Snell's law)
 // Add one more object > Cone
 
-// How to turning off antialiasing?
-// Correct way of light source
+// How to turning off antialiasing? > ray_color
+// Correct way of light source > sctter in material
 
 #include "minirt.h"
 
@@ -24,35 +31,32 @@ void	test_sphere(void);
 void	test_checker(void);
 void	test_sphere_world(void);
 void	test_plane(void);
+void	test_final(void);
 
 int	main(void)
 {
+	// test_final();
+	
 	t_list	*objs = NULL;
-	
-	t_color	nocolor = color(0, 0, 0);
 
-	// t_txtr	tx_solid1 = texture(TX_SOLID, color(0.0, 1.0, 0.0), nocolor, NONE);
-	t_txtr	tx_solid1 = texture(TX_CHKER, color(.2, .3, .1), color(.9, .9, .9), 0.8);
-	t_txtr	tx_solid2 = texture(TX_SOLID, color(0.0, 0.0, 1.0), nocolor, NONE);
+	ft_lstadd_back(&objs, ft_lstnew(sphere(point(0, 0, -1), 0.5,
+		material(MT_LMBRT, NONE, NONE,
+		texture(TX_SOLID, color(0.0, 0.0, 1.0), color(0, 0, 0), NONE)))));
 
-	t_mtral	mt_lmbrt1 = material(MT_LMBRT, NONE, NONE, tx_solid1);
-	t_mtral	mt_lmbrt2 = material(MT_LMBRT, NONE, NONE, tx_solid2);
+	// ft_lstadd_back(&objs, ft_lstnew(sphere(point(0, 0, -1), 0.5,
+	// 	material(MT_DIELCT, NONE, NONE,
+	// 	texture(TX_SOLID, color(1, 1, 1), color(0, 0, 0), NONE)))));
 
-	ft_lstadd_back(&objs, ft_lstnew(sphere(point(0, -1000, 0), 1000, mt_lmbrt1)));
-	ft_lstadd_back(&objs, ft_lstnew(sphere(point(0,     2, 0),    2, mt_lmbrt2)));
-
-	t_txtr	tx_solid3 = texture(TX_SOLID, color(3, 3, 3), nocolor, NONE);
-	t_mtral	mt_light = material(MT_LIGHT, NONE, NONE, tx_solid3);
-	
-	ft_lstadd_back(&objs, ft_lstnew(sphere(point(0, 7, 0), 1, mt_light)));
-	ft_lstadd_back(&objs, ft_lstnew(plane(point(3, 1, -2), vec(2, 0, 0), vec(0, 2, 0), mt_light)));
-
+	ft_lstadd_back(&objs, ft_lstnew(sphere(point(0, -100.5, -1), 100,
+		material(MT_LMBRT, NONE, NONE,
+		texture(TX_SOLID, color(0.0, 1.0, 0.0), color(0, 0, 0), NONE)))));
+		
 	t_scene	scene;
 
-	scene.cam = camera(point(26, 3, 6), point(0, 2, 0), vec(0, 1, 0), 20);
-	scene.img = image(16.0 / 9.0, 800);
+	scene.img = image(16.0 / 9.0, 1200);
+	scene.cam = camera(point(0, 0, 0), point(0, 0, -1), vec(0, 1, 0), 90);
 	scene.view = viewport(&scene);
-	scene.sample = 100;
+	scene.sample = 15;
 	scene.depth = 50;
 
 	render(objs, &scene);
@@ -282,3 +286,38 @@ void	test_sphere_world(void)
 // 	render(objs, &scene);
 
 // }
+
+void	test_final(void)
+{
+	t_list	*objs = NULL;
+	
+	t_color	nocolor = color(0, 0, 0);
+
+	t_txtr	tx_solid1 = texture(TX_SOLID, color(0.0, 1.0, 0.0), nocolor, NONE);
+	t_txtr	tx_solid2 = texture(TX_SOLID, color(0.0, 0.0, 1.0), nocolor, NONE);
+	t_txtr	tx_chker = texture(TX_CHKER, color(.2, .3, .1), color(.9, .9, .9), 0.8);
+
+	// t_mtral	mt_lmbrt1 = material(MT_LMBRT, NONE, NONE, tx_solid1);
+	t_mtral	mt_lmbrt2 = material(MT_LMBRT, NONE, NONE, tx_solid2);
+	t_mtral	mt_dielct = material(MT_DIELCT, NONE, NONE, tx_solid1);
+	t_mtral	mt_metal = material(MT_METAL, 0.8, NONE, tx_chker);
+
+	ft_lstadd_back(&objs, ft_lstnew(sphere(point(0, -1000, 0), 1000, mt_metal)));
+	ft_lstadd_back(&objs, ft_lstnew(sphere(point(0,     2, 0),    2, mt_dielct)));
+
+	// t_txtr	tx_solid3 = texture(TX_SOLID, color(5, 5, 5), nocolor, NONE);
+	// t_mtral	mt_light = material(MT_LIGHT, NONE, NONE, tx_solid3);
+	
+	// ft_lstadd_back(&objs, ft_lstnew(sphere(point(0, 7, 0), 1, mt_light)));
+	ft_lstadd_back(&objs, ft_lstnew(plane(point(3, 1, -2), vec(2, 0, 0), vec(0, 2, 0), mt_lmbrt2)));
+
+	t_scene	scene;
+
+	scene.cam = camera(point(26, 3, 6), point(0, 2, 0), vec(0, 1, 0), 20);
+	scene.img = image(16.0 / 9.0, 800);
+	scene.view = viewport(&scene);
+	scene.sample = 100;
+	scene.depth = 50;
+
+	render(objs, &scene);
+}

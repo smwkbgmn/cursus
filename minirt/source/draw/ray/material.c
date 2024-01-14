@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 13:30:27 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/11 10:44:43 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/12 09:24:49 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static t_bool	metal(const t_mtral *mtral, const t_ray *r_in, const t_hit *rec,
 	t_color *atnu, t_ray *sctrd);
 static t_bool	dielectric(const t_mtral *mtral, const t_ray *r_in, const t_hit *rec,
 	t_color *atnu, t_ray *sctrd);
-static t_scl	reflectance(t_scl cos, t_scl ref_idx);
 static t_bool	light(const t_mtral *mtral, const t_ray *r_in, const t_hit *rec,
 	t_color *atnu, t_ray *sctrd);
 
@@ -45,13 +44,14 @@ t_mtral	material(t_name name, t_scl fuzz, t_scl ir, t_txtr txtr)
 		}
 		// mtral.albedo = albedo;
 	}
-		mtral.texture = txtr;
+	mtral.texture = txtr;
 	return (mtral);
 }
 
 static t_bool	lambertian(const t_mtral *mtral, const t_ray *r_in, const t_hit *rec,
 	t_color *atnu, t_ray *sctrd)
 {
+	// Snell's
 	t_uvec	scatter_direction = ad(rec->normal, randuv());
 
 	// Catch degenerate scatter direcion
@@ -63,7 +63,6 @@ static t_bool	lambertian(const t_mtral *mtral, const t_ray *r_in, const t_hit *r
 	*atnu = mtral->texture.value(&mtral->texture, rec->map.x, rec->map.y, &rec->point);
 
 	(void)r_in;
-	
 	return TRUE;
 }
 
@@ -81,6 +80,9 @@ static t_bool	metal(const t_mtral *mtral, const t_ray *r_in, const t_hit *rec,
 }
 
 // MUST CHEKC WHICH WAY IS CORRECT FOR MODELING (Phong's vs Snell's)
+// Snell's
+static t_scl	reflectance(t_scl cos, t_scl ref_idx);
+
 static t_bool	dielectric(const t_mtral *mtral, const t_ray *r_in, const t_hit *rec,
 	t_color *atnu, t_ray *sctrd)
 {
@@ -111,6 +113,14 @@ static t_bool	dielectric(const t_mtral *mtral, const t_ray *r_in, const t_hit *r
 	return (TRUE);
 }
 
+// Schlick's approximation for reflectance
+static t_scl	reflectance(t_scl cos, t_scl ref_idx)
+{
+	t_scl	r0 = (1 - ref_idx) / (1 + ref_idx);
+	r0 = pow(r0, 2);
+	return (r0 + (1 -r0) * pow((1 - cos), 5));
+}
+
 static t_bool	light(const t_mtral *mtral, const t_ray *r_in, const t_hit *rec,
 	t_color *atnu, t_ray *sctrd)
 {
@@ -120,13 +130,5 @@ static t_bool	light(const t_mtral *mtral, const t_ray *r_in, const t_hit *rec,
 	(void)atnu;
 	(void)sctrd;
 	
-	return FALSE;
-}
-
-// Schlick's approximation for reflectance
-static t_scl	reflectance(t_scl cos, t_scl ref_idx)
-{
-	t_scl	r0 = (1 - ref_idx) / (1 + ref_idx);
-	r0 = pow(r0, 2);
-	return (r0 + (1 -r0) * pow((1 - cos), 5));
+	return (FALSE);
 }
