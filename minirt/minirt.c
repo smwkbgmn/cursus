@@ -6,14 +6,13 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 21:54:32 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/14 10:44:35 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/15 18:07:07 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // Parsing
 // Init MLX
 
-// Epsylon for fractured image
 // Light source
 // Consider Phong reflection model 
 
@@ -295,26 +294,26 @@ void	test_final(void)
 
 	t_txtr	tx_solid1 = texture(TX_SOLID, color(0.0, 1.0, 0.0), nocolor, NONE);
 	t_txtr	tx_solid2 = texture(TX_SOLID, color(0.0, 0.0, 1.0), nocolor, NONE);
-	t_txtr	tx_chker = texture(TX_CHKER, color(.2, .3, .1), color(.9, .9, .9), 0.8);
+	// t_txtr	tx_chker = texture(TX_CHKER, color(.2, .3, .1), color(.9, .9, .9), 0.8);
 
-	// t_mtral	mt_lmbrt1 = material(MT_LMBRT, NONE, NONE, tx_solid1);
+	t_mtral	mt_lmbrt1 = material(MT_LMBRT, NONE, NONE, tx_solid1);
 	t_mtral	mt_lmbrt2 = material(MT_LMBRT, NONE, NONE, tx_solid2);
-	t_mtral	mt_dielct = material(MT_DIELCT, NONE, NONE, tx_solid1);
-	t_mtral	mt_metal = material(MT_METAL, 0.8, NONE, tx_chker);
+	// t_mtral	mt_dielct = material(MT_DIELCT, NONE, NONE, tx_solid1);
+	// t_mtral	mt_metal = material(MT_METAL, 0.8, NONE, tx_chker);
 
-	ft_lstadd_back(&objs, ft_lstnew(sphere(point(0, -1000, 0), 1000, mt_metal)));
-	ft_lstadd_back(&objs, ft_lstnew(sphere(point(0,     2, 0),    2, mt_dielct)));
+	ft_lstadd_back(&objs, ft_lstnew(sphere(point(0, -1000, 0), 1000, mt_lmbrt1)));
+	ft_lstadd_back(&objs, ft_lstnew(sphere(point(0,     2, 0),    2, mt_lmbrt2)));
 
-	// t_txtr	tx_solid3 = texture(TX_SOLID, color(5, 5, 5), nocolor, NONE);
+	// t_txtr	tx_solid3 = texture(TX_SOLID, color(1, 1, 1), nocolor, NONE);
 	// t_mtral	mt_light = material(MT_LIGHT, NONE, NONE, tx_solid3);
 	
 	// ft_lstadd_back(&objs, ft_lstnew(sphere(point(0, 7, 0), 1, mt_light)));
-	ft_lstadd_back(&objs, ft_lstnew(plane(point(3, 1, -2), vec(2, 0, 0), vec(0, 2, 0), mt_lmbrt2)));
+	// ft_lstadd_back(&objs, ft_lstnew(plane(point(3, 1, -2), vec(2, 0, 0), vec(0, 2, 0), mt_light)));
 
 	t_scene	scene;
 
 	scene.cam = camera(point(26, 3, 6), point(0, 2, 0), vec(0, 1, 0), 20);
-	scene.img = image(16.0 / 9.0, 800);
+	scene.img = image(16.0 / 9.0, 1200);
 	scene.view = viewport(&scene);
 	scene.sample = 100;
 	scene.depth = 50;

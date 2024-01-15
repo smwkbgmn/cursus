@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 10:15:03 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/14 11:07:20 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/15 17:15:21 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	render(t_list *objs, const t_scene *scene)
 }
 
 static t_scl	linear_to_gamma(t_scl linear_component);
-static void	antialiasing(t_color pxl_color, int sample);
+static void		antialiasing(t_color pxl_color, int sample);
 
 static void	write_color(t_color pxl_color, int sample, t_bool aliasing)
 {
@@ -93,6 +93,8 @@ static void	antialiasing(t_color pxl_color, int sample)
 	t_scl	r = pxl_color.x;
 	t_scl	g = pxl_color.y;
 	t_scl	b = pxl_color.z;
+
+	// dprintf(2, "%.2f %.2f %.2f\n", pxl_color.x, pxl_color.y, pxl_color.z);
 
 	// Divide the color by the numver of samples
 	t_scl	scale = 1.0 / sample;
