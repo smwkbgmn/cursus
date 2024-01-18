@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 02:30:19 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/11 10:47:17 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/17 09:02:37 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ struct s_window
 	void	*ptr;
 };
 
-/* VIEW */
+/* SCENE */
 typedef struct s_image	t_image;
 typedef struct s_camera	t_camera;
 typedef struct s_view	t_view;
@@ -141,8 +141,7 @@ struct s_scene
 	t_camera	cam;
 	t_image		img;
 	t_view		view;
-	t_scl		sample;
-	t_scl		depth;
+	// t_scl		depth;
 };
 
 /* RAY */
@@ -205,12 +204,20 @@ struct s_equation
 };
 
 /* OBJECTS */
-typedef struct s_circle		t_circle;
-typedef struct s_square		t_square;
-typedef struct s_value		t_value;
-typedef struct s_obj		t_obj;
+typedef struct s_light	t_light;
+typedef struct s_circle	t_circle;
+typedef struct s_square	t_square;
+typedef struct s_value	t_value;
+typedef struct s_obj	t_obj;
+typedef struct s_world	t_world;
 
 typedef t_bool	(*t_fp_hit)(const t_obj *, const t_ray *, t_intvl, t_hit *rec);
+
+struct s_light
+{
+	t_point	pos;
+	t_color	albedo;
+};
 
 struct s_circle
 {
@@ -242,6 +249,13 @@ struct s_obj
 	t_value		val;
 	t_mtral		mtral;
 	t_fp_hit	hit;
+};
+
+struct s_world
+{
+	t_list	*objs;
+	t_list	*lights;
+	t_color	ambient;
 };
 
 #endif
