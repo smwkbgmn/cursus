@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 10:15:03 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/17 09:07:09 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/18 21:27:42 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,6 @@ static void	write_color(t_color pxl_color)
 	cut(&pxl_color.x);
 	cut(&pxl_color.y);
 	cut(&pxl_color.z);
-
-	// dprintf(2, "\t\tpxl_color(%.2f, %.2f, %.2f)\n",
-	// 	pxl_color.x,
-	// 	pxl_color.y,
-	// 	pxl_color.z);
 
 	printf("%d %d %d\n",
 		(int)(255.999 * pxl_color.x),

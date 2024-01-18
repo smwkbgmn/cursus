@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 02:30:19 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/17 09:02:37 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/18 21:08:55 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,7 @@ typedef struct s_material	t_mtral;
 typedef struct s_texture	t_txtr;
 typedef struct s_hit		t_hit;
 typedef struct s_equation	t_eqa;
+typedef struct s_phong		t_phong;
 
 typedef t_bool	(*t_fp_scatter)(const t_mtral *, const t_ray *, const t_hit *, t_color *, t_ray *);
 typedef t_color	(*t_fp_value)(const t_txtr *, t_scl, t_scl, const t_point *);
@@ -201,6 +202,13 @@ struct s_equation
 	t_scl	b_half;
 	t_scl	c;
 	t_scl	dscr;
+};
+
+struct s_phong
+{
+	t_color	light;
+	t_scl	diffuse;
+	t_scl	specular;
 };
 
 /* OBJECTS */

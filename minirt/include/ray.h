@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 04:35:59 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/18 19:35:58 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/18 21:19:02 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "vector.h"
 
 # define PI 3.1415926535897932385
+
 # define CLR_SCALE 255
 # define SPEC_INTENS 0.9
 # define SPEC_SHINE 23

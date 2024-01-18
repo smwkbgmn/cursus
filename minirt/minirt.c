@@ -6,15 +6,13 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 21:54:32 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/18 19:31:19 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/18 21:37:42 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // Parsing
 // Init MLX
 
-// Ambient lighting (+color) > ray_color & see within light object
-// Multiple light point
 // Correct plane hit equation
 // Implement cylinder
 // Add one more object > Cone
@@ -31,7 +29,7 @@ int	main(void)
 
 	world.objs = NULL;
 	world.lights = NULL;
-	world.ambient = albedo_rgb(color(255, 255, 255), 0.0);
+	world.ambient = albedo_rgb(color(255, 255, 255), 0.5);
 
 	// ft_lstadd_back(&world.lights, ft_lstnew(light(point(-10, 5, 10), color(255, 255, 255), 1)));
 	ft_lstadd_back(&world.lights, ft_lstnew(light(point(0, 7, 0), color(255, 255, 255), 1.0)));
@@ -70,7 +68,7 @@ void	test_plane(void)
 
 	world.objs = NULL;
 	world.lights = NULL;
-	world.ambient = albedo_rgb(color(255, 255, 255), 0.0);
+	world.ambient = albedo_rgb(color(255, 255, 255), 0.1);
 	
 	t_color	nocolor = color(0, 0, 0);
 	
