@@ -6,97 +6,146 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 21:54:32 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/18 21:37:42 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/24 10:37:10 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// Parsing
 // Init MLX
 
-// Correct plane hit equation
 // Implement cylinder
 // Add one more object > Cone
+// Test min, max of point and sclar value
 
 #include "minirt.h"
 
-void	test_plane(void);
+void	test_box(t_render *data);
+void	test_sphere(t_render *data);
+// void	test_plane_lightatnu(void);
+void	print_data(t_render *data);
+
+void	set_window(t_win *win, t_size size);
 
 int	main(void)
 {
-	// test_plane();
+	t_render	data;
+	// char		fname[50] = "test.rt";
 
-	t_world	world;
+	// init(fname, &data);
+	// print_data(&data);
+	// render(&data);
 
-	world.objs = NULL;
-	world.lights = NULL;
-	world.ambient = albedo_rgb(color(255, 255, 255), 0.5);
+	// test_box(&data);
+	test_sphere(&data);
 
-	// ft_lstadd_back(&world.lights, ft_lstnew(light(point(-10, 5, 10), color(255, 255, 255), 1)));
-	ft_lstadd_back(&world.lights, ft_lstnew(light(point(0, 7, 0), color(255, 255, 255), 1.0)));
-	// ft_lstadd_back(&world.lights, ft_lstnew(light(point(0, 7, 0), color(255, 255, 255), 0.9)));
-	// ft_lstadd_back(&world.lights, ft_lstnew(light(point(3, 3, 0), color(255, 255, 255), 0.3)));
-	// ft_lstadd_back(&world.lights, ft_lstnew(light(point(-3, 3, 0), color(255, 255, 255), 0.6)));
+	// mlx_loop_hook(data.window.mlx, &render, (void *)&data);
+	render(&data);
 
-	// ft_lstadd_back(&world.objs, ft_lstnew(sphere(point(0, 0, 0), 1,
-	ft_lstadd_back(&world.objs, ft_lstnew(sphere(point(0, 0, -1), 0.5,
-		material(MT_LMBRT, NONE, NONE,
-		texture(TX_SOLID, color(0, 0, 1), color(0, 0, 0), NONE)))));
-
-	// ft_lstadd_back(&world.objs, ft_lstnew(sphere(point(0, 0, -1), 0.5,
-	// 	material(MT_DIELCT, NONE, NONE,
-	// 	texture(TX_SOLID, color(1, 1, 1), color(0, 0, 0), NONE)))));
-
-	// ft_lstadd_back(&world.objs, ft_lstnew(sphere(point(0, -100.5, -1), 100,
-	ft_lstadd_back(&world.objs, ft_lstnew(sphere(point(0, -5.5, -1), 5,
-		material(MT_LMBRT, NONE, NONE,
-		texture(TX_SOLID, color(0, 1, 0), color(0, 0, 0), NONE)))));
-		
-	t_scene	scene;
-
-	scene.img = image(16.0 / 9.0, 1200);
-	scene.cam = camera(point(5, 5, 5), point(0, 0, -1), vec(0, 100, 0), 90);
-	scene.view = viewport(&scene);
-
-	render(&scene, &world);
+	mlx_loop(data.window.mlx);
 	
 	return (EXIT_SUCCESS);
 }
 
-void	test_plane(void)
-{
-	t_world	world;
 
-	world.objs = NULL;
-	world.lights = NULL;
-	world.ambient = albedo_rgb(color(255, 255, 255), 0.1);
+void	test_sphere(t_render *data)
+{
+	data->world.objs = NULL;
+	data->world.lights = NULL;
+	data->world.ambient = albedo_rgb(color(255, 255, 255), 0.0015);
+
+	// ft_lstadd_back(&data->world.lights, ft_lstnew(light(point(-10, 5, 10), color(255, 255, 255), 1)));
+	// ft_lstadd_back(&data->world.lights, ft_lstnew(light(point(0, 7, 0), color(255, 255, 255), 1.0)));
+	// ft_lstadd_back(&data->world.lights, ft_lstnew(light(point(0, 7, 0), color(255, 255, 255), 0.9)));
+	ft_lstadd_back(&data->world.lights, ft_lstnew(light(point(5, 5, 0), color(255, 255, 255), 1)));
+	// ft_lstadd_back(&data->world.lights, ft_lstnew(light(point(-3, 3, 0), color(255, 255, 255), 0.6)));
+
+	// ft_lstadd_back(&data->world.objs, ft_lstnew(sphere(point(0, 0, 0), 1,
+	ft_lstadd_back(&data->world.objs, ft_lstnew(sphere(circle(point(0, 0, -1), 0.5),
+		texture(TX_SOLID, color(0, 0, 255), color(0, 0, 0), NONE))));
+
+	// ft_lstadd_back(&data->world.objs, ft_lstnew(sphere(point(0, 0, -1), 0.5,
+	// 	texture(TX_SOLID, color(1, 1, 1), color(0, 0, 0), NONE))));
+
+	// ft_lstadd_back(&data->world.objs, ft_lstnew(sphere(point(0, -100.5, -1), 100,
+	ft_lstadd_back(&data->world.objs, ft_lstnew(sphere(circle(point(0, -100.5, -1), 100),
+		texture(TX_CHKER, color(200, 0, 0), color(0, 200, 0), 1.5))));
+		
+	data->scene.img = image(16.0 / 9.0, 1200);
+	data->scene.cam = camera(point(0, 0, 1), point(0, 0, -1), 90);
+	data->scene.view = viewport(&data->scene);
+
+	set_window(&data->window, data->scene.img.size);
+	print_data(data);
+}
+
+void	test_box(t_render *data)
+{	
+	data->world.objs = NULL;
+	data->world.lights = NULL;
+	data->world.ambient = albedo_rgb(color(255, 255, 255), 0);
 	
 	t_color	nocolor = color(0, 0, 0);
 	
-	t_txtr	col1 = texture(TX_SOLID, color(1.0, 0.2, 0.2), nocolor, NONE);
-	t_txtr	col2 = texture(TX_SOLID, color(0.2, 1.0, 0.2), nocolor, NONE);
-	t_txtr	col3 = texture(TX_SOLID, color(0.2, 0.2, 1.0), nocolor, NONE);
-	t_txtr	col4 = texture(TX_SOLID, color(1.0, 0.5, 0.0), nocolor, NONE);
-	t_txtr	col5 = texture(TX_SOLID, color(0.2, 0.8, 0.8), nocolor, NONE);
+	// t_txtr	col1 = texture(TX_SOLID, color(0.5, 0.5, 0.5), nocolor, NONE);
+	// t_txtr	col2 = texture(TX_SOLID, color(1.0, 0.2, 0.2), nocolor, NONE);
+	// t_txtr	col3 = texture(TX_SOLID, color(0.2, 0.2, 1.0), nocolor, NONE);
+	// t_txtr	col4 = texture(TX_SOLID, color(1.0, 0.5, 0.0), nocolor, NONE);
+	// t_txtr	col5 = texture(TX_SOLID, color(0.2, 0.8, 0.8), nocolor, NONE);
 
-	t_mtral	left_red	= material(MT_LMBRT, NONE, NONE, col1);
-	t_mtral	back_green	= material(MT_LMBRT, NONE, NONE, col2);
-	t_mtral	right_blue	= material(MT_LMBRT, NONE, NONE, col3);
-	t_mtral	up_orange	= material(MT_LMBRT, NONE, NONE, col4);
-	t_mtral	lo_teal		= material(MT_LMBRT, NONE, NONE, col5);
+	t_txtr	col1 = texture(TX_SOLID, color(130, 130, 130), nocolor, NONE);
+	t_txtr	col2 = texture(TX_SOLID, color(255, 70, 70), nocolor, NONE);
+	t_txtr	col3 = texture(TX_SOLID, color(70, 70, 255), nocolor, NONE);
+	t_txtr	col4 = texture(TX_SOLID, color(70, 230, 230), nocolor, NONE);
+	t_txtr	col5 = texture(TX_SOLID, color(230, 130, 0), nocolor, NONE);
 
-	ft_lstadd_back(&world.objs, ft_lstnew(plane(point(-3, -2,  5), vec( 0,  0, -4), vec( 0,  4,  0), left_red)));
-	ft_lstadd_back(&world.objs, ft_lstnew(plane(point(-2, -2,  0), vec( 4,  0,  0), vec( 0,  4,  0), back_green)));
-	ft_lstadd_back(&world.objs, ft_lstnew(plane(point( 3, -2,  1), vec( 0,  0,  4), vec( 0,  4,  0), right_blue)));
-	ft_lstadd_back(&world.objs, ft_lstnew(plane(point(-2,  3,  1), vec( 4,  0,  0), vec( 0,  0,  4), up_orange)));
-	ft_lstadd_back(&world.objs, ft_lstnew(plane(point(-2, -3,  5), vec( 4,  0,  0), vec( 0,  0, -4), lo_teal)));
+	// t_txtr	col1 = texture(TX_SOLID, color(0.5, 0.5, 0.5), nocolor, NONE);
+	// t_txtr	col2 = texture(TX_SOLID, color(0.5, 0.5, 0.5), nocolor, NONE);
+	// t_txtr	col3 = texture(TX_SOLID, color(0.5, 0.5, 0.5), nocolor, NONE);
+	// t_txtr	col4 = texture(TX_SOLID, color(0.5, 0.5, 0.5), nocolor, NONE);
+	// t_txtr	col5 = texture(TX_SOLID, color(0.5, 0.5, 0.5), nocolor, NONE);
 
-	ft_lstadd_back(&world.lights, ft_lstnew(light(point(0, 0, 9), color(255, 255, 255), 0.7)));
+	ft_lstadd_back(&data->world.objs, ft_lstnew(plane(point(  0,   0,  0), vec( 0,  0,  1), col1)));
+	ft_lstadd_back(&data->world.objs, ft_lstnew(plane(point(-10,   0,  0), vec( 1,  0,  0), col2)));
+	ft_lstadd_back(&data->world.objs, ft_lstnew(plane(point( 10,   0,  0), vec(-1,  0,  0), col3)));
+	ft_lstadd_back(&data->world.objs, ft_lstnew(plane(point(  0,  10,  0), vec( 0, -1,  0), col4)));
+	ft_lstadd_back(&data->world.objs, ft_lstnew(plane(point(  0, -10,  0), vec( 0,  1,  0), col5)));
 
-	t_scene	scene;
+	// ft_lstadd_back(&data->world.objs, ft_lstnew(
+	// 	sphere(point(0, 0, 0), 0.5,
+	// 		material(MT_LMBRT, NONE, NONE,
+	// 			texture(TX_SOLID, color(0.5, 0.5, 0.5), color(0, 0, 0), NONE)))));
 
-	scene.cam = camera(point(0, 0, 9), point(0, 0, 0), vec(0, 1, 0), 80);
-	scene.img = image(1.0, 1600);
-	scene.view = viewport(&scene);
+	// ft_lstadd_back(&data->world.lights, ft_lstnew(light(point(0, 0, 5), color(255, 255, 255), 1)));
+	// ft_lstadd_back(&data->world.lights, ft_lstnew(light(point(0, 0, 10), color(255, 255, 255), 1)));
+	ft_lstadd_back(&data->world.lights, ft_lstnew(light(point(0, 0, 50), color(255, 255, 255), 1)));
 
-	render(&scene, &world);
+	data->scene.cam = camera(point(0, 0, 50), point(0, 0, 0), 80);
+	data->scene.img = image(16.0 / 9.0, 1000);
+	data->scene.view = viewport(&data->scene);
+
+	set_window(&data->window, data->scene.img.size);
+	print_data(data);
 }
+
+// void	test_plane_lightatnu(void)
+// {
+// 	t_world	data->world;
+
+// 	data->world.objs = NULL;
+// 	data->world.lights = NULL;
+// 	data->world.ambient = albedo_rgb(0.0, color(0, 0, 0));
+
+// 	ft_lstadd_back(&data->world.objs, ft_lstnew(
+// 		plane(point(0, 0, -10), point(0, 0, 1),
+// 			material(MT_LMBRT, NONE, NONE,
+// 				texture(TX_SOLID, color(0.2, 0.5, 0.8), color(0, 0, 0), NONE)))));
+	
+// 	ft_lstadd_back(&data->world.lights, ft_lstnew(light(point(0, 0, 10), color(255, 255, 255), 1.0)));
+
+// 	t_scene	scene;
+
+// 	scene.cam = camera(point(0, 0, 0), point(0, 0, -1), point(0, 1, 0), 90);
+// 	scene.img = image(16 / 9, 1200);
+// 	scene.view = viewport(&scene);
+	
+// 	render(&scene, &data->world);
+// }

@@ -7,11 +7,10 @@ FLAG		= -Wall -Wextra -Werror $(F_HDR)
 F_HDR	= -I $(DIR_HDR) -I $(DIR_L_FT) -I $(DIR_L_MLX)
 
 SRC		= \
-$(wildcard $(DIR_SRC)/draw/ray/*.c) \
-$(wildcard $(DIR_SRC)/draw/scene/*.c) \
-$(wildcard $(DIR_SRC)/draw/vector/*.c) \
 $(wildcard $(DIR_SRC)/draw/*.c) \
-$(wildcard $(DIR_SRC)/window/*.c) \
+$(wildcard $(DIR_SRC)/init/*.c) \
+$(wildcard $(DIR_SRC)/ray/*.c) \
+$(wildcard $(DIR_SRC)/vector/*.c) \
 $(wildcard $(DIR_SRC)/*.c) \
 minirt.c
 

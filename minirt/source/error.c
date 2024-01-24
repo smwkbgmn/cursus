@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 14:06:47 by donghyu2          #+#    #+#             */
-/*   Updated: 2023/12/28 02:19:14 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/22 12:06:22 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	err_usr(char *msg)
 {
 	if (msg)
 	{
+		ft_putstr("Error\n");
 		ft_putstr(msg);
 		ft_putchar('\n');
 	}
