@@ -1,33 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   utill.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/01 21:54:49 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/25 09:40:51 by donghyu2         ###   ########.fr       */
+/*   Created: 2024/01/02 11:21:44 by donghyu2          #+#    #+#             */
+/*   Updated: 2024/01/25 21:25:32 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#include "ray.h"
 
-# include <fcntl.h>
+t_uvec	direction(t_point from, t_point at)
+{
+	return (unit(sb(at, from)));
+}
 
-# include "libft.h"
-# include "data.h"
-# include "mlx.h"
-
-# define LOOP 1
-# define MATCH 0
-
-# define ON_DESTROY 17
-
-/* draw.c */
-void	render(const t_render *data);
-
-// hook.c
-void	activate_mlx(const t_render *data);
-
-#endif
+t_scl	degrees_to_radians(t_scl degrees)
+{
+	return (degrees * M_PI / 180.0);
+}

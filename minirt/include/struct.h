@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 02:30:19 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/25 08:16:27 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/25 22:23:12 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,22 @@
 
 # define NONE 0
 
-typedef double			t_scl;
-typedef unsigned int	t_color_mlx;
+typedef double				t_scl;
+typedef unsigned int		t_argb;
 
 /* ELEMENT */
-typedef enum e_name	t_name;
+typedef enum e_name			t_name;
 
-typedef struct s_bias3	t_vec;
-typedef struct s_bias3	t_uvec;
-typedef struct s_bias3	t_point;
-typedef struct s_bias3	t_color;
+typedef struct s_bias3		t_vec;
+typedef struct s_bias3		t_uvec;
+typedef struct s_bias3		t_point;
+typedef struct s_bias3		t_color;
 
-typedef struct s_bias2	t_map;
-typedef struct s_bias2	t_size;
+typedef struct s_bias2		t_map;
+typedef struct s_bias2		t_size;
 
-typedef struct s_vbias3	t_frame;
-typedef struct s_vbias2	t_grid;
+typedef struct s_vbias3		t_frame;
+typedef struct s_vbias2		t_grid;
 
 enum e_name
 {
@@ -81,8 +81,8 @@ typedef struct s_phong		t_phong;
 
 struct s_ray
 {
-	t_point	origin;
-	t_vec	direc;
+	t_point	org;
+	t_vec	dir;
 };
 
 struct s_interval
@@ -118,19 +118,20 @@ struct s_phong
 };
 
 /* OBJECTS */
-typedef struct s_light	t_light;
-typedef struct s_circle	t_circle;
-typedef struct s_square	t_square;
-typedef struct s_value	t_value;
-typedef struct s_obj	t_obj;
-typedef struct s_world	t_world;
+typedef struct s_light		t_light;
+typedef struct s_circle		t_circle;
+typedef struct s_square		t_square;
+typedef struct s_value		t_value;
+typedef struct s_obj		t_obj;
+typedef struct s_world		t_world;
 
-typedef t_bool	(*t_fp_hit)(const t_obj *obj, const t_ray *r, t_intvl intvl, t_hit *rec);
-typedef t_color	(*t_fp_value)(const t_hit *rec);
+typedef t_bool				(*t_fp_hit)(const t_obj *obj, const t_ray *r,
+	t_intvl intvl, t_hit *rec);
+typedef t_color				(*t_fp_value)(const t_hit *rec);
 
 struct s_light
 {
-	t_point	pos;
+	t_point	point;
 	t_color	albedo;
 };
 
@@ -142,7 +143,7 @@ struct s_circle
 
 struct s_square
 {
-	t_point	point; // A point in palne 
+	t_point	point;
 	t_uvec	normal;
 	t_vec	u;
 	t_vec	v;
@@ -182,30 +183,29 @@ struct s_world
 };
 
 /* SCENE */
-typedef struct s_image	t_image;
-typedef struct s_camera	t_camera;
-typedef struct s_view	t_view;
-typedef struct s_scene	t_scene;
+typedef struct s_image		t_image;
+typedef struct s_camera		t_camera;
+typedef struct s_view		t_view;
+typedef struct s_scene		t_scene;
 
 struct s_image
 {
 	t_size	size;
-	t_scl	aspect;	// Ratio of img width over height
+	t_scl	aspect;
 };
 
 struct s_view
 {
-	t_point	pxl00;	// Location of pixel 0, 0
-	t_grid	pxl;	// Offset to pxl to the right(w) and below(h)
+	t_point	pxl00;
+	t_grid	pxl;
 };
 
 struct s_camera
 {
-	t_point	from; // Point camera is looking from
-	t_point	at; // Point camera is looking at
-	// t_uvec	up; // Camera-relative "up" direction
+	t_point	from;
+	t_point	at;
 	t_scl	fov;
-	t_frame	frame; // Camera frame vasis vectors
+	t_frame	frame;
 };
 
 struct s_scene
@@ -215,9 +215,8 @@ struct s_scene
 	t_view		view;
 };
 
-
 /* MLX */
-typedef struct s_window	t_win;
+typedef struct s_window		t_win;
 
 enum e_key
 {
@@ -232,8 +231,8 @@ struct s_window
 };
 
 /* DATA */
-typedef enum e_element	t_element;
-typedef	struct s_render	t_render;
+typedef enum e_element		t_element;
+typedef struct s_render		t_render;
 
 enum e_element
 {

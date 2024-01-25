@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 13:14:24 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/08 15:19:25 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/25 21:26:19 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,5 @@ t_vec	dv(t_vec vec, t_scl t)
 		rst.z = vec.z / t;
 		return (rst);
 	}
-	// printf("YOU'RE ATTEMPTING TO DIVIDE BY ZERO\n");
 	return (vec);
 }

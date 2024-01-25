@@ -6,19 +6,15 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 12:20:38 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/25 09:27:25 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/25 22:23:30 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
-
 #include "minirt.h"
-// #include "data.h"
-
 
 static int	open_file(char *fname);
 static void	valid_fname(char *fname);
-void	set_window(t_win *win, t_size size);
+void		set_window(t_win *win, t_size size);
 
 void	init(char *fname, t_render *data)
 {
@@ -54,7 +50,6 @@ void	set_window(t_win *win, t_size size)
 	win->mlx = mlx_init();
 	if (!win->mlx)
 		err_usr("fail to mlx_init");
-
 	win->ptr = mlx_new_window(win->mlx, (int)size.x, (int)size.y, "miniRT");
 	if (!win->ptr)
 		err_usr("fail to mlx_new_window");

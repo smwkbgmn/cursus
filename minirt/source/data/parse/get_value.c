@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 10:21:25 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/25 08:10:09 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/25 22:18:24 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,14 @@ t_vec	get_vec(char *arg, t_intvl intvl)
 	char	*comma;
 	char	*substr;
 
-	ft_memset(&scl, NONE, sizeof(t_scl) * 3);	
 	idx = 0;
+	ft_memset(&scl, NONE, sizeof(t_scl) * 3);
 	while (idx < 3)
 	{
 		if (idx < 2)
 		{
 			comma = anchor(arg, ',');
 			substr = try(ft_strdup_ptr(arg, comma));
-
-			// dprintf(2, "substr [%s]\n", substr);
-			
 			scl[idx++] = get_scl(substr, intvl);
 			ft_free(substr);
 			arg = comma + 1;
@@ -67,7 +64,6 @@ t_scl	get_scl(char *arg, t_intvl intvl)
 	t_scl	val;
 
 	val = ft_strtod(arg);
-	// dprintf(2, "\tget_scl result [%f] from [%s]\n", val, arg);
 	if (!contains(val, intvl))
 		err_usr("ensure entered value is in range as required");
 	return (val);

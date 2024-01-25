@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 07:43:24 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/25 09:39:15 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/25 22:18:33 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	parse(int fd, t_render *data)
 			if (*line != '\n')
 			{
 				remove_tail_nl(line);
-				// dprintf(2, "got a line [%s]\n", line);
 				set_value(try(ft_split(line, ' ')), data, &essential[0]);
 			}
 			ft_free(line);
@@ -53,17 +52,10 @@ static void	remove_tail_nl(char *line)
 		*nl = '\0';
 }
 
-// void	print_argv(char **argv)
-// {
-// 	while (*argv)
-// 		dprintf(2, "arg[%s]\n", *(argv++));
-// }
-
 static void	set_value(char **argv, t_render *data, int *essential)
 {
 	t_element	elem;
-	
-	// print_argv(argv);
+
 	which_element(*argv, &elem);
 	if (elem < SP)
 		get_essential(elem, argv + 1, data, essential);
@@ -74,8 +66,6 @@ static void	set_value(char **argv, t_render *data, int *essential)
 
 static void	which_element(char *arg, t_element *elem)
 {
-	// dprintf(2, "now arg [%s]\n", arg);
-	// dprintf(2, "which_element\n");
 	if (arg)
 	{	
 		if (ft_strncmp(arg, "A", 2) == MATCH)

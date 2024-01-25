@@ -6,16 +6,16 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 07:47:31 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/25 07:16:52 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/25 22:12:39 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray.h"
 
-// static t_bool	is_interior(t_scl a, t_scl b, t_hit *rec);
 static void		set_sphere_uv(t_uvec p, t_hit *rec);
 static void		set_equation(t_eqa *eqa, const t_obj *obj, const t_ray *r);
-static void		set_face_normal(t_hit *rec, const t_ray *r, t_vec outward_normal);
+static void		set_face_normal(t_hit *rec, const t_ray *r,
+					t_vec outward_normal);
 
 t_bool	hit(t_list *objs, const t_ray *r, t_intvl t, t_hit *rec)
 {
@@ -26,7 +26,7 @@ t_bool	hit(t_list *objs, const t_ray *r, t_intvl t, t_hit *rec)
 	while (objs)
 	{
 		if (((t_obj *)objs->content)->hit(objs->content,
-			r, interval(t.min, closest_so_far), &rec_tmp))
+				r, interval(t.min, closest_so_far), &rec_tmp))
 		{
 			hit_anything = TRUE;
 			closest_so_far = rec_tmp.t;
@@ -39,7 +39,7 @@ t_bool	hit(t_list *objs, const t_ray *r, t_intvl t, t_hit *rec)
 
 t_bool	hit_plane(const t_obj *obj, const t_ray *r, t_intvl ray_t, t_hit *rec)
 {
-	t_scl	denom = dot(obj->val.sqr.normal, r->direc);
+	t_scl	denom = dot(obj->val.sqr.normal, r->dir);
 
 	// No hit if the ray is parallel to the plane
 	if (fabs(denom) < 1e-8)
@@ -47,7 +47,7 @@ t_bool	hit_plane(const t_obj *obj, const t_ray *r, t_intvl ray_t, t_hit *rec)
 
 	// ORIGINAL
 	t_scl	d = dot(obj->val.sqr.point, obj->val.sqr.normal);
-	t_scl	t = (d - dot(obj->val.sqr.normal, r->origin)) / denom;
+	t_scl	t = (d - dot(obj->val.sqr.normal, r->org)) / denom;
 
 	// GPT
 	// t_vec	tmp = mtv(sb(obj->val.sqr.point, r->origin), obj->val.sqr.normal);
@@ -59,9 +59,6 @@ t_bool	hit_plane(const t_obj *obj, const t_ray *r, t_intvl ray_t, t_hit *rec)
 	// ORIGINAL
 	t_point	intersection = ray_at(r, t);
 	
-	// GPT
-	// t_point	intersection = ad(r->origin, mt(r->direc, t));
-	
 	rec->t = t;
 	rec->point = intersection;
 	rec->txtr = &obj->txtr;
@@ -69,56 +66,6 @@ t_bool	hit_plane(const t_obj *obj, const t_ray *r, t_intvl ray_t, t_hit *rec)
 
 	return (TRUE);
 }
-
-/* ORIGINAL */
-// t_bool	hit_plane(const t_obj *obj, const t_ray *r, t_intvl ray_t, t_hit *rec)
-// {
-// 	t_scl	denom = dot(obj->val.sqr.normal, r->direc);
-
-// 	// No hit if the ray is parallel to the plane
-// 	if (fabs(denom) < 1e-8)
-// 		return FALSE;
-
-// 	// Return FALSE if the hit point parameter t is outside the ray interval
-// 	t_scl	t = (obj->val.sqr.d - dot(obj->val.sqr.normal, r->origin)) / denom;
-// 	if (!contains(t, ray_t))
-// 		return FALSE;
-
-// 	dprintf(2, "Valid t(%.3f)\n", t);
-
-// 	// Determine the hit point lies within the planar shape using its plane coord
-// 	t_point	intersection = ray_at(r, t);
-// 	t_vec	planar_hitpt_vector = sb(intersection, obj->val.sqr.point);
-// 	t_scl	alpha = dot(obj->val.sqr.w, cross(planar_hitpt_vector, obj->val.sqr.v));
-// 	t_scl	beta = dot(obj->val.sqr.w, cross(obj->val.sqr.u, planar_hitpt_vector));
-
-// 	if (!is_interior(alpha, beta, rec))
-// 		return FALSE;
-	
-// 	// Ray hits the 2D shape; set the rest of the hit record and return TRUE
-// 	rec->t = t;
-// 	rec->point = intersection;
-// 	rec->mtral = &obj->mtral;
-// 	set_face_normal(rec, r, obj->val.sqr.normal);
-
-// 	dprintf(2, "\thitpoint (%.2f, %.2f, %.2f)\n",
-// 		intersection.x, intersection.y, intersection.z);
-		
-// 	return (TRUE);
-// }
-
-// static t_bool	is_interior(t_scl a, t_scl b, t_hit *rec)
-// {
-// 	/* GIven the hit point in plane coord, return FALSE if it is outside the
-// 	primitive, otherwise set the hit record UV coord and return TRUE */
-	
-// 	if (a < 0 || 1 < a || b < 0 || 1 < b)
-// 		return FALSE;
-
-// 	rec->map.x = a;
-// 	rec->map.y = b;
-// 	return TRUE;
-// }
 
 t_bool	hit_sphere(const t_obj *obj, const t_ray *r, t_intvl t, t_hit *rec)
 {
@@ -165,17 +112,17 @@ static void	set_sphere_uv(t_uvec p, t_hit *rec)
 			<0 0 1> tyelds <0.25 0.50>	< 0  0 -1> yields <0.75 0.50>
 	*/
 	t_scl	theta = acos(-p.y);
-	t_scl	phi = atan2(-p.z, p.x) + PI;
+	t_scl	phi = atan2(-p.z, p.x) + M_PI;
 
-	rec->map.x = phi / (2 * PI);
-	rec->map.y = theta / PI;
+	rec->map.x = phi / (2 * M_PI);
+	rec->map.y = theta / M_PI;
 }
 
 static void	set_equation(t_eqa *eqa, const t_obj *obj, const t_ray *r)
 {
-	eqa->oc = sb(r->origin, obj->val.cir.center);
-	eqa->a = square(r->direc);
-	eqa->b_half = dot(eqa->oc, r->direc);
+	eqa->oc = sb(r->org, obj->val.cir.center);
+	eqa->a = square(r->dir);
+	eqa->b_half = dot(eqa->oc, r->dir);
 	eqa->c = square(eqa->oc) - pow(obj->val.cir.radius, 2);
 	
 	eqa->dscr = pow(eqa->b_half, 2) - (eqa->a * eqa->c);
@@ -189,7 +136,7 @@ static void	set_equation(t_eqa *eqa, const t_obj *obj, const t_ray *r)
 static void	set_face_normal(t_hit *rec, const t_ray *r, t_vec outward_normal)
 {
 	// The parameter 'outward_normal' is assumed to have unit len
-	rec->face = dot(r->direc, outward_normal) < 0;
+	rec->face = dot(r->dir, outward_normal) < 0;
 	if (rec->face)
 		rec->normal = outward_normal;
 	else

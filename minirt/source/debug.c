@@ -120,7 +120,7 @@ void	print_lights(t_list *lights)
 
 		dprintf(2, "[Light]\n");
 		dprintf(2, "\tpoint ");
-		print_vec(light->pos);
+		print_vec(light->point);
 		dprintf(2, "\tcolor ");
 		print_vec(light->albedo);
 

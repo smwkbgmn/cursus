@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:11:02 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/25 08:07:28 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/25 22:27:05 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static void	exit_program(const t_render *data);
 void	activate_mlx(const t_render *data)
 {
 	mlx_key_hook(data->window.ptr, &hookfn_key, (void *)data);
-	mlx_hook(data->window.ptr, ON_DESTROY, 0, &hookfn_window_closed, (void *)data);
+	mlx_hook(data->window.ptr, ON_DESTROY,
+		0, &hookfn_window_closed, (void *)data);
 	mlx_loop(data->window.mlx);
 }
 
@@ -30,7 +31,7 @@ static int	hookfn_key(int key, const t_render *data)
 	return (NONE);
 }
 
-static int	hookfn_window_closed(const t_render *data) 
+static int	hookfn_window_closed(const t_render *data)
 {
 	exit_program(data);
 	return (NONE);

@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 07:45:07 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/25 08:14:39 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/25 22:18:49 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,9 @@ static void	valid_len(char *arg)
 	t_bool	sign;
 	char	*dot;
 
-	sign = (*arg == '+' || *arg == '-');	
+	if (!ft_strlen(arg))
+		err_usr("empty field has found");
+	sign = (*arg == '+' || *arg == '-');
 	dot = ft_strchr(arg, '.');
 	if (dot)
 	{

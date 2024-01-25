@@ -5,19 +5,37 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/02 11:21:44 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/24 11:26:55 by donghyu2         ###   ########.fr       */
+/*   Created: 2024/01/25 13:56:53 by donghyu2          #+#    #+#             */
+/*   Updated: 2024/01/25 22:18:57 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ray.h"
+#include "data.h"
 
-t_uvec	direction(t_point from, t_point at)
+t_color	albedo_rgb(t_color rgb, t_scl bright)
 {
-	return (unit(sb(at, from)));
+	return (mt(color(rgb.x / 255, rgb.y / 255, rgb.z / 255), bright));
 }
 
-t_scl	degrees_to_radians(t_scl degrees)
+t_uvec	valid_normal(t_uvec normal)
 {
-	return (degrees * PI / 180.0);
+	if (!normal.x && !normal.y && !normal.z)
+		err_usr("normalized vector must be set");
+	return (normal);
+}
+
+t_scl	valid_size(t_scl value)
+{
+	if (!value)
+		err_usr("the size of object couldn't be zero");
+	return (value);
+}
+
+t_circle	circle(t_point center, t_scl diameter)
+{
+	t_circle	cir;
+
+	cir.center = center;
+	cir.radius = valid_size(diameter) / 2;
+	return (cir);
 }

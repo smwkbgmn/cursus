@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 10:15:03 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/24 12:49:00 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/25 22:28:22 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void		put_pixel(const t_render *data, int x, int y);
 static t_color	shoot_ray(const t_render *data, int x, int y);
-static void		cut(t_scl *pxl_color);
-// static t_scl	linear_to_gamma(t_scl linear_component);
+static t_color	clamp(t_color albedo);
+static t_argb	argb_albedo(t_color albedo);
 
 void	render(const t_render *data)
 {
@@ -25,7 +25,7 @@ void	render(const t_render *data)
 	y = 0;
 	while (y < data->scene.img.size.y)
 	{
-		printf("\rScanlines remaning: %d ", (int)data->scene.img.size.y - y);	
+		printf("\rScanlines remaning: %d ", (int)data->scene.img.size.y - y);
 		x = 0;
 		while (x < data->scene.img.size.x)
 		{
@@ -35,24 +35,13 @@ void	render(const t_render *data)
 		y++;
 	}
 	printf("\rDone.                      \n");
-
 	activate_mlx(data);
 }
 
 static void	put_pixel(const t_render *data, int x, int y)
 {
-	t_color	pxl_color = shoot_ray(data, x, y);
-	t_color_mlx	argb = 0;
-
-	cut(&pxl_color.x);
-	cut(&pxl_color.y);
-	cut(&pxl_color.z);
-
-	argb = (argb | (int)(pxl_color.x * CLR_SCALE)) << 8;
-	argb = (argb | (int)(pxl_color.y * CLR_SCALE)) << 8;
-	argb = (argb | (int)(pxl_color.z * CLR_SCALE));
-	
-	mlx_pixel_put(data->window.mlx, data->window.ptr, x, y, argb);
+	mlx_pixel_put(data->window.mlx, data->window.ptr, x, y,
+		argb_albedo(clamp(shoot_ray(data, x, y))));
 }
 
 static t_color	shoot_ray(const t_render *data, int x, int y)
@@ -64,18 +53,25 @@ static t_color	shoot_ray(const t_render *data, int x, int y)
 	pxl_center = ad(pxl_center, mt(data->scene.view.pxl.u, x));
 	pxl_center = ad(pxl_center, mt(data->scene.view.pxl.v, y));
 	r = ray(data->scene.cam.from,
-		direction(data->scene.cam.from, pxl_center));
-	return (ray_color(&r, &data->world, mt(r.direc, -1)));
+			direction(data->scene.cam.from, pxl_center));
+	return (ray_color(&r, &data->world));
 }
 
-static void	cut(t_scl *rgb)
+static t_color	clamp(t_color albedo)
 {
-	// *rgb = linear_to_gamma(*rgb);
-	if (*rgb > 1)
-		*rgb = 1;
+	albedo.x = fmin(albedo.x, 1.0);
+	albedo.y = fmin(albedo.y, 1.0);
+	albedo.z = fmin(albedo.z, 1.0);
+	return (albedo);
 }
 
-// static t_scl	linear_to_gamma(t_scl linear_component)
-// {
-// 	return (sqrt(linear_component));
-// }
+static t_argb	argb_albedo(t_color albedo)
+{
+	t_argb	argb;
+
+	argb = 0;
+	argb = (argb | (int)(albedo.x * CLR_SCALE)) << 8;
+	argb = (argb | (int)(albedo.y * CLR_SCALE)) << 8;
+	argb = (argb | (int)(albedo.z * CLR_SCALE));
+	return (argb);
+}
