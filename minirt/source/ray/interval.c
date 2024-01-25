@@ -6,22 +6,13 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 07:51:51 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/22 13:41:20 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/25 07:15:09 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray.h"
 
-t_intvl	interval(void)
-{
-	t_intvl	intvl;
-
-	intvl.min = INFINITY;
-	intvl.max = INFINITY * -1;
-	return intvl;
-}
-
-t_intvl	interval_set(t_scl min, t_scl max)
+t_intvl	interval(t_scl min, t_scl max)
 {
 	t_intvl	intvl;
 
@@ -29,6 +20,26 @@ t_intvl	interval_set(t_scl min, t_scl max)
 	intvl.max = max;
 	return (intvl);
 }
+
+// t_intvl	interval(void)
+// {
+// 	t_intvl	intvl;
+
+// 	intvl.min = INFINITY;
+// 	intvl.max = INFINITY * -1;
+// 	// intvl.min = INFINITY;
+// 	// intvl.max = INFINITY * -1;
+// 	return intvl;
+// }
+
+// t_intvl	interval_set(t_scl min, t_scl max)
+// {
+// 	t_intvl	intvl;
+
+// 	intvl.min = min;
+// 	intvl.max = max;
+// 	return (intvl);
+// }
 
 // t_intvl	interval(t_scl min, t_scl max)
 // {

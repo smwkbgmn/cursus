@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 19:34:37 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/24 08:04:39 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/25 07:17:02 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static t_bool	meet_light(const t_hit *rec, t_list *objs, const t_light *light)
 	t_scl	len_to_light = length(sb(light->pos, rec->point));
 	t_hit	rec_to_light;
 	
-	if (hit(objs, &ray_to_light, interval_set(0.001, len_to_light), &rec_to_light))
+	if (hit(objs, &ray_to_light, interval(0.001, len_to_light), &rec_to_light))
 		return FALSE;
 	return TRUE;
 }

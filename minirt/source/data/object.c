@@ -6,11 +6,11 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 08:52:26 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/24 07:06:06 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/25 08:14:26 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "draw.h"
+#include "data.h"
 
 t_light	*light(t_point position, t_color rgb, t_scl bright)
 {
@@ -58,17 +58,16 @@ t_obj	*cylinder(t_circle cir, t_scl height, t_uvec axis, t_txtr txtr)
 	return (obj);
 }
 
-t_circle	circle(t_point center, t_scl radius)
+t_circle	circle(t_point center, t_scl diameter)
 {
 	t_circle	cir;
 
 	cir.center = center;
-	cir.radius = radius;
+	cir.radius = diameter / 2;
 	return (cir);
 }
 
 t_color	albedo_rgb(t_color rgb, t_scl bright)
 {
 	return (mt(color(rgb.x / 255, rgb.y / 255, rgb.z / 255), bright));
-	// return (mt(color(rgb.x / 255.999, rgb.y / 255.999, rgb.z / 255.999), bright));
 }

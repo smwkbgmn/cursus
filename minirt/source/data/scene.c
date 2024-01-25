@@ -6,11 +6,11 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 04:12:29 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/23 13:20:29 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/25 08:14:32 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "draw.h"
+#include "data.h"
 
 // t_camera	camera(t_point from, t_point at, t_uvec up, t_scl fov)
 t_camera	camera(t_point from, t_point at, t_scl fov)
@@ -20,7 +20,7 @@ t_camera	camera(t_point from, t_point at, t_scl fov)
 
 	cam.from = from;
 	cam.at = at;
-	cam.fov = fov;
+	cam.fov = (int)fov;
 
 	up = vec(0, 1, 0);
 	if ((at.y > 0.0 || at.y < 0.0)

@@ -6,15 +6,17 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 21:54:32 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/24 10:37:10 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/25 09:24:46 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// Init MLX
 
 // Implement cylinder
 // Add one more object > Cone
 // Test min, max of point and sclar value
+
+// Remove function not allowed
+// See including headers
+// Check diameter
 
 #include "minirt.h"
 
@@ -28,19 +30,15 @@ void	set_window(t_win *win, t_size size);
 int	main(void)
 {
 	t_render	data;
-	// char		fname[50] = "test.rt";
-
-	// init(fname, &data);
-	// print_data(&data);
-	// render(&data);
+	
+	char		fname[50] = "test.rt";
+	init(fname, &data);
+	print_data(&data);
 
 	// test_box(&data);
-	test_sphere(&data);
+	// test_sphere(&data);
 
-	// mlx_loop_hook(data.window.mlx, &render, (void *)&data);
 	render(&data);
-
-	mlx_loop(data.window.mlx);
 	
 	return (EXIT_SUCCESS);
 }

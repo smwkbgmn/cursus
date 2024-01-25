@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 02:30:19 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/24 09:24:27 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/25 08:16:27 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,7 +181,6 @@ struct s_world
 	t_color	ambient;
 };
 
-
 /* SCENE */
 typedef struct s_image	t_image;
 typedef struct s_camera	t_camera;
@@ -220,6 +219,11 @@ struct s_scene
 /* MLX */
 typedef struct s_window	t_win;
 
+enum e_key
+{
+	ESC = 53
+};
+
 struct s_window
 {
 	t_size	size;
@@ -227,7 +231,7 @@ struct s_window
 	void	*ptr;
 };
 
-/* PROGRAM */
+/* DATA */
 typedef enum e_element	t_element;
 typedef	struct s_render	t_render;
 

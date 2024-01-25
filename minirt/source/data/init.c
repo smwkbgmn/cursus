@@ -6,13 +6,15 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 12:20:38 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/24 10:38:10 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/25 09:27:25 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 
 #include "minirt.h"
+// #include "data.h"
+
 
 static int	open_file(char *fname);
 static void	valid_fname(char *fname);
@@ -22,7 +24,7 @@ void	init(char *fname, t_render *data)
 {
 	ft_memset(data, NONE, sizeof(t_render));
 	parse(open_file(fname), data);
-	data->scene.img = image(16.0 / 9.0, WIN_WIDTH);
+	data->scene.img = image(WIN_ASPECT, WIN_WIDTH);
 	data->scene.view = viewport(&data->scene);
 	set_window(&data->window, data->scene.img.size);
 }

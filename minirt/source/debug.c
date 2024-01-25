@@ -10,8 +10,6 @@ void	print_data(t_render *data)
 	t_world	*world = &data->world;
 	t_scene	*scene = &data->scene;
 
-	// dprintf(2, "--------------------------------------\n");
-
 	dprintf(2, "--------------- SCENE ----------------\n");
 	dprintf(2, "[Camera]\n");
 	dprintf(2, "\tfrom ");
@@ -29,13 +27,11 @@ void	print_data(t_render *data)
 
 	dprintf(2, "--------------- LIGHT -----------------\n");
 	print_lights(world->lights);
-	dprintf(2, "\n");
 
 	dprintf(2, "--------------- OBJECT ----------------\n");
 	print_obj(world->objs);
-	dprintf(2, "\n");
 
-	dprintf(2, "--------------------------------------\n");
+	dprintf(2, "---------------------------------------\n");
 }
 
 void	print_vec(t_vec vec)

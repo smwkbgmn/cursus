@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 12:32:54 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/08 14:58:35 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/24 12:29:12 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 # define VECTOR_H
 
 # include <math.h>
+# include <stdlib.h>
 
 # include "libft.h"
-# include "utill.h"
-# include "error.h"
+# include "struct.h"
 
 # define LOOP 1
 

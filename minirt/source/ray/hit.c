@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 07:47:31 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/24 07:43:27 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/25 07:16:52 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_bool	hit(t_list *objs, const t_ray *r, t_intvl t, t_hit *rec)
 	while (objs)
 	{
 		if (((t_obj *)objs->content)->hit(objs->content,
-			r, interval_set(t.min, closest_so_far), &rec_tmp))
+			r, interval(t.min, closest_so_far), &rec_tmp))
 		{
 			hit_anything = TRUE;
 			closest_so_far = rec_tmp.t;
