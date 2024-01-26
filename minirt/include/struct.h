@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 02:30:19 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/25 22:23:12 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/26 07:22:01 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,10 +145,6 @@ struct s_square
 {
 	t_point	point;
 	t_uvec	normal;
-	t_vec	u;
-	t_vec	v;
-	t_scl	d;
-	t_vec	w;
 };
 
 struct s_value

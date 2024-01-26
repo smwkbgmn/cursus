@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 13:56:53 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/25 22:18:57 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/26 07:23:27 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,4 @@ t_scl	valid_size(t_scl value)
 	if (!value)
 		err_usr("the size of object couldn't be zero");
 	return (value);
-}
-
-t_circle	circle(t_point center, t_scl diameter)
-{
-	t_circle	cir;
-
-	cir.center = center;
-	cir.radius = valid_size(diameter) / 2;
-	return (cir);
 }

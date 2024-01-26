@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 04:35:59 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/25 22:06:14 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/26 08:26:21 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_phong	phong(const t_hit *rec, const t_light *light, t_uvec dir_view);
 t_bool	hit(t_list *objs, const t_ray *r, t_intvl t, t_hit *rec);
 t_bool	hit_plane(const t_obj *obj, const t_ray *r, t_intvl t, t_hit *rec);
 t_bool	hit_sphere(const t_obj *obj, const t_ray *r, t_intvl t, t_hit *rec);
-// t_bool	hit_cylinder(const t_obj *obj, const t_ray *r, t_intvl t, t_hit *rec);
+t_bool	hit_cylinder(const t_obj *obj, const t_ray *r, t_intvl t, t_hit *rec);
 
 // utill.c
 t_uvec	direction(t_point from, t_point at);

@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:17:56 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/25 22:21:19 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/26 07:23:58 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ t_view		viewport(const t_scene *scene);
 t_point		point(t_scl x, t_scl y, t_scl z);
 
 // object.c
+t_circle	circle(t_point center, t_scl diameter);
 t_obj		*plane(t_point point_on_plane, t_uvec normal, t_txtr txtr);
 t_obj		*sphere(t_circle cir, t_txtr txtr);
 t_obj		*cylinder(t_circle cir, t_scl height, t_uvec axis, t_txtr txtr);
@@ -62,7 +63,6 @@ t_light		*light(t_point position, t_color rgb, t_scl bright);
 t_txtr		texture(t_name name, t_color first, t_color second, t_scl scale);
 
 // utill.c
-t_circle	circle(t_point center, t_scl diameter);
 t_color		albedo_rgb(t_color rgb, t_scl bright);
 t_uvec		valid_normal(t_uvec normal);
 t_scl		valid_size(t_scl value);

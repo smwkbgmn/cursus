@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 08:02:33 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/25 22:17:35 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/26 08:31:43 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,14 @@ void	get_object(t_element elem, char **argv, t_render *data)
 						get_vec(argv[1], interval(-1, 1)),
 						texture(TX_SOLID,
 							get_color(argv[2]), color(0, 0, 0), NONE)))));
-	else if (elem == CY && count_arg(argv) == 4)
+	else if (elem == CY && count_arg(argv) == 5)
 		ft_lstadd_back(&data->world.objs, try(ft_lstnew(cylinder(circle(
 							get_point(argv[0]),
 							get_scl(argv[2], interval(0, SCL_MAX))),
 						get_scl(argv[3], interval(0, SCL_MAX)),
 						get_vec(argv[1], interval(-1, 1)),
 						texture(TX_SOLID,
-							get_color(argv[2]), color(0, 0, 0), NONE)))));
+							get_color(argv[4]), color(0, 0, 0), NONE)))));
 	else
 		err_usr("found missing parameter for the object element");
 }

@@ -6,11 +6,20 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 08:52:26 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/25 22:20:14 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/26 08:32:50 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "data.h"
+
+t_circle	circle(t_point center, t_scl diameter)
+{
+	t_circle	cir;
+
+	cir.center = center;
+	cir.radius = valid_size(diameter) / 2;
+	return (cir);
+}
 
 t_obj	*sphere(t_circle cir, t_txtr txtr)
 {
@@ -48,6 +57,7 @@ t_obj	*cylinder(t_circle cir, t_scl height, t_uvec axis, t_txtr txtr)
 	obj->val.cir.radius = cir.radius;
 	obj->val.height = valid_size(height);
 	obj->val.axis = valid_normal(axis);
+	obj->hit = &hit_cylinder;
 	obj->txtr = txtr;
 	return (obj);
 }
