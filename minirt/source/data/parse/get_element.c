@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_data.c                                         :+:      :+:    :+:   */
+/*   get_element.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 08:02:33 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/26 08:31:43 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/31 23:04:22 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	get_essential(t_element elem, char **argv,
 	{
 		if (essential[C]++)
 			err_usr("multiple 'Camera' has found");
-		data->scene.cam = camera(get_point(argv[0]), get_point(argv[1]),
+		data->scene.cam = camera(get_point(argv[0]),
+				get_vec(argv[1], interval(-1, 1)),
 				get_scl(argv[2], interval(0, 180)));
 	}
 	else if (elem == L && count_arg(argv) == 3)
@@ -54,8 +55,8 @@ void	get_object(t_element elem, char **argv, t_render *data)
 		ft_lstadd_back(&data->world.objs, try(ft_lstnew(plane(
 						get_point(argv[0]),
 						get_vec(argv[1], interval(-1, 1)),
-						texture(TX_SOLID,
-							get_color(argv[2]), color(0, 0, 0), NONE)))));
+						texture(TX_CHKER,
+							get_color(argv[2]), color(255, 0, 0), 0.8)))));
 	else if (elem == CY && count_arg(argv) == 5)
 		ft_lstadd_back(&data->world.objs, try(ft_lstnew(cylinder(circle(
 							get_point(argv[0]),

@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 21:33:08 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/25 22:29:15 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/30 18:41:22 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,12 @@ static t_bool	meet_light(const t_hit *rec,
 	t_ray	ray_to_light;
 	t_hit	rec_to_light;
 
+	ft_memset(&rec_to_light, NONE, sizeof(t_hit));
+	// printf("DETERMINE HIT LIGHT\n");
 	ray_to_light = ray(rec->point, direction(rec->point, light->point));
 	if (hit(objs, &ray_to_light, interval(0.001, len), &rec_to_light))
 		return (FALSE);
+	// printf("\tNo hinder between obj and light\n");
 	return (TRUE);
 }
 

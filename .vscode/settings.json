@@ -26,6 +26,9 @@
 		"init.h": "c",
 		"struct.h": "c",
 		"so_long.h": "c",
-		"data.h": "c"
+		"data.h": "c",
+		"__locale": "c",
+		"string_view": "c",
+		"__string": "c"
 	}
 }

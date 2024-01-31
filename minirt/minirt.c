@@ -6,17 +6,17 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 21:54:32 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/26 08:34:38 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/27 19:34:55 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* TO DO */
 // Implement cylinder
 // Add one more object > Cone
+// Change vector comma parsing way > use ft_split
 // If you add checker texture,
 // - change input file form and parsing.c
 // - adjust texture at get_data.c
-// Change vector comma parsing way
 // Consider using of MLX images
 
 // Get libft

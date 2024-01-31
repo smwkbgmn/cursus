@@ -6,16 +6,15 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 07:43:24 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/25 22:18:33 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/31 23:01:21 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "data.h"
 
-static void	set_value(char **argv, t_render *data, int *essential);
+static void	get_element(char **argv, t_render *data, int *essential);
 static void	remove_tail_nl(char *line);
 static void	which_element(char *arg, t_element *elem);
-static void	free_argv(char **argv);
 
 void	parse(int fd, t_render *data)
 {
@@ -31,7 +30,7 @@ void	parse(int fd, t_render *data)
 			if (*line != '\n')
 			{
 				remove_tail_nl(line);
-				set_value(try(ft_split(line, ' ')), data, &essential[0]);
+				get_element(try(ft_split(line, ' ')), data, &essential[0]);
 			}
 			ft_free(line);
 			continue ;
@@ -52,7 +51,7 @@ static void	remove_tail_nl(char *line)
 		*nl = '\0';
 }
 
-static void	set_value(char **argv, t_render *data, int *essential)
+static void	get_element(char **argv, t_render *data, int *essential)
 {
 	t_element	elem;
 
@@ -87,7 +86,7 @@ static void	which_element(char *arg, t_element *elem)
 		err_usr("empty line has found");
 }
 
-static void	free_argv(char **argv)
+void	free_argv(char **argv)
 {
 	int	ptr;
 

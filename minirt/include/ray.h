@@ -6,12 +6,14 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 04:35:59 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/26 08:26:21 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/31 19:36:19 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RAY_H
 # define RAY_H
+
+# include <stdio.h>
 
 # include "libft.h"
 # include "vector.h"

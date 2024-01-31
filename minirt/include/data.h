@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:17:56 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/26 07:23:58 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/31 22:59:13 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define MATCH 0	
 # define SCL_MAX 10000000
 
-# define WIN_WIDTH 1920
+# define WIN_WIDTH 1600
 # define WIN_ASPECT 16.0 / 9.0
 
 // init.c
@@ -31,6 +31,7 @@ void		delete(const t_render *data);
 
 // parse > parse.c
 void		parse(int fd, t_render *data);
+void		free_argv(char **argv);
 
 // parse > get_data.c
 void		get_essential(t_element elem, char **argv,

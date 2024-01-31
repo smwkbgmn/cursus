@@ -6,49 +6,47 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 10:21:25 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/31 23:01:11 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/01/31 20:12:49 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "data.h"
 
-static t_bool	valid_comma(char *arg);
+static char	*anchor(char *arg, int c);
 
 t_vec	get_vec(char *arg, t_intvl intvl)
 {
-	char	**argv;
-	t_vec	vector;
+	t_scl	scl[3];
+	int		idx;
+	char	*comma;
+	char	*substr;
 
-	valid_comma(arg);
-	argv = try(ft_split(arg, ','));
-	vector.x = get_scl(argv[0], intvl);
-	vector.y = get_scl(argv[1], intvl);
-	vector.z = get_scl(argv[2], intvl);
-	free_argv(argv);
-	return (vector);
+	idx = 0;
+	ft_memset(&scl, NONE, sizeof(t_scl) * 3);
+	while (idx < 3)
+	{
+		if (idx < 2)
+		{
+			comma = anchor(arg, ',');
+			substr = try(ft_strdup_ptr(arg, comma));
+			scl[idx++] = get_scl(substr, intvl);
+			ft_free(substr);
+			arg = comma + 1;
+		}
+		else
+			scl[idx++] = get_scl(arg, intvl);
+	}
+	return (vec(scl[0], scl[1], scl[2]));
 }
 
-static t_bool	valid_comma(char *arg)
+static char	*anchor(char *arg, int c)
 {
-	char	*anchor;
-	int		cnt_comma;
+	char	*ptr;
 
-	cnt_comma = 0;
-	while (LOOP)
-	{
-		anchor = ft_strchr(arg, ',');
-		if (anchor && ++cnt_comma < 3)
-		{
-			if (anchor == arg || *(anchor + 1) == '\0')
-				err_usr("empty field in vector has found");
-			arg = anchor + 1;
-			continue ;
-		}
-		break ;
-	}
-	if (cnt_comma != 2)
-		err_usr("ensure there are 3 values in vector");
-	return (TRUE);
+	ptr = ft_strchr(arg, c);
+	if (!ptr || ptr == arg)
+		err_usr("three value with comma should be typed");
+	return (ptr);
 }
 
 t_point	get_point(char *arg)
