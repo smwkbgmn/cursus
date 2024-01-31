@@ -94,9 +94,9 @@ void	print_cylinder(t_obj *obj)
 	dprintf(2, "\tradius ");
 	print_val(val->cir.radius);
 	dprintf(2, "\theght ");
-	print_val(val->height);
+	print_val(val->cyl.height);
 	dprintf(2, "\taxis ");
-	print_vec(val->axis);
+	print_vec(val->cyl.axis);
 }
 
 void	print_plane(t_obj *obj)

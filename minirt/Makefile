@@ -9,6 +9,7 @@ F_HDR	= -I $(DIR_HDR) -I $(DIR_L_FT) -I $(DIR_L_MLX)
 SRC		= \
 $(wildcard $(DIR_SRC)/data/parse/*.c) \
 $(wildcard $(DIR_SRC)/data/*.c) \
+$(wildcard $(DIR_SRC)/render/ray/hit/*.c) \
 $(wildcard $(DIR_SRC)/render/ray/vector/*.c) \
 $(wildcard $(DIR_SRC)/render/ray/*.c) \
 $(wildcard $(DIR_SRC)/render/*.c) \

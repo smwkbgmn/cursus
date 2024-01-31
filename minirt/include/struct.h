@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 02:30:19 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/31 23:08:16 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/02/01 01:39:46 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,11 +121,12 @@ struct s_phong
 typedef struct s_light		t_light;
 typedef struct s_circle		t_circle;
 typedef struct s_square		t_square;
+typedef struct s_cylndr		t_cylndr;
 typedef struct s_value		t_value;
 typedef struct s_obj		t_obj;
 typedef struct s_world		t_world;
 
-typedef t_bool				(*t_fp_hit)(const t_obj *obj, const t_ray *r,
+typedef t_bool				(*t_fp_hit)(t_obj *obj, const t_ray *r,
 	t_intvl intvl, t_hit *rec);
 typedef t_color				(*t_fp_value)(const t_hit *rec);
 
@@ -147,12 +148,19 @@ struct s_square
 	t_uvec	normal;
 };
 
+struct s_cylndr
+{
+	t_uvec	axis;
+	t_scl	height;
+	t_point	base;
+	t_point	top;
+};
+
 struct s_value
 {
 	t_circle	cir;
 	t_square	sqr;
-	t_uvec		axis;
-	t_scl		height;
+	t_cylndr	cyl;
 };
 
 struct s_texture
