@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 23:12:33 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/02/01 01:40:43 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/02/01 01:47:17 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,7 @@ static t_bool	hit_endcap(t_obj *obj, const t_ray *r, t_intvl ray_t, t_hit *rec)
 	t = dot(sb(center, r->org), axis) / dot(r->dir, axis);
 	pc_len = length(sb(center, ray_at(r, t)));
 	if (obj->val.cir.radius < fabs(pc_len) || !contains(t, ray_t))
-	{
-		// printf("what's wrong\n");
 		return (FALSE);
-	}
 	rec->t = t;
 	rec->point = ray_at(r, t);
 	return (TRUE);
