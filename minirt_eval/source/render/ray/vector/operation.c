@@ -6,11 +6,9 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 13:14:24 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/25 21:26:19 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/02/01 19:11:24 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdio.h>
 
 #include "vector.h"
 

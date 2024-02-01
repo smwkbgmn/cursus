@@ -1,7 +1,6 @@
 #ifndef ICE_HPP
 # define ICE_HPP
 
-// class AMateria;
 # include "AMateria.hpp"
 
 class ICharacter;

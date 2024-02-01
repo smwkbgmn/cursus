@@ -6,13 +6,13 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 21:54:32 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/02/01 17:28:43 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/02/01 18:46:51 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* TO DO */
-// Get libft
-// See evaluation sheet 
+// Norminette
+// See subject
 
 #include "render.h"
 

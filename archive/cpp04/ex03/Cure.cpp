@@ -1,4 +1,3 @@
-// #include "AMateria.hpp"
 #include "ICharacter.hpp"
 #include "Cure.hpp"
 

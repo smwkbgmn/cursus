@@ -1,9 +1,14 @@
 {
 	"files.associations": {
-		"ray.h": "c",
-		"error.h": "c",
-		"libft.h": "c",
-		"stdio.h": "c",
-		"stdlib.h": "c"
+		"__hash_table": "c",
+		"deque": "c",
+		"filesystem": "c",
+		"functional": "c",
+		"string": "c",
+		"unordered_map": "c",
+		"vector": "c",
+		"render.h": "c",
+		"data.h": "c",
+		"fcntl.h": "c"
 	}
 }

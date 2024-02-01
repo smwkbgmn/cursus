@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 23:17:33 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/02/01 01:04:57 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/02/01 19:12:57 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_bool	hit_sphere(t_obj *obj, const t_ray *r, t_intvl ray_t, t_hit *rec)
 	t_scl	sqrtd;
 	t_scl	root;
 	t_vec	outward_normal;
-	
+
 	set_equation(&eqa, obj, r);
 	if (eqa.dscr < 0)
 		return (FALSE);
@@ -36,7 +36,8 @@ t_bool	hit_sphere(t_obj *obj, const t_ray *r, t_intvl ray_t, t_hit *rec)
 	rec->t = root;
 	rec->point = ray_at(r, rec->t);
 	rec->txtr = &obj->txtr;
-	outward_normal = dv(sb(rec->point, obj->val.cir.center), obj->val.cir.radius);
+	outward_normal = dv(sb(rec->point,
+				obj->val.cir.center), obj->val.cir.radius);
 	set_face_normal(rec, r, outward_normal);
 	set_sphere_uv(outward_normal, rec);
 	return (TRUE);

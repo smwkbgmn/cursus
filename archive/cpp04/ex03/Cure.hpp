@@ -1,7 +1,6 @@
 #ifndef CURE_HPP
 # define CURE_HPP
 
-// class AMateria;
 # include "AMateria.hpp"
 
 class ICharacter;

@@ -1,7 +1,6 @@
 #include <new>
 #include <iostream>
 
-// #include "ICharacter.hpp"
 #include "Floor.hpp"
 #include "AMateria.hpp"
 #include "Character.hpp"

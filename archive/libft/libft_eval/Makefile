@@ -66,7 +66,11 @@ $(DIR_CUSTOM)/ft_itoa_uint.c \
 $(DIR_CUSTOM)/ft_itoa_ulong_base.c \
 $(DIR_CUSTOM)/ft_itoa_ulong.c \
 $(DIR_CUSTOM)/ft_lstadd_idx.c \
+$(DIR_CUSTOM)/ft_lstdel_idx.c \
 $(DIR_CUSTOM)/ft_lstidx.c \
+$(DIR_CUSTOM)/ft_putchar.c \
+$(DIR_CUSTOM)/ft_putstr.c \
+$(DIR_CUSTOM)/ft_strdup_ptr.c \
 $(DIR_CUSTOM)/write_hex_len.c \
 $(DIR_CUSTOM)/write_hex.c \
 \

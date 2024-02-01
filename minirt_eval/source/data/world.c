@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 08:52:26 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/02/01 01:44:32 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/02/01 19:19:38 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ t_obj	*cylinder(t_circle cir, t_scl height, t_uvec axis, t_txtr txtr)
 	obj->val.cyl.base = sb(cir.center, dv(mt(axis, height / 2), length(axis)));
 	obj->val.cyl.top = ad(cir.center, dv(mt(axis, height / 2), length(axis)));
 	obj->val.cyl.axis = unit(sb(obj->val.cyl.top, obj->val.cyl.base));
-
 	obj->hit = &hit_cylinder;
 	obj->txtr = txtr;
 	return (obj);

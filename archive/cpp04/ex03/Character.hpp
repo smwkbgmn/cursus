@@ -1,7 +1,6 @@
 #ifndef CHARACTER_HPP
 # define CHARACTER_HPP
 
-// class ICharacter;
 # include "ICharacter.hpp"
 
 # define FALSE 0

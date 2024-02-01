@@ -9,7 +9,7 @@ $(DIR_SRC)/data/parse/get_element.c \
 $(DIR_SRC)/data/parse/get_value.c \
 $(DIR_SRC)/data/parse/parse.c \
 $(DIR_SRC)/data/parse/strtod.c \
-$(DIR_SRC)/data/delete.c \
+$(DIR_SRC)/data/free.c \
 $(DIR_SRC)/data/init.c \
 $(DIR_SRC)/data/scene.c \
 $(DIR_SRC)/data/texture.c \
@@ -35,18 +35,17 @@ minirt.c
 OBJ		= $(SRC:.c=.o)
 
 L_FT		= $(DIR_L_FT)/libft.a
-# L_MLX		= $(DIR_L_MLX)/libmlx.a
-L_MLX		= $(DIR_L_MLX)/libmlx.dylib
+L_MLX		= libmlx.dylib
 
 DIR_HDR		= include
 DIR_SRC		= source
 DIR_L_FT	= libft
-# DIR_L_MLX	= mlx
-DIR_L_MLX	= mlx_mac
+DIR_L_MLX	= mlx
 
 all			: $(NAME)
 
 $(NAME)		: $(L_FT) $(L_MLX) $(OBJ)
+			cp $(DIR_L_MLX)/libmlx.dylib .
 			$(CC) $(FLAG) $(L_FT) $(L_MLX) $(OBJ) -o $@
 
 %.o			: %.c
@@ -71,4 +70,7 @@ re			:
 			make fclean
 			make all
 
-.PHONY		: all celan fclean re
+bonus		:
+			@make all
+
+.PHONY		: all celan fclean re bonus

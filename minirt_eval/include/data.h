@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:17:56 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/02/01 17:27:43 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/02/01 19:25:08 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,8 @@
 # define MATCH 0	
 # define SCL_MAX 10000000
 
-
-
-// delete.c
-void		delete(const t_render *data);
+// free.c
+void		erase(const t_render *data);
 
 // parse > parse.c
 void		parse(int fd, t_render *data);
@@ -60,8 +58,7 @@ t_obj		*cylinder(t_circle cir, t_scl height, t_uvec axis, t_txtr txtr);
 t_light		*light(t_point position, t_color rgb, t_scl bright);
 
 // texture.c
-// t_txtr		texture(t_name name, t_color first, t_color second, t_scl scale);
-t_txtr	texture(char **argv);
+t_txtr		texture(char **argv);
 
 // utill.c
 t_color		albedo_rgb(t_color rgb, t_scl bright);

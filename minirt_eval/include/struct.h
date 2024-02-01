@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 02:30:19 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/02/01 13:38:01 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/02/01 19:18:28 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ typedef double				t_scl;
 typedef unsigned int		t_argb;
 
 /* ELEMENT */
-typedef enum e_name			t_name;
-
 typedef struct s_bias3		t_vec;
 typedef struct s_bias3		t_uvec;
 typedef struct s_bias3		t_point;
@@ -33,16 +31,6 @@ typedef struct s_bias2		t_size;
 
 typedef struct s_vbias3		t_frame;
 typedef struct s_vbias2		t_grid;
-
-enum e_name
-{
-	SPHERE,
-	CYLNDR,
-	PLANE
-	// TX_SOLID,
-	// TX_CHKER,
-	// TX_BUMP
-};
 
 struct s_bias3
 {
@@ -118,6 +106,7 @@ struct s_phong
 };
 
 /* OBJECTS */
+typedef enum e_name			t_name;
 typedef struct s_light		t_light;
 typedef struct s_circle		t_circle;
 typedef struct s_square		t_square;
@@ -129,6 +118,13 @@ typedef struct s_world		t_world;
 typedef t_bool				(*t_fp_hit)(t_obj *obj, const t_ray *r,
 	t_intvl intvl, t_hit *rec);
 typedef t_color				(*t_fp_value)(const t_hit *rec);
+
+enum e_name
+{
+	SPHERE,
+	CYLNDR,
+	PLANE
+};
 
 struct s_light
 {

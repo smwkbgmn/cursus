@@ -6,13 +6,14 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 23:12:33 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/02/01 01:47:17 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/02/01 19:13:49 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray.h"
 
-static t_bool	hit_endcap(t_obj *obj, const t_ray *r, t_intvl ray_t, t_hit *rec);
+static t_bool	hit_endcap(t_obj *obj, const t_ray *r,
+					t_intvl ray_t, t_hit *rec);
 static t_bool	hit_seam(t_obj *obj, const t_ray *r, t_intvl ray_t, t_hit *rec);
 static void		set_equation(t_eqa *eqa, t_obj *obj, const t_ray *r);
 static t_bool	set_normal(t_obj *obj, t_hit *rec);
@@ -21,7 +22,7 @@ t_bool	hit_cylinder(t_obj *obj, const t_ray *r, t_intvl ray_t, t_hit *rec)
 {
 	t_bool	does_hit;
 	t_point	middle;
-	
+
 	does_hit = FALSE;
 	middle = obj->val.cir.center;
 	obj->val.cir.center = obj->val.cyl.top;
@@ -45,7 +46,8 @@ t_bool	hit_cylinder(t_obj *obj, const t_ray *r, t_intvl ray_t, t_hit *rec)
 	return (does_hit);
 }
 
-static t_bool	hit_endcap(t_obj *obj, const t_ray *r, t_intvl ray_t, t_hit *rec)
+static t_bool	hit_endcap(t_obj *obj, const t_ray *r,
+					t_intvl ray_t, t_hit *rec)
 {
 	t_vec	center;
 	t_uvec	axis;
@@ -68,7 +70,7 @@ static t_bool	hit_seam(t_obj *obj, const t_ray *r, t_intvl ray_t, t_hit *rec)
 	t_eqa	eqa;
 	t_scl	sqrtd;
 	t_scl	root;
-	
+
 	set_equation(&eqa, obj, r);
 	if (eqa.dscr < 0)
 		return (FALSE);
@@ -83,7 +85,7 @@ static t_bool	hit_seam(t_obj *obj, const t_ray *r, t_intvl ray_t, t_hit *rec)
 	rec->t = root;
 	rec->point = ray_at(r, root);
 	if (!set_normal(obj, rec))
-		return(FALSE);
+		return (FALSE);
 	set_face_normal(rec, r, rec->normal);
 	rec->txtr = &obj->txtr;
 	return (TRUE);

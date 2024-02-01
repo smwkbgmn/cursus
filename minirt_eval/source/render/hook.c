@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:11:02 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/02/01 17:28:14 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/02/01 19:25:21 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,6 @@ static int	hookfn_window_closed(const t_render *data)
 
 static void	exit_program(const t_render *data)
 {
-	delete(data);
+	erase(data);
 	exit(EXIT_SUCCESS);
 }

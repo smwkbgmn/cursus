@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 03:13:25 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/30 17:53:18 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/02/01 19:10:56 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,7 @@ t_color	ray_color(const t_ray *r, const t_world *world)
 	t_hit	rec;
 
 	ft_memset(&rec, NONE, sizeof(t_hit));
-	// printf("DETERMINE HIT OBJ\n");
 	if (hit(world->objs, r, interval(0.001, INFINITY), &rec))
 		return (color_at(&rec, world, mt(r->dir, -1)));
-	// printf("Nothing to hit in ray direciton\n");
 	return (color(0, 0, 0));
 }
