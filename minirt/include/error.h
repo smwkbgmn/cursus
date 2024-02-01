@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 01:36:42 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/24 12:21:51 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/02/01 17:44:41 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include <stdlib.h>
 # include <stdio.h>
+
+# include "libft.h"
 
 # define ERROR -1
 
