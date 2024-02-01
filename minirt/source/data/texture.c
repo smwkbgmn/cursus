@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 10:35:13 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/25 22:12:00 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/02/01 16:42:15 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,20 @@
 static t_color	solid(const t_hit *rec);
 static t_color	checker(const t_hit *rec);
 
-t_txtr	texture(t_name name, t_color first, t_color second, t_scl scale)
+t_txtr	texture(char **argv)
 {
 	t_txtr	txtr;
 
-	if (name == TX_SOLID)
-		txtr.value = &solid;
-	else if (name == TX_CHKER)
+	ft_memset(&txtr, NONE, sizeof(t_txtr));
+	txtr.albedo1 = albedo_rgb(get_color(argv[0]), 1);
+	if (argv[1])
+	{
 		txtr.value = &checker;
-	txtr.albedo1 = albedo_rgb(first, 1);
-	txtr.albedo2 = albedo_rgb(second, 1);
-	txtr.scale = 1.0 / scale;
+		txtr.albedo2 = albedo_rgb(get_color(argv[1]), 1);
+		txtr.scale = 1.0 / get_scl(argv[2], interval(0.5, 5));
+	}
+	else
+		txtr.value = &solid;
 	return (txtr);
 }
 

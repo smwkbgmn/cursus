@@ -52,12 +52,12 @@ void	print_plane(t_obj *obj);
 void	print_obj(t_list *objs)
 {
 	t_name	name;
-	t_color	albedo;
+	t_txtr	*txtr;
 	
 	while (objs)
 	{
 		name = ((t_obj *)objs->content)->name;
-		albedo = ((t_obj *)objs->content)->txtr.albedo1;
+		txtr = &((t_obj *)objs->content)->txtr;
 		
 		if (name == SPHERE)
 			print_sphere(objs->content);
@@ -66,7 +66,15 @@ void	print_obj(t_list *objs)
 		else
 			print_plane(objs->content);
 		dprintf(2, "\tcolor ");
-		print_vec(albedo);
+		print_vec(txtr->albedo1);
+
+		if (txtr->scale)
+		{
+			dprintf(2, "\tcheckr color ");
+			print_vec(txtr->albedo2);
+			dprintf(2, "\tchecker scale ");
+			print_val(txtr->scale);
+		}
 
 		dprintf(2, "\n");
 		objs = objs->next;

@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 04:12:29 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/30 18:32:25 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/02/01 16:48:42 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ t_camera	camera(t_point from, t_point at, t_scl fov)
 	cam.from = from;
 	cam.at = valid_normal(at);
 	cam.fov = (int)fov;
+	if (cam.fov == 0)
+		err_usr("fov can not be zero");
 	if (at.y != 0 && at.x == 0 && at.z == 0)
 		up = vec(0, 0, 1);
 	else

@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 02:30:19 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/02/01 01:39:46 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/02/01 13:38:01 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ enum e_name
 {
 	SPHERE,
 	CYLNDR,
-	PLANE,
-	TX_SOLID,
-	TX_CHKER,
-	TX_BUMP
+	PLANE
+	// TX_SOLID,
+	// TX_CHKER,
+	// TX_BUMP
 };
 
 struct s_bias3

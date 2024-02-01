@@ -6,7 +6,7 @@
 /*   By: donghyu2 <donghyu2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:17:56 by donghyu2          #+#    #+#             */
-/*   Updated: 2024/01/31 22:59:13 by donghyu2         ###   ########.fr       */
+/*   Updated: 2024/02/01 15:00:43 by donghyu2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ t_obj		*cylinder(t_circle cir, t_scl height, t_uvec axis, t_txtr txtr);
 t_light		*light(t_point position, t_color rgb, t_scl bright);
 
 // texture.c
-t_txtr		texture(t_name name, t_color first, t_color second, t_scl scale);
+// t_txtr		texture(t_name name, t_color first, t_color second, t_scl scale);
+t_txtr	texture(char **argv);
 
 // utill.c
 t_color		albedo_rgb(t_color rgb, t_scl bright);
