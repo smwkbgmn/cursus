@@ -17,42 +17,32 @@ void ScalarConverter::printValue( const std::string &input )
 {
 	set_t	val;
 
-	switch (detectType(input, val))
+	void	(*convertValue[CNT_TYPE])( set_t & ) =
 	{
-		case CHAR:
-			convertChar(val);
-			break;
+		&fromInt,
+		&fromFloat,
+		&fromDouble,
+		&fromChar
+	};
 
-		case INT:
-			convertInt(val);
-			break;
-
-		case FLOAT:
-			convertFloat(val); 
-			break;
-
-		case DOUBLE:
-			convertDouble(val);
-			break;
-	}
+	convertValue[getType(input, val)](val);
 	print(val);
 }
 
-ScalarConverter::name_t ScalarConverter::detectType( const std::string &input, set_t &val )
+ScalarConverter::name_t ScalarConverter::getType( const std::string &input, set_t &val )
 {
-	if (tryInt(input , val))
-		return INT;
-	
-	if (tryFloat(input, val))
-		return FLOAT;
-
-	if (tryDouble(input, val))
-		return DOUBLE;
-
-	if (input.length() == 1)
+	bool	(*get[CNT_TYPE])( const std::string &, set_t & ) =
 	{
-		val.character = input.at(0);
-		return CHAR;
+		&tryInt,
+		&tryFloat,
+		&tryDouble,
+		&tryChar
+	};
+
+	for (int type = 0; type < CNT_TYPE; type++)
+	{
+		if (get[type](input, val))
+			return static_cast<name_t>(type);
 	}
 
 	throw noTypeMatchExcpt();
@@ -68,18 +58,17 @@ bool ScalarConverter::tryInt( const std::string &input, set_t &val )
 
 bool ScalarConverter::tryFloat( const std::string &input, set_t &val )
 {
-	if (!literal(input, val))
+	if (literal(input, val))
+		return TRUE;
+		
+	if (input.back() == 'f' && input.find('.') != std::string::npos)
 	{
-		if (input.back() == 'f' && input.find('.') != std::string::npos)
-		{
-			std::istringstream	is(input.substr(0, input.length() - 1));
+		std::istringstream	is(input.substr(0, input.length() - 1));
 
-			is >> val.dec_f;
-			return success(is);
-		}
-		return FALSE;
+		is >> val.dec_f;
+		return success(is);
 	}
-	return TRUE;
+	return FALSE;
 }
 
 bool ScalarConverter::tryDouble( const std::string &input, set_t &val )
@@ -88,6 +77,16 @@ bool ScalarConverter::tryDouble( const std::string &input, set_t &val )
 
 	is >> val.dec_d;
 	return success(is);
+}
+
+bool ScalarConverter::tryChar( const std::string &input, set_t &val )
+{
+	if (input.length() == 1)
+	{
+		val.character = input.at(0);
+		return TRUE;
+	}
+	return FALSE;
 }
 
 bool ScalarConverter::success( const std::istringstream &is )

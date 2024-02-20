@@ -21,6 +21,7 @@
 # define FALSE 0
 # define TRUE 1
 
+# define CNT_TYPE 4
 # define CNT_LITERAL 6
 
 static const std::string	pesudoLiteral[CNT_LITERAL] =
@@ -51,10 +52,10 @@ class ScalarConverter
 	private:
 		typedef enum valueName
 		{
-			CHAR,
 			INT,
 			FLOAT,
-			DOUBLE
+			DOUBLE,
+			CHAR
 		}	name_t;
 
 		typedef struct valueSet
@@ -80,18 +81,19 @@ class ScalarConverter
 		ScalarConverter	&operator=( const ScalarConverter & );
 
 		static void		printValue( const std::string & );
-		static name_t	detectType( const std::string &, set_t & );
+		static name_t	getType( const std::string &, set_t & );
 
 		static bool		tryInt( const std::string &, set_t & );
 		static bool		tryFloat( const std::string &, set_t & );
 		static bool		tryDouble( const std::string &, set_t & );
+		static bool		tryChar( const std::string &, set_t & );
 		static bool		success( const std::istringstream & );
 		static bool		literal( const std::string &, set_t & );
 
-		static void		convertChar( set_t & );
-		static void		convertInt( set_t & );
-		static void		convertFloat( set_t & );
-		static void		convertDouble( set_t & );
+		static void		fromChar( set_t & );
+		static void		fromInt( set_t & );
+		static void		fromFloat( set_t & );
+		static void		fromDouble( set_t & );
 
 		static void		print( const set_t & );
 		static bool		exceedValue( const set_t &, name_t type );
