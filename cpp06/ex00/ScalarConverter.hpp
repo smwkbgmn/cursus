@@ -2,20 +2,16 @@
 # define ScalarConverter_HPP
 
 # include <exception>
+# include <string>
 
 # include <iostream>
 # include <iomanip>
 # include <sstream>
-# include <ios>
 
-# include <string>
-# include <limits>
-# include <climits>
-
+// FOR SOME VALIDATION
+# include <limits> 
 # include <cctype>
-# include <cstring>
 # include <cmath>
-# include <cfloat>
 
 # define NONE 0
 # define FALSE 0
