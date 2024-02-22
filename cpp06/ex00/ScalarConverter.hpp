@@ -60,8 +60,8 @@ class ScalarConverter
 			
 			char	character;
 			int		integer;
-			float	dec_f;
-			double	dec_d;
+			float	decimal_f;
+			double	decimal_d;
 		}	set_t;
 
 		struct noTypeMatchExcpt
@@ -77,8 +77,9 @@ class ScalarConverter
 		ScalarConverter	&operator=( const ScalarConverter & );
 
 		static void		printValue( const std::string & );
-		static name_t	getType( const std::string &, set_t & );
+		static void		printImpossible( void );
 
+		static name_t	getType( const std::string &, set_t & );
 		static bool		tryInt( const std::string &, set_t & );
 		static bool		tryFloat( const std::string &, set_t & );
 		static bool		tryDouble( const std::string &, set_t & );
@@ -95,8 +96,6 @@ class ScalarConverter
 		static bool		exceedValue( const set_t &, name_t type );
 		static bool		hasDecimal( const set_t & );
 		static void		newline( void );
-		static void		printImpossible( void );
-	
 };
 
 #endif

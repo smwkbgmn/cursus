@@ -60,12 +60,15 @@ bool ScalarConverter::tryFloat( const std::string &input, set_t &val )
 {
 	if (literal(input, val))
 		return TRUE;
-		
-	if (input.back() == 'f' && input.find('.') != std::string::npos)
-	{
-		std::istringstream	is(input.substr(0, input.length() - 1));
 
-		is >> val.dec_f;
+	size_t	len = input.length();	
+	if (len > 0 && input.at(len - 1) == 'f' && input.find('.') != std::string::npos)
+	{
+		std::istringstream	is(input.substr(0, len - 1));
+
+		is >> val.decimal_f;
+		std::cout << "substring: " << input.substr(0, len - 1) << std::endl;
+		std::cout << "taked float: " << std::fixed << val.decimal_f << '\n';
 		return success(is);
 	}
 	return FALSE;
@@ -75,7 +78,7 @@ bool ScalarConverter::tryDouble( const std::string &input, set_t &val )
 {
 	std::istringstream	is(input);
 
-	is >> val.dec_d;
+	is >> val.decimal_d;
 	return success(is);
 }
 
@@ -100,7 +103,7 @@ bool ScalarConverter::literal( const std::string &input, set_t &val )
 	{
 		if (input == pesudoLiteral[idx] + "f")
 		{
-			val.dec_f = pesudoLiteralVal[idx];
+			val.decimal_f = pesudoLiteralVal[idx];
 			return TRUE;
 		}
 	}
@@ -109,36 +112,40 @@ bool ScalarConverter::literal( const std::string &input, set_t &val )
 
 void ScalarConverter::fromChar( set_t &val )
 {
+	std::cout << "from Char\n";
 	val.integer = static_cast<int>(val.character);
-	val.dec_f = static_cast<float>(val.character);
-	val.dec_d = static_cast<double>(val.character);
+	val.decimal_f = static_cast<float>(val.character);
+	val.decimal_d = static_cast<double>(val.character);
 }
 
 void ScalarConverter::fromInt( set_t &val )
 {
+	std::cout << "from Int\n";
 	val.character = static_cast<char>(val.integer);
-	val.dec_f = static_cast<float>(val.integer);
-	val.dec_d = static_cast<double>(val.integer);
+	val.decimal_f = static_cast<float>(val.integer);
+	val.decimal_d = static_cast<double>(val.integer);
 }
 
 void ScalarConverter::fromFloat( set_t &val )
 {
-	val.character = static_cast<char>(val.dec_f);
-	val.integer = static_cast<int>(val.dec_f);
-	val.dec_d = static_cast<double>(val.dec_f);
+	std::cout << "from Float\n";
+	val.character = static_cast<char>(val.decimal_f);
+	val.integer = static_cast<int>(val.decimal_f);
+	val.decimal_d = static_cast<double>(val.decimal_f);
 }
 
 void ScalarConverter::fromDouble( set_t &val )
 {
-	val.character = static_cast<char>(val.dec_d);
-	val.integer = static_cast<int>(val.dec_d);
-	val.dec_f = static_cast<float>(val.dec_d);
+	std::cout << "from Double\n";
+	val.character = static_cast<char>(val.decimal_d);
+	val.integer = static_cast<int>(val.decimal_d);
+	val.decimal_f = static_cast<float>(val.decimal_d);
 }
 
 void ScalarConverter::print( const set_t &val )
 {
 	std::cout << "char: ";
-	if (!std::isfinite(val.dec_f) || exceedValue(val, CHAR) || hasDecimal(val))
+	if (!std::isfinite(val.decimal_f) || exceedValue(val, CHAR) || hasDecimal(val))
 		std::cout << "impossible";
 	else
 	{
@@ -150,20 +157,20 @@ void ScalarConverter::print( const set_t &val )
 	newline();
 	
 	std::cout << "int: ";
-	if (!std::isfinite(val.dec_f) || exceedValue(val, INT) || hasDecimal(val))
+	if (!std::isfinite(val.decimal_f) || exceedValue(val, INT) || hasDecimal(val))
 		std::cout << "impossible";
 	else
 		std::cout << val.integer;
 	newline();
 	
 	std::cout << "float: ";
-	if (std::isfinite(val.dec_d) && exceedValue(val, FLOAT))
+	if (std::isfinite(val.decimal_d) && exceedValue(val, FLOAT))
 		std::cout << "impossible";
 	else
-		std::cout << std::fixed << std::setprecision(2) << val.dec_f << 'f';
+		std::cout << std::fixed << std::setprecision(2) << val.decimal_f << 'f';
 	newline();
 
-	std::cout << "double: " << std::fixed << std::setprecision(2) << val.dec_d;
+	std::cout << "double: " << std::fixed << std::setprecision(2) << val.decimal_d;
 	newline();
 }
 
@@ -183,11 +190,11 @@ bool ScalarConverter::exceedValue( const set_t &val, ScalarConverter::name_t typ
 			return val.integer < std::numeric_limits<char>::min() ||
 					val.integer > std::numeric_limits<char>::max();
 		case INT:
-			return val.dec_d < std::numeric_limits<int>::min() ||
-					val.dec_d > std::numeric_limits<int>::max();
+			return val.decimal_d < std::numeric_limits<int>::min() ||
+					val.decimal_d > std::numeric_limits<int>::max();
 		case FLOAT:
-			return val.dec_d < -std::numeric_limits<float>::max() ||
-					val.dec_d > std::numeric_limits<float>::max();
+			return val.decimal_d < -std::numeric_limits<float>::max() ||
+					val.decimal_d > std::numeric_limits<float>::max();
 		default:
 			return FALSE;
 	}
@@ -195,7 +202,7 @@ bool ScalarConverter::exceedValue( const set_t &val, ScalarConverter::name_t typ
 
 bool ScalarConverter::hasDecimal( const set_t &val )
 {
-	return val.dec_f - static_cast<float>(val.integer) != 0;
+	return val.decimal_f - static_cast<float>(val.integer) != 0;
 }
 
 void ScalarConverter::newline( void )
@@ -204,6 +211,6 @@ void ScalarConverter::newline( void )
 }
 
 ScalarConverter::valueSet::valueSet( void )
-: character(NONE), integer(NONE), dec_f(NONE), dec_d(NONE)
+: character(NONE), integer(NONE), decimal_f(NONE), decimal_d(NONE)
 {
 }

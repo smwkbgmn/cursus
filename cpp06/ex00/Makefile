@@ -1,8 +1,8 @@
 NAME		= converter
 
 CPP			= c++
-FLAG		= -Wall -Wextra -Werror \
-$(FLG_STD)
+FLAG		= -Wall -Wextra -Werror
+# $(FLG_STD)
 
 FLG_STD		= -std=c++98
 
