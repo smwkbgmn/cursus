@@ -1,4 +1,4 @@
-NAME		= converter
+NAME		= serialize
 
 CPP			= c++
 FLAG		= -Wall -Wextra -Werror \

@@ -3,11 +3,6 @@
 #include "Bureaucrat.hpp"
 
 //  Instantiate
-Bureaucrat::Bureaucrat( void )
-{
-	std::cout << "[CON-DEF] Bureaucrat has created" << std::endl;
-}
-
 Bureaucrat::Bureaucrat( std::string name, int grade )
 : _name(name)
 {
@@ -26,17 +21,6 @@ Bureaucrat::Bureaucrat( const Bureaucrat &target )
 Bureaucrat::~Bureaucrat( void )
 {
 	std::cout << "[DES] Bureaucrat has destroyed" << std::endl;
-}
-
-// Operator Overload
-Bureaucrat &Bureaucrat::operator=( const Bureaucrat &target )
-{
-	std::cout << "[Bureaucrat's copy assignment called]" << std::endl;
-
-	if (this != &target)
-		_grade = target._grade;
-
-	return *this;
 }
 
 // Get & Set

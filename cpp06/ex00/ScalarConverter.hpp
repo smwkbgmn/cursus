@@ -85,7 +85,8 @@ class ScalarConverter
 		static bool		tryDouble( const std::string &, set_t & );
 		static bool		tryChar( const std::string &, set_t & );
 		static bool		success( const std::istringstream & );
-		static bool		literal( const std::string &, set_t & );
+		static bool		literalFloat( const std::string &, set_t & );
+		static bool		literalDouble( const std::string &, set_t & );
 
 		static void		fromChar( set_t & );
 		static void		fromInt( set_t & );

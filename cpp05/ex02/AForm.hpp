@@ -8,12 +8,8 @@ class Bureaucrat;
 class AForm
 {
 	public:
-		AForm( void );
-		AForm( const AForm & );
 		AForm( const std::string &, int, int );
 		virtual ~AForm( void );
-
-		AForm			&operator=( const AForm & );
 
 		std::string		getName( void ) const;
 		bool			getSign( void ) const;
@@ -43,16 +39,24 @@ class AForm
 		};
 
 	private:
-		const std::string	_name;
-		const int			_gradeSign;
-		const int			_gradeExecute;
-
-		bool				_signature;
 		enum boolValue
 		{
 			FALSE,
 			TRUE
 		};
+		
+	private:
+		const std::string	_name;
+		const int			_gradeSign;
+		const int			_gradeExecute;
+
+		bool				_signature;
+
+	private:
+		AForm( void );
+		AForm( const AForm & );
+
+		AForm			&operator=( const AForm & );
 };
 
 std::ostream &operator<<( std::ostream&, const AForm & );

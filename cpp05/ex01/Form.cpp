@@ -1,21 +1,10 @@
-#include <iostream>
-
 #include "Form.hpp"
 #include "Bureaucrat.hpp"
-
-// Instance
-Form::Form( void )
-: _gradeSign(1), _gradeExecute(1)
-{
-	std::cout << "[CON-DEF] Form has created" << std::endl;
-}
 
 Form::Form( const Form &target )
 : _name(target.getName()), _gradeSign(target.getGradeSign()),
 _gradeExecute(target.getGradeExecute()), _signature(target.getSign())
 {
-	*this = target;
-	
 	std::cout << "[CON-CPY] Form has created" << std::endl;
 }
 
@@ -31,17 +20,6 @@ Form::Form( const std::string &name, int sign, int execute )
 Form::~Form( void )
 {
 	std::cout << "[DES] Form has destroyed" << std::endl;
-}
-
-// Overload
-Form &Form::operator=( const Form &target )
-{
-	std::cout << "[Form's copy assignment called]" << std::endl;
-
-	if (this != &target)
-		_signature = target.getSign();
-	
-	return *this;
 }
 
 // Get & Set

@@ -7,8 +7,6 @@
 
 # define COUNT_FORM 3
 
-typedef Form	*(*clone_fp)( const std::string & );
-
 class Intern
 {
 	public:
@@ -27,10 +25,6 @@ class Intern
 		Intern(const Intern &);
 
 		Intern &operator=(const Intern &);
-
-	private:
-		std::string	_nameForm[COUNT_FORM];
-		clone_fp	_newForm[COUNT_FORM];
 };
 
 #endif

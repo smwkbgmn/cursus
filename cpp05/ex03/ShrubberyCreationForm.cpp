@@ -1,21 +1,8 @@
-#include <fstream>
-
 #include "Bureaucrat.hpp"
 #include "ShrubberyCreationForm.hpp"
 
 // Instantiate
-ShrubberyCreationForm::ShrubberyCreationForm( void )
-{
-	std::cout << "[CON-DEF] ShrubberyCreationForm has created" << std::endl;
-}
-
-ShrubberyCreationForm::ShrubberyCreationForm( const ShrubberyCreationForm &target )
-: AForm(target), _target(target._target)
-{
-	std::cout << "[CON-CPY] ShrubberyCreationForm has created" << std::endl;
-}
-
-ShrubberyCreationForm::ShrubberyCreationForm( const std::string target )
+ShrubberyCreationForm::ShrubberyCreationForm( const std::string &target )
 : AForm("Shrubbery", 145, 137), _target(target)
 {
 	std::cout << "[CON-USR] ShrubberyCreationForm has created" << std::endl;
@@ -24,17 +11,6 @@ ShrubberyCreationForm::ShrubberyCreationForm( const std::string target )
 ShrubberyCreationForm::~ShrubberyCreationForm( void )
 {
 	std::cout << "[DES] ShrubberyCreationForm has destroyed" << std::endl;
-}
-
-// Overload
-ShrubberyCreationForm &ShrubberyCreationForm::operator=( const ShrubberyCreationForm &target )
-{
-	std::cout << "[ShrubberyCreationForm's copy assignment called]" << std::endl;
-
-	if (this != &target)
-		AForm::operator=(target);
-
-	return *this;
 }
 
 // Member
@@ -67,7 +43,7 @@ void ShrubberyCreationForm::execute( Bureaucrat const &executor ) const
 	}
 }
 
-AForm *ShrubberyCreationForm::clone( const std::string &name )
+Form *ShrubberyCreationForm::clone( const std::string &target )
 {
-	return new ShrubberyCreationForm(name);
+	return new ShrubberyCreationForm(target);
 }

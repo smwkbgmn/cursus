@@ -1,4 +1,4 @@
-NAME		= converter
+NAME		= WhoAreYou
 
 CPP			= c++
 FLAG		= -Wall -Wextra -Werror \

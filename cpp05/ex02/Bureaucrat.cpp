@@ -4,9 +4,11 @@
 #include "AForm.hpp"
 
 // Instance
-Bureaucrat::Bureaucrat( void )
+
+Bureaucrat::Bureaucrat( const Bureaucrat &target )
+: _name(target.getName()), _grade(target.getGrade())
 {
-	std::cout << "[CON-DEF] Bureaucrat has created" << std::endl;
+	std::cout << "[CON-CPY] Bureaucrat has created" << std::endl;
 }
 
 Bureaucrat::Bureaucrat( const std::string &name, int grade )
@@ -18,26 +20,9 @@ Bureaucrat::Bureaucrat( const std::string &name, int grade )
 	std::cout << "[CON-USR] Bureaucrat has created" << std::endl;
 }
 
-Bureaucrat::Bureaucrat( const Bureaucrat &target )
-: _name(target.getName()), _grade(target.getGrade())
-{
-	std::cout << "[CON-CPY] Bureaucrat has created" << std::endl;
-}
-
 Bureaucrat::~Bureaucrat( void )
 {
 	std::cout << "[DES] Bureaucrat has destroyed" << std::endl;
-}
-
-// Overload
-Bureaucrat &Bureaucrat::operator=( const Bureaucrat &target )
-{
-	std::cout << "[Bureaucrat's copy assignment called]" << std::endl;
-
-	if (this != &target)
-		_grade = target._grade;
-
-	return *this;
 }
 
 // Get & Set

@@ -6,36 +6,12 @@
 // Instantiate
 Intern::Intern( void )
 {
-	_nameForm[0] = "Shrubbery";
-	_nameForm[1] = "Robotomy";
-	_nameForm[2] = "Presidential";
-
-	_newForm[0] = &ShrubberyCreationForm::clone;
-	_newForm[1] = &RobotomyRequestForm::clone;
-	_newForm[2] = &PresidentialPardonForm::clone;
-
 	std::cout << "[CON-DEF] Intern has created" << std::endl;
-}
-
-Intern::Intern( const Intern &target )
-{
-	*this = target;
-
-	std::cout << "[CON-CPY] Intern has created" << std::endl;
 }
 
 Intern::~Intern( void )
 {
 	std::cout << "[DES] Intern has destroyed" << std::endl;
-}
-
-// Overload
-Intern &Intern::operator=( const Intern &target )
-{
-	std::cout << "[Intern's copy assignment called]" << std::endl;
-
-	(void)target;
-	return *this;
 }
 
 // Exception
@@ -47,14 +23,28 @@ const char *Intern::unrecognizedTokenException::what( void ) const throw()
 // Member
 Form *Intern::makeForm( const std::string &nameForm, const std::string &nameTarget )
 {
-	int idx = 0;
+	std::string	form[COUNT_FORM] =
+	{
+		"Shrubbery",
+		"Robotomy",
+		"Presidential"
+	};
+	
+	Form	*(*clone[COUNT_FORM])( const std::string &name ) =
+	{
+		&ShrubberyCreationForm::clone,
+		&RobotomyRequestForm::clone,
+		&PresidentialPardonForm::clone
+	};
 
-	while (idx < COUNT_FORM && _nameForm[idx] != nameForm)
-		idx++;
+	for (int idx = 0; idx < COUNT_FORM; idx++)
+	{
+		if (form[idx] == nameForm)
+		{
+			std::cout << "Intern creates " << nameForm << std::endl;
+			return (*clone[idx])(nameTarget);
+		}
+	}
 
-	if (idx == COUNT_FORM)
-		throw unrecognizedTokenException();
-
-	std::cout << "Intern creates " << nameForm << std::endl;
-	return (*_newForm[idx])(nameTarget);
+	throw unrecognizedTokenException();
 }

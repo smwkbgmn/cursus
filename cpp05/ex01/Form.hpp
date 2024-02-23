@@ -1,6 +1,7 @@
 #ifndef FORM_HPP
 # define FORM_HPP
 
+# include <iostream>
 # include <string>
 
 class Bureaucrat;
@@ -37,9 +38,11 @@ class Form
 
 	/* PRIVATE */
 	private:
-		Form( void );
-
-		Form		&operator=( const Form & );
+		enum boolValue
+		{
+			FALSE,
+			TRUE
+		};
 
 	private:
 		const std::string	_name;
@@ -47,11 +50,11 @@ class Form
 		const int			_gradeExecute;
 
 		bool				_signature;
-		enum boolValue
-		{
-			FALSE,
-			TRUE
-		};
+
+	private:
+		Form( void );
+
+		Form		&operator=( const Form & );
 };
 
 std::ostream &operator<<( std::ostream&, const Form & );

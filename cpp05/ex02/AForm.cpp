@@ -4,19 +4,20 @@
 #include "Bureaucrat.hpp"
 
 // Instance
-AForm::AForm( void )
-: _gradeSign(1), _gradeExecute(1)
-{
-	std::cout << "[CON-DEF] AForm has created" << std::endl;
-}
+// AForm::AForm( void )
+// : _gradeSign(1), _gradeExecute(1)
+// {
+// 	std::cout << "[CON-DEF] AForm has created" << std::endl;
+// }
 
-AForm::AForm( const AForm &target )
-: _name(target.getName()), _gradeSign(target.getGradeSign()), _gradeExecute(target.getGradeExecute())
-{
-	*this = target;
+// AForm::AForm( const AForm &target )
+// : _name(target.getName()), _signature(target.getSign()),
+// _gradeSign(target.getGradeSign()), _gradeExecute(target.getGradeExecute())
+// {
+// 	// *this = target;
 	
-	std::cout << "[CON-CPY] AForm has created" << std::endl;
-}
+// 	std::cout << "[CON-CPY] AForm has created" << std::endl;
+// }
 
 AForm::AForm( const std::string &name, int sign, int execute )
 : _name(name), _gradeSign(sign), _gradeExecute(execute), _signature(FALSE)
@@ -33,15 +34,15 @@ AForm::~AForm( void )
 }
 
 // Overload
-AForm &AForm::operator=( const AForm &target )
-{
-	std::cout << "[AForm's copy assignment called]" << std::endl;
+// AForm &AForm::operator=( const AForm &target )
+// {
+// 	std::cout << "[AForm's copy assignment called]" << std::endl;
 
-	if (this != &target)
-		_signature = target.getSign();
+// 	if (this != &target)
+// 		_signature = target.getSign();
 	
-	return *this;
-}
+// 	return *this;
+// }
 
 // Get & Set
 std::string	AForm::getName( void ) const

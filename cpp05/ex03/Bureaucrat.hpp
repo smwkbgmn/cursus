@@ -1,6 +1,7 @@
 #ifndef BURUREAUCRAT_HPP
 # define BURUREAUCRAT_HPP
 
+# include <iostream>
 # include <string>
 # include <exception>
 

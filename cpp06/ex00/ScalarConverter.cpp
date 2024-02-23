@@ -58,7 +58,7 @@ bool ScalarConverter::tryInt( const std::string &input, set_t &val )
 
 bool ScalarConverter::tryFloat( const std::string &input, set_t &val )
 {
-	if (literal(input, val))
+	if (literalFloat(input, val))
 		return TRUE;
 
 	size_t	len = input.length();	
@@ -67,8 +67,6 @@ bool ScalarConverter::tryFloat( const std::string &input, set_t &val )
 		std::istringstream	is(input.substr(0, len - 1));
 
 		is >> val.decimal_f;
-		std::cout << "substring: " << input.substr(0, len - 1) << std::endl;
-		std::cout << "taked float: " << std::fixed << val.decimal_f << '\n';
 		return success(is);
 	}
 	return FALSE;
@@ -76,6 +74,9 @@ bool ScalarConverter::tryFloat( const std::string &input, set_t &val )
 
 bool ScalarConverter::tryDouble( const std::string &input, set_t &val )
 {
+	if (literalDouble(input, val))
+		return TRUE;
+
 	std::istringstream	is(input);
 
 	is >> val.decimal_d;
@@ -97,7 +98,7 @@ bool ScalarConverter::success( const std::istringstream &is )
 	return (is.eof() && !is.fail());
 }
 
-bool ScalarConverter::literal( const std::string &input, set_t &val )
+bool ScalarConverter::literalFloat( const std::string &input, set_t &val )
 {
 	for (int idx = 0; idx < CNT_LITERAL; idx++)
 	{
@@ -110,9 +111,21 @@ bool ScalarConverter::literal( const std::string &input, set_t &val )
 	return FALSE;
 }
 
+bool ScalarConverter::literalDouble( const std::string &input, set_t &val )
+{
+	for (int idx = 0; idx < CNT_LITERAL; idx++)
+	{
+		if (input == pesudoLiteral[idx])
+		{
+			val.decimal_d = pesudoLiteralVal[idx];
+			return TRUE;
+		}
+	}
+	return FALSE;
+}
+
 void ScalarConverter::fromChar( set_t &val )
 {
-	std::cout << "from Char\n";
 	val.integer = static_cast<int>(val.character);
 	val.decimal_f = static_cast<float>(val.character);
 	val.decimal_d = static_cast<double>(val.character);
@@ -120,7 +133,6 @@ void ScalarConverter::fromChar( set_t &val )
 
 void ScalarConverter::fromInt( set_t &val )
 {
-	std::cout << "from Int\n";
 	val.character = static_cast<char>(val.integer);
 	val.decimal_f = static_cast<float>(val.integer);
 	val.decimal_d = static_cast<double>(val.integer);
@@ -128,7 +140,6 @@ void ScalarConverter::fromInt( set_t &val )
 
 void ScalarConverter::fromFloat( set_t &val )
 {
-	std::cout << "from Float\n";
 	val.character = static_cast<char>(val.decimal_f);
 	val.integer = static_cast<int>(val.decimal_f);
 	val.decimal_d = static_cast<double>(val.decimal_f);
@@ -136,7 +147,6 @@ void ScalarConverter::fromFloat( set_t &val )
 
 void ScalarConverter::fromDouble( set_t &val )
 {
-	std::cout << "from Double\n";
 	val.character = static_cast<char>(val.decimal_d);
 	val.integer = static_cast<int>(val.decimal_d);
 	val.decimal_f = static_cast<float>(val.decimal_d);
@@ -174,14 +184,6 @@ void ScalarConverter::print( const set_t &val )
 	newline();
 }
 
-void ScalarConverter::printImpossible( void )
-{
-	std::cout << "char: impossible\n";
-	std::cout << "int: impossible\n";
-	std::cout << "float: impossible\n";
-	std::cout << "double: impossible\n";
-}
-
 bool ScalarConverter::exceedValue( const set_t &val, ScalarConverter::name_t type )
 {
 	switch (type)
@@ -213,4 +215,12 @@ void ScalarConverter::newline( void )
 ScalarConverter::valueSet::valueSet( void )
 : character(NONE), integer(NONE), decimal_f(NONE), decimal_d(NONE)
 {
+}
+
+void ScalarConverter::printImpossible( void )
+{
+	std::cout << "char: impossible\n";
+	std::cout << "int: impossible\n";
+	std::cout << "float: impossible\n";
+	std::cout << "double: impossible\n";
 }
