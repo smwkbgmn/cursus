@@ -212,15 +212,15 @@ void ScalarConverter::newline( void )
 	std::cout << std::endl;
 }
 
-ScalarConverter::valueSet::valueSet( void )
-: character(NONE), integer(NONE), decimal_f(NONE), decimal_d(NONE)
-{
-}
-
 void ScalarConverter::printImpossible( void )
 {
 	std::cout << "char: impossible\n";
 	std::cout << "int: impossible\n";
 	std::cout << "float: impossible\n";
 	std::cout << "double: impossible\n";
+}
+
+ScalarConverter::valueSet::valueSet( void )
+: character(NONE), integer(NONE), decimal_f(NONE), decimal_d(NONE)
+{
 }
