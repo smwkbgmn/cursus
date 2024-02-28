@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include "OCF.hpp"
 
 /* STRUCTURE */

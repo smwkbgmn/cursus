@@ -3,7 +3,7 @@
 /* STRUCTURE */
 template<typename T>
 Array<T>::badRefExcpt::badRefExcpt( void )
-: range_error("error: entered value exceed range of array\n")
+: range_error("error: entered value exceed range of array")
 {
 }
 
@@ -28,7 +28,6 @@ Array<T>::Array( const Array &target )
 template<typename T>
 Array<T>::Array( unsigned int n )
 {
-	std::cout << "some size taked [" << n << "]\n";
 	init(n);
 
 	std::cout << "[CON-USR] Array has created" << std::endl;
@@ -51,7 +50,6 @@ Array<T> &Array<T>::operator=( const Array &target )
 	if (this != &target)
 	{
 		clear();
-		init(target.size());
 		copy(target);
 	}
 
@@ -59,7 +57,15 @@ Array<T> &Array<T>::operator=( const Array &target )
 }
 
 template<typename T>
-T &Array<T>::operator[]( size_t idx ) const
+T &Array<T>::operator[]( size_t idx )
+{
+	throwBadRef(idx);
+
+	return _ary[idx];
+}
+
+template<typename T>
+const T &Array<T>::operator[]( size_t idx ) const
 {
 	throwBadRef(idx);
 
@@ -97,6 +103,8 @@ void Array<T>::clear( void )
 template<typename T>
 void Array<T>::copy( const Array &target )
 {
+	init(target.size());
+	
 	for (size_t idx = 0; idx < target.size(); ++idx)
 		_ary[idx] = target[idx];
 }

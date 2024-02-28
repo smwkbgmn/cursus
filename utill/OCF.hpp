@@ -1,6 +1,8 @@
 #ifndef OCF_HPP
 # define OCF_HPP
 
+# include <iostream>
+
 class OCF
 {
 	public:

@@ -1,0 +1,41 @@
+# Sequence
+T: type
+A: allocator (std::allocator<T>)
+	vector<T, A>		 : a contiguously allocated sequence of Ts, the default choice of container
+	list<T, A>			 : doubly-linked list of T, use when you need to insert and delete elements without moving existing elements 
+	forward_list<T, A>	 : singly-linked list of T, ideal for epty and very short sequences
+	deque<T, A>			 : double-ended queue of T, a cross between a vector and a list, slower than one or the other for most uses
+
+# Associative
+> Ordered
+K: the default ordering criterion for a key (std::less<K>)
+V: 
+C: type of the comparison
+A: allocator (std::allocator<std::pair<const K, T>> for map/ std::allocator<K> for set)
+	map<K, V, C, A>		 : from K to V, a sequence of (K, V) pairs 
+	multimap<K, V, C, A> : from K to V, duplicate keys allowed
+	set<K, C, A>		 : ordered set of K
+	multiset<K, C, A>	 : ordered set of K, duplicate keys allowed
+
+> Unordered
+H: hash function type
+E: equality test
+A: allocator type
+	unordered_map<K, V, H, E, A>
+	unordered_multimap<K, V, H, E, A>
+	unordered_set<K, H, E, A>
+	unordered_multiset<K, H, E, A>
+
+# Container Adaptors
+T: type
+C: container type (std::vector<T> for priority_queue) (std::deque<T> for queue and stack)
+	priority_queue<T, C, Cmp>	: cmp is the priority function type (default Cmp std::less<T>)
+	queue<T, C>					: queue of Ts with push() and pop()
+	stack<T, C>					: stack of Ts with push() and pop()
+
+# For Almost Container
+T[N]					: A fixed-size built-in array: N contiguous elements of type T
+						no size() or other memer functions
+array<T, N>				: A fixed-size array of N contiguous elements of type T
+						like the built-in array, but with most problems folved
+basic_string<C, Tr, A>	: 

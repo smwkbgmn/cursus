@@ -21,8 +21,9 @@ class Array
 		explicit Array( unsigned int );
 		~Array( void );
 
-		Array	&operator=( const Array & );
-		T		&operator[]( const size_t ) const;
+		Array		&operator=( const Array & );
+		T			&operator[]( const size_t );
+		const T		&operator[]( const size_t ) const;
 
 	public:
 		size_t	size( void ) const;
