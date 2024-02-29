@@ -32,10 +32,3 @@ C: container type (std::vector<T> for priority_queue) (std::deque<T> for queue a
 	priority_queue<T, C, Cmp>	: cmp is the priority function type (default Cmp std::less<T>)
 	queue<T, C>					: queue of Ts with push() and pop()
 	stack<T, C>					: stack of Ts with push() and pop()
-
-# For Almost Container
-T[N]					: A fixed-size built-in array: N contiguous elements of type T
-						no size() or other memer functions
-array<T, N>				: A fixed-size array of N contiguous elements of type T
-						like the built-in array, but with most problems folved
-basic_string<C, Tr, A>	: 

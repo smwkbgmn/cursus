@@ -20,6 +20,8 @@ OCF::~OCF( void )
 	std::cout << "[DES] OCF has destroyed" << std::endl;
 }
 
+/* MEMBER */
+
 /* OPERATOR */
 OCF &OCF::operator=( const OCF &target )
 {
@@ -30,5 +32,3 @@ OCF &OCF::operator=( const OCF &target )
 
 	return *this;
 }
-
-/* MEMBER */

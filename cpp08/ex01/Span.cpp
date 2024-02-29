@@ -2,16 +2,13 @@
 
 /* STRUCTURE */
 Span::duplicationExcpt::duplicationExcpt( void )
-: runtime_error("Entered value already exist")
-{}
+: runtime_error("Entered value already exist") {}
 
 Span::exceedSizeExcpt::exceedSizeExcpt( void )
-: runtime_error("No space has left")
-{}
+: runtime_error("No space has left") {}
 
 Span::noSpanExcpt::noSpanExcpt( void )
-: runtime_error("Span has not found. Ensure some elements are in")
-{}
+: runtime_error("Span has not found. Ensure some elements are in") {}
 
 /* INSTANTIATE */
 Span::Span( void ): _size(0) {
@@ -32,20 +29,6 @@ Span::~Span( void ) {
 	std::cout << "[DES] Span has destroyed" << std::endl;
 }
 
-/* OPERATOR */
-Span& Span::operator=( const Span& target ) {
-	
-	std::cout << "[Span's copy assignment called]" << std::endl;
-
-	if (this != &target)
-	{
-		_elem.clear();
-		_elem = target._elem;
-		_size = target._size;
-	}
-	return *this;
-}
-
 /* MEMBER */
 void Span::addNumber( int n ) {
 	throwExceedSize();
@@ -54,7 +37,7 @@ void Span::addNumber( int n ) {
 	_elem.insert(n);
 }
 
-void Span::addNumber( std::set<int>::iterator begin, std::set<int>::iterator end )
+void Span::addNumber( iterator begin, iterator end )
 {
 	// while (begin != end)
 	// 	addNumber(*begin++);
@@ -67,7 +50,7 @@ unsigned int Span::shortestSpan( void ) const {
 
 	unsigned int	shortest = longestSpan();
 
-	for (std::set<int>::iterator it = _elem.begin(); it != _elem.end(); ++it) {
+	for (iterator it = _elem.begin(); it != _elem.end(); ++it) {
 		unsigned int span = *_elem.upper_bound(*it) - *it;
 		if (span < shortest && span != 0)
 			shortest = span;
@@ -95,4 +78,18 @@ void Span::throwDuplication( int n ) const {
 void Span::throwNoSpan( void ) const {
 	if (_elem.size() < 2)
 		throw noSpanExcpt();
+}
+
+/* OPERATOR */
+Span& Span::operator=( const Span& target ) {
+	
+	std::cout << "[Span's copy assignment called]" << std::endl;
+
+	if (this != &target)
+	{
+		_elem.clear();
+		_elem = target._elem;
+		_size = target._size;
+	}
+	return *this;
 }

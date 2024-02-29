@@ -16,7 +16,6 @@ void ScalarConverter::convert( const std::string &input )
 void ScalarConverter::printValue( const std::string &input )
 {
 	set_t	val;
-
 	void	(*convertValue[CNT_TYPE])( set_t & ) =
 	{
 		&fromInt,
