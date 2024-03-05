@@ -1,15 +1,5 @@
 #include "Span.hpp"
 
-/* STRUCTURE */
-Span::duplicationExcpt::duplicationExcpt( void )
-: runtime_error("Entered value already exist") {}
-
-Span::exceedSizeExcpt::exceedSizeExcpt( void )
-: runtime_error("No space has left") {}
-
-Span::noSpanExcpt::noSpanExcpt( void )
-: runtime_error("Span has not found. Ensure some elements are in") {}
-
 /* INSTANTIATE */
 Span::Span( void ): _size(0) {
 	std::cout << "[CON] Span has created" << std::endl;
@@ -29,7 +19,21 @@ Span::~Span( void ) {
 	std::cout << "[DES] Span has destroyed" << std::endl;
 }
 
-/* MEMBER */
+/* OPERATOR */
+Span& Span::operator=( const Span& target ) {
+	
+	std::cout << "[Span's copy assignment called]" << std::endl;
+
+	if (this != &target)
+	{
+		_elem.clear();
+		_elem = target._elem;
+		_size = target._size;
+	}
+	return *this;
+}
+
+/* METHOD */
 void Span::addNumber( int n ) {
 	throwExceedSize();
 	throwDuplication(n);
@@ -80,16 +84,12 @@ void Span::throwNoSpan( void ) const {
 		throw noSpanExcpt();
 }
 
-/* OPERATOR */
-Span& Span::operator=( const Span& target ) {
-	
-	std::cout << "[Span's copy assignment called]" << std::endl;
+/* STRUCT */
+Span::duplicationExcpt::duplicationExcpt( void )
+: runtime_error("Entered value already exist") {}
 
-	if (this != &target)
-	{
-		_elem.clear();
-		_elem = target._elem;
-		_size = target._size;
-	}
-	return *this;
-}
+Span::exceedSizeExcpt::exceedSizeExcpt( void )
+: runtime_error("No space has left") {}
+
+Span::noSpanExcpt::noSpanExcpt( void )
+: runtime_error("Span has not found. Ensure some elements are in") {}

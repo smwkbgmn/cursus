@@ -14,6 +14,10 @@ class Span
 		struct exceedSizeExcpt: std::runtime_error{ exceedSizeExcpt( void ); };
 		struct duplicationExcpt: std::runtime_error { duplicationExcpt( void ); };
 		struct noSpanExcpt: std::runtime_error { noSpanExcpt( void ); };
+
+	private:
+		unsigned int	_size;
+		std::set<int>	_elem;
 		
 	public:
 		Span( void );
@@ -22,22 +26,19 @@ class Span
 		~Span( void );
 
 	public:
+		Span&	operator=( const Span& );
+
+	public:
 		void			addNumber( int );
 		void			addNumber( iterator, iterator );
 		unsigned int	shortestSpan( void ) const;
 		unsigned int	longestSpan( void ) const;
-
-	public:
-		Span&	operator=( const Span& );
-
+	
 	private:
-		unsigned int	_size;
-		std::set<int>	_elem;
-
-	private:	
 		void	throwExceedSize( void ) const;
 		void	throwDuplication( int ) const;
 		void	throwNoSpan( void ) const;
+
 };
 
 #endif

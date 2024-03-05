@@ -5,22 +5,21 @@
 
 class OCF
 {
-	/* TYPEDEF & STRUCTURE */
-
-	/* DATA */
-
+	/* TYPEDEF */
+	/* ATTRIBUTE */
 	/* INSTANTIATE */
 	public:
 		OCF( void );
 		OCF( const OCF & );
 		~OCF( void );
 
-	/* MEMBER*/
-	public:
-
+	/* METHOD */
+	
 	/* OPERATOR */
 	public:
 		OCF	&operator=( const OCF & );
+
+	/* STRUCT */
 };
 
 #endif

@@ -8,8 +8,8 @@ A: allocator (std::allocator<T>)
 
 # Associative
 > Ordered
-K: the default ordering criterion for a key (std::less<K>)
-V: 
+K: key, the default ordering criterion for a key (std::less<K>)
+V: value
 C: type of the comparison
 A: allocator (std::allocator<std::pair<const K, T>> for map/ std::allocator<K> for set)
 	map<K, V, C, A>		 : from K to V, a sequence of (K, V) pairs 
@@ -32,3 +32,8 @@ C: container type (std::vector<T> for priority_queue) (std::deque<T> for queue a
 	priority_queue<T, C, Cmp>	: cmp is the priority function type (default Cmp std::less<T>)
 	queue<T, C>					: queue of Ts with push() and pop()
 	stack<T, C>					: stack of Ts with push() and pop()
+
+cpp09
+	ex00: map
+	ex01: stack
+	ex02: vector, deque
