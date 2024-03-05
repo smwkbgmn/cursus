@@ -103,7 +103,7 @@ BitcoinExchange::FileStream::~FileStream( void ) {
 }
 
 /* STRUCT - Date */
-BitcoinExchange::Date::Date( const str_t& input ): _date(0) {
+BitcoinExchange::Date::Date( const str_t& input ): _date( 0 ) {
 	convert( trimSpace( input ) );
 }
 
@@ -111,8 +111,7 @@ void BitcoinExchange::Date::convert( const str_t& input ) {
 	isstream_t	iss( input );
 	str_t		substr;
 
-	for ( int id = 0; id < 3; ++id )
-	{
+	for ( int id = 0; id < 3; ++id ) {
 		if ( !std::getline( iss, substr, '-' ) && id < 2 )
 			throw invalidDateExcpt();
 

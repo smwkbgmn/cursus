@@ -8,7 +8,7 @@
 # include <exception>
 # include <string>
 
-// STL
+// Container
 # include <map>
 
 // Validation
