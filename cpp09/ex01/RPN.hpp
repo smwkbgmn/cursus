@@ -30,6 +30,7 @@ class RPN
 		RPN( const RPN & );
 		~RPN( void );
 
+		static void	proceedOne( isstream_t&, value_t& );
 		static void	operate( value_t&, char );
 		static void throwBadInput( isstream_t& );
 

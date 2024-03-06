@@ -14,17 +14,9 @@
 int RPN::calculate( const str_t& input ) {
 	isstream_t	iss( input );
 	value_t		val;
-	char		ch;
 
-	while ( !iss.eof() ) {
-		iss >> std::ws >> ch;
-
-		throwBadInput( iss );
-		if ( std::isdigit( ch ) ) 
-			val.push( ch - '0' );
-		else
-			operate( val, ch );
-	}
+	while ( !iss.eof() )
+		proceedOne( iss, val );
 
 	if ( val.size() != 1 )
 		throw err_t( errPrfx + "unoperated value has left" );
@@ -32,9 +24,21 @@ int RPN::calculate( const str_t& input ) {
 	return val.top();
 }
 
+void RPN::proceedOne( isstream_t& iss, value_t& val ) {
+	char	c;
+
+	iss >> std::ws >> c;
+	throwBadInput( iss );
+
+	if ( std::isdigit( c ) ) 
+		val.push( c - '0' );
+	else
+		operate( val, c );
+}
+
 void RPN::operate( value_t& val, char operation ) {
 	if ( val.size() < 2 )
-		throw err_t( errPrfx + "fail to get two value for operation" );
+		throw err_t( errPrfx + "fail to get value for operation" );
 
 	int	rval = val.top();
 	val.pop();
