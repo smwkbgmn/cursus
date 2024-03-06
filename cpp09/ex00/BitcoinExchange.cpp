@@ -2,7 +2,7 @@
 
 /* INSTANTIATE */
 BitcoinExchange::BitcoinExchange( const str_t& nameData ) {
-	getData(nameData);
+	getData( nameData );
 	
 	std::cout << "[CON-USR] BitcoinExchange has created" << std::endl;
 }
@@ -20,7 +20,7 @@ void BitcoinExchange::getData( const str_t& nameData ) {
 			while ( std::getline( fileData._in, line ) )
 				insertData( isstream_t( line ) );
 		else
-			throw err_t( errPrefix + "fail to read data" );
+			throw err_t( errPrfx + "fail to read data" );
 }
 
 void BitcoinExchange::insertData( isstream_t iss ) {
@@ -28,29 +28,29 @@ void BitcoinExchange::insertData( isstream_t iss ) {
 }
 
 void BitcoinExchange::outResult( const str_t& nameInput ) const {
-		file_s	fileInput(nameInput);
+		file_s	fileInput( nameInput );
 		str_t	line;
 
 		if ( std::getline( fileInput._in, line ) && line == headInput )
 			while ( std::getline( fileInput._in, line ) )
-				printResult( isstream_t(line) );
+				printResult( isstream_t( line ) );
 		else
-			throw err_t( errPrefix + "fail to read input");
+			throw err_t( errPrfx + "fail to read input" );
 }
 
 void BitcoinExchange::printResult( isstream_t iss ) const {
 	try {
 		date_s					key = getDate( iss, INPUT );
 		float					value = getValue( iss, INPUT );
-		data_t::const_iterator	rate = _rate.lower_bound(key);
+		data_t::const_iterator	rate = _rate.lower_bound( key );
 
 		if ( rate == _rate.end() )
-			throw err_t( errPrefix + "no data has found" );
+			throw err_t( errPrfx + "no data has found" );
 
 		key.print();
 		std::cout << " => " << value << " = " << value * rate->second << std::endl;
 
-	} catch ( err_t& err ) {std::cout << err.what() << std::endl; }
+	} catch ( err_t& err ) { std::cout << err.what() << std::endl; }
 }
 
 BitcoinExchange::date_s BitcoinExchange::getDate( isstream_t& iss, FileType type ) const {
@@ -72,22 +72,22 @@ float BitcoinExchange::getValue( isstream_t& iss, FileType type ) const {
 	float	val;
 
 	iss >> val;
-	if ( success(iss) ) {
+	if ( success( iss ) ) {
 		if ( type == INPUT )
 			throwInvalidValue( val );
 		return val;
 	}
 
-	throw err_t( errPrefix + "fail to get a value" );
+	throw err_t( errPrfx + "fail to get a value" );
 }
 
-bool BitcoinExchange::success( const isstream_t& iss ) const {
+bool BitcoinExchange::success( const isstream_t& iss ) {
 	return iss.eof() && !iss.fail();
 }
 
 void BitcoinExchange::throwInvalidValue( float rate ) const {
 	if ( rate < 0 || rate > 1000 )
-		throw err_t( errPrefix + "the value is out of range" );
+		throw err_t( errPrfx + "the value is out of range" );
 }
 
 /* STRUCT - FileStream */
@@ -95,7 +95,7 @@ BitcoinExchange::FileStream::FileStream( const str_t& fileName ) {
 	_in.open( fileName );
 
 	if ( !_in.is_open() )
-		throw std::ios_base::failure( errPrefix + "fail to open file " + fileName );
+		throw std::ios_base::failure( errPrfx + "fail to open file " + fileName );
 }
 
 BitcoinExchange::FileStream::~FileStream( void ) {
@@ -104,7 +104,7 @@ BitcoinExchange::FileStream::~FileStream( void ) {
 
 /* STRUCT - Date */
 BitcoinExchange::Date::Date( const str_t& input ): _date( 0 ) {
-	convert( trimSpace( input ) );
+	convert( input );
 }
 
 void BitcoinExchange::Date::convert( const str_t& input ) {
@@ -131,6 +131,10 @@ BitcoinExchange::Date::bits_t BitcoinExchange::Date::toBits( const str_t& input,
 		throw invalidDateExcpt();
 
 	iss >> val;
+	// Remove trail spaces
+	if ( id == 2 && !iss.eof() )
+		iss >> std::ws;
+
 	if ( !success(iss) )
 		throw invalidDateExcpt();
 
@@ -171,21 +175,10 @@ bool BitcoinExchange::Date::yearLeap( bits_t year ) const {
 	return year % 4 == 0 && ( year % 100 != 0 || year % 400 == 0 );
 }
 
-bool BitcoinExchange::Date::success( const isstream_t& iss ) const {
-	return iss.eof() && !iss.fail();
-}
-
 void BitcoinExchange::Date::print( void ) const {
 	std::cout << std::setw( 4 ) << std::setfill( '0' ) << ( _date >> PAD_Y & HLD_Y ) << '-';
 	std::cout << std::setw( 2 ) << std::setfill( '0' ) << ( _date >> PAD_M & HLD_M ) << '-';
 	std::cout << std::setw( 2 ) << std::setfill( '0' ) << ( _date >> PAD_D & HLD_D );
-}
-
-str_t BitcoinExchange::Date::trimSpace( const str_t& input ) const {
-	str_t		clear;
-
-	std::getline(isstream_t(input), clear, ' ');
-	return clear;
 }
 
 void BitcoinExchange::Date::throwInvalidValue( bits_t val, unsigned int min, unsigned int max ) const {
@@ -198,5 +191,5 @@ bool BitcoinExchange::Date::operator<( const Date& target ) const {
 }
 
 /* STRUCT - Exceptions */
-BitcoinExchange::invalidDateExcpt::invalidDateExcpt( void ): err_t(errPrefix + "fail to get a date")
+BitcoinExchange::invalidDateExcpt::invalidDateExcpt( void ): err_t(errPrfx + "fail to get a date")
 {}

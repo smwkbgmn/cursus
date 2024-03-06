@@ -24,7 +24,7 @@ typedef std::runtime_error	err_t;
 
 static const unsigned int	monthDays[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 static const str_t			headInput = "date | value";
-static const str_t			errPrefix = "Error: ";
+static const str_t			errPrfx = "Error: ";
 
 class BitcoinExchange
 {
@@ -53,12 +53,13 @@ class BitcoinExchange
 		BitcoinExchange( void );
 		BitcoinExchange( const BitcoinExchange & );
 
+		static bool	success( const isstream_t& );
+
 		void	getData( const str_t& );
 		void	insertData( isstream_t );
 		void	printResult( isstream_t ) const;
 		date_s	getDate( isstream_t&, FileType ) const;
 		float	getValue( isstream_t&, FileType ) const;
-		bool	success( const isstream_t& ) const;
 		void	throwInvalidValue( float ) const;
 
 		BitcoinExchange	&operator=( const BitcoinExchange & );
@@ -97,9 +98,7 @@ class BitcoinExchange
 			bits_t	padBits( bits_t, int ) const;
 			bool	validDay( void ) const;
 			bool	yearLeap( bits_t ) const;
-			bool	success( const isstream_t& ) const;
 			void	print( void ) const;
-			str_t	trimSpace( const str_t& ) const;
 			void	throwInvalidValue( bits_t, unsigned int, unsigned int ) const;
 
 			bool	operator<( const Date& ) const;
