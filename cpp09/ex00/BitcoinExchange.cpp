@@ -20,7 +20,7 @@ void BitcoinExchange::getData( const str_t& nameData ) {
 			while ( std::getline( fileData._in, line ) )
 				insertData( isstream_t( line ) );
 		else
-			throw err_t( errPrfx + "fail to read data" );
+			throw err_t( errMsg[FAIL_RD_DATA] );
 }
 
 void BitcoinExchange::insertData( isstream_t iss ) {
@@ -35,7 +35,7 @@ void BitcoinExchange::outResult( const str_t& nameInput ) const {
 			while ( std::getline( fileInput._in, line ) )
 				printResult( isstream_t( line ) );
 		else
-			throw err_t( errPrfx + "fail to read input" );
+			throw err_t( errMsg[FAIL_RD_INPUT] );
 }
 
 void BitcoinExchange::printResult( isstream_t iss ) const {
@@ -45,7 +45,7 @@ void BitcoinExchange::printResult( isstream_t iss ) const {
 		data_t::const_iterator	rate	= _rate.lower_bound( key );
 
 		if ( rate == _rate.end() )
-			throw err_t( errPrfx + "data has not found" );
+			throw err_t( errMsg[NO_DATA] );
 
 		key.print();
 		std::cout << " => " << value << " = " << value * rate->second << std::endl;
@@ -73,7 +73,7 @@ float BitcoinExchange::getValue( isstream_t& iss, FileType type ) const {
 
 	iss >> val;
 	if ( !success( iss ) )
-		throw err_t( errPrfx + "fail to get a value" );
+		throw err_t( errMsg[FAIL_GET_VAL] );
 
 	if ( type == INPUT )
 		throwInvalidValue( val );
@@ -83,7 +83,7 @@ float BitcoinExchange::getValue( isstream_t& iss, FileType type ) const {
 
 void BitcoinExchange::throwInvalidValue( float rate ) const {
 	if ( rate < 0 || rate > 1000 )
-		throw err_t( errPrfx + "the value is out of range" );
+		throw err_t( errMsg[OUT_OF_RANGE] );
 }
 
 bool BitcoinExchange::success( const isstream_t& iss ) {
@@ -95,7 +95,7 @@ BitcoinExchange::FileStream::FileStream( const str_t& fileName ) {
 	_in.open( fileName );
 
 	if ( !_in.is_open() )
-		throw std::ios_base::failure( errPrfx + "fail to open file " + fileName );
+		throw std::ios_base::failure( errMsg[FAIL_OPN_FILE] + fileName );
 }
 
 BitcoinExchange::FileStream::~FileStream( void ) {
@@ -191,5 +191,4 @@ bool BitcoinExchange::Date::operator<( const Date& target ) const {
 }
 
 /* STRUCT - Exceptions */
-BitcoinExchange::invalidDateExcpt::invalidDateExcpt( void ): err_t( errPrfx + "fail to get a date" )
-{}
+BitcoinExchange::invalidDateExcpt::invalidDateExcpt( void ): err_t( errPrfx + "fail to get a date" ) {}

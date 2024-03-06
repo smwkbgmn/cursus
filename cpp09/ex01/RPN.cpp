@@ -8,6 +8,7 @@
 
 		iss >> std::ws
 		while { iss >> c .... iss >> std::ws }
+	- 5 5 5 5 + + 5 5 - - - > -10
 */
 
 /* METHOD */
@@ -19,26 +20,26 @@ int RPN::calculate( const str_t& input ) {
 		proceedOne( iss, val );
 
 	if ( val.size() != 1 )
-		throw err_t( errPrfx + "unoperated value has left" );
+		throw err_t( errMsg[LEFT_VAL] );
 
 	return val.top();
 }
 
 void RPN::proceedOne( isstream_t& iss, value_t& val ) {
-	char	c;
+	char	ch;
 
-	iss >> std::ws >> c;
+	iss >> std::ws >> ch;
 	throwBadInput( iss );
 
-	if ( std::isdigit( c ) ) 
-		val.push( c - '0' );
+	if ( std::isdigit( ch ) ) 
+		val.push( ch - '0' );
 	else
-		operate( val, c );
+		operate( val, ch );
 }
 
 void RPN::operate( value_t& val, char operation ) {
 	if ( val.size() < 2 )
-		throw err_t( errPrfx + "fail to get value for operation" );
+		throw err_t( errMsg[FAIL_GET_VAL] );
 
 	int	rval = val.top();
 	val.pop();
@@ -49,16 +50,16 @@ void RPN::operate( value_t& val, char operation ) {
 		case '*': val.top() *= rval; break;
 		case '/':
 			if ( !rval )
-				throw err_t( errPrfx + "may not divide by 0");
+				throw err_t( errMsg[DVIDE_ZERO] );
 			val.top() /= rval; break;
-		default: throw err_t( errPrfx + "only arithemetic operations are allowed (+, -, *, /)");
+		default: throw err_t( errMsg[INVALID_OPER] );
 	}
 }
 
 void RPN::throwBadInput( isstream_t& iss ) {
 	if ( iss.fail() )
-		throw err_t( errPrfx + "fail to get a character" );
+		throw err_t( errMsg[FAIL_GET_CHR] );
 
 	if ( iss.peek() != ' ' && !iss.eof() )
-		throw err_t( errPrfx + "ensure the form of input does meet requirement" );
+		throw err_t( errMsg[INVALID_INPUT] );
 }

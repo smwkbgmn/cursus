@@ -24,7 +24,26 @@ typedef std::runtime_error	err_t;
 
 const unsigned int	monthDays[12]	= { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 const str_t			headInput		= "date | value";
-const str_t			errPrfx 		= "Error: ";
+
+const enum Msg {
+	FAIL_RD_DATA,
+	FAIL_RD_INPUT,
+	NO_DATA,
+	FAIL_GET_VAL,
+	OUT_OF_RANGE,
+	FAIL_OPN_FILE
+};
+
+const str_t	errPrfx		= "Error: ";
+const str_t	errMsg[]	= {
+	"fail to read data",
+	"fail to read input",
+	"data has not found",
+	"fail to get a value",
+	"the value is out of range",
+	"fail to open file "
+};
+
 
 class BitcoinExchange
 {
@@ -106,5 +125,4 @@ class BitcoinExchange
 
 		struct invalidDateExcpt: err_t { invalidDateExcpt( void ); };
 };
-
 #endif
