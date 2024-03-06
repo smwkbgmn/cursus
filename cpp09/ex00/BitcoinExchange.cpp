@@ -45,7 +45,7 @@ void BitcoinExchange::printResult( isstream_t iss ) const {
 		data_t::const_iterator	rate = _rate.lower_bound( key );
 
 		if ( rate == _rate.end() )
-			throw err_t( errPrfx + "no data has found" );
+			throw err_t( errPrfx + "data has not found" );
 
 		key.print();
 		std::cout << " => " << value << " = " << value * rate->second << std::endl;
@@ -72,22 +72,22 @@ float BitcoinExchange::getValue( isstream_t& iss, FileType type ) const {
 	float	val;
 
 	iss >> val;
-	if ( success( iss ) ) {
-		if ( type == INPUT )
-			throwInvalidValue( val );
-		return val;
-	}
+	if ( !success( iss ) )
+		throw err_t( errPrfx + "fail to get a value" );
 
-	throw err_t( errPrfx + "fail to get a value" );
-}
+	if ( type == INPUT )
+		throwInvalidValue( val );
 
-bool BitcoinExchange::success( const isstream_t& iss ) {
-	return iss.eof() && !iss.fail();
+	return val;
 }
 
 void BitcoinExchange::throwInvalidValue( float rate ) const {
 	if ( rate < 0 || rate > 1000 )
 		throw err_t( errPrfx + "the value is out of range" );
+}
+
+bool BitcoinExchange::success( const isstream_t& iss ) {
+	return iss.eof() && !iss.fail();
 }
 
 /* STRUCT - FileStream */
@@ -191,5 +191,5 @@ bool BitcoinExchange::Date::operator<( const Date& target ) const {
 }
 
 /* STRUCT - Exceptions */
-BitcoinExchange::invalidDateExcpt::invalidDateExcpt( void ): err_t(errPrfx + "fail to get a date")
+BitcoinExchange::invalidDateExcpt::invalidDateExcpt( void ): err_t( errPrfx + "fail to get a date" )
 {}
