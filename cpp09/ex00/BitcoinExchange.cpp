@@ -4,11 +4,11 @@
 BitcoinExchange::BitcoinExchange( const str_t& nameData ) {
 	getData( nameData );
 	
-	std::cout << "[CON-USR] BitcoinExchange has created" << std::endl;
+	std::clog << "[CON-USR] BitcoinExchange has created" << std::endl;
 }
 
 BitcoinExchange::~BitcoinExchange( void ) {
-	std::cout << "[DES] BitcoinExchange has destroyed" << std::endl;
+	std::clog << "[DES] BitcoinExchange has destroyed" << std::endl;
 }
 
 /* METHOD */
@@ -50,7 +50,7 @@ void BitcoinExchange::printResult( isstream_t iss ) const {
 		key.print();
 		std::cout << " => " << value << " = " << value * rate->second << std::endl;
 
-	} catch ( err_t& err ) { std::cout << err.what() << std::endl; }
+	} catch ( err_t& err ) { std::cerr << err.what() << std::endl; }
 }
 
 BitcoinExchange::date_s BitcoinExchange::getDate( isstream_t& iss, FileType type ) const {
