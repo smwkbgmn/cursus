@@ -14,30 +14,22 @@
 int RPN::calculate( const str_t& input ) {
 	isstream_t		iss( input );
 	stack_int_t		stackVal;
+	char			ch;
 
 	while ( !iss.eof() ) {
-		char	c;
-		iss >> std::ws >> c;
+		iss >> std::ws >> ch;
 
 		throwBadInput( iss );
-		if ( std::isdigit( c ) ) 
-			stackVal.push( c - '0' );
+		if ( std::isdigit( ch ) ) 
+			stackVal.push( ch - '0' );
 		else
-			operate( stackVal, c );
+			operate( stackVal, ch );
 	}
 
 	if ( stackVal.size() != 1 )
 		throw err_t( errPrfx + "unoperated value has left" );
 
 	return stackVal.top();
-}
-
-void RPN::throwBadInput( isstream_t& iss ) {
-	if ( iss.fail() )
-		throw err_t( errPrfx + "fail to get a character" );
-
-	if ( iss.peek() != ' ' && !iss.eof() )
-		throw err_t( errPrfx + "ensure the form of input does meet requirement" );
 }
 
 void RPN::operate( stack_int_t& stackVal, char operation ) {
@@ -59,3 +51,10 @@ void RPN::operate( stack_int_t& stackVal, char operation ) {
 	}
 }
 
+void RPN::throwBadInput( isstream_t& iss ) {
+	if ( iss.fail() )
+		throw err_t( errPrfx + "fail to get a character" );
+
+	if ( iss.peek() != ' ' && !iss.eof() )
+		throw err_t( errPrfx + "ensure the form of input does meet requirement" );
+}
