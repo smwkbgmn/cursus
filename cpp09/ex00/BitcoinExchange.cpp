@@ -14,8 +14,8 @@ BitcoinExchange::~BitcoinExchange( void ) {
 /* METHOD */
 void BitcoinExchange::getData( const str_t& nameData ) {
 		file_s	fileData( nameData );
-		str_t	line;
 
+		str_t	line;
 		if ( std::getline( fileData._in, line ) )
 			while ( std::getline( fileData._in, line ) )
 				insertData( isstream_t( line ) );
@@ -29,8 +29,8 @@ void BitcoinExchange::insertData( isstream_t iss ) {
 
 void BitcoinExchange::outResult( const str_t& nameInput ) const {
 		file_s	fileInput( nameInput );
-		str_t	line;
 
+		str_t	line;
 		if ( std::getline( fileInput._in, line ) && line == headInput )
 			while ( std::getline( fileInput._in, line ) )
 				printResult( isstream_t( line ) );
@@ -40,9 +40,9 @@ void BitcoinExchange::outResult( const str_t& nameInput ) const {
 
 void BitcoinExchange::printResult( isstream_t iss ) const {
 	try {
-		date_s					key = getDate( iss, INPUT );
-		float					value = getValue( iss, INPUT );
-		data_t::const_iterator	rate = _rate.lower_bound( key );
+		date_s					key		= getDate( iss, INPUT );
+		float					value	= getValue( iss, INPUT );
+		data_t::const_iterator	rate	= _rate.lower_bound( key );
 
 		if ( rate == _rate.end() )
 			throw err_t( errPrfx + "data has not found" );
@@ -109,8 +109,8 @@ BitcoinExchange::Date::Date( const str_t& input ): _date( 0 ) {
 
 void BitcoinExchange::Date::convert( const str_t& input ) {
 	isstream_t	iss( input );
-	str_t		substr;
 
+	str_t		substr;
 	for ( int id = 0; id < 3; ++id ) {
 		if ( !std::getline( iss, substr, '-' ) && id < 2 )
 			throw invalidDateExcpt();
@@ -123,8 +123,8 @@ void BitcoinExchange::Date::convert( const str_t& input ) {
 }
 
 BitcoinExchange::Date::bits_t BitcoinExchange::Date::toBits( const str_t& input, int id ) const {
-	isstream_t	iss ( input );
-	bits_t		val = 0;
+	isstream_t	iss( input );
+	bits_t		val;
 
 	// May not use sign character at date
 	if ( !std::isdigit( *input.begin() ) )

@@ -22,9 +22,9 @@ typedef std::istringstream	isstream_t;
 typedef std::string			str_t;
 typedef std::runtime_error	err_t;
 
-static const unsigned int	monthDays[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-static const str_t			headInput = "date | value";
-static const str_t			errPrfx = "Error: ";
+const unsigned int	monthDays[12]	= { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+const str_t			headInput		= "date | value";
+const str_t			errPrfx 		= "Error: ";
 
 class BitcoinExchange
 {
