@@ -12,41 +12,41 @@
 
 /* METHOD */
 int RPN::calculate( const str_t& input ) {
-	isstream_t		iss( input );
-	stack_int_t		stackVal;
-	char			ch;
+	isstream_t	iss( input );
+	value_t		val;
+	char		ch;
 
 	while ( !iss.eof() ) {
 		iss >> std::ws >> ch;
 
 		throwBadInput( iss );
 		if ( std::isdigit( ch ) ) 
-			stackVal.push( ch - '0' );
+			val.push( ch - '0' );
 		else
-			operate( stackVal, ch );
+			operate( val, ch );
 	}
 
-	if ( stackVal.size() != 1 )
+	if ( val.size() != 1 )
 		throw err_t( errPrfx + "unoperated value has left" );
 
-	return stackVal.top();
+	return val.top();
 }
 
-void RPN::operate( stack_int_t& stackVal, char operation ) {
-	if ( stackVal.size() < 2 )
+void RPN::operate( value_t& val, char operation ) {
+	if ( val.size() < 2 )
 		throw err_t( errPrfx + "fail to get two value for operation" );
 
-	int	rval = stackVal.top();
-	stackVal.pop();
+	int	rval = val.top();
+	val.pop();
 
 	switch ( operation ) {
-		case '+': stackVal.top() += rval; break;
-		case '-': stackVal.top() -= rval; break;
-		case '*': stackVal.top() *= rval; break;
+		case '+': val.top() += rval; break;
+		case '-': val.top() -= rval; break;
+		case '*': val.top() *= rval; break;
 		case '/':
 			if ( !rval )
 				throw err_t( errPrfx + "may not divide by 0");
-			stackVal.top() /= rval; break;
+			val.top() /= rval; break;
 		default: throw err_t( errPrfx + "only arithemetic operations are allowed (+, -, *, /)");
 	}
 }

@@ -15,7 +15,7 @@
 
 typedef std::string			str_t;
 typedef std::istringstream	isstream_t;
-typedef std::stack<int>		stack_int_t;
+typedef std::stack<int>		value_t;
 typedef std::runtime_error	err_t;
 
 const str_t	errPrfx = "error: ";
@@ -30,7 +30,7 @@ class RPN
 		RPN( const RPN & );
 		~RPN( void );
 
-		static void	operate( stack_int_t&, char );
+		static void	operate( value_t&, char );
 		static void throwBadInput( isstream_t& );
 
 		RPN	&operator=( const RPN & );
