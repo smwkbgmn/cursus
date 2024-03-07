@@ -60,7 +60,7 @@ class BitcoinExchange {
 		
 		typedef struct FileStream		file_s;
 		typedef struct Date				date_s;
-		typedef std::map<date_s, float>	rate_t;
+		typedef std::map<date_s, float>	map_t;
 
 
 	public:
@@ -73,7 +73,7 @@ class BitcoinExchange {
 		BitcoinExchange( void );
 		BitcoinExchange( const BitcoinExchange & );
 
-		rate_t		_data;		
+		map_t		_rate;		
 
 		static bool	_success( const isstream_t& );
 

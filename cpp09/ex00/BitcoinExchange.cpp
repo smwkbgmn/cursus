@@ -24,7 +24,7 @@ void BitcoinExchange::_getData( const str_t& nameData ) {
 }
 
 void BitcoinExchange::_insertData( isstream_t iss ) {
-	_data.insert( std::make_pair( _getDate( iss, DATA ), _getValue( iss, DATA ) ) );
+	_rate.insert( std::make_pair( _getDate( iss, DATA ), _getValue( iss, DATA ) ) );
 }
 
 void BitcoinExchange::outResult( const str_t& nameInput ) const {
@@ -42,9 +42,9 @@ void BitcoinExchange::_printResult( isstream_t iss ) const {
 	try {
 		date_s					key		= _getDate( iss, INPUT );
 		float					value	= _getValue( iss, INPUT );
-		rate_t::const_iterator	rate	= _data.lower_bound( key );
+		map_t::const_iterator	rate	= _rate.lower_bound( key );
 
-		if ( rate == _data.end() )
+		if ( rate == _rate.end() )
 			throw err_t( errMsg[NO_DATA] );
 
 		key.print();
