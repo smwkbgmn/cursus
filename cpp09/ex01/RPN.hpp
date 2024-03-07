@@ -4,8 +4,8 @@
 # include <iostream>
 # include <sstream>
 
+# include <string>s
 # include <exception>
-# include <string>
 
 // Container
 # include <stack>
@@ -18,15 +18,6 @@ typedef std::istringstream	isstream_t;
 typedef std::stack<int>		value_t;
 typedef std::runtime_error	err_t;
 
-enum Msg {
-	LEFT_VAL,
-	DVIDE_ZERO,
-	INVALID_INPUT,
-	INVALID_OPER,
-	FAIL_GET_CHR,
-	FAIL_GET_VAL
-};
-
 const str_t	errPrfx = "error: ";
 const str_t errMsg[] = {
 	errPrfx + "unoperated value has left",
@@ -35,6 +26,15 @@ const str_t errMsg[] = {
 	errPrfx + "only arithemetic operations are allowed (+, -, *, /)",
 	errPrfx + "fail to get a character",
 	errPrfx + "fail to get two value for operation"
+};
+
+enum Msg {
+	LEFT_VAL,
+	DVIDE_ZERO,
+	INVALID_INPUT,
+	INVALID_OPER,
+	FAIL_GET_CHR,
+	FAIL_GET_VAL
 };
 
 class RPN {
@@ -46,9 +46,9 @@ class RPN {
 		RPN( const RPN & );
 		~RPN( void );
 
-		static void	proceedOne( isstream_t&, value_t& );
-		static void	operate( value_t&, char );
-		static void throwBadInput( isstream_t& );
+		static void	_proceedOne( isstream_t&, value_t& );
+		static void	_operate( value_t&, char );
+		static void _throwBadInput( isstream_t& );
 
 		RPN	&operator=( const RPN & );
 };

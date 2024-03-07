@@ -5,8 +5,8 @@
 # include <fstream>
 # include <sstream>
 
-# include <exception>
 # include <string>
+# include <exception>
 
 // Container
 # include <map>
@@ -22,8 +22,22 @@ typedef std::istringstream	isstream_t;
 typedef std::string			str_t;
 typedef std::runtime_error	err_t;
 
-const unsigned int	monthDays[12]	= { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-const str_t			headInput		= "date | value";
+const unsigned int			monthDays[12]	= {
+	31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
+};
+
+const str_t					headInput		= "date | value";
+const str_t					headData		= "date,exchange_rate";
+
+const str_t	errPrfx		= "Error: ";
+const str_t	errMsg[]	= {
+	errPrfx + "fail to read data",
+	errPrfx + "fail to read input",
+	errPrfx + "data has not found",
+	errPrfx + "fail to get a value",
+	errPrfx + "the value is out of range",
+	errPrfx + "fail to open file "
+};
 
 const enum Msg {
 	FAIL_RD_DATA,
@@ -34,66 +48,53 @@ const enum Msg {
 	FAIL_OPN_FILE
 };
 
-const str_t	errPrfx		= "Error: ";
-const str_t	errMsg[]	= {
-	"fail to read data",
-	"fail to read input",
-	"data has not found",
-	"fail to get a value",
-	"the value is out of range",
-	"fail to open file "
-};
-
-
-class BitcoinExchange
-{
+class BitcoinExchange {
 	private:
-		struct 	FileStream;
-		struct	Date;
-		
-		typedef struct FileStream		file_s;
-		typedef struct Date				date_s;
-		typedef std::map<date_s, float>	data_t;
-
 		enum FileType {
 			DATA,
 			INPUT
 		};
 
+		struct 	FileStream;
+		struct	Date;
+		
+		typedef struct FileStream		file_s;
+		typedef struct Date				date_s;
+		typedef std::map<date_s, float>	rate_t;
+
+
 	public:
 		BitcoinExchange( const str_t& );
 		~BitcoinExchange( void );
 
-		void	outResult( const str_t& ) const;
+		void		outResult( const str_t& ) const;
 
 	private:
-		data_t	_rate;		
-
 		BitcoinExchange( void );
 		BitcoinExchange( const BitcoinExchange & );
 
-		static bool	success( const isstream_t& );
+		rate_t		_data;		
 
-		void	getData( const str_t& );
-		void	insertData( isstream_t );
-		void	printResult( isstream_t ) const;
-		date_s	getDate( isstream_t&, FileType ) const;
-		float	getValue( isstream_t&, FileType ) const;
-		void	throwInvalidValue( float ) const;
+		static bool	_success( const isstream_t& );
+
+		void		_getData( const str_t& );
+		void		_insertData( isstream_t );
+		void		_printResult( isstream_t ) const;
+		date_s		_getDate( isstream_t&, FileType ) const;
+		float		_getValue( isstream_t&, FileType ) const;
+		void		_throwInvalidValue( float ) const;
 
 		BitcoinExchange	&operator=( const BitcoinExchange & );
 
 	private:
 		struct FileStream {
-			std::ifstream	_in;
-
 			FileStream( const str_t& );
 			~FileStream( void );
+
+			std::ifstream	in;
 		};
 
 		struct Date {
-			typedef unsigned int	bits_t;
-
 			enum ID { Y, M, D };
 			enum Padding {
 				PAD_Y = 9,
@@ -107,10 +108,12 @@ class BitcoinExchange
 				HLD_D = 0b11111
 			};
 
-			bits_t	_date;
-			/* Y: 14bits, M: 4bits, D: 5bits */
+			typedef unsigned int	bits_t;
 
 			Date( const str_t& );
+
+			bits_t	date;
+			/* Y: 14bits, M: 4bits, D: 5bits */
 
 			void	convert( const str_t& );
 			bits_t	toBits( const str_t&, int ) const;
