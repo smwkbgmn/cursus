@@ -18,6 +18,10 @@
 	time, with a specially chosen insertion ordering described below.
 	Use BINARY SEARCH in subsequences of S (as described below) to
 	determine the position at which each element should be inserted.
+
+	* When if just insert the remainig element as in order, the possiblity
+	arise for next element to be increased search count. To avoid this,
+	insert Nth element first that is end of threshold of binary search count.
 */
 
 /* METHOD */
