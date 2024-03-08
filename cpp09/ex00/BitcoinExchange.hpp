@@ -8,10 +8,10 @@
 # include <string>
 # include <exception>
 
-// Container
+/* Container */
 # include <map>
 
-// Validation
+/* Validation */
 # include <locale>
 
 # define NONE 0
@@ -22,12 +22,12 @@ typedef std::istringstream	isstream_t;
 typedef std::string			str_t;
 typedef std::runtime_error	err_t;
 
-const unsigned int			monthDays[12]	= {
+const unsigned int	monthDays[12]	= {
 	31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
 };
 
-const str_t					headInput		= "date | value";
-const str_t					headData		= "date,exchange_rate";
+const str_t	headInput	= "date | value";
+const str_t	headData	= "date,exchange_rate";
 
 const str_t	errPrfx		= "Error: ";
 const str_t	errMsg[]	= {
@@ -39,7 +39,7 @@ const str_t	errMsg[]	= {
 	errPrfx + "fail to open file "
 };
 
-const enum Msg {
+const enum errIdx {
 	FAIL_RD_DATA,
 	FAIL_RD_INPUT,
 	NO_DATA,
@@ -70,10 +70,10 @@ class BitcoinExchange {
 		void		outResult( const str_t& ) const;
 
 	private:
+		map_t		_rate;		
+
 		BitcoinExchange( void );
 		BitcoinExchange( const BitcoinExchange & );
-
-		map_t		_rate;		
 
 		static bool	_success( const isstream_t& );
 
@@ -110,10 +110,10 @@ class BitcoinExchange {
 
 			typedef unsigned int	bits_t;
 
-			Date( const str_t& );
-
 			bits_t	date;
 			/* Y: 14bits, M: 4bits, D: 5bits */
+
+			Date( const str_t& );
 
 			void	convert( const str_t& );
 			bits_t	toBits( const str_t&, int ) const;

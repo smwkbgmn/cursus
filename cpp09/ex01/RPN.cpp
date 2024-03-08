@@ -28,14 +28,16 @@ int RPN::calculate( const str_t& input ) {
 
 void RPN::_proceed( isstream_t& iss, value_t& val ) {
 	char	chr;
-
+	
 	iss >> chr;
 	_throwBadInput( iss );
 
 	if ( std::isdigit( chr ) ) 
 		val.push( chr - '0' );
-	else
+	else if ( arithemetic.find( chr ) != str_t::npos )
 		_operate( val, chr );
+	else
+		throw err_t( errMsg[INVALID_OPER] );
 }
 
 void RPN::_operate( value_t& val, char operation ) {
@@ -53,7 +55,6 @@ void RPN::_operate( value_t& val, char operation ) {
 			if ( !rval )
 				throw err_t( errMsg[DVIDE_ZERO] );
 			val.top() /= rval; break;
-		default: throw err_t( errMsg[INVALID_OPER] );
 	}
 }
 

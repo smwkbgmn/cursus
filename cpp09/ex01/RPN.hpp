@@ -4,13 +4,13 @@
 # include <iostream>
 # include <sstream>
 
-# include <string>s
+# include <string>
 # include <exception>
 
-// Container
+/* Container */
 # include <stack>
 
-// Validation
+/* Validation */
 # include <locale>
 
 typedef std::string			str_t;
@@ -18,18 +18,20 @@ typedef std::istringstream	isstream_t;
 typedef std::stack<int>		value_t;
 typedef std::runtime_error	err_t;
 
+const str_t	arithemetic = "+-*/";
+
 const str_t	errPrfx = "error: ";
 const str_t errMsg[] = {
 	errPrfx + "not found any value. please enter values for operation.",
 	errPrfx + "unoperated value has left",
 	errPrfx + "may not divide by 0",
-	errPrfx + "ensure the form of input does meet requirement",
+	errPrfx + "ensure the form of input has met requirement",
 	errPrfx + "only arithemetic operations are allowed (+, -, *, /)",
 	errPrfx + "fail to get a character",
 	errPrfx + "fail to get two value for operation"
 };
 
-enum Msg {
+enum errIdx {
 	EMPTY_VAL,
 	LEFT_VAL,
 	DVIDE_ZERO,

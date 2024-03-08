@@ -49,7 +49,6 @@ void BitcoinExchange::_printResult( isstream_t iss ) const {
 
 		key.print();
 		std::cout << " => " << value << " = " << value * rate->second << std::endl;
-
 	} catch ( err_t& err ) { std::cerr << err.what() << std::endl; }
 }
 
@@ -98,14 +97,10 @@ BitcoinExchange::FileStream::FileStream( const str_t& fileName ) {
 		throw std::ios_base::failure( errMsg[FAIL_OPN_FILE] + fileName );
 }
 
-BitcoinExchange::FileStream::~FileStream( void ) {
-	in.close();
-}
+BitcoinExchange::FileStream::~FileStream( void ) { in.close(); }
 
 /* STRUCT - Date */
-BitcoinExchange::Date::Date( const str_t& input ): date( 0 ) {
-	convert( input );
-}
+BitcoinExchange::Date::Date( const str_t& input ): date( 0 ) { convert( input ); }
 
 void BitcoinExchange::Date::convert( const str_t& input ) {
 	isstream_t	iss( input );

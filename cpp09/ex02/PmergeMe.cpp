@@ -25,6 +25,16 @@
 */
 
 /* METHOD */
-void PmergeMe::sort( vec_t& input ) throw() {
+void PmergeMe::sort( vec_t& input ) {
 	
 }
+
+vec_t PmergeMe::strVec( const str_t& input ) {
+	isstream_t	iss( input );
+	vec_t		val();
+	
+
+	while ( std::getline( iss, ' ' ))
+}
+
+uint_t PmergeMe::_getVal( )
