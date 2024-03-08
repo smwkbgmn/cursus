@@ -20,6 +20,7 @@ typedef std::runtime_error	err_t;
 
 const str_t	errPrfx = "error: ";
 const str_t errMsg[] = {
+	errPrfx + "not found any value. please enter values for operation.",
 	errPrfx + "unoperated value has left",
 	errPrfx + "may not divide by 0",
 	errPrfx + "ensure the form of input does meet requirement",
@@ -29,6 +30,7 @@ const str_t errMsg[] = {
 };
 
 enum Msg {
+	EMPTY_VAL,
 	LEFT_VAL,
 	DVIDE_ZERO,
 	INVALID_INPUT,
@@ -46,9 +48,10 @@ class RPN {
 		RPN( const RPN & );
 		~RPN( void );
 
-		static void	_proceedOne( isstream_t&, value_t& );
+		static void	_proceed( isstream_t&, value_t& );
 		static void	_operate( value_t&, char );
 		static void _throwBadInput( isstream_t& );
+		static void	_throwBadArg( size_t );
 
 		RPN	&operator=( const RPN & );
 };

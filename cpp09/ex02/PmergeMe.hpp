@@ -3,6 +3,11 @@
 
 # include <iostream>
 
+// Container
+# include <vector>
+
+typedef unsigned int	uint_t;
+
 class PmergeMe
 {
 	/*
@@ -10,15 +15,19 @@ class PmergeMe
 		STRUCT - FORWARD DECLARE
 		TYPEDEF
 	*/
+	typedef std::vector<int>	vec_t;
 
 	/* INSTANTIATE */
 	/* ATTRIBUTE */
-	public:
+	private:
 		PmergeMe( void );
 		PmergeMe( const PmergeMe & );
 		~PmergeMe( void );
 
 	/* METHOD */
+	public:
+		static void	sort( vec_t& ) throw();
+
 	/* OPERATOR */
 		PmergeMe	&operator=( const PmergeMe & );
 
