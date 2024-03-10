@@ -18,10 +18,9 @@ typedef std::istringstream	isstream_t;
 typedef std::stack<int>		value_t;
 typedef std::runtime_error	err_t;
 
-const str_t	arithemetic = "+-*/";
-
-const str_t	errPrfx = "error: ";
-const str_t errMsg[] = {
+const str_t	arithemetic	= "+-*/";
+const str_t	errPrfx		= "error: ";
+const str_t errMsg[]	= {
 	errPrfx + "not found any value. please enter values for operation.",
 	errPrfx + "unoperated value has left",
 	errPrfx + "may not divide by 0",
