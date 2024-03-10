@@ -270,7 +270,7 @@ void PmergeMe::strVec( char* argv[], vec_uint_t& vec ) {
 			throw err_t( errMsg[INVALID_VAL] );
 
 		iss >> val;
-		if ( iss.fail() )
+		if ( !iss.eof() || iss.fail() )
 			throw err_t( errMsg[FAIL_GET_VAL] );
 		
 		vec.push_back( val );
@@ -286,7 +286,7 @@ void PmergeMe::strDeq( char* argv[], deq_uint_t& deq ) {
 			throw err_t( errMsg[INVALID_VAL] );
 
 		iss >> val;
-		if ( iss.fail() )
+		if ( !iss.eof() || iss.fail() )
 			throw err_t( errMsg[FAIL_GET_VAL] );
 		
 		deq.push_back( val );

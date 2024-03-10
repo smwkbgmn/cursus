@@ -18,12 +18,14 @@ void BitcoinExchange::_getData( const str_t& nameData ) {
 		str_t	line;
 		if ( std::getline( fileData.in, line ) && line == headData )
 			while ( std::getline( fileData.in, line ) )
-				_insertData( isstream_t( line ) );
+				_insertData( line );
 		else
 			throw err_t( errMsg[FAIL_RD_DATA] );
 }
 
-void BitcoinExchange::_insertData( isstream_t iss ) {
+void BitcoinExchange::_insertData( const str_t& line ) {
+	isstream_t	iss( line );
+
 	_rate.insert( std::make_pair( _getDate( iss, DATA ), _getValue( iss, DATA ) ) );
 }
 
@@ -33,13 +35,15 @@ void BitcoinExchange::outResult( const str_t& nameInput ) const {
 		str_t	line;
 		if ( std::getline( fileInput.in, line ) && line == headInput )
 			while ( std::getline( fileInput.in, line ) )
-				_printResult( isstream_t( line ) );
+				_printResult( line );
 		else
 			throw err_t( errMsg[FAIL_RD_INPUT] );
 }
 
-void BitcoinExchange::_printResult( isstream_t iss ) const {
+void BitcoinExchange::_printResult( const str_t& line ) const {
 	try {
+		isstream_t				iss( line );
+
 		date_s					key		= _getDate( iss, INPUT );
 		float					value	= _getValue( iss, INPUT );
 		map_t::const_iterator	rate	= _rate.lower_bound( key );
@@ -56,13 +60,9 @@ BitcoinExchange::date_s BitcoinExchange::_getDate( isstream_t& iss, FileType typ
 	str_t	strDate;
 	
 	switch ( type ) {
-		case DATA:
-			if ( std::getline( iss, strDate, ',' ) )
-				return date_s( strDate );
+		case DATA: if ( std::getline( iss, strDate, ',' ) ) return date_s( strDate );
 			break;
-		case INPUT:
-			if ( std::getline( iss, strDate, '|' ) )
-				return date_s( strDate );
+		case INPUT: if ( std::getline( iss, strDate, '|' ) ) return date_s( strDate );
 			break;
 	}
 

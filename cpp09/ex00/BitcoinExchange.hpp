@@ -79,8 +79,8 @@ class BitcoinExchange {
 		static bool	_success( const isstream_t& );
 
 		void		_getData( const str_t& );
-		void		_insertData( isstream_t );
-		void		_printResult( isstream_t ) const;
+		void		_insertData( const str_t& );
+		void		_printResult( const str_t& ) const;
 		date_s		_getDate( isstream_t&, FileType ) const;
 		float		_getValue( isstream_t&, FileType ) const;
 		void		_throwInvalidValue( float ) const;
