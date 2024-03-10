@@ -6,8 +6,7 @@
 # include <set>
 # include <algorithm>
 
-class Span
-{
+class Span {
 	public:
 		typedef std::set<int>::iterator	iterator;
 
@@ -15,29 +14,27 @@ class Span
 		struct duplicationExcpt: std::runtime_error { duplicationExcpt( void ); };
 		struct noSpanExcpt: std::runtime_error { noSpanExcpt( void ); };
 
-	private:
-		unsigned int	_size;
-		std::set<int>	_elem;
-		
 	public:
-		Span( void );
 		Span( const Span& );
 		explicit Span( unsigned int );
 		~Span( void );
 
-	public:
-		Span&	operator=( const Span& );
-
-	public:
 		void			addNumber( int );
 		void			addNumber( iterator, iterator );
 		unsigned int	shortestSpan( void ) const;
 		unsigned int	longestSpan( void ) const;
 	
 	private:
-		void	throwExceedSize( void ) const;
-		void	throwDuplication( int ) const;
-		void	throwNoSpan( void ) const;
+		unsigned int	_size;
+		std::set<int>	_elem;
+
+		Span( void );
+
+		void			throwExceedSize( void ) const;
+		void			throwDuplication( int ) const;
+		void			throwNoSpan( void ) const;
+
+		Span&			operator=( const Span& );
 
 };
 

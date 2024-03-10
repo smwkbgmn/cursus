@@ -310,39 +310,3 @@ void PmergeMe::print( const str_t& prfx, deq_uint_t& vec ) {
 		std::cout << *iter++ << ' ';
 	std::cout << std::endl;
 }
-
-
-/******** DEBUGGING *********/
-void PmergeMe::_dbgPrintVec( vec_uint_t& vec ) {
-	vec_uint_iter_t	start = vec.begin();
-
-	while ( start != vec.end() )
-		std::cout << *start++ << ' ';
-	std::cout << std::endl;
-}
-
-void PmergeMe::_dbgPrintVec( deq_uint_t& vec ) {
-	deq_uint_iter_t	start = vec.begin();
-
-	while ( start != vec.end() )
-		std::cout << *start++ << ' ';
-	std::cout << std::endl;
-}
-
-void PmergeMe::_dbgPrintVec( vec_pair_t& pairs ) {
-	vec_pair_t::iterator	iter = pairs.begin();
-
-	while ( iter != pairs.end() ) {
-		std::clog << iter->first << ", " << iter->second << std::endl;
-		iter++;
-	}
-}
-
-void PmergeMe::_dbgPrintHalf( vec_uint_t& arr, vec_uint_t& half ) {
-	std::clog << "doHalf\tarr\t: ";
-	_dbgPrintVec( arr );
-	
-	std::clog << "\thalf\t: ";
-	_dbgPrintVec( half );
-	std::clog << '\n';
-}
