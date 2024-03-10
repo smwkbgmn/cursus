@@ -6,8 +6,7 @@
 void myStack( void );
 void stdList( void );
 
-int main()
-{
+int main() {
 	myStack();
 	std::cout << std::endl;
 

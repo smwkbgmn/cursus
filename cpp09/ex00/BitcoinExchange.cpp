@@ -59,9 +59,11 @@ BitcoinExchange::date_s BitcoinExchange::_getDate( isstream_t& iss, FileType typ
 		case DATA:
 			if ( std::getline( iss, strDate, ',' ) )
 				return date_s( strDate );
+			break;
 		case INPUT:
 			if ( std::getline( iss, strDate, '|' ) )
 				return date_s( strDate );
+			break;
 	}
 
 	throw invalidDateExcpt();
@@ -91,7 +93,7 @@ bool BitcoinExchange::_success( const isstream_t& iss ) {
 
 /* STRUCT - FileStream */
 BitcoinExchange::FileStream::FileStream( const str_t& fileName ) {
-	in.open( fileName );
+	in.open( fileName.c_str() );
 
 	if ( !in.is_open() )
 		throw std::ios_base::failure( errMsg[FAIL_OPN_FILE] + fileName );

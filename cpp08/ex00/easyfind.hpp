@@ -6,9 +6,18 @@
 # include <exception>
 
 template<typename T>
-typename T::iterator easyfind( T &obj, int n )
-{
+typename T::iterator easyfind( T &obj, int n ) {
 	typename T::iterator	itr = std::find(obj.begin(), obj.end(), n);
+
+	if (itr == obj.end())
+		throw std::runtime_error("couldn't find entered value");
+
+	return itr;
+}
+
+template<typename T>
+typename T::const_iterator easyfind( const T &obj, int n ) {
+	typename T::const_iterator	itr = std::find(obj.begin(), obj.end(), n);
 
 	if (itr == obj.end())
 		throw std::runtime_error("couldn't find entered value");

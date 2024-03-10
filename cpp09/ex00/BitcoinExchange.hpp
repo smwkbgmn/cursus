@@ -2,6 +2,7 @@
 # define BITCOINEXCHANGE_HPP
 
 # include <iostream>
+# include <iomanip>
 # include <fstream>
 # include <sstream>
 
@@ -39,7 +40,7 @@ const str_t	errMsg[]	= {
 	errPrfx + "fail to open file "
 };
 
-const enum errIdx {
+enum errIdx {
 	FAIL_RD_DATA,
 	FAIL_RD_INPUT,
 	NO_DATA,

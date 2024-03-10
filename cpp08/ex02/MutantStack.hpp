@@ -4,8 +4,7 @@
 # include <stack>
 
 template<typename T>
-class MutantStack: public std::stack<T>
-{
+class MutantStack: public std::stack<T> {
 	public:
 		typedef typename MutantStack<T>::stack								stack;
 
@@ -32,7 +31,7 @@ class MutantStack: public std::stack<T>
 		const_reverse_iterator	crend( void ) { return stack::c.crend(); }
 
 	public:
-		MutantStack&	operator=( const MutantStack& target ) {
+		MutantStack&			operator=( const MutantStack& target ) {
 			if (this != target)
 				stack::operator=(target);
 			return *this;

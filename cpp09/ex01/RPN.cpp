@@ -21,7 +21,7 @@ int RPN::calculate( const str_t& input ) {
 		_proceed( iss, val );
 		iss >> std::ws;
 	}
-	_throwBadArg( val.size() );
+	_throwBadValue( val.size() );
 
 	return val.top();
 }
@@ -66,7 +66,7 @@ void RPN::_throwBadInput( isstream_t& iss ) {
 		throw err_t( errMsg[INVALID_INPUT] );
 }
 
-void RPN::_throwBadArg( size_t size ) {
+void RPN::_throwBadValue( size_t size ) {
 	if ( size == 0 )
 		throw err_t( errMsg[EMPTY_VAL] );
 	

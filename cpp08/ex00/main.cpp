@@ -15,27 +15,25 @@ int main( void )
 	std::deque<int>		deq(elem.begin(), elem.end());
 	std::list<int>		lst(elem.begin(), elem.end());
 
-	try
-	{
+	try {
 		std::cout << std::distance(vec.begin(), easyfind(vec, 3)) << std::endl;
 		std::cout << std::distance(deq.begin(), easyfind(deq, 3)) << std::endl;
 		std::cout << std::distance(lst.begin(), easyfind(lst, 3)) << std::endl;
 	}
-	catch (std::exception &excpt)
-	{
-		std::cout << excpt.what() << std::endl;
-	}
+	catch ( std::exception &excpt ) { std::cout << excpt.what() << std::endl; }
 
-	try
-	{
+	try {
 		std::cout << std::distance(vec.begin(), easyfind(vec, 5)) << std::endl;
 		std::cout << std::distance(deq.begin(), easyfind(deq, 5)) << std::endl;
 		std::cout << std::distance(lst.begin(), easyfind(lst, 5)) << std::endl;
-	}
-	catch (std::exception &excpt)
-	{
-		std::cout << excpt.what() << std::endl;
-	}
+	} catch (std::exception &excpt) { std::cout << excpt.what() << std::endl; }
+
+	const std::vector<int>	conVec(elem);
+	try { std::cout << std::distance(conVec.begin(), easyfind(conVec, 3)) << std::endl; }
+	catch (std::exception &excpt) { std::cout << excpt.what() << std::endl; }
+
+	try { std::cout << std::distance(conVec.begin(), easyfind(conVec, 5)) << std::endl; }
+	catch (std::exception &excpt) { std::cout << excpt.what() << std::endl; }
 
 	return 0;
 }

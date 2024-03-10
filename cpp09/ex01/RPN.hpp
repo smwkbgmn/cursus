@@ -53,7 +53,7 @@ class RPN {
 		static void	_proceed( isstream_t&, value_t& );
 		static void	_operate( value_t&, char );
 		static void _throwBadInput( isstream_t& );
-		static void	_throwBadArg( size_t );
+		static void	_throwBadValue( size_t );
 
 		RPN	&operator=( const RPN & );
 };

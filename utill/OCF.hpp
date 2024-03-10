@@ -5,21 +5,24 @@
 
 class OCF
 {
-	/* TYPEDEF */
+	public:
+	/*
+		ENUM
+		STRUCT - FORWARD DECLARE
+		TYPEDEF
+	*/
+
 	/* ATTRIBUTE */
 	/* INSTANTIATE */
-	public:
 		OCF( void );
 		OCF( const OCF & );
 		~OCF( void );
 
 	/* METHOD */
-	
 	/* OPERATOR */
-	public:
 		OCF	&operator=( const OCF & );
 
-	/* STRUCT */
+	/* STRUCT - DEFINE */
 };
 
 #endif

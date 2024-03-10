@@ -37,3 +37,8 @@ cpp09
 	ex00: map
 	ex01: stack
 	ex02: vector, deque
+
+interface
+vector	: push_back
+stack	: push
+map		: insert( make_pair<> )
