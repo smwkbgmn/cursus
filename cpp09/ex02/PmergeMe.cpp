@@ -33,10 +33,8 @@ void PmergeMe::sort( vec_uint_t& arr ) {
 		bool	odd = FALSE;
 		uint_t	val = 0;
 
-		if ( arr.size() % 2 == 1) {
-			odd = TRUE;
-			val = _getBack( arr );
-		}
+		if ( arr.size() % 2 == 1)
+			_getOdd( arr, odd, val );
 
 		vec_pair_t	pairs = _sortedPair( arr );
 		for ( vec_pair_iter_t iter = pairs.begin(); iter != pairs.end(); ++iter )
@@ -89,15 +87,6 @@ vec_pair_t PmergeMe::_merge( vec_pair_t& pair1, vec_pair_t& pair2 ) {
 	return merged;
 }
 
-void PmergeMe::_putOdd( vec_uint_t& arr, uint_t val ) {
-	if ( val <= *arr.rbegin() ) {
-		vec_uint_iter_t	iter = arr.begin();
-
-		arr.insert( _search( iter, iter + arr.size() - 1, val ), val );
-	}
-	else
-		arr.push_back( val );
-}
 
 void PmergeMe::_insert( vec_uint_t& arr, vec_pair_t& pairs ) {
 	for ( size_t thres = 0; thres < arr.size(); thres = _nextThreshold( thres ) ) {
@@ -124,6 +113,20 @@ vec_uint_iter_t PmergeMe::_search( vec_uint_iter_t left, vec_uint_iter_t right, 
 		return val < *left? left : right;
 }
 
+void PmergeMe::_getOdd( vec_uint_t& arr, bool& odd, uint_t& val ) {
+	odd = TRUE;
+	val = _getBack( arr );
+}
+
+void PmergeMe::_putOdd( vec_uint_t& arr, uint_t val ) {
+	if ( val <= *arr.rbegin() ) {
+		vec_uint_iter_t	iter = arr.begin();
+
+		arr.insert( _search( iter, iter + arr.size() - 1, val ), val );
+	}
+	else
+		arr.push_back( val );
+}
 
 
 /* METHOD - DEQUE */
@@ -135,10 +138,8 @@ void PmergeMe::sort( deq_uint_t& arr ) {
 		bool	odd = FALSE;
 		uint_t	val = 0;
 
-		if ( arr.size() % 2 == 1) {
-			odd = TRUE;
-			val = _getBack( arr );
-		}
+		if ( arr.size() % 2 == 1)
+			_getOdd( arr, odd, val );
 
 		deq_pair_t	pairs = _sortedPair( arr );
 		for ( deq_pair_iter_t iter = pairs.begin(); iter != pairs.end(); ++iter )
@@ -191,16 +192,6 @@ deq_pair_t PmergeMe::_merge( deq_pair_t& pair1, deq_pair_t& pair2 ) {
 	return merged;
 }
 
-void PmergeMe::_putOdd( deq_uint_t& arr, uint_t val ) {
-	if ( val < *arr.rbegin() ) {
-		deq_uint_iter_t	iter = arr.begin();
-
-		arr.insert( _search( iter, iter + arr.size() - 1, val ), val );
-	}
-	else
-		arr.push_back( val );
-}
-
 void PmergeMe::_insert( deq_uint_t& arr, deq_pair_t& pairs ) {
 	for ( size_t thres = 0; thres < arr.size(); thres = _nextThreshold( thres ) ) {
 		size_t	idx = _nextThreshold( thres );
@@ -224,6 +215,21 @@ deq_uint_iter_t PmergeMe::_search( deq_uint_iter_t left, deq_uint_iter_t right, 
 		return val < *mid? _search( left, mid, val ) : _search( mid + 1, right, val );
 	else
 		return val < *left? left : right;
+}
+
+void PmergeMe::_getOdd( deq_uint_t& arr, bool& odd, uint_t& val ) {
+	odd = TRUE;
+	val = _getBack( arr );
+}
+
+void PmergeMe::_putOdd( deq_uint_t& arr, uint_t val ) {
+	if ( val < *arr.rbegin() ) {
+		deq_uint_iter_t	iter = arr.begin();
+
+		arr.insert( _search( iter, iter + arr.size() - 1, val ), val );
+	}
+	else
+		arr.push_back( val );
 }
 
 
@@ -260,7 +266,7 @@ size_t PmergeMe::_nextThreshold( size_t thres ) {
 
 
 
-/* UTILL */
+/* INTERFACE */
 void PmergeMe::strVec( char* argv[], vec_uint_t& vec ) {
 	while ( *argv ) {
 		isstream_t	iss( *argv++ );
@@ -302,11 +308,11 @@ void PmergeMe::print( const str_t& prfx, vec_uint_t& vec ) {
 	std::cout << std::endl;
 }
 
-void PmergeMe::print( const str_t& prfx, deq_uint_t& vec ) {
-	deq_uint_iter_t iter = vec.begin();
+void PmergeMe::print( const str_t& prfx, deq_uint_t& deq ) {
+	deq_uint_iter_t iter = deq.begin();
 
 	std::cout << prfx;
-	while ( iter != vec.end() )
+	while ( iter != deq.end() )
 		std::cout << *iter++ << ' ';
 	std::cout << std::endl;
 }

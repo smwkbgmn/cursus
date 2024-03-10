@@ -68,19 +68,23 @@ class PmergeMe {
 		static vec_pair_t		_sortedPair( vec_uint_t& );
 		static void				_split( vec_uint_t&, vec_uint_t&, vec_uint_t& );
 		static vec_pair_t		_merge( vec_pair_t&, vec_pair_t& );
-		static void				_putOdd( vec_uint_t&, uint_t );
 
 		static void				_insert( vec_uint_t&, vec_pair_t& );
 		static vec_uint_iter_t	_search( vec_uint_iter_t, vec_uint_iter_t, uint_t );
+
+		static void				_getOdd( vec_uint_t&, bool&, uint_t& );
+		static void				_putOdd( vec_uint_t&, uint_t );
 
 		/* METHOD - DEQUE */
 		static deq_pair_t		_sortedPair( deq_uint_t& );
 		static void				_split( deq_uint_t&, deq_uint_t&, deq_uint_t& );
 		static deq_pair_t		_merge( deq_pair_t&, deq_pair_t& );
-		static void				_putOdd( deq_uint_t&, uint_t );
 
 		static void				_insert( deq_uint_t&, deq_pair_t& );
 		static deq_uint_iter_t	_search( deq_uint_iter_t, deq_uint_iter_t, uint_t );
+		
+		static void				_getOdd( deq_uint_t&, bool&, uint_t& );
+		static void				_putOdd( deq_uint_t&, uint_t );
 
 		/* METHOD - COMMON */
 		static size_t			_getMid( size_t );
