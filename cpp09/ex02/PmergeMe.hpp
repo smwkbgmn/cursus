@@ -90,14 +90,6 @@ class PmergeMe {
 		static size_t			_nextThreshold( size_t );
 
 		PmergeMe				&operator=( const PmergeMe & );
-
-	/* DEBUGGING */
-	private:
-		static void	_dbgPrintVec( vec_uint_t& );
-		static void	_dbgPrintVec( deq_uint_t& );
-		static void	_dbgPrintVec( vec_pair_t& );
-		static void	_dbgPrintHalf( vec_uint_t&, vec_uint_t& );
-
 };
 
 #endif

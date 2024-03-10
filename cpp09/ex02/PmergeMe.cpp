@@ -132,18 +132,21 @@ void PmergeMe::sort( deq_uint_t& arr ) {
 		throw err_t( errMsg[EMPTY_VAL] );
 
 	if ( arr.size() > 1) {
-		uint_t	oddval = 0;
+		bool	odd = FALSE;
+		uint_t	val = 0;
 
-		if ( arr.size() % 2 == 1)
-			oddval = _getBack( arr );
+		if ( arr.size() % 2 == 1) {
+			odd = TRUE;
+			val = _getBack( arr );
+		}
 
 		deq_pair_t	pairs = _sortedPair( arr );
 		for ( deq_pair_iter_t iter = pairs.begin(); iter != pairs.end(); ++iter )
 			arr.push_back( iter->first );
 
 		_insert( arr, pairs );
-		if ( oddval )
-			_putOdd( arr, oddval );
+		if ( odd )
+			_putOdd( arr, val );
 	}
 }
 
