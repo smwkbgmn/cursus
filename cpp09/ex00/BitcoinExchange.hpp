@@ -122,6 +122,7 @@ class BitcoinExchange {
 			bool	validDay( void ) const;
 			bool	yearLeap( bits_t ) const;
 			void	print( void ) const;
+			void	throwInvalidForm( const str_t&, int ) const;
 			void	throwInvalidValue( bits_t, unsigned int, unsigned int ) const;
 
 			bool	operator<( const Date& ) const;

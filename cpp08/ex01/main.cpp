@@ -40,14 +40,7 @@ void noSpan( void ) {
 
 		noSize.addNumber(42);
 	} catch (std::exception &excpt) { std::cout << excpt.what() << '\n'; }
-
-	try {
-		Span	noSpan;
-
-		std::cout << noSpan.shortestSpan() << '\n';
-		std::cout << noSpan.longestSpan() << '\n';
-	} catch (std::exception &excpt) { std::cout << excpt.what() << '\n'; }
-
+	
 	try {
 		Span	noSpan(1);
 

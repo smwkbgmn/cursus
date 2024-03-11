@@ -33,8 +33,10 @@ void PmergeMe::sort( vec_uint_t& arr ) {
 		bool	odd = FALSE;
 		uint_t	val = 0;
 
-		if ( arr.size() % 2 == 1)
-			_getOdd( arr, odd, val );
+		if ( arr.size() % 2 == 1) {
+			odd = TRUE;
+			val = _getBack( arr );
+		}
 
 		vec_pair_t	pairs = _sortedPair( arr );
 		for ( vec_pair_iter_t iter = pairs.begin(); iter != pairs.end(); ++iter )
@@ -113,11 +115,6 @@ vec_uint_iter_t PmergeMe::_search( vec_uint_iter_t left, vec_uint_iter_t right, 
 		return val < *left? left : right;
 }
 
-void PmergeMe::_getOdd( vec_uint_t& arr, bool& odd, uint_t& val ) {
-	odd = TRUE;
-	val = _getBack( arr );
-}
-
 void PmergeMe::_putOdd( vec_uint_t& arr, uint_t val ) {
 	if ( val <= *arr.rbegin() ) {
 		vec_uint_iter_t	iter = arr.begin();
@@ -138,8 +135,10 @@ void PmergeMe::sort( deq_uint_t& arr ) {
 		bool	odd = FALSE;
 		uint_t	val = 0;
 
-		if ( arr.size() % 2 == 1)
-			_getOdd( arr, odd, val );
+		if ( arr.size() % 2 == 1) {
+			odd = TRUE;
+			val = _getBack( arr );
+		}
 
 		deq_pair_t	pairs = _sortedPair( arr );
 		for ( deq_pair_iter_t iter = pairs.begin(); iter != pairs.end(); ++iter )
@@ -217,11 +216,6 @@ deq_uint_iter_t PmergeMe::_search( deq_uint_iter_t left, deq_uint_iter_t right, 
 		return val < *left? left : right;
 }
 
-void PmergeMe::_getOdd( deq_uint_t& arr, bool& odd, uint_t& val ) {
-	odd = TRUE;
-	val = _getBack( arr );
-}
-
 void PmergeMe::_putOdd( deq_uint_t& arr, uint_t val ) {
 	if ( val < *arr.rbegin() ) {
 		deq_uint_iter_t	iter = arr.begin();
@@ -247,14 +241,14 @@ pair_t PmergeMe::_getPair( uint_t val1, uint_t val2 ) {
 }
 
 uint_t PmergeMe::_getBack( vec_uint_t& arr ) {
-	uint_t	val = arr.at( arr.size() - 1 );
+	uint_t	val = *arr.rbegin();
 	arr.pop_back();
 	
 	return val;
 }
 
 uint_t PmergeMe::_getBack( deq_uint_t& arr ) {
-	uint_t	val = arr.at( arr.size() - 1 );
+	uint_t	val = *arr.rbegin();
 	arr.pop_back();
 	
 	return val;

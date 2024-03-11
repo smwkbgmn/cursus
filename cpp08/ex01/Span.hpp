@@ -24,6 +24,7 @@ class Span {
 		unsigned int	shortestSpan( void ) const;
 		unsigned int	longestSpan( void ) const;
 	
+
 	private:
 		unsigned int	_size;
 		std::set<int>	_elem;

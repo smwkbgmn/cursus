@@ -14,11 +14,13 @@ BitcoinExchange::~BitcoinExchange( void ) {
 /* METHOD */
 void BitcoinExchange::_getData( const str_t& nameData ) {
 		file_s	fileData( nameData );
-
 		str_t	line;
+		
 		if ( std::getline( fileData.in, line ) && line == headData )
-			while ( std::getline( fileData.in, line ) )
-				_insertData( line );
+			while ( std::getline( fileData.in, line ) ) {
+				if ( !line.empty() )
+					_insertData( line );
+			}
 		else
 			throw err_t( errMsg[FAIL_RD_DATA] );
 }
@@ -31,11 +33,13 @@ void BitcoinExchange::_insertData( const str_t& line ) {
 
 void BitcoinExchange::outResult( const str_t& nameInput ) const {
 		file_s	fileInput( nameInput );
-
 		str_t	line;
+
 		if ( std::getline( fileInput.in, line ) && line == headInput )
-			while ( std::getline( fileInput.in, line ) )
-				_printResult( line );
+			while ( std::getline( fileInput.in, line ) ) {
+				if ( !line.empty() )
+					_printResult( line );
+			}
 		else
 			throw err_t( errMsg[FAIL_RD_INPUT] );
 }
@@ -106,12 +110,18 @@ BitcoinExchange::Date::Date( const str_t& input ): date( 0 ) { convert( input );
 
 void BitcoinExchange::Date::convert( const str_t& input ) {
 	isstream_t	iss( input );
-
 	str_t		substr;
+
 	for ( int id = 0; id < 3; ++id ) {
 		if ( !std::getline( iss, substr, '-' ) && id < 2 )
 			throw invalidDateExcpt();
 
+		// Remove trailing spaces
+		if ( id == D )
+			while ( *substr.rbegin() == ' ' )
+				substr.erase( substr.size() - 1 );
+
+		throwInvalidForm( substr, id );
 		date = date | toBits( substr, id );
 	}
 
@@ -119,19 +129,11 @@ void BitcoinExchange::Date::convert( const str_t& input ) {
 		throw invalidDateExcpt();
 }
 
-BitcoinExchange::Date::bits_t BitcoinExchange::Date::toBits( const str_t& input, int id ) const {
-	isstream_t	iss( input );
+BitcoinExchange::Date::bits_t BitcoinExchange::Date::toBits( const str_t& substr, int id ) const {
+	isstream_t	iss( substr );
 	bits_t		val;
 
-	// May not use sign character at date
-	if ( !std::isdigit( *input.begin() ) )
-		throw invalidDateExcpt();
-
 	iss >> val;
-	// Remove trail spaces
-	if ( id == 2 && !iss.eof() )
-		iss >> std::ws;
-
 	if ( !_success(iss) )
 		throw invalidDateExcpt();
 
@@ -175,6 +177,18 @@ void BitcoinExchange::Date::print( void ) const {
 	std::cout << std::setw( 4 ) << std::setfill( '0' ) << ( date >> PAD_Y & HLD_Y ) << '-';
 	std::cout << std::setw( 2 ) << std::setfill( '0' ) << ( date >> PAD_M & HLD_M ) << '-';
 	std::cout << std::setw( 2 ) << std::setfill( '0' ) << ( date >> PAD_D & HLD_D );
+}
+
+void BitcoinExchange::Date::throwInvalidForm( const str_t& substr, int id ) const {
+	// May not use sign character at date
+		if ( !std::isdigit( *substr.begin() ) )
+			throw invalidDateExcpt();
+
+	switch ( id ) {
+		case Y: if ( substr.size() != 4 ) throw invalidDateExcpt(); break;
+		case M: if ( substr.size() != 2 ) throw invalidDateExcpt(); break;
+		case D: if ( substr.size() != 2 ) throw invalidDateExcpt(); break;
+	}
 }
 
 void BitcoinExchange::Date::throwInvalidValue( bits_t val, unsigned int min, unsigned int max ) const {

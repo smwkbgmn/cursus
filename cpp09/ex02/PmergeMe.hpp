@@ -72,7 +72,6 @@ class PmergeMe {
 		static void				_insert( vec_uint_t&, vec_pair_t& );
 		static vec_uint_iter_t	_search( vec_uint_iter_t, vec_uint_iter_t, uint_t );
 
-		static void				_getOdd( vec_uint_t&, bool&, uint_t& );
 		static void				_putOdd( vec_uint_t&, uint_t );
 
 		/* METHOD - DEQUE */
@@ -83,7 +82,6 @@ class PmergeMe {
 		static void				_insert( deq_uint_t&, deq_pair_t& );
 		static deq_uint_iter_t	_search( deq_uint_iter_t, deq_uint_iter_t, uint_t );
 		
-		static void				_getOdd( deq_uint_t&, bool&, uint_t& );
 		static void				_putOdd( deq_uint_t&, uint_t );
 
 		/* METHOD - COMMON */
