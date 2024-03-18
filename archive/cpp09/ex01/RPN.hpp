@@ -15,7 +15,7 @@
 
 typedef std::string			str_t;
 typedef std::istringstream	isstream_t;
-typedef std::stack<int>		value_t;
+typedef std::stack<int>		stack_t;
 typedef std::runtime_error	err_t;
 
 const str_t	arithemetic	= "+-*/";
@@ -49,8 +49,8 @@ class RPN {
 		RPN( const RPN & );
 		~RPN( void );
 
-		static void	_proceed( isstream_t&, value_t& );
-		static void	_operate( value_t&, char );
+		static void	_proceed( isstream_t&, stack_t& );
+		static void	_operate( stack_t&, char );
 		static void _throwBadInput( isstream_t& );
 		static void	_throwBadValue( size_t );
 

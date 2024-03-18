@@ -101,6 +101,7 @@ void PmergeMe::_insert( vec_uint_t& arr, vec_pair_t& pairs ) {
 		while ( idx > thres ) {
 			uint_t	val = pairs.at( idx-- - 1 ).second;
 
+			std::clog << "finding " << val << std::endl;
 			arr.insert( _search( arr.begin(), arr.begin() + right, val ), val );	
 		}
 	}
@@ -108,6 +109,8 @@ void PmergeMe::_insert( vec_uint_t& arr, vec_pair_t& pairs ) {
 
 vec_uint_iter_t PmergeMe::_search( vec_uint_iter_t left, vec_uint_iter_t right, uint_t val ) {
 	vec_uint_iter_t	mid = left + ( std::distance( left, right ) / 2 );
+
+	std::clog << "\tBinarySearch: " << *left << ", " << *mid << ", " << *right << std::endl;
 
 	if ( mid != left )
 		return val < *mid? _search( left, mid, val ) : _search( mid + 1, right, val );
@@ -211,9 +214,11 @@ deq_uint_iter_t PmergeMe::_search( deq_uint_iter_t left, deq_uint_iter_t right, 
 	deq_uint_iter_t	mid = left + ( std::distance( left, right ) / 2 );
 
 	if ( mid != left )
-		return val < *mid? _search( left, mid, val ) : _search( mid + 1, right, val );
+		return val < *mid?
+			_search( left, mid, val ) : _search( mid + 1, right, val );
 	else
-		return val < *left? left : right;
+		return val < *left?
+			left : right;
 }
 
 void PmergeMe::_putOdd( deq_uint_t& arr, uint_t val ) {

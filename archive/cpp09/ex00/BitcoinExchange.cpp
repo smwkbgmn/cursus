@@ -181,8 +181,8 @@ void BitcoinExchange::Date::print( void ) const {
 
 void BitcoinExchange::Date::throwInvalidForm( const str_t& substr, int id ) const {
 	// May not use sign character at date
-		if ( !std::isdigit( *substr.begin() ) )
-			throw invalidDateExcpt();
+	if ( !std::isdigit( *substr.begin() ) )
+		throw invalidDateExcpt();
 
 	switch ( id ) {
 		case Y: if ( substr.size() != 4 ) throw invalidDateExcpt(); break;
