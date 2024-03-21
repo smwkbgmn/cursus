@@ -10,8 +10,8 @@ int RPN::calculate( const str_t& input ) {
 		_proceed( iss, val );
 		iss >> std::ws;
 	}
-	_throwBadValue( val.size() );
 
+	_throwBadValue( val.size() );
 	return val.top();
 }
 
