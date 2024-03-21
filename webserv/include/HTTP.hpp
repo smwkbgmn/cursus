@@ -8,23 +8,9 @@
 	redirection
 */
 
-# define OPTIONS 3
-
-enum methodIdx {
-	GET,
-	POST,
-	DELETE
-};
-
-const str_t	methodName[OPTIONS] = {
-	"GET",
-	"POST",
-	"DELETE"
-};
-
 class HTTP {
 	public:
-		static void	response( Transaction&, socket_t );
+		static void	respone( Transaction&, socket_t );
 	
 	private:
 		static void	_method( Transaction& );

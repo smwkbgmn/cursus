@@ -7,6 +7,5 @@ int main( void ) {
 		server.listening();
 	} catch ( err_t &err ) { std::cout << err.what() << std::endl; }
 
-	
 	return 0;
 }

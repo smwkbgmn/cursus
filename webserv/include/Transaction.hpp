@@ -10,27 +10,46 @@
 	GET: refuse body contents
 */
 
+# define OPTIONS 3
+
+enum methodID {
+	GET,
+	POST,
+	DELETE
+};
+
+const str_t	methodName[OPTIONS] = {
+	"GET",
+	"POST",
+	"DELETE"
+};
 
 class Request {
 	public:
+		methodID	method;
+		str_t		url;
+		str_t		version;
 		
 	private:
-		enum ID {
-			METHOD,
-			URL,
-			VERSION,
-			HEADER,
-			BODY
-		};
 };
 
 class Response {
 	// redirection
+	public:
+		str_t		version;
+		status_t	stat;
+		str_t		msg;
+		str_t		body;
+
+	private:
+		struct ResponseLine {
+		};
 };
 
-class Transaction {
+class Transaction: Request, Response {
 	public:
-		Transaction( const vec_str_t& );
+		Transaction( const str_t& );
+		~Transaction( void );
 		
 		/* Methods for parsing request &
 		writing response */
@@ -38,8 +57,6 @@ class Transaction {
 		/* Resource Mapping(Docroot) */
 
 	private:
-		Request		_msgIn;
-		Response	_msgOut;
 };
 
 #endif

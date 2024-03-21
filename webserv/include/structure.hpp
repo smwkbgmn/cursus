@@ -7,11 +7,13 @@
 
 /* CONTAINER */
 # include <vector>
+# include <map>
 
 /* UTILL */
 # include <string>
 
 typedef int						socket_t;
+typedef unsigned int			status_t;
 
 typedef std::string				str_t;
 

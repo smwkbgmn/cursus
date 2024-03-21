@@ -1,13 +1,6 @@
 #include "Client.hpp"
 
-Client::Client( void ) {
-	addrSize = sizeof( addr );
-	sock = accept( sock, (struct sockaddr* )&addr, &addrSize );
-
-	if ( sock == ERROR )
-		throw err_t( "fail to accepting connection" );
-}
-
+Client::Client( socket_t sockServer ): TCP( sockServer ) {}
 Client::~Client( void ) { close( sock ); }
 
 void Client::receiving( void ) { 
@@ -18,7 +11,6 @@ void Client::receiving( void ) {
 		throw err_t( "fail to read from socket" );
 
 	std::cout << "Received request:\n" << buf << std::endl;
-
 }
 
 void Client::sending( void ) {

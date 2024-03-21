@@ -1,19 +1,18 @@
 #ifndef SERVER_HPP
 # define SERVER_HPP
 
+# include "ATCP.hpp"
 # include "Client.hpp"
 
-class Server {
+class Server: public TCP {
 	public:
-		struct sockaddr_in	addr;
-		socket_t			sock;
-
 		Server( void );
 		~Server( void );
 
 		void	listening( void );
 
 	private:
+		Server( socket_t );
 };
 
 #endif
