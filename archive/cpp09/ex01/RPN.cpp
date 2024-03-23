@@ -3,7 +3,7 @@
 /* METHOD */
 int RPN::calculate( const str_t& input ) {
 	isstream_t	iss( input );
-	stack_t		val;
+	stack_int_t		val;
 
 	iss >> std::ws;
 	while ( !iss.eof() ) {
@@ -11,11 +11,12 @@ int RPN::calculate( const str_t& input ) {
 		iss >> std::ws;
 	}
 
+	std::cout << "wtf static test integer is " << test << std::endl;
 	_throwBadValue( val.size() );
 	return val.top();
 }
 
-void RPN::_proceed( isstream_t& iss, stack_t& val ) {
+void RPN::_proceed( isstream_t& iss, stack_int_t& val ) {
 	char	chr;
 	
 	iss >> chr;
@@ -29,7 +30,7 @@ void RPN::_proceed( isstream_t& iss, stack_t& val ) {
 		throw err_t( errMsg[INVALID_OPER] );
 }
 
-void RPN::_operate( stack_t& val, char operation ) {
+void RPN::_operate( stack_int_t& val, char operation ) {
 	if ( val.size() < 2 )
 		throw err_t( errMsg[FAIL_GET_VAL] );
 

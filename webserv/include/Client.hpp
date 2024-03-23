@@ -1,10 +1,10 @@
 #ifndef CLIENT_HPP
 # define CLIENT_HPP
 
-# include "ATCP.hpp"
+# include "ASocket.hpp"
 # include "Server.hpp"
 
-class Client: public TCP {
+class Client: ASocket {
 	public:
 		Client( socket_t );
 		~Client( void );

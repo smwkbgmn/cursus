@@ -29,12 +29,12 @@ class Request {
 		methodID	method;
 		str_t		url;
 		str_t		version;
+		str_t		body;
 		
 	private:
 };
 
 class Response {
-	// redirection
 	public:
 		str_t		version;
 		status_t	stat;
@@ -50,9 +50,6 @@ class Transaction: Request, Response {
 	public:
 		Transaction( const str_t& );
 		~Transaction( void );
-		
-		/* Methods for parsing request &
-		writing response */
 
 		/* Resource Mapping(Docroot) */
 

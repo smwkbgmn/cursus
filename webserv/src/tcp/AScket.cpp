@@ -1,6 +1,6 @@
-#include "ATCP.hpp"
+#include "ASocket.hpp"
 
-ATCP::ATCP( void ) {
+ASocket::ASocket( void ) {
 	sock = socket( AF_INET, SOCK_STREAM, 0 );
 	if ( sock == ERROR )
 		throw err_t( "fail to create socket" );
@@ -13,7 +13,7 @@ ATCP::ATCP( void ) {
 		throw err_t( "fail to bind" );
 }
 
-ATCP::ATCP( socket_t sockServer ) {
+ASocket::ASocket( socket_t sockServer ) {
 	addrSize = sizeof( addr );
 	sock = accept( sockServer, ( struct sockaddr* )&addr, &addrSize );
 
@@ -21,4 +21,4 @@ ATCP::ATCP( socket_t sockServer ) {
 		throw err_t( "fail to accepting connection" );
 }
 
-ATCP::~ATCP( void ) {}
+ASocket::~ASocket( void ) {}

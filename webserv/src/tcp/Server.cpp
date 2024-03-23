@@ -1,6 +1,6 @@
 #include "Server.hpp"
 
-Server::Server( void ): TCP() {}
+Server::Server( void ): ASocket() {}
 Server::~Server( void ) { close( sock ); }
 
 void Server::listening( void ) {

@@ -1,6 +1,6 @@
 #include "Client.hpp"
 
-Client::Client( socket_t sockServer ): TCP( sockServer ) {}
+Client::Client( socket_t sockServer ): ASocket( sockServer ) {}
 Client::~Client( void ) { close( sock ); }
 
 void Client::receiving( void ) { 

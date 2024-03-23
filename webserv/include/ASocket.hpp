@@ -40,15 +40,15 @@
 	getprotobyname
 */
 
-typedef class ATCP {
+class ASocket {
 	public:
 		struct sockaddr_in	addr;
 		socklen_t			addrSize;
 		socket_t			sock;
 
-		ATCP( void );
-		ATCP( socket_t );
-		virtual ~ATCP( void ) = 0;
-}	TCP;
+		ASocket( void );
+		ASocket( socket_t );
+		virtual ~ASocket( void ) = 0;
+};
 
 #endif
