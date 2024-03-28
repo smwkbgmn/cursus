@@ -27,8 +27,8 @@ class File {
 	private:
 		File( void );
 		File( const File& );
-
 		File&	operator=( const File& );
+
 };
 
 #endif

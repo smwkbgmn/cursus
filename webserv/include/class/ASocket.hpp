@@ -8,6 +8,7 @@
 # include <cstring>
 # include <stdio.h>
 
+# include "log.hpp"
 # include "structure.hpp"
 # include "error.hpp"
 

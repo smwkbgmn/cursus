@@ -2,24 +2,48 @@
 # define HTTP_HPP
 
 # include "Transaction.hpp"
-# include "File.hpp"
 
 /*
 	[Any HTTP method and resources]
 	GET, POST, DELETE
 	redirection
+	CGI
 */
+
+# define CNT_METHOD 3
+# define CNT_VERSION 4
+
+// Shitty shit versin limitation: initializer list
+const str_t	strMethod[] = {
+	"GET",
+	"POST",
+	"DELETE"
+};
+
+const str_t	strVersion[] = {
+	"0.9",
+	"1.0",
+	"1.1",
+	"2.0"
+};
+
 
 class HTTP {
 	public:
-		static method_t		method;
-		static status_t		status;	
+		static str_t		http;
+		static vec_str_t	version;
+		static vec_str_t	method;
+		static status_t		status;
+		static mime_t		mime;
 
-		static void	respone( Transaction&, socket_t );
-		static void	init( const str_t&, const str_t& );
-	
+		static void			init( const str_t&, const str_t& );
+		static void			respone( Transaction&, socket_t );
+		// CGI
+
 	private:
-		static void	_method( Transaction& );
+		static void			_assignVec( vec_str_t&, const str_t[], size_t );
+		static void			_assignStatus( const str_t& );
+		static void			_assignMime( const str_t& );
 
 };
 
@@ -32,6 +56,7 @@ The semantics of the GET method change to a “conditional GET” if the request
 The semantics of the GET method change to a “partial GET” if the request message includes a Range header field. A partial GET requests that only part of the entity be transferred, as described in section 14.35. The partial GET method is intended to reduce unnecessary network usage by allowing partially-retrieved entities to be completed without transferring data already held by the client.
 The response to a GET request is cacheable if and only if it meets the requirements for HTTP caching described in section 13.
 See section 15.1.3 for security considerations when used for forms.
+
 
 9.5 POST
 The POST method is used to request that the origin server accept the entity enclosed in the request as a new subordinate of the resource identified by the Request-URI in the Request-Line. POST is designed to allow a uniform method to cover the following functions:
@@ -55,6 +80,43 @@ The DELETE method requests that the origin server delete the resource identified
 A successful response SHOULD be 200 (OK) if the response includes an entity describing the status, 202 (Accepted) if the action has not yet been enacted, or 204 (No Content) if the action has been enacted but the response does not include an entity.
 If the request passes through a cache and the Request-URI identifies one or more currently cached entities, those entries SHOULD be treated as stale. Responses to this method are not cacheable.
 
+The scheme and host are case-insensitive and normally provided in lowercase; all other components are compared in a case-sensitive manner.
 
+For example, the following three URIs are equivalent:
+
+   http://example.com:80/~smith/home.html
+   http://EXAMPLE.com/%7Esmith/home.html
+   http://EXAMPLE.com:/%7esmith/home.html
+
+
+4.3.1. URI Origin
+The origin for a given URI is the triple of scheme, host, and port after normalizing the scheme and host to lowercase and normalizing the port to remove any leading zeros. If port is elided from the URI, the default port for that scheme is used. For example, the URI
+
+   https://Example.Com/happy.js
+would have the origin
+
+   { "https", "example.com", "443" }
+
+
+5.2. Field Lines and Combined Field Value
+Field sections are composed of any number of field lines, each with a field name (see Section 5.1) identifying the field, and a field line value that conveys data for that instance of the field.
+
+When a field name is only present once in a section, the combined field value for that field consists of the corresponding field line value. When a field name is repeated within a section, its combined field value consists of the list of corresponding field line values within that section, concatenated in order, with each field line value separated by a comma.
+
+For example, this section:
+
+Example-Field: Foo, Bar
+Example-Field: Baz
+contains two field lines, both with the field name "Example-Field". The first field line has a field line value of "Foo, Bar", while the second field line value is "Baz". The field value for "Example-Field" is the list "Foo, Bar, Baz".
+
+A server MUST NOT apply a request to the target resource until it receives the entire request header section, since later header field lines might include conditionals, authentication credentials, or deliberately misleading duplicate header fields that could impact request processing.
+
+
+5.4. Field Limits
+HTTP does not place a predefined limit on the length of each field line, field value, or on the length of a header or trailer section as a whole, as described in Section 2. Various ad hoc limitations on individual lengths are found in practice, often depending on the specific field's semantics.
+
+A server that receives a request header field line, field value, or set of fields larger than it wishes to process MUST respond with an appropriate 4xx (Client Error) status code. Ignoring such header fields would increase the server's vulnerability to request smuggling attacks (Section 11.2 of [HTTP/1.1]).
+
+A client MAY discard or truncate received field lines that are larger than the client wishes to process if the field semantics are such that the dropped value(s) can be safely ignored without changing the message framing or response semantics.
 */
 

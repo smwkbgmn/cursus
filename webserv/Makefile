@@ -1,13 +1,12 @@
-NAME		= Webserv
+NAME		= webserv
 
 CPP			= c++
 FLAG		= -Wall -Wextra -Werror \
-$(FLG_STD) -I include
+$(FLG_STD) -I include -I include/class
 
 FLG_STD		= -std=c++98
 
 SRC			= \
-$(wildcard *.cpp) \
 $(wildcard src/*.cpp) \
 $(wildcard src/cgi/*.cpp) \
 $(wildcard src/http/*.cpp) \

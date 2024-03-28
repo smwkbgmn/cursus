@@ -10,7 +10,7 @@ void Client::receiving( void ) {
 	if ( bytesRead == ERROR ) 
 		throw err_t( "fail to read from socket" );
 
-	std::cout << "Received request:\n" << buf << std::endl;
+	logfile.fs << buf;
 }
 
 void Client::sending( void ) {
