@@ -18,3 +18,14 @@ std::string strTime( void ) {
 	
 	return std::string( buf );
 }
+
+
+//////////////// DEBUGGING ///////////////////
+
+void
+printVec( vec_str_t& target, const str_t title ) {
+	 std::clog << title << std::endl;
+
+	for ( vec_str_iter_t iter = target.begin(); iter != target.end(); ++iter )
+		std::clog << *iter << std::endl;
+}

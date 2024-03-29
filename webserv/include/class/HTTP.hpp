@@ -2,6 +2,8 @@
 # define HTTP_HPP
 
 # include "Transaction.hpp"
+# include "Client.hpp"
+# include "log.hpp"
 
 /*
 	[Any HTTP method and resources]
@@ -12,6 +14,11 @@
 
 # define CNT_METHOD 3
 # define CNT_VERSION 4
+
+const str_t	nameStatus		= "keyStatus.txt";
+const str_t	nameMime		= "keyMime.txt";
+const str_t	nameHeaderIn	= "keyHeaderIn.txt";
+const str_t	nameHeaderOut	= "keyHedaerOut.txt";
 
 // Shitty shit versin limitation: initializer list
 const str_t	strMethod[] = {
@@ -27,25 +34,43 @@ const str_t	strVersion[] = {
 	"2.0"
 };
 
-
 class HTTP {
 	public:
 		static str_t		http;
 		static vec_str_t	version;
 		static vec_str_t	method;
+		static vec_str_t	header_in;
+		static vec_str_t	header_out;
 		static status_t		status;
 		static mime_t		mime;
 
-		static void			init( const str_t&, const str_t& );
-		static void			respone( Transaction&, socket_t );
+		static void			init( void );
+		static void			sending( const Client&, const Request& );
+	
+		static str_t		GET( const str_t& );
+		// static void			POST( const str_t& );
+		// static void			DELETE( const str_t& );
+
 		// CGI
+		// Redirect
 
 	private:
+		static void			_assignHeader( void );
+		static void			_assignStatus( void );
+		static void			_assignMime( void );
 		static void			_assignVec( vec_str_t&, const str_t[], size_t );
-		static void			_assignStatus( const str_t& );
-		static void			_assignMime( const str_t& );
+
+		static const char*	_toData( const Response& );
 
 };
+
+template<typename T>
+typename T::iterator
+lookupStr( T& obj, str_t token ) { return std::find( obj.begin(), obj.end(), token ); }
+
+template<typename T>
+typename T::iterator
+lookupUint( T& obj, uint_t token ) { return std::find( obj.begin(), obj.end(), token ); }
 
 #endif
 

@@ -15,19 +15,16 @@
 	field-line = field-name ":" OWS field-value OWS
 */
 
-Transaction::Transaction( const str_t& msgRequest ): Request( msgRequest ) {}
-
-
-/* BASE - REQUEST */
-Request::Request( const str_t& msgRequest ) {
+/* REQUEST */
+Request::Request( const str_t& msgRqst ) {
 	size_t	pos = 0;
 	str_t	substr;
 
 	// CRLF could be replaced with only LF (see RFC)
-	substr = msgRequest.substr( pos, pos = msgRequest.find( CRLF, pos ) );
+	substr = msgRqst.substr( pos, pos = msgRqst.find( CRLF, pos ) );
 	_getLine( substr );
 
-	while ( !(substr = msgRequest.substr( pos + 2, pos = msgRequest.find( CRLF, pos ) ) ).empty() )
+	while ( !(substr = msgRqst.substr( pos + 2, pos = msgRqst.find( CRLF, pos ) ) ).empty() )
 		_getHeader( substr );
 
 	// _getBody(  );
@@ -44,7 +41,7 @@ Request::_getLine( str_t line ) {
 
 void
 Request::_assignMethod( str_t token ) {
-	vec_str_iter_t	iter = _find( HTTP::method, token );
+	vec_str_iter_t	iter = lookupStr( HTTP::method, token );
 
 	if ( iter == HTTP::method.end() )
 		throw err_t( "_assignMethod: " + errMsg[INVALID_REQUEST_LINE] );
@@ -62,7 +59,7 @@ Request::_assignVersion( str_t token ) {
 	if ( _token( iss, '/' ) != HTTP::http )
 		throw err_t( "_assignVersion: " + errMsg[INVALID_REQUEST_LINE] );
 	
-	vec_str_iter_t iter = _find( HTTP::version, _token( iss, NONE ) );
+	vec_str_iter_t iter = lookupStr( HTTP::version, _token( iss, NONE ) );
 
 	if ( iter == HTTP::version.end() )
 		throw err_t( "_assignVersion: " + errMsg[INVALID_REQUEST_LINE] );
@@ -70,18 +67,20 @@ Request::_assignVersion( str_t token ) {
 	_line.version = static_cast<versionID>( std::distance( HTTP::version.begin(), iter ) );
 }
 
-
-
-
 void
-Request::_getHeader( str_t fields ) {
-	vec_str_iter_t iter = _find( )
-	switch ( )
+Request::_getHeader( str_t field ) {
+	vec_str_iter_t iter = lookupStr( HTTP::header_in, field );
+
+	// if ( iter == HTTP::header_in.end() )
+	// 	throw err_t( "_getHeader: " + errMsg[INVALID_REQUEST_FIELD] + " " + field );
+
+	switch ( std::distance( HTTP::header_in.begin(), iter ) ) {
+		case 0: _header.host = field; break;
+		case 1: _header.date = field; break;
+		case 2: _header.connection = KEEP_ALIVE; break;
+		// default: throw err_t( "_getHeader: " + errMsg[INVALID_REQUEST_FIELD] + " " + field );
+	}
 }
-
-
-
-
 
 str_t
 Request::_token( isstream_t& iss, char delim ) {
@@ -94,11 +93,18 @@ Request::_token( isstream_t& iss, char delim ) {
 	return token;
 }
 
-template<typename T>
-typename T::iterator
-Request::_find( T& obj, str_t token ) { return std::find( obj.begin(), obj.end(), token ); }
-
-/* BASE - RESPONSE */
 
 
+ /* REQUEST - METHOD */
+const request_line_t& Request::line( void ) { return _line; }
+const request_header_t& Request::header( void ) { return _header; }
 
+
+
+/* RESPONSE */
+Response::Response( const Request& rqst ) {
+	_line.version = VERSION_11;
+	_line.status = lookupUint( HTTP::status, 202);
+	_body = HTTP::GET( rqst.line().target );
+	_header.content_length = _body.size();
+}

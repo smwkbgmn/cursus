@@ -12,6 +12,9 @@ class Request {
 		Request( const str_t& msgRequest );
 		~Request( void );
 
+		const request_line_t&	line( void );
+		const request_header_t&	header( void );
+
 	private:
 		request_line_t			_line;
 		request_header_t		_header;
@@ -26,10 +29,6 @@ class Request {
 		void					_getBody( str_t );
 
 		str_t					_token( isstream_t&, char );
-		
-		template<typename T>
-		typename T::iterator	_find( T&, str_t );
-		
 };
 
 class Response {
@@ -37,22 +36,14 @@ class Response {
 		Response( const Request& );
 		~Response( void );
 
-	private:
-		response_line_t		_line;
-		response_header_t	_header;
-						_body;		
-};
-
-class Transaction: Request {
-	public:
-		Transaction( const str_t& );
-		~Transaction( void );
+		const response_line_t&		line( void );
+		const response_header_t&	header( void );
+		const str_t&				body( void );
 
 	private:
-		Transaction( void );
-		Transaction( const Transaction& );
-		
-		Transaction&	operator=( const Transaction& );
+		response_line_t				_line;
+		response_header_t			_header;
+		str_t						_body;
 };
 
 #endif
