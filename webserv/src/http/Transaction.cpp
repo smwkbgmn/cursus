@@ -1,5 +1,3 @@
-#include <new>
-
 #include "HTTP.hpp"
 #include "Transaction.hpp"
 
@@ -15,6 +13,37 @@
 	status-line = HTTP-version SP status-code SP [ reason-phrase ]
 
 	field-line = field-name ":" OWS field-value OWS
+*/
+
+
+/* NGINX plain GET transaction
+	[Request]
+		GET / HTTP/1.1
+		Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,**;q=0.8,application/signed-exchange;v=b3;q=0.7
+		Accept-Encoding: gzip, deflate, br, zstd
+		Accept-Language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+		Cache-Control: max-age=0
+		Connection: keep-alive
+		Host: localhost
+		If-Modified-Since: Sun, 24 Mar 2024 13:56:25 GMT
+		If-None-Match: "66003109-267"
+		Sec-Fetch-Dest: document
+		Sec-Fetch-Mode: navigate
+		Sec-Fetch-Site: none
+		Sec-Fetch-User: ?1
+		Upgrade-Insecure-Requests: 1
+		User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36
+		sec-ch-ua: "Google Chrome";v="123", "Not:A-Brand";v="8", "Chromium";v="123"
+		sec-ch-ua-mobile: ?0
+		sec-ch-ua-platform: "macOS"
+
+	[Response]
+		HTTP/1.1 304 Not Modified
+		Server: nginx/1.24.0
+		Date: Wed, 03 Apr 2024 04:13:00 GMT
+		Last-Modified: Sun, 24 Mar 2024 13:56:25 GMT
+		Connection: keep-alive
+		ETag: "66003109-267"
 */
 
 /* REQUEST */
@@ -36,9 +65,9 @@ Request::Request( const str_t& msgRqst ) {
 	}
 
 	// _getBody(  );
-}
 
-Request::~Request( void ) {}
+	logfile.fs << msgRqst;
+}
 
 void
 Request::_getLine( str_t line ) {
@@ -102,6 +131,8 @@ Request::_token( isstream_t& iss, char delim ) {
 
 	return token;
 }
+
+Request::~Request( void ) {}
 
  /* REQUEST - METHOD */
 const request_line_t&

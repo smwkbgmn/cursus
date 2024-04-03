@@ -5,13 +5,6 @@
 # include "Client.hpp"
 # include "log.hpp"
 
-/*
-	[Any HTTP method and resources]
-	GET, POST, DELETE
-	redirection
-	CGI
-*/
-
 # define CNT_METHOD 3
 # define CNT_VERSION 4
 
@@ -22,7 +15,7 @@ const str_t	nameMime		= dirKeys + "keyMime.txt";
 const str_t	nameHeaderIn	= dirKeys + "keyHeaderIn.txt";
 const str_t	nameHeaderOut	= dirKeys + "keyHeaderOut.txt";
 
-// Shitty shit versin limitation: initializer list
+// Shitty shit versin limit: initializer list
 const str_t	strMethod[]		= {
 	"GET",
 	"POST",
@@ -49,9 +42,9 @@ class HTTP {
 		static void			init( void );
 		static void			response( const Client&, const Request& );
 	
-		static char*			GET( const str_t&, size_t& );
-		// static void			POST( const str_t& );
-		// static void			DELETE( const str_t& );
+		static char*		GET( const str_t&, size_t& );
+		// static void		POST( const str_t& );
+		// static void		DELETE( const str_t& );
 
 		// CGI
 		// Redirect
@@ -62,7 +55,10 @@ class HTTP {
 		static void			_assignMime( void );
 		static void			_assignVec( vec_str_t&, const str_t[], size_t );
 
-		static void			_toData( const Response&, osstream_t& );
+		static void			_message( const Response&, osstream_t& );
+		static void			_msgLine( const Response&, osstream_t& );
+		static void			_msgHeader( const Response&, osstream_t& );
+		static void			_msgBody( const Response&, osstream_t& );
 
 };
 

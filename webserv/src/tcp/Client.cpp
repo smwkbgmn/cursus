@@ -11,8 +11,7 @@ Client::receiving( void ) {
 	
 	if ( bytesRead == ERROR ) 
 		throw err_t( "fail to read from socket" );
-
-	logfile.fs << buf;
+		
 	HTTP::response( *this, Request( buf ) );
 }
 

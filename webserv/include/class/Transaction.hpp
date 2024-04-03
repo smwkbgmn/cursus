@@ -1,6 +1,7 @@
 #ifndef TRANSACTION_HPP
 # define TRANSACTION_HPP
 
+# include <new>
 # include <algorithm>
 
 # include "structure.hpp"
@@ -18,7 +19,7 @@ class Request {
 	private:
 		request_line_t			_line;
 		request_header_t		_header;
-		// bits_t					_body; // Should be changed later to Transfer-encoding type > octet
+		char*					_body;
 
 		void					_getLine( str_t );
 		void					_assignMethod( str_t );

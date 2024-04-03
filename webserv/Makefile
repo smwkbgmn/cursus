@@ -27,7 +27,7 @@ clean		:
 
 fclean		:
 			make clean
-			$(RM) $(NAME)
+			$(RM) $(NAME) $(wildcard log/*.log)
 
 re			:
 			make fclean
