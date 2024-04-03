@@ -47,13 +47,13 @@ enum connectionID {
 /* STRUCT */
 typedef struct {
 	methodID	method;
-	str_t		target;
+	str_t		uri;
 	versionID	version;
 }	request_line_t;
 
 typedef struct {
 	versionID	version;
-	status_t	status;
+	uint_t		status;
 }	response_line_t;
 
 /*

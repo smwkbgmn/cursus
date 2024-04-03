@@ -12,8 +12,8 @@ class Request {
 		Request( const str_t& msgRequest );
 		~Request( void );
 
-		const request_line_t&	line( void );
-		const request_header_t&	header( void );
+		const request_line_t&	line( void ) const;
+		const request_header_t&	header( void ) const;
 
 	private:
 		request_line_t			_line;
@@ -36,14 +36,14 @@ class Response {
 		Response( const Request& );
 		~Response( void );
 
-		const response_line_t&		line( void );
-		const response_header_t&	header( void );
-		const str_t&				body( void );
+		const response_line_t&		line( void ) const;
+		const response_header_t&	header( void ) const ;
+		const char*					body( void ) const;
 
 	private:
 		response_line_t				_line;
 		response_header_t			_header;
-		str_t						_body;
+		char*						_body;
 };
 
 #endif

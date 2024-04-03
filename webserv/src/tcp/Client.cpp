@@ -1,9 +1,11 @@
 #include "Client.hpp"
+#include "HTTP.hpp"
 
 Client::Client( socket_t sockServer ): ASocket( sockServer ) {}
 Client::~Client( void ) { close( sock ); }
 
-void Client::receiving( void ) { 
+void
+Client::receiving( void ) { 
 	char	buf[1024] = { 0 };
 	ssize_t	bytesRead = read( sock, buf, sizeof( buf ) );
 	
@@ -11,12 +13,17 @@ void Client::receiving( void ) {
 		throw err_t( "fail to read from socket" );
 
 	logfile.fs << buf;
+	HTTP::response( *this, Request( buf ) );
 }
 
-void Client::sending( void ) {
+void
+Client::sending( void ) {
 	const char*	response	= "HTTP/1.1 200 OK\r\nContent-Length: 12\r\n\r\nHello, World!";
 	ssize_t		bytesSent	= send( sock, response, strlen( response ), 0 );
 
 	if ( bytesSent == ERROR )
 		throw err_t( "fail to send response" );
 }
+
+socket_t
+Client::socket( void ) const { return sock; }

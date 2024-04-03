@@ -12,10 +12,6 @@
 /* UTILL */
 # include <string>
 
-# include "File.hpp"
-# include "filter.hpp"
-# include "error.hpp"
-
 typedef int								socket_t;
 
 typedef unsigned int					uint_t;
@@ -31,5 +27,9 @@ typedef vec_str_t::iterator				vec_str_iter_t;
 
 typedef std::map<vec_str_t, str_t>		mime_t;
 typedef std::map<uint_t, str_t>			status_t;
+
+# include "File.hpp"
+# include "filter.hpp"
+# include "error.hpp"
 
 #endif

@@ -1,3 +1,5 @@
+#include <new>
+
 #include "HTTP.hpp"
 #include "Transaction.hpp"
 
@@ -17,18 +19,26 @@
 
 /* REQUEST */
 Request::Request( const str_t& msgRqst ) {
-	size_t	pos = 0;
-	str_t	substr;
+	size_t	posBegin = 0;
+	size_t	posEnd = 0;
 
 	// CRLF could be replaced with only LF (see RFC)
-	substr = msgRqst.substr( pos, pos = msgRqst.find( CRLF, pos ) );
-	_getLine( substr );
+	
+	posEnd = msgRqst.find( CRLF, posBegin );
+	_getLine( msgRqst.substr( posBegin, posEnd ) );
+	posBegin = posEnd + 2;
 
-	while ( !(substr = msgRqst.substr( pos + 2, pos = msgRqst.find( CRLF, pos ) ) ).empty() )
-		_getHeader( substr );
+	while ( LOOP ) {
+		posEnd = msgRqst.find( CRLF, posBegin );
+		if ( posEnd == str_t::npos ) break;
+		_getHeader( msgRqst.substr( posBegin, posEnd ) );
+		posBegin = posEnd + 2;
+	}
 
 	// _getBody(  );
 }
+
+Request::~Request( void ) {}
 
 void
 Request::_getLine( str_t line ) {
@@ -41,7 +51,7 @@ Request::_getLine( str_t line ) {
 
 void
 Request::_assignMethod( str_t token ) {
-	vec_str_iter_t	iter = lookupStr( HTTP::method, token );
+	vec_str_iter_t	iter = lookup( HTTP::method, token );
 
 	if ( iter == HTTP::method.end() )
 		throw err_t( "_assignMethod: " + errMsg[INVALID_REQUEST_LINE] );
@@ -50,7 +60,7 @@ Request::_assignMethod( str_t token ) {
 }
 
 void
-Request::_assignURI( str_t token ) { _line.target = token; }
+Request::_assignURI( str_t token ) { _line.uri = token; }
 
 void
 Request::_assignVersion( str_t token ) {
@@ -59,7 +69,7 @@ Request::_assignVersion( str_t token ) {
 	if ( _token( iss, '/' ) != HTTP::http )
 		throw err_t( "_assignVersion: " + errMsg[INVALID_REQUEST_LINE] );
 	
-	vec_str_iter_t iter = lookupStr( HTTP::version, _token( iss, NONE ) );
+	vec_str_iter_t iter = lookup( HTTP::version, _token( iss, NONE ) );
 
 	if ( iter == HTTP::version.end() )
 		throw err_t( "_assignVersion: " + errMsg[INVALID_REQUEST_LINE] );
@@ -69,7 +79,7 @@ Request::_assignVersion( str_t token ) {
 
 void
 Request::_getHeader( str_t field ) {
-	vec_str_iter_t iter = lookupStr( HTTP::header_in, field );
+	vec_str_iter_t iter = lookup( HTTP::header_in, field );
 
 	// if ( iter == HTTP::header_in.end() )
 	// 	throw err_t( "_getHeader: " + errMsg[INVALID_REQUEST_FIELD] + " " + field );
@@ -93,18 +103,31 @@ Request::_token( isstream_t& iss, char delim ) {
 	return token;
 }
 
-
-
  /* REQUEST - METHOD */
-const request_line_t& Request::line( void ) { return _line; }
-const request_header_t& Request::header( void ) { return _header; }
+const request_line_t&
+Request::line( void ) const { return _line; }
+
+const request_header_t&
+Request::header( void ) const { return _header; }
+
+
 
 
 
 /* RESPONSE */
-Response::Response( const Request& rqst ) {
+Response::Response( const Request& rqst ): _body( NULL ) {
 	_line.version = VERSION_11;
-	_line.status = lookupUint( HTTP::status, 202);
-	_body = HTTP::GET( rqst.line().target );
-	_header.content_length = _body.size();
+	_line.status = 200;
+	_body = HTTP::GET( rqst.line().uri, _header.content_length );
 }
+
+Response::~Response( void ) { if ( _body ) delete _body; }
+
+const response_line_t&
+Response::line( void ) const { return _line; }
+
+const response_header_t&
+Response::header( void ) const { return _header; }
+
+const char*
+Response::body( void ) const { return _body; }

@@ -1,4 +1,5 @@
 #include "Server.hpp"
+#include "HTTP.hpp"
 
 Server::Server( void ): ASocket() {}
 Server::~Server( void ) { close( sock ); }
@@ -14,7 +15,7 @@ void Server::listening( void ) {
 			Client	connection( sock );
 			
 			connection.receiving();
-			connection.sending();
+			// connection.sending();
 		} catch( err_t &err ) { std::clog << err.what() << std::endl; }
 	}
 }

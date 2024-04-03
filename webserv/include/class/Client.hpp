@@ -9,8 +9,10 @@ class Client: ASocket {
 		Client( socket_t );
 		~Client( void );
 
-		void	receiving( void );
-		void	sending( void );
+		socket_t	socket( void ) const;
+
+		void		receiving( void );
+		void		sending( void );
 		
 	private:
 		Client( void );

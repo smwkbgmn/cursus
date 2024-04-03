@@ -2,10 +2,13 @@
 # define ERROR_HPP
 
 # include <exception>
+# include <sys/errno.h>
 
 # include "structure.hpp"
 
 # define ERROR -1
+
+extern int errno;
 
 typedef std::runtime_error	err_t;
 

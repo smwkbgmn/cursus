@@ -15,19 +15,21 @@
 # define CNT_METHOD 3
 # define CNT_VERSION 4
 
-const str_t	nameStatus		= "keyStatus.txt";
-const str_t	nameMime		= "keyMime.txt";
-const str_t	nameHeaderIn	= "keyHeaderIn.txt";
-const str_t	nameHeaderOut	= "keyHedaerOut.txt";
+const str_t dirRoot			= "./html";
+const str_t	dirKeys			= "./src/http/";
+const str_t	nameStatus		= dirKeys + "keyStatus.txt";
+const str_t	nameMime		= dirKeys + "keyMime.txt";
+const str_t	nameHeaderIn	= dirKeys + "keyHeaderIn.txt";
+const str_t	nameHeaderOut	= dirKeys + "keyHeaderOut.txt";
 
 // Shitty shit versin limitation: initializer list
-const str_t	strMethod[] = {
+const str_t	strMethod[]		= {
 	"GET",
 	"POST",
 	"DELETE"
 };
 
-const str_t	strVersion[] = {
+const str_t	strVersion[]	= {
 	"0.9",
 	"1.0",
 	"1.1",
@@ -45,9 +47,9 @@ class HTTP {
 		static mime_t		mime;
 
 		static void			init( void );
-		static void			sending( const Client&, const Request& );
+		static void			response( const Client&, const Request& );
 	
-		static str_t		GET( const str_t& );
+		static char*			GET( const str_t&, size_t& );
 		// static void			POST( const str_t& );
 		// static void			DELETE( const str_t& );
 
@@ -60,17 +62,13 @@ class HTTP {
 		static void			_assignMime( void );
 		static void			_assignVec( vec_str_t&, const str_t[], size_t );
 
-		static const char*	_toData( const Response& );
+		static void			_toData( const Response&, osstream_t& );
 
 };
 
-template<typename T>
-typename T::iterator
-lookupStr( T& obj, str_t token ) { return std::find( obj.begin(), obj.end(), token ); }
-
-template<typename T>
-typename T::iterator
-lookupUint( T& obj, uint_t token ) { return std::find( obj.begin(), obj.end(), token ); }
+template<typename Container, typename Target>
+typename Container::iterator
+lookup( Container& obj, Target token ) { return std::find( obj.begin(), obj.end(), token ); }
 
 #endif
 

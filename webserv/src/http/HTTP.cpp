@@ -76,32 +76,44 @@ HTTP::_assignVec( vec_str_t& target, const str_t source[], size_t cnt ) {
 }
 
 void
-HTTP::sending( const Client& client, const Request& rqst ) {
-	Response	rspn( rqst );
+HTTP::response( const Client& client, const Request& rqst ) {
 	// const char*	response	= "HTTP/1.1 200 OK\r\nContent-Length: 12\r\n\r\nHello, World!";
 	// ssize_t		bytesSent	= send( sock, rspn, strlen( rspn ), 0 );
-	ssize_t		bytesSent = send( client.sock, _toData( rspn ), rspn.header().content_length, 0 );
+	Response	rspn( rqst );
+	osstream_t	oss;
+	_toData( rspn, oss );
+	logfile.fs << oss.str() << std::endl;
+	ssize_t		bytesSent = send( client.socket(), oss.str().c_str(), oss.str().size(), 0 );
+
 
 	if ( bytesSent == ERROR )
-		throw err_t( "HTTP: send: " + errMsg[FAIL_SEND] );
+		throw err_t( "http: send: " + errMsg[FAIL_SEND] );
 }
 
-const char*
-HTTP::_toData( const Response& rspn ) {
-	osstream_t	oss;
-
-	oss << http << '/' << version.at( static_cast<size_t>( )
-	oss << rspn.line().version
-
-
-	return oss.str().c_str();
+void
+HTTP::_toData( const Response& rspn, osstream_t& oss ) {
+	oss << http << '/' << version.at( static_cast<size_t>( rspn.line().version ) ) << ' ';
+	status_t::iterator iter = HTTP::status.find( rspn.line().status );
+	oss << iter->first << " " << iter->second << CRLF;
+	oss << "Content-Length: ";
+	oss << rspn.header().content_length << CRLF;
+	oss << CRLF;
+	oss << rspn.body();
 }
 
-str_t
-HTTP::GET( const str_t& uri ) {
-	File	target( uri, R );
-	str_t	data;
+char*
+HTTP::GET( const str_t& uri, size_t& size ) {
+	File			target( dirRoot + uri, R );
+	// Get pointer to associated buffer object
+	std::filebuf*	pbuf = target.fs.rdbuf();
+	// Get file size using buffer's member
+	size = pbuf->pubseekoff( 0, target.fs.end, target.fs.in );
+	pbuf->pubseekpos( 0, target.fs.in );
 
-	target.fs >> data;
-	return data;
+	// Allocate memory to contain file data
+	char			*buf = new char[size];
+	// Get file data
+	pbuf->sgetn( buf, size );
+	
+	return buf;
 }
