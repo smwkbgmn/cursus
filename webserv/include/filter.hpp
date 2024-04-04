@@ -74,7 +74,7 @@ typedef struct {
 	str_t		host;
 	str_t		date;
 	unsigned	connection: 2;
-	size_t		content_len;
+	size_t		content_length;
 	unsigned	content_type: 8;
 	
 }	request_header_t;

@@ -47,7 +47,9 @@
 */
 
 /* REQUEST */
-Request::Request( const str_t& msgRqst ) {
+// Request::Request( const str_t& msgRqst ): _body( NULL ) {
+Request::Request( const char* buf ): _body( NULL ) {
+	str_t	msgRqst( buf );
 	size_t	posBegin = 0;
 	size_t	posEnd = 0;
 
@@ -63,8 +65,9 @@ Request::Request( const str_t& msgRqst ) {
 		_getHeader( msgRqst.substr( posBegin, posEnd ) );
 		posBegin = posEnd + 2;
 	}
-
-	// _getBody(  );
+	
+	if( posBegin != msgRqst.length() )
+		_getBody( msgRqst.substr( posBegin ) );
 
 	logfile.fs << msgRqst;
 }
@@ -121,6 +124,15 @@ Request::_getHeader( str_t field ) {
 	}
 }
 
+void
+Request::_getBody( str_t body ) {
+	_header.content_length = body.size();
+	
+	_body = new char[body.length()];
+	body.copy( _body, body.length() );
+	_body[body.length()] = '\0';
+}
+
 str_t
 Request::_token( isstream_t& iss, char delim ) {
 	str_t token;
@@ -132,7 +144,7 @@ Request::_token( isstream_t& iss, char delim ) {
 	return token;
 }
 
-Request::~Request( void ) {}
+Request::~Request( void ) { if ( _body ) delete _body; }
 
  /* REQUEST - METHOD */
 const request_line_t&
@@ -141,15 +153,28 @@ Request::line( void ) const { return _line; }
 const request_header_t&
 Request::header( void ) const { return _header; }
 
+const char*
+Request::body( void ) const { return _body; }
+
 
 
 
 
 /* RESPONSE */
 Response::Response( const Request& rqst ): _body( NULL ) {
+	switch ( rqst.line().method ) {
+		case GET:
+			_body = HTTP::GET( rqst.line().uri, _header.content_length ); break;
+
+		case POST:
+			HTTP::POST( rqst ); break;
+
+		case DELETE:
+			break;
+	}
+
 	_line.version = VERSION_11;
 	_line.status = 200;
-	_body = HTTP::GET( rqst.line().uri, _header.content_length );
 }
 
 Response::~Response( void ) { if ( _body ) delete _body; }
@@ -162,3 +187,4 @@ Response::header( void ) const { return _header; }
 
 const char*
 Response::body( void ) const { return _body; }
+

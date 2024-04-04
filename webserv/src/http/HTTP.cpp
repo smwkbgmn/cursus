@@ -101,7 +101,7 @@ void HTTP::_msgBody( const Response& rspn, osstream_t& oss ) {
 	oss << rspn.body();
 }
 
-/* METHOD - GET */
+/* METHOD - methods */
 
 char*
 HTTP::GET( const str_t& uri, size_t& size ) {
@@ -115,4 +115,11 @@ HTTP::GET( const str_t& uri, size_t& size ) {
 	pbuf->sgetn( buf, size );
 	
 	return buf;
+}
+
+void
+HTTP::POST( const Request& rqst ) {
+	File target( dirRoot + rqst.line().uri, W );
+
+	target.fs << rqst.body();
 }

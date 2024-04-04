@@ -10,11 +10,13 @@
 
 class Request {
 	public:
-		Request( const str_t& msgRequest );
+		// Request( const str_t& );
+		Request( const char* );
 		~Request( void );
 
 		const request_line_t&	line( void ) const;
 		const request_header_t&	header( void ) const;
+		const char*				body( void ) const;
 
 	private:
 		request_line_t			_line;

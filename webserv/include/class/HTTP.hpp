@@ -43,7 +43,7 @@ class HTTP {
 		static void			response( const Client&, const Request& );
 	
 		static char*		GET( const str_t&, size_t& );
-		// static void		POST( const str_t& );
+		static void			POST( const Request& );
 		// static void		DELETE( const str_t& );
 
 		// CGI
