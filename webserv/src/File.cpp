@@ -3,7 +3,7 @@
 File::File( const std::string& fileName, int mode ) {
 	switch ( mode ) {
 		case R: fs.open( fileName.c_str(), std::fstream::in ); break;
-		case R_BINARY: fs.open( fileName.c_str(), std::ifstream::binary ); break;
+		case R_BINARY: fs.open( fileName.c_str(), std::ios::in | std::ios::binary ); break;
 		case W: fs.open( fileName.c_str(), std::fstream::out ); break;
 		default: throw std::runtime_error( "unknown mode" );
 	}

@@ -78,7 +78,8 @@ void
 HTTP::_message( const Response& rspn, osstream_t& oss ) {
 	_msgLine( rspn, oss );
 	_msgHeader( rspn, oss );
-	_msgBody( rspn, oss );
+	if ( rspn.body() )
+		_msgBody( rspn, oss );
 }
 
 void
@@ -105,7 +106,7 @@ void HTTP::_msgBody( const Response& rspn, osstream_t& oss ) {
 
 char*
 HTTP::GET( const str_t& uri, size_t& size ) {
-	File target( dirRoot + uri, R );
+	File target( dirRoot + uri, R_BINARY );
 
 	std::filebuf* pbuf = target.fs.rdbuf();
 	size = pbuf->pubseekoff( 0, target.fs.end, target.fs.in );

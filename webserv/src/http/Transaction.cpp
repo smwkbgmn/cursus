@@ -170,7 +170,7 @@ Response::Response( const Request& rqst ): _body( NULL ) {
 			HTTP::POST( rqst ); break;
 
 		case DELETE:
-			break;
+			HTTP::DELETE( rqst ); break;
 	}
 
 	_line.version = VERSION_11;

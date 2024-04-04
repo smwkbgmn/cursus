@@ -44,7 +44,7 @@ class HTTP {
 	
 		static char*		GET( const str_t&, size_t& );
 		static void			POST( const Request& );
-		// static void		DELETE( const str_t& );
+		static void			DELETE( const Request& );
 
 		// CGI
 		// Redirect

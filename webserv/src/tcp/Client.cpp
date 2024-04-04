@@ -11,7 +11,7 @@ Client::receiving( void ) {
 	
 	if ( bytesRead == ERROR ) 
 		throw err_t( "fail to read from socket" );
-		
+	
 	HTTP::response( *this, Request( buf ) );
 }
 
@@ -22,7 +22,7 @@ Client::sending( void ) {
 
 	if ( bytesSent == ERROR )
 		throw err_t( "fail to send response" );
-}
+} 
 
 socket_t
 Client::socket( void ) const { return sock; }
