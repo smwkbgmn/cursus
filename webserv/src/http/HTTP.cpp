@@ -1,20 +1,19 @@
 #include "HTTP.hpp"
 
-str_t		HTTP::http;
-vec_str_t	HTTP::version;
-vec_str_t	HTTP::method;
-vec_str_t	HTTP::header_in;
-vec_str_t	HTTP::header_out;
-status_t	HTTP::status;
-mime_t		HTTP::mime;
+http_t	HTTP::http;
+keys_t	HTTP::key;
 
-/* METHOD - init*/
-
+/* METHOD - init: assign basic HTTP info and load keys */
 void
-HTTP::init( void ) {
-	http = "HTTP";
-	_assignVec( version, strVersion, CNT_VERSION );
-	_assignVec( method, strMethod, CNT_METHOD );
+HTTP::init( const str_t& type, const name_t& cgi ) {
+	http.signature		= "HTTP";
+	http.typeDefault	= type;
+	http.locationCGI	= cgi;
+	http.fileAtidx		= cgi + "/autoindex.cgi";
+
+	_assignVec( http.version, strVersion, CNT_VERSION );
+	_assignVec( http.method, strMethod, CNT_METHOD );
+
 	_assignHeader();
 	_assignStatus();
 	_assignMime();
@@ -24,18 +23,18 @@ void
 HTTP::_assignHeader( void ) {
 	str_t	header;
 
-	File fileIn( nameHeaderIn, R );
+	File fileIn( fileHeaderIn, R );
 	while ( std::getline( fileIn.fs, header ) )
-		header_in.push_back( header );
+		key.header_in.push_back( header );
 
-	File fileOut( nameHeaderOut, R );
+	File fileOut( fileHeaderOut, R );
 	while ( std::getline( fileOut.fs, header ) )
-		header_out.push_back( header );
+		key.header_out.push_back( header );
 }
 
 void
 HTTP::_assignStatus( void ) {
-	File file( nameStatus, R );
+	File file( fileStatus, R );
 
 	while ( !file.fs.eof() ) {
 		uint_t	code;
@@ -45,13 +44,23 @@ HTTP::_assignStatus( void ) {
 		file.fs.get();
 		std::getline( file.fs, reason );
 
-		status.insert( std::make_pair( code, reason ) );
+		key.status.insert( std::make_pair( code, reason ) );
 	}
 }
 
 void
 HTTP::_assignMime( void ) {
-	File	file( nameMime, R );	
+	File	file( fileMime, R );
+	str_t	type, exts, ext;
+
+	while ( !file.fs.eof() ) {
+		file.fs >> type;
+		
+		std::getline( file.fs, exts, ';' );
+		isstream_t	iss( exts );
+		while ( iss >> ext )
+			key.mime.insert( std::make_pair( ext, type ) );
+	}
 }
 
 void
@@ -60,67 +69,69 @@ HTTP::_assignVec( vec_str_t& target, const str_t source[], size_t cnt ) {
 		target.push_back( source[idx] );
 }
 
-/* METHOD - response */
 
-void
-HTTP::response( const Client& client, const Request& rqst ) {
-	osstream_t oss;
-	_message( Response( rqst ), oss );
 
-	logfile.fs << oss.str() << std::endl;
-	ssize_t bytesSent = send( client.socket(), oss.str().c_str(), oss.str().size(), 0 );
-
-	if ( bytesSent == ERROR )
-		throw err_t( "http: send: " + errMsg[FAIL_SEND] );
+/* METHOD - getLocationConf: get index of vec_config_t matching with request URI */
+size_t
+HTTP::getLocationConf( const str_t& uri, const vec_config_t& config ) {
+	if ( config.size() > 1 ) {
+		size_t idx = 1;
+		for ( vec_config_t::const_iterator iter = config.begin(); iter != config.end(); ++iter ) {
+			if ( uri.find( iter->location ) == 0 )
+				return idx;
+			++idx;
+		}
+	}
+	return 0;
 }
 
-void
-HTTP::_message( const Response& rspn, osstream_t& oss ) {
-	_msgLine( rspn, oss );
-	_msgHeader( rspn, oss );
-	if ( rspn.body() )
-		_msgBody( rspn, oss );
+
+
+/* FILTER INIT */
+errstat_s::errstat_s( const uint_t& status ) {
+	code = status;
 }
 
-void
-HTTP::_msgLine( const Response& rspn, osstream_t& oss ) {
-	status_t::iterator iter = HTTP::status.find( rspn.line().status );
+config_s::config_s( void ) {
+	location		= "/";
+	root			= "./html";
+	file40x			= "./html/40x.html";
+	file40x			= "./html/50x.html";
 
-	oss <<
-	http << '/' << version.at( static_cast<size_t>( rspn.line().version ) ) << ' ' <<
-	iter->first << " " << iter->second <<
-	CRLF;
+	atidx			= FALSE;
+	sizeBodyMax		= 1000;
+	 
+	allow.insert( std::make_pair( GET, TRUE ) );
+	allow.insert( std::make_pair( POST, TRUE ) );
+	allow.insert( std::make_pair( DELETE, TRUE ) );
 }
 
-void HTTP::_msgHeader( const Response& rspn, osstream_t& oss ) {
-	oss << 
-	"Content-Length: " << rspn.header().content_length << CRLF <<
-	CRLF;
+request_header_s::request_header_s( void ) {
+	connection		= KEEP_ALIVE;
+	chunked			= FALSE;
+	content_length	= 0;
 }
 
-void HTTP::_msgBody( const Response& rspn, osstream_t& oss ) {
-	oss << rspn.body();
+response_line_s::response_line_s( void ) {
+	version			= VERSION_11;
+	status			= 200;
 }
 
-/* METHOD - methods */
+response_header_s::response_header_s( void ) {
+	connection		= KEEP_ALIVE;
+	chunked			= FALSE;
+	content_length	= 0;
+}
+
 
 char*
-HTTP::GET( const str_t& uri, size_t& size ) {
-	File target( dirRoot + uri, R_BINARY );
-
-	std::filebuf* pbuf = target.fs.rdbuf();
-	size = pbuf->pubseekoff( 0, target.fs.end, target.fs.in );
-	pbuf->pubseekpos( 0, target.fs.in );
+dupIOBuf( std::ios& obj, size_t& size ) {
+	std::streambuf* pbuf = obj.rdbuf();
+	size = pbuf->pubseekoff( 0, obj.end, obj.in );
+	pbuf->pubseekpos( 0, obj.in );
 
 	char *buf = new char[size];
 	pbuf->sgetn( buf, size );
 	
 	return buf;
-}
-
-void
-HTTP::POST( const Request& rqst ) {
-	File target( dirRoot + rqst.line().uri, W );
-
-	target.fs << rqst.body();
 }

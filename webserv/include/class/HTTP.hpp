@@ -1,21 +1,26 @@
 #ifndef HTTP_HPP
 # define HTTP_HPP
 
-# include "Transaction.hpp"
-# include "Client.hpp"
+# include <cstdio>
+
 # include "log.hpp"
+# include "Client.hpp"
 
 # define CNT_METHOD 3
 # define CNT_VERSION 4
 
-const str_t dirRoot			= "./html";
-const str_t	dirKeys			= "./src/http/";
-const str_t	nameStatus		= dirKeys + "keyStatus.txt";
-const str_t	nameMime		= dirKeys + "keyMime.txt";
-const str_t	nameHeaderIn	= dirKeys + "keyHeaderIn.txt";
-const str_t	nameHeaderOut	= dirKeys + "keyHeaderOut.txt";
+class Request;
+class Response;
 
-// Shitty shit versin limit: initializer list
+const path_t	dirKeys			= "./src/http/key/";
+const path_t	fileStatus		= dirKeys + "keyStatus.txt";
+const path_t	fileMime		= dirKeys + "keyMime.txt";
+const path_t	fileHeaderIn	= dirKeys + "keyHeaderIn.txt";
+const path_t	fileHeaderOut	= dirKeys + "keyHeaderOut.txt";
+const path_t	fileListCGI		= dirKeys + "lstCGI.txt";
+
+const path_t	fileBadRqst		= "./html/bad_request.html";
+
 const str_t	strMethod[]		= {
 	"GET",
 	"POST",
@@ -31,40 +36,50 @@ const str_t	strVersion[]	= {
 
 class HTTP {
 	public:
-		static str_t		http;
-		static vec_str_t	version;
-		static vec_str_t	method;
-		static vec_str_t	header_in;
-		static vec_str_t	header_out;
-		static status_t		status;
-		static mime_t		mime;
+		static http_t	http;
+		static keys_t	key;
+		
+		HTTP( config_t& );
+		~HTTP( void );
 
-		static void			init( void );
-		static void			response( const Client&, const Request& );
+		static void		init( const str_t&, const str_t& );
+		static void		transaction( const Client& );
+		static size_t	getLocationConf( const str_t&, const vec_config_t& );
 	
-		static char*		GET( const str_t&, size_t& );
-		static void			POST( const Request& );
-		static void			DELETE( const Request& );
-
-		// CGI
-		// Redirect
+		static void		GET( const Request&, char**, size_t& );
+		static void		GET( const str_t&, char**, size_t& ); // For getting body of error page
+		static void		POST( const Request&, char**, size_t& );
+		static void		DELETE( const Request& );
 
 	private:
-		static void			_assignHeader( void );
-		static void			_assignStatus( void );
-		static void			_assignMime( void );
-		static void			_assignVec( vec_str_t&, const str_t[], size_t );
+		/* init */
+		static void		_assignHeader( void );
+		static void		_assignStatus( void );
+		static void		_assignMime( void );
+		static void		_assignVec( vec_str_t&, const str_t[], size_t );
 
-		static void			_message( const Response&, osstream_t& );
-		static void			_msgLine( const Response&, osstream_t& );
-		static void			_msgHeader( const Response&, osstream_t& );
-		static void			_msgBody( const Response&, osstream_t& );
+		/* transaction */
+		static void		_build( const Response&, osstream_t& );
+		static void		_buildLine( const Response&, osstream_t& );
+		static void		_buildHeader( const Response&, osstream_t& );
+		static void		_buildHeaderName( uint_t, osstream_t& );
+		static void		_buildHeaderValue( const response_header_t&, uint_t, osstream_t& );
+		static void		_buildBody( const Response&, osstream_t& );
+
+		/* method */
+		static bool		_cgiGet( const Request& );
+		static bool		_cgiPost( const Request& );
 
 };
 
 template<typename Container, typename Target>
 typename Container::iterator
 lookup( Container& obj, Target token ) { return std::find( obj.begin(), obj.end(), token ); }
+
+char* dupIOBuf( std::ios&, size_t& );
+
+# include "Request.hpp"
+# include "Response.hpp"
 
 #endif
 

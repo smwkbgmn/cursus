@@ -1,7 +1,7 @@
 #include "Client.hpp"
 #include "HTTP.hpp"
 
-Client::Client( socket_t sockServer ): ASocket( sockServer ) {}
+Client::Client( socket_t sockServer, const Server& server ): ASocket( sockServer ), _server( server ) {}
 Client::~Client( void ) { close( sock ); }
 
 void
@@ -12,7 +12,8 @@ Client::receiving( void ) {
 	if ( bytesRead == ERROR ) 
 		throw err_t( "fail to read from socket" );
 	
-	HTTP::response( *this, Request( buf ) );
+	this->buf = buf;
+	HTTP::transaction( *this );
 }
 
 void
@@ -23,6 +24,3 @@ Client::sending( void ) {
 	if ( bytesSent == ERROR )
 		throw err_t( "fail to send response" );
 } 
-
-socket_t
-Client::socket( void ) const { return sock; }

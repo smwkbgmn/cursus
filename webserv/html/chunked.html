@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chunked HTTP Request</title>
+</head>
+<body>
+<h1>Chunked HTTP Request</h1>
+<button onclick="sendChunkedRequest()">Send Chunked Request</button>
+<div id="response"></div>
+
+<script>
+function sendChunkedRequest() {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "/freeboard", true); // Change the URL to your server endpoint
+    xhr.setRequestHeader("Content-Type", "text/plain");
+
+    // Define the chunks of data to send
+    var chunks = [
+        "5\r\nHello\r\n",
+        "7\r\n, world\r\n",
+        "0\r\n" // Final chunk
+    ];
+
+    // Send each chunk
+    for (var i = 0; i < chunks.length; i++) {
+        xhr.send(chunks[i]);
+    }
+
+    // Handle response
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            document.getElementById("response").innerHTML = xhr.responseText;
+        }
+    };
+}
+</script>
+</body>
+</html>

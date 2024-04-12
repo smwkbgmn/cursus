@@ -12,78 +12,144 @@
 	OWS		= *( SP / HTAB ); optional whitespace
 	RWS		= 1*( SP / HTAB ); required whitespace
 	BWS		= OWS; "bad" whitespace
+
+	See iana.org for method, header and status list
+	method: https://www.iana.org/assignments/http-methods/http-methods.xhtml
+	header: https://www.iana.org/assignments/http-fields/http-fields.xhtml
+		also https://en.wikipedia.org/wiki/List_of_HTTP_header_fields
+	status: https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml
 */
 
-// # define FALSE		0
-// # define TRUE		1
-
-/* VALUE */
 # define NONE	0
+# define FALSE	0
+# define TRUE	1
 
-/* TOKEN */
 # define LF		'\n'
 # define CR		'\r'
 # define CRLF	"\r\n"
 # define SP		' '
 
+
 /* IDs */
 enum methodID {
 	GET,
 	POST,
-	DELETE
+	DELETE,
+	NOT_ALLOWED,
+	UNKNOWN
 };
 
 enum versionID {
 	VERSION_9,
 	VERSION_10,
 	VERSION_11,
-	VERSION_20
+	VERSION_20,
+	NOT_SUPPORTED
 };
 
 enum connectionID {
 	KEEP_ALIVE
 };
 
-/* STRUCT */
+enum headerInID {
+	IN_HOST,
+	IN_CONNECTION,
+	IN_CHUNK,
+	IN_CONTENT_LEN,
+	IN_CONTENT_TYPE
+};
+
+enum headerOutID {
+	OUT_SERVER,
+	OUT_DATE,
+	OUT_CONNECTION,
+	OUT_CHUNK,
+	OUT_CONTENT_LEN,
+	OUT_CONTENT_TYPE
+};
+
+// Try default value by declaring directly
+// path_t	location = "/";
+
+/* STRUCT - Http, Config, Keys */
+typedef std::map<methodID, bool>	map_method_bool_t;
+
 typedef struct {
-	methodID	method;
-	str_t		uri;
-	versionID	version;
+	str_t				signature;
+	vec_str_t			version;
+	vec_str_t			method;
+
+	str_t				typeDefault;
+	name_t				locationCGI;
+	name_t				fileAtidx;
+}	http_t;
+
+typedef struct config_s {
+	name_t				location;
+	path_t				root;
+	map_method_bool_t	allow;
+
+	bool				atidx;
+	size_t				sizeBodyMax;
+
+	path_t				file40x;
+	path_t				file50x;
+
+	config_s( void );
+}	config_t;
+
+typedef std::vector<config_t>		vec_config_t;
+
+typedef struct {
+	vec_str_t			header_in;
+	vec_str_t			header_out;
+	map_uint_str_t		status;
+	map_str_str_t		mime;	
+}	keys_t;
+
+
+/* STRUCT - Request */
+typedef struct {
+	methodID			method;
+	name_t				uri;
+	versionID			version;
+
 }	request_line_t;
 
-typedef struct {
-	versionID	version;
-	uint_t		status;
-}	response_line_t;
-
-/*
-	[Request]
-	Host
-	Connection
-	Accept
-	Accept-Encoding
+typedef struct request_header_s {
+	str_t				host;
+	// date_t				date;
+	unsigned			connection: 2;
+	unsigned			chunked: 1;
+	size_t				content_length;
+	str_t				content_type;
 	
-	[Response]
-	Date
-	Content-Length
-	Content-Range
-	Content-Type
-*/
+	vec_uint_t			list;
 
-typedef struct {
-	str_t		host;
-	str_t		date;
-	unsigned	connection: 2;
-	size_t		content_length;
-	unsigned	content_type: 8;
-	
+	request_header_s( void );
 }	request_header_t;
 
-typedef struct {
-	str_t		date;
-	size_t		content_length;
-	str_t		content_type;
+
+/* STRUCT - Response */
+typedef struct response_line_s {
+	versionID			version;
+	uint_t				status;
+
+	response_line_s( void );
+}	response_line_t;
+
+typedef struct response_header_s {
+	str_t				server;
+	// date_t				date;
+	// date_t				last_modified;
+	unsigned			connection: 2;
+	unsigned			chunked: 1;
+	size_t				content_length;
+	str_t				content_type;
 	
+	vec_uint_t			list;
+
+	response_header_s( void );
 }	response_header_t;
 
 #endif 

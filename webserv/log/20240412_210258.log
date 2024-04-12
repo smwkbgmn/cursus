@@ -1,0 +1,202 @@
+GET /index.html HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: "Chromium";v="116", "Not)A;Brand";v="24", "Google Chrome";v="116"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9,ko;q=0.8
+
+
+HTTP/1.1 200 OK
+Content-Length: 1889
+Content-Type: text/html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTTP Method Test</title>
+</head>
+<body>
+  <h1>HTTP Method Test</h1>
+  
+  <!-- GET Method -->
+  <h2>GET Method</h2>
+  <form id="getForm">
+    <button type="button" onclick="sendGET()">Send GET Request</button>
+  </form>
+  <div id="getResult"></div>
+  
+  <!-- POST Method -->
+  <h2>POST Method</h2>
+  <form id="postForm">
+    <label for="postInput">Enter Text:</label><br>
+    <input type="text" id="postInput" name="postInput"><br>
+    <button type="button" onclick="sendPOST()">Send POST Request</button>
+  </form>
+  <div id="postResult"></div>
+  
+  <!-- DELETE Method -->
+  <h2>DELETE Method</h2>
+  <form id="deleteForm">
+    <button type="button" onclick="sendDELETE()">Send DELETE Request</button>
+  </form>
+  <div id="deleteResult"></div>
+  
+  <script>
+    function sendGET() {
+      fetch('/freeboard.txt', {
+        method: 'GET'
+      })
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('getResult').innerText = data;
+      })
+      .catch(error => console.error('Error:', error));
+    }
+    
+    function sendPOST() {
+      const text = document.getElementById('postInput').value;
+      
+      fetch('/freeboard.txt', {
+        method: 'POST',
+        body: text
+      })
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('postResult').innerText = data;
+      })
+      .catch(error => console.error('Error:', error));
+    }
+    
+    function sendDELETE() {
+      fetch('/freeboard.txt', {
+        method: 'DELETE'
+      })
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('deleteResult').innerText = data;
+      })
+      .catch(error => console.error('Error:', error));
+    }
+  </script>
+</body>
+</html>
+POST /freeboard.txt HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Content-Length: 3
+sec-ch-ua: "Chromium";v="116", "Not)A;Brand";v="24", "Google Chrome";v="116"
+sec-ch-ua-platform: "macOS"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36
+Content-Type: text/plain;charset=UTF-8
+Accept: */*
+Origin: http://localhost:8080
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: cors
+Sec-Fetch-Dest: empty
+Referer: http://localhost:8080/index.html
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9,ko;q=0.8
+
+123
+HTTP/1.1 204 No Content
+
+
+GET /freeboard.txt HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: "Chromium";v="116", "Not)A;Brand";v="24", "Google Chrome";v="116"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36
+sec-ch-ua-platform: "macOS"
+Accept: */*
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: cors
+Sec-Fetch-Dest: empty
+Referer: http://localhost:8080/index.html
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9,ko;q=0.8
+
+
+HTTP/1.1 200 OK
+Content-Length: 3
+Content-Type: text/plain
+
+123
+DELETE /freeboard.txt HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: "Chromium";v="116", "Not)A;Brand";v="24", "Google Chrome";v="116"
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36
+sec-ch-ua-platform: "macOS"
+Accept: */*
+Origin: http://localhost:8080
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: cors
+Sec-Fetch-Dest: empty
+Referer: http://localhost:8080/index.html
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9,ko;q=0.8
+
+
+HTTP/1.1 204 No Content
+
+
+GET / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: "Chromium";v="116", "Not)A;Brand";v="24", "Google Chrome";v="116"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9,ko;q=0.8
+
+
+open: fail to open : unspecified iostream_category error
+std::exceptionHTTP/1.1 400 Bad Request
+Content-Type: text/html
+Content-Length: 12
+
+bad request!
+GET /cgi-bin/ HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+sec-ch-ua: "Chromium";v="116", "Not)A;Brand";v="24", "Google Chrome";v="116"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9,ko;q=0.8
+
+
+open: fail to open : unspecified iostream_category error
+std::exceptionHTTP/1.1 400 Bad Request
+Content-Type: text/html
+Content-Length: 12
+
+bad request!

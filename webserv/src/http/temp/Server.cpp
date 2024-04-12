@@ -1,7 +1,9 @@
 #include "Server.hpp"
 #include "HTTP.hpp"
 
-Server::Server( void ): ASocket() {}
+Server::Server( void ): ASocket() {
+	cnf.push_back( config_t() );
+}
 Server::~Server( void ) { close( sock ); }
 
 void Server::listening( void ) {
@@ -12,7 +14,7 @@ void Server::listening( void ) {
 
 	while ( LOOP ) {
 		try {
-			Client	connection( sock );
+			Client	connection( sock, *this );
 			
 			connection.receiving();
 			// connection.sending();
