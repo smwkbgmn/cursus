@@ -1,0 +1,1 @@
+hihi i'm index file for cgi-bin dir
