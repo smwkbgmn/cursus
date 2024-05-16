@@ -183,8 +183,8 @@ typedef struct msg_buffer_s {
 
 /* STRUCT - Request & Response */
 typedef struct {
-	unsigned			version: 2;
-	unsigned			method: 2;
+	version_e			version;
+	method_e			method;
 	path_t				uri;
 	str_t				query;
 
@@ -195,8 +195,8 @@ typedef struct request_header_s {
 
 	str_t 				host;
 	// date_t				date;
-	unsigned 			connection: 2;
-	unsigned 			transfer_encoding: 1;
+	connection_e 		connection;
+	transfer_enc_e 		transfer_encoding;
 	size_t				content_length;
 	type_t				content_type;
 
@@ -207,7 +207,7 @@ typedef struct request_header_s {
 typedef struct response_line_s {
 	response_line_s( void );
 
-	unsigned			version: 2;
+	version_e			version;
 	uint_t				status;
 
 }	response_line_t;
@@ -217,8 +217,8 @@ typedef struct response_header_s {
 
 	str_t				server;
 	// date_t				date;
-	unsigned			connection: 2;
-	unsigned			transfer_encoding: 1;
+	connection_e		connection: 2;
+	transfer_enc_e		transfer_encoding: 1;
 	size_t				content_length;
 	type_t				content_type;
 	str_t				location;

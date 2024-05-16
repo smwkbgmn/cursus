@@ -98,15 +98,23 @@ Request::_parseHeader( const str_t& field ) {
 	header = _token( iss, ':' );
 	iss >> std::ws;
 
+	std::clog << "_parseHeader\n";
+	std::clog << "field: " << field << '\n'; 
+	std::clog << "header: " << header << '\n';
+	std::clog << "iss: " << iss.str() << '\n';
+
 	switch ( _add( _header.list, distance( HTTP::key.header_in, header ) ) ) {
 		case IN_HOST			: iss >> _header.host; break;
 		case IN_CONNECTION		: _header.connection = KEEP_ALIVE; break;
-		case IN_TRANSFER_ENC	:
+
+		case IN_TRANSFER_ENC	: {
 			ssize_t idx = distance( HTTP::http.encoding, iss.str() );
 
-			if ( idx != NOT_FOUND ) _header.transfer_encoding = idx;
+			if ( idx != NOT_FOUND ) _header.transfer_encoding = static_cast<transfer_enc_e>( idx );
 			else _header.transfer_encoding = TE_UNKNOWN;
 			break;
+		}
+
 		case IN_CONTENT_LEN		: iss >> _header.content_length; break;
 		case IN_CONTENT_TYPE	: iss >> _header.content_type; break;
 	}
