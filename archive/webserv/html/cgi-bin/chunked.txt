@@ -1,0 +1,21 @@
+curl -X POST http://localhost:8080/freeboard.txt \
+     -H "Content-Type: application/octet-stream" \
+     -H "Transfer-Encoding: chunked" \
+     --data-raw 'This is the first chunk' \
+     --data-raw 'This is the second chunk' \
+     --data-raw 'And this is the final chunk'
+
+
+POST /freeboard.txt HTTP/1.1
+Content-Type: text/plain
+Transfer-Encoding: chunked
+
+4
+Wiki
+5
+pedia
+E
+12345678901234
+5
+chunk
+0
